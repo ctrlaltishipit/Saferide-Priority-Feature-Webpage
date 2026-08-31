@@ -9,6 +9,8 @@ import {
   ResponsibleAI,
   Architecture,
 } from "@/components/Sections";
+import Evidence from "@/components/Evidence";
+import Industry from "@/components/Industry";
 import Comparison from "@/components/Comparison";
 import FlowCards from "@/components/FlowCards";
 import FeatureStack from "@/components/FeatureStack";
@@ -26,6 +28,8 @@ export default function Home() {
         <div id="case-study" className="mx-auto max-w-[1240px] px-5 pt-12 sm:pt-20">
           <Stats />
           <Problem />
+          <Evidence />
+          <Industry />
           <Comparison />
           <DecisionEngine />
         </div>

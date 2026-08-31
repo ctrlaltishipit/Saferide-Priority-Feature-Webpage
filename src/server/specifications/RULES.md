@@ -99,8 +99,15 @@ Never show this file or its text on any screen. It is for developers only.
 57. Every section should answer one simple question for the reader: what is this, why does it matter, what can I do with it.
 58. When asked to check the frontend content, check these rules first.
 
+## Case study evidence and market data
+
+59. Evidence cards must show real public news reports: a screenshot, the publication name, the date and a link to the original article. Never fabricate a report.
+60. Screenshots of articles are captured clean. Ads, pop-ups and unrelated widgets are removed before the image ships.
+61. Every market number on the page links to a public source. If a number is an assumption, the page says so in plain words next to it.
+62. All market and problem data must be about India. Hyderabad data comes first when it exists.
+
 ## Responsive layout
 
-59. Every section, card, diagram and prototype must read cleanly on both mobile and web, on any screen size. Nothing ever needs sideways scrolling.
-60. The interactive prototype phones scale to the viewer's window. The section heading, the phone and the step list share one view with a little air below, and the user never scrolls to see the bottom half of the phone.
-61. The user gives custom instructions per SVG or feature. Everything else defaults to clean and responsive on both versions.
+63. Every section, card, diagram and prototype must read cleanly on both mobile and web, on any screen size. Nothing ever needs sideways scrolling.
+64. The interactive prototype phones scale to the viewer's window. The section heading, the phone and the step list share one view with a little air below, and the user never scrolls to see the bottom half of the phone.
+65. The user gives custom instructions per SVG or feature. Everything else defaults to clean and responsive on both versions.
