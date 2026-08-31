@@ -59,7 +59,7 @@ export default function ContactView({
   onExit?: () => void;
 }) {
   const [view, setView] = useState<"sms" | "track" | "details">("sms");
-  const [progress, setProgress] = useState(0.12);
+  const [progress, setProgress] = useState(info?.tripEnded ? 1 : 0.12);
   const [replaying, setReplaying] = useState(false);
   const [expiry, setExpiry] = useState(TRACKING_LINK_EXPIRY_MINUTES * 60);
   const raf = useRef<number | null>(null);
@@ -123,10 +123,10 @@ export default function ContactView({
   const mm = String(Math.floor(expiry / 60)).padStart(2, "0");
   const ss = String(Math.floor(expiry % 60)).padStart(2, "0");
   const linkStatus = !ended
-    ? "live for the whole trip"
+    ? "link live for the whole trip"
     : safe
-      ? `expires in ${mm}:${ss}`
-      : `no check-in response · active ${NO_RESPONSE_LINK_HOURS} h`;
+      ? `link expires in ${mm}:${ss}`
+      : `no check-in · link active ${NO_RESPONSE_LINK_HOURS} h`;
 
   const callRow = (label: string, number: string, dark?: boolean) => (
     <a
@@ -145,16 +145,18 @@ export default function ContactView({
   return (
     <div className="relative flex h-full flex-col bg-[#F6F7F9] pt-[54px] text-[#111]" style={{ fontFamily: "-apple-system,'Helvetica Neue',system-ui,sans-serif" }}>
       {onExit && (
-        <button
-          type="button"
-          onClick={onExit}
-          className="absolute left-3 top-[56px] z-30 flex items-center gap-1 rounded-full bg-black/85 py-1.5 pl-2 pr-3 text-[10.5px] font-bold text-white shadow-[0_2px_10px_rgba(0,0,0,.25)] backdrop-blur-sm"
-        >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 5l-7 7 7 7" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Back to rider app
-        </button>
+        <div className="flex flex-none px-3 pb-2 pt-0.5">
+          <button
+            type="button"
+            onClick={onExit}
+            className="flex items-center gap-1 rounded-full bg-black py-1.5 pl-2 pr-3 text-[10.5px] font-bold text-white shadow-[0_2px_10px_rgba(0,0,0,.2)]"
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 5l-7 7 7 7" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Back to rider app
+          </button>
+        </div>
       )}
       {view === "sms" && (
         <>
@@ -209,25 +211,27 @@ export default function ContactView({
       {view === "track" && (
         <>
           {/* tracking header */}
-          <div className="flex flex-none items-center gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 pb-2.5">
-            <button type="button" onClick={() => setView("sms")} aria-label="Back to SMS" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F3F3F3]">
+          <div className="flex flex-none items-center gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 pb-3 pt-1.5">
+            <button type="button" onClick={() => setView("sms")} aria-label="Back to SMS" className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[#F3F3F3]">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                 <path d="M15 5l-7 7 7 7" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 text-[14px] font-extrabold">
                 Tracking {riderName}
-                <span className="h-2 w-2 rounded-full" style={{ background: ended && safe ? "#F6BC2F" : "#06C167", animation: "blink 1.4s ease infinite" }} />
+                <span className="h-2 w-2 flex-none rounded-full" style={{ background: ended && safe ? "#F6BC2F" : "#06C167", animation: "blink 1.4s ease infinite" }} />
                 <span className="text-[10.5px] font-bold text-safe-dark">{ended ? "TRIP ENDED" : "LIVE GPS"}</span>
               </div>
-              <div className="text-[11px] text-ink-faint">saferide.demo · link {linkStatus}</div>
+              <div className="overflow-hidden text-ellipsis whitespace-nowrap text-[11px] text-ink-faint">
+                saferide.demo · {linkStatus}
+              </div>
             </div>
-            <span className="rounded-lg bg-[#F3F3F3] px-2 py-1 text-[10.5px] font-extrabold tracking-[1px]">PIN {TRIP_PIN}</span>
+            <span className="flex-none rounded-lg bg-[#F3F3F3] px-2 py-1 text-[10.5px] font-extrabold tracking-[1px]">PIN {TRIP_PIN}</span>
           </div>
 
-          {/* live map */}
-          <div className="relative h-[286px] flex-none overflow-hidden bg-[#E9EDF0]">
+          {/* live map fills the free space so nothing sits empty below */}
+          <div className="relative min-h-[240px] flex-1 overflow-hidden bg-[#E9EDF0]">
             <svg viewBox="0 0 402 250" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" aria-label="Live map with the rider's car moving along the route">
               <CityMapLayers />
               <path d={MAP_ROUTE_PATH} fill="none" stroke="#C9CED4" strokeWidth="4" strokeLinecap="round" />
@@ -266,7 +270,7 @@ export default function ContactView({
           </div>
 
           {/* driver + actions */}
-          <div className="hscroll min-h-0 flex-1 overflow-y-auto px-4 pb-5 pt-3">
+          <div className="flex-none px-4 pb-7 pt-3.5">
             {ended && !safe && (
               <div className="mb-2.5 rounded-xl border border-[#F0DCC8] bg-[#FFF1D6] px-3 py-2.5 text-[11.5px] leading-[1.55] text-[#7A4E00]" style={{ animation: "slideup .3s ease" }}>
                 {riderName} has not answered her arrival check-in yet. Use the driver&apos;s number
@@ -325,18 +329,23 @@ export default function ContactView({
 
       {view === "details" && (
         <>
-          <div className="flex flex-none items-center gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 pb-2.5">
-            <button type="button" onClick={() => setView("track")} aria-label="Back to tracking" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F3F3F3]">
+          <div className="flex flex-none items-center gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 pb-3 pt-1.5">
+            <button type="button" onClick={() => setView("track")} aria-label="Back to tracking" className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[#F3F3F3]">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                 <path d="M15 5l-7 7 7 7" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <div className="text-[14px] font-extrabold">Trip details</div>
-              <div className="text-[11px] text-ink-faint">{riderName}&apos;s ride · link {linkStatus}</div>
+              <div className="overflow-hidden text-ellipsis whitespace-nowrap text-[11px] text-ink-faint">
+                {riderName}&apos;s ride · {linkStatus}
+              </div>
             </div>
           </div>
-          <div className="hscroll min-h-0 flex-1 overflow-y-auto px-4 pb-6 pt-3">
+          {/* the content column centres itself, so the leftover space is
+             shared evenly above and below instead of piling up at the bottom */}
+          <div className="hscroll flex min-h-0 flex-1 flex-col overflow-y-auto px-4 py-5">
+            <div className="my-auto">
             <div className="rounded-2xl border border-[#E5E7EB] bg-white px-3.5 py-1">
               {[
                 ["Booked from", pickup],
@@ -380,6 +389,7 @@ export default function ContactView({
             </div>
             <div className="mt-2.5 text-center text-[10px] leading-[1.5] text-[#9AA0A6]">
               Numbers are fictional. Nothing is contacted in this demo.
+            </div>
             </div>
           </div>
         </>
