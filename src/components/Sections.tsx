@@ -433,52 +433,166 @@ export function ResponsibleAI() {
   );
 }
 
-/* ──────────────── Why we built this (replaces the old build stack) ──────────────── */
+/* ──────────────── Why we built this: India first, Hyderabad pilot ──────────────── */
+
+function PreRideCheckScene() {
+  return (
+    <svg
+      viewBox="0 0 440 300"
+      className="block h-auto w-full"
+      aria-label="Night scene: a rider finishes the pre-ride checklist on her phone, the contact gets the link, the driver gets the alert, all before the car door opens"
+    >
+      <defs>
+        <linearGradient id="whysky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#060D1F" />
+          <stop offset=".6" stopColor="#0E2250" />
+          <stop offset="1" stopColor="#1B3D8F" />
+        </linearGradient>
+      </defs>
+      <rect width="440" height="300" rx="20" fill="url(#whysky)" />
+      <circle cx="386" cy="46" r="16" fill="#FFF3C4" />
+      <circle cx="70" cy="40" r="2" fill="#fff" opacity=".6" style={{ animation: "blink 3.6s ease infinite" }} />
+      <circle cx="180" cy="28" r="1.6" fill="#fff" opacity=".5" style={{ animation: "blink 4.4s .8s ease infinite" }} />
+      <circle cx="300" cy="52" r="1.8" fill="#fff" opacity=".5" style={{ animation: "blink 3.9s 1.4s ease infinite" }} />
+      {/* skyline */}
+      <rect x="250" y="96" width="54" height="130" fill="#122A63" />
+      <rect x="316" y="76" width="66" height="150" fill="#173377" />
+      <rect x="394" y="110" width="40" height="116" fill="#122A63" />
+      <g fill="#F6BC2F">
+        <rect x="326" y="92" width="8" height="7" /><rect x="344" y="92" width="8" height="7" />
+        <rect x="326" y="128" width="8" height="7" /><rect x="360" y="112" width="8" height="7" />
+        <rect x="262" y="112" width="7" height="6" /><rect x="278" y="140" width="7" height="6" />
+        <rect x="402" y="126" width="7" height="6" />
+      </g>
+      {/* road */}
+      <rect x="0" y="226" width="440" height="74" fill="#0B1220" />
+      <path d="M14 262 H440" stroke="#F6F6F6" strokeWidth="3" strokeDasharray="20 16" opacity=".7" style={{ animation: "routedash 1.3s linear infinite" }} />
+      {/* the car, waiting with the door area highlighted */}
+      <g>
+        <ellipse cx="330" cy="252" rx="76" ry="8" fill="#276EF1" opacity=".25" />
+        <path d="M262 244 v-14 c0-6.5 5-11.5 11.5-11.5 h11 l12.5-15.5 c3-3.5 7-5.5 11.5-5.5 h41 c4.5 0 8.5 2 11.5 5.5 l12.5 15.5 h7.5 c6.5 0 11.5 5 11.5 11.5 v14 z" fill="#0A0D13" />
+        <path d="M300 218 l9.5-12 c1.7-2 4.2-3.2 7-3.2 h9 v15.2 z" fill="#8FB4F2" opacity=".95" />
+        <path d="M330 202.8 h9 c2.8 0 5.3 1.2 7 3.2 l9.5 12 h-25.5 z" fill="#7FA3E8" opacity=".95" />
+        <rect x="327.5" y="202.8" width="3.5" height="15.2" fill="#0A0D13" />
+        <circle cx="286" cy="244" r="11" fill="#05070B" /><circle cx="286" cy="244" r="5" fill="#8A96A6" />
+        <circle cx="366" cy="244" r="11" fill="#05070B" /><circle cx="366" cy="244" r="5" fill="#8A96A6" />
+        <rect x="386" y="222" width="7" height="6" rx="2" fill="#FFF7DE" />
+        {/* driver alert ping */}
+        <g style={{ animation: "floaty 5s ease-in-out infinite" }}>
+          <rect x="348" y="168" width="74" height="22" rx="11" fill="#FDF3FB" />
+          <circle cx="360" cy="179" r="4.5" fill="#B0499B" />
+          <text x="368" y="183" fontSize="9.5" fontWeight="700" fill="#8A2E78" fontFamily="Helvetica,Arial">driver alerted</text>
+        </g>
+      </g>
+      {/* the rider's phone with the pre-ride checklist */}
+      <g>
+        <rect x="34" y="76" width="112" height="180" rx="16" fill="#05070B" />
+        <rect x="40" y="84" width="100" height="164" rx="11" fill="#FFFFFF" />
+        <rect x="50" y="94" width="58" height="8" rx="4" fill="#111" />
+        {[
+          ["#06C167", 112, "trip reviewed"],
+          ["#06C167", 140, "drop point set"],
+          ["#06C167", 168, "link sent"],
+        ].map(([c, y, label]) => (
+          <g key={String(y)}>
+            <rect x="48" y={Number(y)} width="84" height="22" rx="6" fill="#F3F3F3" />
+            <circle cx="60" cy={Number(y) + 11} r="6" fill={String(c)} />
+            <path d={`M57 ${Number(y) + 11} l2 2.2 4-4.4`} stroke="#fff" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            <text x="70" y={Number(y) + 15} fontSize="8.5" fontWeight="700" fill="#333" fontFamily="Helvetica,Arial">{String(label)}</text>
+          </g>
+        ))}
+        <rect x="48" y="198" width="84" height="20" rx="8" fill="#0A0D13" />
+        <text x="90" y="211" textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#fff" fontFamily="Helvetica,Arial">ready to board</text>
+      </g>
+      {/* the contact who received the link */}
+      <g style={{ animation: "floaty 6s ease-in-out infinite" }}>
+        <circle cx="196" cy="118" r="17" fill="#06C167" />
+        <text x="196" y="123" textAnchor="middle" fontSize="11" fontWeight="800" fill="#00250F" fontFamily="Helvetica,Arial">AN</text>
+        <rect x="164" y="142" width="66" height="18" rx="9" fill="#EAF6EF" />
+        <text x="197" y="154" textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">tracking live</text>
+      </g>
+      <path d="M148 136 C164 130 172 126 182 122" stroke="#06C167" strokeWidth="2.5" fill="none" strokeDasharray="5 5" style={{ animation: "dashflow 1.3s linear infinite" }} />
+      <path d="M212 132 C236 156 256 178 288 200" stroke="#8FB0FF" strokeWidth="2" fill="none" strokeDasharray="3 6" opacity=".7" />
+    </svg>
+  );
+}
+
+const INDIA_FACTS = [
+  {
+    big: "4 in 10",
+    text: "women in Indian cities said they feel unsafe, and the feeling grows after dark.",
+    src: "NARI 2025",
+    url: "https://www.insightsonindia.com/2025/08/29/nari-2025-report/",
+  },
+  {
+    big: "92%",
+    text: "of women riders in India said emergency support during the ride matters to them.",
+    src: "Statista, 2023",
+    url: "https://www.statista.com/statistics/1454958/india-importance-of-ride-hailing-safety-features-by-gender/",
+  },
+  {
+    big: "331",
+    text: "SHE Teams run by Telangana Police to protect women in public spaces, in our pilot state.",
+    src: "Telangana Police",
+    url: "https://womensafetywing.telangana.gov.in/she-module/she-teams/",
+  },
+];
+
 export function Architecture() {
   return (
     <Reveal className="mt-12 rounded-2xl bg-mist p-5 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
       <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">WHY WE BUILT THIS</div>
-      <h2 className="m-0 mb-3 text-[clamp(24px,3vw,36px)] font-extrabold tracking-[-1px]">
+      <h2 className="m-0 mb-4 text-[clamp(24px,3vw,36px)] font-extrabold tracking-[-1px]">
         The tools exist. The flow is missing.
       </h2>
-      <div className="max-w-[72ch] text-[14.5px] leading-[1.65] text-ink-soft">
-        <p className="m-0">
-          Getting into a stranger&apos;s car at night asks for real trust. Uber already ships strong
-          tools for that moment: SOS, live trip sharing, RideCheck, trip PINs, audio recording and a
-          24x7 safety line. Each one works. Each one is also a separate switch, and most of them only
-          matter after you are already sitting inside the car.
-        </p>
-        <p className="mb-0 mt-3">
-          The gap shows up in the numbers. Even with all of these tools live, Uber&apos;s own US
-          safety report counted 998 sexual assault reports in 2020 alone.{" "}
-          <a
-            href="https://www.cnn.com/2022/06/30/tech/uber-safety-report"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whitespace-nowrap rounded-full bg-black px-2.5 py-1 text-[11px] font-bold text-white"
-          >
-            source ↗
-          </a>
-        </p>
-        <p className="mb-0 mt-3">
-          SafeRide Priority moves the safety work to before the door closes. One pre-ride check runs
-          the whole plan: it reviews the trip, alerts the driver, picks a safer drop point, and sends
-          your contact a link with the driver&apos;s name, plate, PIN and live GPS. By the time you
-          sit down, everyone who should know already knows.
-        </p>
-        <p className="mb-0 mt-3">
-          It covers any reason you ride at night: a late shift, an event, an emergency, a long
-          outstation trip. The goal is simple. Reach the destination safely, and feel safe the whole
-          way there.
-        </p>
+
+      <div className="grid items-center gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
+        <div className="max-w-[62ch] text-[14.5px] leading-[1.65] text-ink-soft">
+          <p className="m-0">
+            Getting into a stranger&apos;s car at night asks for real trust. Uber India already ships
+            strong tools for that moment: SOS, live trip sharing, RideCheck, trip PINs, audio
+            recording and a 24x7 safety line. Each one works. Each one is also a separate switch,
+            and most only matter after you are already sitting inside the car.
+          </p>
+          <p className="mb-0 mt-3">
+            SafeRide Priority moves the safety work to before the door closes. One pre-ride check
+            runs the whole plan: it reviews the trip, alerts the driver, picks a safer drop point,
+            and sends your contact a link with the driver&apos;s name, plate, PIN and live GPS. By
+            the time you sit down, everyone who should know already knows.
+          </p>
+          <p className="mb-0 mt-3">
+            It covers any reason you ride at night in Hyderabad: a late shift in HITEC City, an
+            event across town, an emergency, a long outstation trip. The goal is simple. Reach the
+            destination safely, and feel safe the whole way there.
+          </p>
+        </div>
+        <PreRideCheckScene />
+      </div>
+
+      {/* the India numbers behind the decision */}
+      <div className="mt-6 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
+        {INDIA_FACTS.map((f) => (
+          <div key={f.big} className="flex flex-col rounded-2xl border border-line bg-white p-4">
+            <div className="text-[26px] font-extrabold tracking-[-1px]">{f.big}</div>
+            <div className="mt-1 text-[12.5px] leading-[1.5] text-ink-soft">{f.text}</div>
+            <a
+              href={f.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto inline-flex w-max items-center gap-1 pt-2.5 text-[11px] font-bold text-brand-dark"
+            >
+              {f.src} ↗
+            </a>
+          </div>
+        ))}
       </div>
 
       {/* what exists today, and what this concept adds on top */}
-      <div className="mt-6 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
+      <div className="mt-3 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
         <div className="rounded-2xl border border-line bg-white p-4">
-          <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-ink-faint">ON UBER TODAY</div>
+          <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-ink-faint">ON UBER INDIA TODAY</div>
           <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-ink-soft">
-            {["SOS button", "Live trip sharing", "RideCheck", "Trip PIN", "Audio recording", "24x7 safety line"].map((x) => (
+            {["SOS button", "Live trip sharing", "RideCheck", "Trip PIN", "Audio recording", "Women Rider Preference, in select cities"].map((x) => (
               <li key={x} className="flex items-center gap-2 py-1">
                 <span className="h-1.5 w-1.5 flex-none rounded-full bg-[#C9CED4]" />
                 {x}
@@ -486,7 +600,7 @@ export function Architecture() {
             ))}
           </ul>
           <div className="mt-2 text-[12px] font-semibold text-ink-faint">
-            Six good tools. Six separate switches, mostly used mid-ride.
+            Good tools, each a separate switch, mostly used mid-ride.
           </div>
         </div>
         <div className="rounded-2xl bg-black p-4 text-white">
