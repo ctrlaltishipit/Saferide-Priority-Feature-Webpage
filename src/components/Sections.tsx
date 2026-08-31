@@ -189,46 +189,127 @@ function JugglingIllustration() {
     <svg
       viewBox="0 0 440 340"
       className="block h-auto w-full"
-      aria-label="Illustration: a rider juggling a manual safety checklist across apps after midnight"
+      aria-label="After midnight in Hyderabad: a tired rider juggles Uber, Ola, Rapido, Maps and the family chat while six safety chores float around her phone, and the tired driver in the waiting cab is something no app tells her about"
     >
-      <rect x="140" y="18" width="160" height="304" rx="26" fill="#000" />
-      <rect x="150" y="30" width="140" height="280" rx="18" fill="#FFFFFF" />
-      <rect x="163" y="48" width="80" height="10" rx="5" fill="#000" />
-      <rect x="163" y="70" width="114" height="34" rx="8" fill="#F6F6F6" />
-      <circle cx="180" cy="87" r="7" fill="#06C167" />
-      <rect x="194" y="82" width="66" height="9" rx="4" fill="#C9CED4" />
-      <rect x="163" y="112" width="114" height="34" rx="8" fill="#F6F6F6" />
-      <circle cx="180" cy="129" r="7" fill="#06C167" />
-      <rect x="194" y="124" width="52" height="9" rx="4" fill="#C9CED4" />
-      <rect x="163" y="154" width="114" height="34" rx="8" fill="#F6F6F6" />
-      <circle cx="180" cy="171" r="7" fill="#F6BC2F" style={{ animation: "blink 1.8s ease infinite" }} />
-      <rect x="194" y="166" width="60" height="9" rx="4" fill="#C9CED4" />
-      <rect x="163" y="196" width="114" height="34" rx="8" fill="#F6F6F6" />
-      <circle cx="180" cy="213" r="7" fill="#E2E2E2" />
-      <rect x="194" y="208" width="44" height="9" rx="4" fill="#E2E2E2" />
-      <rect x="163" y="252" width="114" height="38" rx="10" fill="#000" />
-      <rect x="196" y="266" width="48" height="10" rx="5" fill="#fff" />
-      <g style={{ animation: "floaty 6s ease-in-out infinite" }}>
-        <rect x="18" y="60" width="112" height="46" rx="12" fill="#fff" stroke="#E2E2E2" />
-        <circle cx="42" cy="83" r="11" fill="#276EF1" />
-        <rect x="60" y="72" width="56" height="8" rx="4" fill="#C9CED4" />
-        <rect x="60" y="87" width="40" height="8" rx="4" fill="#E2E2E2" />
+      {/* moon clock */}
+      <circle cx="388" cy="52" r="30" fill="#0A0D13" />
+      <text x="388" y="57" textAnchor="middle" fontSize="15" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">12:15</text>
+      <text x="388" y="96" textAnchor="middle" fontSize="10" fontWeight="600" fill="#6B6B6B" fontFamily="Helvetica,Arial">after midnight</text>
+
+      {/* ── the tired rider ── */}
+      <g>
+        {/* shadow */}
+        <ellipse cx="120" cy="308" rx="52" ry="7" fill="#000" opacity=".08" />
+        {/* legs */}
+        <path d="M104 236 l-4 62 h11 l5-56 z" fill="#1E2733" />
+        <path d="M130 236 l6 62 h-11 l-7-57 z" fill="#26303E" />
+        <rect x="96" y="294" width="18" height="8" rx="4" fill="#0A0D13" />
+        <rect x="124" y="294" width="18" height="8" rx="4" fill="#0A0D13" />
+        {/* slouched body */}
+        <path d="M98 160 c-6 26 -6 54 2 78 c12 6 26 6 36 0 c8 -26 6 -52 -2 -78 c-12 -7 -26 -7 -36 0z" fill="#3B6FE0" />
+        {/* slipping bag */}
+        <path d="M132 168 c8 20 10 40 8 58" stroke="#8E3B70" strokeWidth="6" fill="none" strokeLinecap="round" />
+        <rect x="132" y="222" width="26" height="34" rx="8" fill="#8E3B70" />
+        {/* arm holding phone up, elbow bent */}
+        <path d="M100 176 c-14 8 -22 20 -22 34" stroke="#3B6FE0" strokeWidth="11" fill="none" strokeLinecap="round" />
+        <path d="M78 210 c0 8 4 14 12 16" stroke="#E8B08A" strokeWidth="8" fill="none" strokeLinecap="round" />
+        {/* phone, glowing */}
+        <rect x="78" y="196" width="26" height="44" rx="6" fill="#0A0D13" />
+        <rect x="81" y="200" width="20" height="36" rx="3" fill="#EFF4FE" />
+        <rect x="84" y="205" width="14" height="3.5" rx="1.7" fill="#276EF1" />
+        <rect x="84" y="212" width="10" height="3" rx="1.5" fill="#C9CED4" />
+        <rect x="84" y="218" width="12" height="3" rx="1.5" fill="#C9CED4" />
+        <path d="M70 192 l-5-6 M74 188 l-3-8 M66 200 l-8-3" stroke="#8FB4F2" strokeWidth="2" strokeLinecap="round" opacity=".8" style={{ animation: "blink 2.4s ease infinite" }} />
+        {/* head, tilted and tired */}
+        <g transform="rotate(-6 120 134)">
+          <circle cx="120" cy="134" r="19" fill="#E8B08A" />
+          <path d="M101 128 a19 19 0 0132 -9 c6 4 8 12 6 18 c-2 -8 -8 -12 -14 -13 c-9 -2 -18 0 -24 4z" fill="#1F1F1F" />
+          <circle cx="139" cy="122" r="7" fill="#1F1F1F" />
+          {/* closed, heavy eyes + under-eye lines */}
+          <path d="M111 136 q3.5 3 7 0 M126 135 q3.5 3 7 0" stroke="#1F1F1F" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+          <path d="M112 141 q3 1.6 5.5 0 M127 140 q3 1.6 5.5 0" stroke="#C68B62" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+          <path d="M117 148 q4 2.4 8 0" stroke="#1F1F1F" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        </g>
+        {/* rider's sleepy drift */}
+        <text x="152" y="112" fontSize="11" fontWeight="800" fill="#9AA0A6" fontFamily="Helvetica,Arial" style={{ animation: "blink 3s ease infinite" }}>z</text>
+        <text x="160" y="102" fontSize="14" fontWeight="800" fill="#C9CED4" fontFamily="Helvetica,Arial" style={{ animation: "blink 3s .5s ease infinite" }}>Z</text>
       </g>
-      <g style={{ animation: "floaty 7s .7s ease-in-out infinite" }}>
-        <rect x="308" y="96" width="116" height="46" rx="12" fill="#fff" stroke="#E2E2E2" />
-        <circle cx="332" cy="119" r="11" fill="#06C167" />
-        <rect x="350" y="108" width="58" height="8" rx="4" fill="#C9CED4" />
-        <rect x="350" y="123" width="42" height="8" rx="4" fill="#E2E2E2" />
+
+      {/* ── five apps she is juggling ── */}
+      <g style={{ animation: "floaty 5.4s ease-in-out infinite" }}>
+        <rect x="16" y="46" width="64" height="24" rx="12" fill="#0A0D13" />
+        <text x="48" y="62" textAnchor="middle" fontSize="11" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">Uber</text>
       </g>
-      <g style={{ animation: "floaty 6.4s 1.2s ease-in-out infinite" }}>
-        <rect x="300" y="212" width="122" height="52" rx="12" fill="#000" />
-        <circle cx="324" cy="238" r="11" fill="#F6BC2F" />
-        <rect x="342" y="226" width="62" height="8" rx="4" fill="#545454" />
-        <rect x="342" y="241" width="48" height="8" rx="4" fill="#333" />
+      <g style={{ animation: "floaty 6s .5s ease-in-out infinite" }}>
+        <rect x="92" y="24" width="58" height="24" rx="12" fill="#fff" stroke="#E2E2E2" />
+        <circle cx="106" cy="36" r="6" fill="#B3D243" />
+        <text x="128" y="40" textAnchor="middle" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Ola</text>
       </g>
-      <circle cx="70" cy="220" r="34" fill="#000" />
-      <text x="70" y="227" textAnchor="middle" fontSize="16" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">12:15</text>
-      <text x="70" y="272" textAnchor="middle" fontSize="11" fontWeight="600" fill="#6B6B6B" fontFamily="Helvetica,Arial">after midnight</text>
+      <g style={{ animation: "floaty 5s 1s ease-in-out infinite" }}>
+        <rect x="162" y="42" width="76" height="24" rx="12" fill="#fff" stroke="#E2E2E2" />
+        <circle cx="176" cy="54" r="6" fill="#F6BC2F" />
+        <text x="204" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Rapido</text>
+      </g>
+      <g style={{ animation: "floaty 6.4s 1.4s ease-in-out infinite" }}>
+        <rect x="250" y="26" width="66" height="24" rx="12" fill="#fff" stroke="#E2E2E2" />
+        <path d="M264 32 c-3.6 0 -6 2.6 -6 5.8 c0 4 6 8.6 6 8.6 s6 -4.6 6 -8.6 c0 -3.2 -2.4 -5.8 -6 -5.8z" fill="#DE1135" />
+        <text x="292" y="42" textAnchor="middle" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Maps</text>
+      </g>
+      <g style={{ animation: "floaty 5.8s .8s ease-in-out infinite" }}>
+        <rect x="16" y="86" width="104" height="26" rx="13" fill="#EAF6EF" stroke="#BFE6CE" />
+        <circle cx="31" cy="99" r="7" fill="#06C167" />
+        <path d="M28 99 l2 2 4-4" stroke="#fff" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+        <text x="44" y="103" fontSize="10" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">Amma: reached?</text>
+      </g>
+
+      {/* ── six manual decisions orbiting the phone ── */}
+      {[
+        [10, 140, "check the plate"],
+        [10, 170, "share the link"],
+        [10, 200, "call amma"],
+        [156, 170, "pick the gate"],
+        [162, 200, "watch the route"],
+        [156, 230, "text reached"],
+      ].map(([x, y, label], i) => (
+        <g key={String(label)} style={{ animation: `floaty ${5 + i * 0.4}s ${i * 0.3}s ease-in-out infinite` }}>
+          <rect x={Number(x)} y={Number(y)} width={Number(x) < 100 ? 84 : 88} height="20" rx="10" fill="#fff" stroke="#E2E2E2" />
+          <circle cx={Number(x) + 11} cy={Number(y) + 10} r="3" fill={i < 3 ? "#276EF1" : "#F6BC2F"} />
+          <text x={Number(x) + 20} y={Number(y) + 13.5} fontSize="9" fontWeight="700" fill="#545454" fontFamily="Helvetica,Arial">{String(label)}</text>
+        </g>
+      ))}
+
+      {/* ── the waiting cab with a tired driver ── */}
+      <g>
+        <ellipse cx="340" cy="304" rx="78" ry="7" fill="#000" opacity=".1" />
+        <path d="M268 296 v-16 c0-6.5 4.6-11.5 11-12.5 l14-2.5 14-15 c3-3.2 7-5 11.4-5 h42 c4.4 0 8.4 1.8 11.4 5 l13.5 14.5 14.5 2.5 c6 1 10.2 6 10.2 12.5 v16.5 z" fill="#0A0D13" />
+        {/* windows: tired driver at the wheel */}
+        <path d="M311 265 l11-12 c1.8-2 4.4-3 7-3 h8 v15 z" fill="#8FB4F2" opacity=".9" />
+        <g>
+          <rect x="345" y="252" width="26" height="13" rx="3" fill="#16264A" />
+          <circle cx="354" cy="256" r="5" fill="#C68B62" />
+          {/* heavy eyelids */}
+          <path d="M351.5 256 q1.4 1.4 3 0 M356 255.8 q1.2 1.2 2.6 0" stroke="#1F1F1F" strokeWidth="0.9" fill="none" strokeLinecap="round" />
+          <path d="M349 252 a5.5 5.5 0 0110 -1" stroke="#1F1F1F" strokeWidth="2.4" fill="none" />
+          <rect x="360" y="258" width="7" height="2.6" rx="1.3" fill="#C68B62" />
+          <circle cx="368.5" cy="260" r="4" fill="none" stroke="#4A5568" strokeWidth="1.7" />
+        </g>
+        <path d="M28 0" />
+        <path d="M276 291 h146" stroke="#1B2330" strokeWidth="1.5" />
+        <rect x="416" y="276" width="6" height="6" rx="2" fill="#FFF7DE" />
+        <rect x="266" y="276" width="5.5" height="6" rx="2" fill="#DE1135" />
+        <circle cx="302" cy="297" r="12" fill="#05070B" /><circle cx="302" cy="297" r="5.5" fill="#8A96A6" />
+        <circle cx="384" cy="297" r="12" fill="#05070B" /><circle cx="384" cy="297" r="5.5" fill="#8A96A6" />
+        {/* driver's sleepy drift */}
+        <text x="376" y="244" fontSize="10" fontWeight="800" fill="#9AA0A6" fontFamily="Helvetica,Arial" style={{ animation: "blink 2.6s ease infinite" }}>z</text>
+        <text x="384" y="236" fontSize="13" fontWeight="800" fill="#C9CED4" fontFamily="Helvetica,Arial" style={{ animation: "blink 2.6s .4s ease infinite" }}>Z</text>
+        {/* the notification nobody gets today */}
+        <g style={{ animation: "floaty 5s ease-in-out infinite" }}>
+          <rect x="282" y="196" width="148" height="30" rx="10" fill="#FFF1D6" stroke="#F0DCC8" />
+          <circle cx="296" cy="211" r="4.5" fill="#F6BC2F" style={{ animation: "blink 1.8s ease infinite" }} />
+          <text x="305" y="208" fontSize="9" fontWeight="800" fill="#7A4E00" fontFamily="Helvetica,Arial">driver on a long night shift</text>
+          <text x="305" y="219" fontSize="8" fontWeight="600" fill="#B26205" fontFamily="Helvetica,Arial">a heads-up no app sends today</text>
+        </g>
+      </g>
     </svg>
   );
 }
@@ -413,21 +494,45 @@ const PRINCIPLES = [
       </svg>
     ),
   },
+  {
+    title: "Sharing that expires",
+    text: "Tracking links live for the trip, 30 minutes after a safe arrival, and 12 hours only when there is no response.",
+    icon: (
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <circle cx="13" cy="15" r="9" stroke="#000" strokeWidth="2" />
+        <path d="M13 9.5V15l3.6 2.4" stroke="#000" strokeWidth="2" strokeLinecap="round" />
+        <path d="M22 8l4 4m0-4l-4 4" stroke="#F6BC2F" strokeWidth="2.4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Built for every rider",
+    text: "Anyone can turn SafeRide on. The Female rider switch is optional and self declared, never guessed.",
+    icon: (
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <circle cx="10" cy="10" r="4" stroke="#000" strokeWidth="2" />
+        <circle cx="21" cy="11" r="3.2" stroke="#000" strokeWidth="2" />
+        <path d="M3.5 24c.9-4.4 3.5-6.6 6.5-6.6s5.6 2.2 6.5 6.6M18 20.5c.8-2 2.2-3 3.8-3 1.9 0 3.5 1.4 4.2 4" stroke="#276EF1" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 ];
 
 export function ResponsibleAI() {
   return (
     <div className="mt-12 grid gap-3 sm:mt-20 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
       {PRINCIPLES.map((p, i) => (
-        <Reveal
-          key={p.title}
-          delay={(i % 3) * 0.07}
-          className="rounded-2xl border border-line p-[18px] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_14px_34px_rgba(0,0,0,.08)]"
-        >
-          {p.icon}
-          <div className="mb-1 mt-2.5 text-[14.5px] font-extrabold">{p.title}</div>
-          <div className="text-[12.5px] leading-[1.55] text-ink-soft">{p.text}</div>
-        </Reveal>
+        /* mobile: the cards deck over each other on scroll, like the stats */
+        <div key={p.title} className="sticky sm:static" style={{ top: 64 + i * 6, zIndex: i + 1 }}>
+          <Reveal
+            delay={(i % 4) * 0.06}
+            className="h-full rounded-2xl border border-line bg-white p-[18px] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_14px_34px_rgba(0,0,0,.08)]"
+          >
+            {p.icon}
+            <div className="mb-1 mt-2.5 text-[14.5px] font-extrabold">{p.title}</div>
+            <div className="text-[12.5px] leading-[1.55] text-ink-soft">{p.text}</div>
+          </Reveal>
+        </div>
       ))}
     </div>
   );
@@ -436,6 +541,12 @@ export function ResponsibleAI() {
 /* ──────────────── Why we built this: India first, Hyderabad pilot ──────────────── */
 
 function PreRideCheckScene() {
+  const pop = (delay: number) =>
+    ({
+      transformBox: "fill-box",
+      transformOrigin: "50% 50%",
+      animation: `popcycle 8s ease ${delay}s infinite both`,
+    }) as const;
   return (
     <svg
       viewBox="0 0 440 300"
@@ -448,6 +559,8 @@ function PreRideCheckScene() {
           <stop offset=".6" stopColor="#0E2250" />
           <stop offset="1" stopColor="#1B3D8F" />
         </linearGradient>
+        <clipPath id="whyWinR"><rect x="67" y="36" width="26" height="21" rx="3" /></clipPath>
+        <clipPath id="whyWinF"><rect x="100" y="36" width="29" height="21" rx="3" /></clipPath>
       </defs>
       <rect width="440" height="300" rx="20" fill="url(#whysky)" />
       <circle cx="386" cy="46" r="16" fill="#FFF3C4" />
@@ -466,53 +579,99 @@ function PreRideCheckScene() {
       </g>
       {/* road */}
       <rect x="0" y="226" width="440" height="74" fill="#0B1220" />
-      <path d="M14 262 H440" stroke="#F6F6F6" strokeWidth="3" strokeDasharray="20 16" opacity=".7" style={{ animation: "routedash 1.3s linear infinite" }} />
-      {/* the car, waiting with the door area highlighted */}
-      <g>
-        <ellipse cx="330" cy="252" rx="76" ry="8" fill="#276EF1" opacity=".25" />
-        <path d="M262 244 v-14 c0-6.5 5-11.5 11.5-11.5 h11 l12.5-15.5 c3-3.5 7-5.5 11.5-5.5 h41 c4.5 0 8.5 2 11.5 5.5 l12.5 15.5 h7.5 c6.5 0 11.5 5 11.5 11.5 v14 z" fill="#0A0D13" />
-        <path d="M300 218 l9.5-12 c1.7-2 4.2-3.2 7-3.2 h9 v15.2 z" fill="#8FB4F2" opacity=".95" />
-        <path d="M330 202.8 h9 c2.8 0 5.3 1.2 7 3.2 l9.5 12 h-25.5 z" fill="#7FA3E8" opacity=".95" />
-        <rect x="327.5" y="202.8" width="3.5" height="15.2" fill="#0A0D13" />
-        <circle cx="286" cy="244" r="11" fill="#05070B" /><circle cx="286" cy="244" r="5" fill="#8A96A6" />
-        <circle cx="366" cy="244" r="11" fill="#05070B" /><circle cx="366" cy="244" r="5" fill="#8A96A6" />
-        <rect x="386" y="222" width="7" height="6" rx="2" fill="#FFF7DE" />
-        {/* driver alert ping */}
-        <g style={{ animation: "floaty 5s ease-in-out infinite" }}>
-          <rect x="348" y="168" width="74" height="22" rx="11" fill="#FDF3FB" />
-          <circle cx="360" cy="179" r="4.5" fill="#B0499B" />
-          <text x="368" y="183" fontSize="9.5" fontWeight="700" fill="#8A2E78" fontFamily="Helvetica,Arial">driver alerted</text>
+      <path d="M14 264 H440" stroke="#F6F6F6" strokeWidth="3" strokeDasharray="20 16" opacity=".7" style={{ animation: "routedash 1.3s linear infinite" }} />
+
+      {/* the same Uber cab as the top of the page, facing the other way,
+         driver and passenger inside and the Uber board on the roof */}
+      <g transform="translate(432 158) scale(-0.92 0.92)">
+        <ellipse cx="96" cy="95" rx="76" ry="4" fill="#000" opacity=".2" />
+        <rect x="86" y="20" width="34" height="13" rx="4.5" fill="#FFFFFF" />
+        <text x="103" y="29.5" textAnchor="middle" fontSize="9" fontWeight="700" fill="#000" fontFamily="Helvetica,Arial" transform="scale(-1 1)" style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}>Uber</text>
+        <rect x="101" y="32.5" width="4" height="4" fill="#0A0D13" />
+        <path d="M22 82 V68 c0-5.5 3.8-10 9.2-11 l15.5-2.8 15.5-16.5 c3.2-3.4 7.7-5.4 12.4-5.4 h47.8 c4.7 0 9.2 2 12.4 5.4 L150 53.8 l16 2.6 c5.3 .9 9 5.4 9 10.8 V82 z" fill="#0A0D13" />
+        <path d="M64.5 54 L77 40.5 c2-2.2 4.8-3.4 7.8-3.4 h9 V54 z" fill="#1C2534" />
+        <path d="M100 36.6 h12.6 c3 0 5.8 1.2 7.8 3.4 L132 53.5 132 54 H100 z" fill="#1C2534" />
+        <g clipPath="url(#whyWinR)">
+          <rect x="70" y="50" width="17" height="10" rx="3" fill="#0E8345" />
+          <circle cx="79" cy="45" r="5.6" fill="#E8B08A" />
+          <path d="M72.6 44.5 a6.4 6.4 0 0112.8 0 v2.2 h-2.4 v-2.8 a4 4 0 00-8 0 v2.8 h-2.4 z" fill="#1F1F1F" />
+          <rect x="72" y="44" width="2.8" height="7" rx="1.4" fill="#1F1F1F" />
+          <rect x="83.4" y="44" width="2.8" height="7" rx="1.4" fill="#1F1F1F" />
+        </g>
+        <g clipPath="url(#whyWinF)">
+          <rect x="104" y="50" width="18" height="10" rx="3" fill="#16264A" />
+          <circle cx="112" cy="45" r="5.6" fill="#C68B62" />
+          <path d="M105.8 45 a6.3 6.3 0 0112.5 0 v1 h-12.5 z" fill="#276EF1" />
+          <rect x="111" y="43.6" width="9.5" height="2.4" rx="1.2" fill="#175BDC" />
+          <circle cx="112" cy="41" r="1.4" fill="#FFFFFF" />
+          <rect x="117" y="51.5" width="8" height="3" rx="1.5" fill="#C68B62" />
+          <circle cx="126.5" cy="53" r="4.6" fill="none" stroke="#4A5568" strokeWidth="2" />
+        </g>
+        <path d="M96.5 57 v21" stroke="#1B2330" strokeWidth="1.6" />
+        <rect x="84" y="61.5" width="9" height="2.6" rx="1.3" fill="#2B3648" />
+        <rect x="102" y="61.5" width="9" height="2.6" rx="1.3" fill="#2B3648" />
+        <rect x="88" y="56" width="10" height="3.4" rx="1.7" fill="#0E8345" />
+        <circle cx="99.5" cy="57.6" r="2.2" fill="#E8B08A" />
+        <rect x="131" y="46.5" width="5.5" height="3.4" rx="1.6" fill="#0A0D13" />
+        <rect x="130" y="49.5" width="2" height="4" fill="#0A0D13" />
+        <path d="M28 78 H166" stroke="#1B2330" strokeWidth="1.6" />
+        <rect x="169" y="60" width="6" height="6.5" rx="2" fill="#FFF7DE" />
+        <rect x="20" y="60" width="5.5" height="6.5" rx="2" fill="#DE1135" />
+        <g>
+          <circle cx="52" cy="84" r="13" fill="#05070B" />
+          <circle cx="52" cy="84" r="6.8" fill="#8A96A6" />
+          <rect x="51" y="77.5" width="2" height="13" rx="1" fill="#05070B" />
+          <rect x="45.5" y="83" width="13" height="2" rx="1" fill="#05070B" />
+          <circle cx="52" cy="84" r="1.8" fill="#05070B" />
+        </g>
+        <g>
+          <circle cx="142" cy="84" r="13" fill="#05070B" />
+          <circle cx="142" cy="84" r="6.8" fill="#8A96A6" />
+          <rect x="141" y="77.5" width="2" height="13" rx="1" fill="#05070B" />
+          <rect x="135.5" y="83" width="13" height="2" rx="1" fill="#05070B" />
+          <circle cx="142" cy="84" r="1.8" fill="#05070B" />
         </g>
       </g>
-      {/* the rider's phone with the pre-ride checklist */}
+
+      {/* driver alert pill, sized to its text, pops in last */}
+      <g style={pop(3.4)}>
+        <rect x="308" y="132" width="98" height="24" rx="12" fill="#FDF3FB" stroke="#EBC9E4" />
+        <circle cx="322" cy="144" r="4.5" fill="#B0499B" />
+        <text x="331" y="148" fontSize="10" fontWeight="700" fill="#8A2E78" fontFamily="Helvetica,Arial">driver alerted</text>
+      </g>
+
+      {/* the rider's phone with the pre-ride checklist, rows popping in order */}
       <g>
         <rect x="34" y="76" width="112" height="180" rx="16" fill="#05070B" />
         <rect x="40" y="84" width="100" height="164" rx="11" fill="#FFFFFF" />
         <rect x="50" y="94" width="58" height="8" rx="4" fill="#111" />
         {[
-          ["#06C167", 112, "trip reviewed"],
-          ["#06C167", 140, "drop point set"],
-          ["#06C167", 168, "link sent"],
-        ].map(([c, y, label]) => (
-          <g key={String(y)}>
+          [112, "trip reviewed", 0.4],
+          [140, "drop point set", 1.0],
+          [168, "link sent", 1.6],
+        ].map(([y, label, d]) => (
+          <g key={String(y)} style={pop(Number(d))}>
             <rect x="48" y={Number(y)} width="84" height="22" rx="6" fill="#F3F3F3" />
-            <circle cx="60" cy={Number(y) + 11} r="6" fill={String(c)} />
+            <circle cx="60" cy={Number(y) + 11} r="6" fill="#06C167" />
             <path d={`M57 ${Number(y) + 11} l2 2.2 4-4.4`} stroke="#fff" strokeWidth="1.8" fill="none" strokeLinecap="round" />
             <text x="70" y={Number(y) + 15} fontSize="8.5" fontWeight="700" fill="#333" fontFamily="Helvetica,Arial">{String(label)}</text>
           </g>
         ))}
-        <rect x="48" y="198" width="84" height="20" rx="8" fill="#0A0D13" />
-        <text x="90" y="211" textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#fff" fontFamily="Helvetica,Arial">ready to board</text>
+        <g style={pop(2.2)}>
+          <rect x="48" y="198" width="84" height="20" rx="8" fill="#0A0D13" />
+          <text x="90" y="211" textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#fff" fontFamily="Helvetica,Arial">ready to board</text>
+        </g>
       </g>
+
       {/* the contact who received the link */}
-      <g style={{ animation: "floaty 6s ease-in-out infinite" }}>
+      <g style={pop(2.8)}>
         <circle cx="196" cy="118" r="17" fill="#06C167" />
         <text x="196" y="123" textAnchor="middle" fontSize="11" fontWeight="800" fill="#00250F" fontFamily="Helvetica,Arial">AN</text>
         <rect x="164" y="142" width="66" height="18" rx="9" fill="#EAF6EF" />
         <text x="197" y="154" textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">tracking live</text>
       </g>
       <path d="M148 136 C164 130 172 126 182 122" stroke="#06C167" strokeWidth="2.5" fill="none" strokeDasharray="5 5" style={{ animation: "dashflow 1.3s linear infinite" }} />
-      <path d="M212 132 C236 156 256 178 288 200" stroke="#8FB0FF" strokeWidth="2" fill="none" strokeDasharray="3 6" opacity=".7" />
+      <path d="M212 132 C236 152 258 168 292 186" stroke="#8FB0FF" strokeWidth="2" fill="none" strokeDasharray="3 6" opacity=".7" />
     </svg>
   );
 }
@@ -521,19 +680,22 @@ const INDIA_FACTS = [
   {
     big: "4 in 10",
     text: "women in Indian cities said they feel unsafe, and the feeling grows after dark.",
-    src: "NARI 2025",
+    src: "NARI 2025 · National Commission for Women",
+    note: "The National Annual Report and Index on Women's Safety surveyed 12,770 women across 31 Indian cities.",
     url: "https://www.insightsonindia.com/2025/08/29/nari-2025-report/",
   },
   {
     big: "92%",
     text: "of women riders in India said emergency support during the ride matters to them.",
-    src: "Statista, 2023",
+    src: "Statista · 2023 India survey",
+    note: "A 2023 survey of ride-hailing users in India on which safety features matter most, split by gender.",
     url: "https://www.statista.com/statistics/1454958/india-importance-of-ride-hailing-safety-features-by-gender/",
   },
   {
     big: "331",
     text: "SHE Teams run by Telangana Police to protect women in public spaces, in our pilot state.",
-    src: "Telangana Police",
+    src: "Telangana Police · Women Safety Wing",
+    note: "The official SHE Teams page of the Telangana Police Women Safety Wing, active since 2014.",
     url: "https://womensafetywing.telangana.gov.in/she-module/she-teams/",
   },
 ];
@@ -542,54 +704,63 @@ export function Architecture() {
   return (
     <Reveal className="mt-12 rounded-2xl bg-mist p-5 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
       <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">WHY WE BUILT THIS</div>
-      <h2 className="m-0 mb-4 text-[clamp(24px,3vw,36px)] font-extrabold tracking-[-1px]">
+      <h2 className="m-0 mb-3 text-[clamp(22px,3vw,36px)] font-extrabold tracking-[-1px]">
         The tools exist. The flow is missing.
       </h2>
 
-      <div className="grid items-center gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
-        <div className="max-w-[62ch] text-[14.5px] leading-[1.65] text-ink-soft">
+      <div className="grid items-center gap-4 sm:gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
+        <div className="order-2 max-w-[62ch] text-[13.5px] leading-[1.6] text-ink-soft sm:order-1 sm:text-[14.5px] sm:leading-[1.65]">
           <p className="m-0">
             Getting into a stranger&apos;s car at night asks for real trust. Uber India already ships
             strong tools for that moment: SOS, live trip sharing, RideCheck, trip PINs, audio
             recording and a 24x7 safety line. Each one works. Each one is also a separate switch,
             and most only matter after you are already sitting inside the car.
           </p>
-          <p className="mb-0 mt-3">
+          <p className="mb-0 mt-2.5">
             SafeRide Priority moves the safety work to before the door closes. One pre-ride check
             runs the whole plan: it reviews the trip, alerts the driver, picks a safer drop point,
             and sends your contact a link with the driver&apos;s name, plate, PIN and live GPS. By
             the time you sit down, everyone who should know already knows.
           </p>
-          <p className="mb-0 mt-3">
+          <p className="mb-0 mt-2.5">
             It covers any reason you ride at night in Hyderabad: a late shift in HITEC City, an
             event across town, an emergency, a long outstation trip. The goal is simple. Reach the
             destination safely, and feel safe the whole way there.
           </p>
         </div>
-        <PreRideCheckScene />
+        <div className="order-1 sm:order-2">
+          <PreRideCheckScene />
+        </div>
       </div>
 
-      {/* the India numbers behind the decision */}
-      <div className="mt-6 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
-        {INDIA_FACTS.map((f) => (
-          <div key={f.big} className="flex flex-col rounded-2xl border border-line bg-white p-4">
-            <div className="text-[26px] font-extrabold tracking-[-1px]">{f.big}</div>
-            <div className="mt-1 text-[12.5px] leading-[1.5] text-ink-soft">{f.text}</div>
-            <a
-              href={f.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto inline-flex w-max items-center gap-1 pt-2.5 text-[11px] font-bold text-brand-dark"
-            >
-              {f.src} ↗
-            </a>
+      {/* the India numbers behind the decision: flip a card for its source */}
+      <div className="mt-4 grid gap-3 sm:mt-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
+        {INDIA_FACTS.map((f, i) => (
+          <div key={f.big} className="sticky sm:static" style={{ top: 64 + i * 6, zIndex: i + 1 }}>
+            <div className="beam h-full">
+              <StatCard
+                s={{
+                  big: f.big,
+                  text: f.text,
+                  cls: "bg-white",
+                  textCls: "text-ink-soft",
+                  hintCls: "text-[#9AA0A6]",
+                  pillCls: "bg-black text-white",
+                  sourceName: f.src,
+                  sourceNote: f.note,
+                  sourceUrl: f.url,
+                }}
+                delay={i * 0.07}
+              />
+            </div>
           </div>
         ))}
       </div>
 
       {/* what exists today, and what this concept adds on top */}
       <div className="mt-3 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
-        <div className="rounded-2xl border border-line bg-white p-4">
+        <div className="sticky sm:static" style={{ top: 84, zIndex: 4 }}>
+        <div className="h-full rounded-2xl border border-line bg-white p-4">
           <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-ink-faint">ON UBER INDIA TODAY</div>
           <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-ink-soft">
             {["SOS button", "Live trip sharing", "RideCheck", "Trip PIN", "Audio recording", "Women Rider Preference, in select cities"].map((x) => (
@@ -603,7 +774,9 @@ export function Architecture() {
             Good tools, each a separate switch, mostly used mid-ride.
           </div>
         </div>
-        <div className="rounded-2xl bg-black p-4 text-white">
+        </div>
+        <div className="sticky sm:static" style={{ top: 90, zIndex: 5 }}>
+        <div className="h-full rounded-2xl bg-black p-4 text-white">
           <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-[#8FB0FF]">WHAT SAFERIDE PRIORITY ADDS</div>
           <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-[#D6DCE4]">
             {[
@@ -624,10 +797,11 @@ export function Architecture() {
             One flow, finished before the door closes. That is the whole idea.
           </div>
         </div>
+        </div>
       </div>
 
       {/* the plan, at concept level */}
-      <div className="mt-5 flex flex-col items-stretch gap-1.5 sm:flex-row sm:items-center sm:gap-2">
+      <div className="mt-4 flex flex-col items-stretch gap-1.5 sm:flex-row sm:items-center sm:gap-2">
         {[
           ["The night trip", "any ride, 8 PM to 5 AM"],
           ["Pre-ride check", "guidance, driver, drop point"],

@@ -102,14 +102,15 @@ export function PhoneScaler({
   }, [reserve]);
 
   return (
-    <div ref={outer} style={{ width: 402 * scale }}>
+    /* explicit height + hidden overflow so the unscaled inner box never
+       adds phantom scroll space below the page */
+    <div ref={outer} style={{ width: 402 * scale, height: 874 * scale, overflow: "hidden" }}>
       <div
         style={{
           width: 402,
           height: 874,
           transform: `scale(${scale})`,
           transformOrigin: "top left",
-          marginBottom: (scale - 1) * 874,
         }}
       >
         {children}
