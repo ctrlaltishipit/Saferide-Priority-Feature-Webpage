@@ -1,0 +1,389 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import {
+  DRIVERS,
+  NO_RESPONSE_LINK_HOURS,
+  TRACKING_LINK_EXPIRY_MINUTES,
+  TRACKING_URL,
+  TRIP_ETA_MINUTES,
+  TRIP_PIN,
+  UBER_HELPLINE,
+  buildCircleSms,
+  vehicleLine,
+} from "@/server/rules";
+import type { CircleInfo } from "./PhoneApp";
+import { CityMapLayers, CityMapMarkers, MAP_ROUTE_PATH } from "./CityMap";
+
+/* The contact's side of the share. Three views inside one phone:
+   1) the SMS that lands when the rider saves her Safety Circle
+   2) the live GPS tracking page the link opens
+   3) the trip details page with driver contact and the helpline
+
+   Link life, from the backend rules: live for the whole trip however
+   long it runs, 30 more minutes after a safe check-in (with replay),
+   and 12 hours with replay if the rider never responds. */
+
+/* Route points come from the shared map path so there is one source. */
+const ROUTE: [number, number][] = MAP_ROUTE_PATH.split(/[ML]/)
+  .map((s) => s.trim())
+  .filter(Boolean)
+  .map((pair) => pair.split(/\s+/).map(Number) as [number, number]);
+
+const segLengths = ROUTE.slice(1).map((p, i) => Math.hypot(p[0] - ROUTE[i][0], p[1] - ROUTE[i][1]));
+const totalLen = segLengths.reduce((a, b) => a + b, 0);
+
+function pointAt(progress: number): [number, number] {
+  let d = progress * totalLen;
+  for (let i = 0; i < segLengths.length; i++) {
+    if (d <= segLengths[i]) {
+      const t = segLengths[i] === 0 ? 0 : d / segLengths[i];
+      const [x1, y1] = ROUTE[i];
+      const [x2, y2] = ROUTE[i + 1];
+      return [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t];
+    }
+    d -= segLengths[i];
+  }
+  return ROUTE[ROUTE.length - 1];
+}
+
+const TRIP_SECONDS = 45; // one simulated trip lasts 45 real seconds
+
+export default function ContactView({
+  riderName,
+  info,
+  onExit,
+}: {
+  riderName: string;
+  info: CircleInfo | null;
+  onExit?: () => void;
+}) {
+  const [view, setView] = useState<"sms" | "track" | "details">("sms");
+  const [progress, setProgress] = useState(0.12);
+  const [replaying, setReplaying] = useState(false);
+  const [expiry, setExpiry] = useState(TRACKING_LINK_EXPIRY_MINUTES * 60);
+  const raf = useRef<number | null>(null);
+
+  const driver = DRIVERS[info?.driverKind ?? "priority"];
+  const dropShort = info?.dropShort || "Kondapur";
+  const pickup = info?.pickup || "Cyber Towers, HITEC City";
+  const bookedTime = info?.time || "12:15 AM";
+  const contactName = info?.selNames?.[0] || "Ananya";
+  const outstation = info?.tripType === "outstation";
+  const etaLabel = info?.etaLabel || `${TRIP_ETA_MINUTES} minutes`;
+  const ended = info?.tripEnded ?? false;
+  const safe = info?.checkInSafe ?? false;
+  const sms = buildCircleSms({ riderName, dropShort, driver, etaLabel });
+
+  /* snap to the drop point the moment the rider's trip ends, and rewind
+     the 30 minute clock whenever the safe-confirmed state resets */
+  const armed = ended && safe;
+  const [prevEnded, setPrevEnded] = useState(ended);
+  const [prevArmed, setPrevArmed] = useState(armed);
+  if (ended !== prevEnded) {
+    setPrevEnded(ended);
+    if (ended) setProgress(1);
+  }
+  if (armed !== prevArmed) {
+    setPrevArmed(armed);
+    if (!armed) setExpiry(TRACKING_LINK_EXPIRY_MINUTES * 60);
+  }
+
+  /* the countdown runs only once the rider has confirmed safe */
+  useEffect(() => {
+    if (!armed) return;
+    const id = setInterval(() => setExpiry((e) => Math.max(0, e - 1)), 1000);
+    return () => clearInterval(id);
+  }, [armed]);
+
+  /* animate the car while the trip runs, or while a replay runs */
+  const animating = view === "track" && (!ended || replaying);
+  useEffect(() => {
+    if (!animating) return;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      setProgress((p) => {
+        const next = Math.min(1, p + dt / TRIP_SECONDS);
+        if (next >= 1) setReplaying(false);
+        return next;
+      });
+      raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => {
+      if (raf.current) cancelAnimationFrame(raf.current);
+    };
+  }, [animating]);
+
+  const [cx, cy] = pointAt(progress);
+  const etaLeft = Math.max(1, Math.ceil((1 - progress) * TRIP_ETA_MINUTES));
+  const etaNow = ended ? "Arrived" : outstation ? etaLabel.replace("about ", "~") : `${etaLeft} min`;
+  const mm = String(Math.floor(expiry / 60)).padStart(2, "0");
+  const ss = String(Math.floor(expiry % 60)).padStart(2, "0");
+  const linkStatus = !ended
+    ? "live for the whole trip"
+    : safe
+      ? `expires in ${mm}:${ss}`
+      : `no check-in response · active ${NO_RESPONSE_LINK_HOURS} h`;
+
+  const callRow = (label: string, number: string, dark?: boolean) => (
+    <a
+      href={`tel:${number.replace(/\s/g, "")}`}
+      className={`flex items-center justify-center gap-2 rounded-[10px] p-3 text-center text-[13px] font-bold ${
+        dark ? "bg-[#111] text-white" : "border-[1.5px] border-[#D8DCE0]"
+      }`}
+    >
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 4h4l2 5-2.5 1.5a12 12 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      </svg>
+      {label}
+    </a>
+  );
+
+  return (
+    <div className="relative flex h-full flex-col bg-[#F6F7F9] pt-[54px] text-[#111]" style={{ fontFamily: "-apple-system,'Helvetica Neue',system-ui,sans-serif" }}>
+      {onExit && (
+        <button
+          type="button"
+          onClick={onExit}
+          className="absolute left-3 top-[56px] z-30 flex items-center gap-1 rounded-full bg-black/85 py-1.5 pl-2 pr-3 text-[10.5px] font-bold text-white shadow-[0_2px_10px_rgba(0,0,0,.25)] backdrop-blur-sm"
+        >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 5l-7 7 7 7" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Back to rider app
+        </button>
+      )}
+      {view === "sms" && (
+        <>
+          {/* messages header */}
+          <div className="flex flex-none flex-col items-center border-b border-[#E5E7EB] bg-[#FBFBFD] pb-2.5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8A96A6] text-[16px] font-bold text-white">
+              SR
+            </div>
+            <div className="mt-1 text-[12.5px] font-semibold">SafeRide</div>
+            <div className="text-[10.5px] text-[#8A8A8E]">SMS · {contactName}&apos;s phone</div>
+          </div>
+          <div className="hscroll min-h-0 flex-1 overflow-y-auto px-4 pb-6">
+            <div className="my-3 text-center text-[11px] font-medium text-[#8A8A8E]">Today · 12:16 AM</div>
+            <div className="max-w-[86%] rounded-[18px] rounded-bl-md bg-[#E9E9EB] px-3.5 py-2.5 text-[13.5px] leading-[1.5]" style={{ animation: "slideup .4s ease both" }}>
+              {sms.lines.map((line, i) =>
+                line.includes(TRACKING_URL) ? (
+                  <div key={i}>
+                    Track the trip live:{" "}
+                    <button type="button" onClick={() => setView("track")} className="font-semibold text-[#007AFF] underline">
+                      {TRACKING_URL}
+                    </button>{" "}
+                    (mock)
+                  </div>
+                ) : (
+                  <div key={i}>{line}</div>
+                )
+              )}
+              <div className="mt-1.5 text-[11.5px] text-[#6B6B6B]">{sms.footer}</div>
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-1.5 text-[11.5px] font-semibold text-brand-dark">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 5v10m0 4v.5M7 10l5-5 5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Tap the blue link to open live tracking
+            </div>
+            {/* edge case, in plain words */}
+            <div className="mx-auto mt-4 max-w-[92%] rounded-xl border border-[#E5E7EB] bg-white px-3 py-2.5 text-center text-[11.5px] leading-[1.55] text-ink-faint">
+              If {riderName} does not answer her arrival check-in, this link stays active for{" "}
+              {NO_RESPONSE_LINK_HOURS} hours with the full trip replay, and you can call the driver
+              directly from the link.
+            </div>
+            {!info?.sharingOn && (
+              <div className="mx-auto mt-3 max-w-[86%] rounded-xl border border-[#F0DCC8] bg-[#FFF1D6] px-3 py-2.5 text-center text-[11.5px] leading-[1.5] text-[#7A4E00]">
+                This SMS goes out only after {riderName} selects contacts and ticks the consent box on
+                the Safety Circle step.
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {view === "track" && (
+        <>
+          {/* tracking header */}
+          <div className="flex flex-none items-center gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 pb-2.5">
+            <button type="button" onClick={() => setView("sms")} aria-label="Back to SMS" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F3F3F3]">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M15 5l-7 7 7 7" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <div className="flex-1">
+              <div className="flex items-center gap-1.5 text-[14px] font-extrabold">
+                Tracking {riderName}
+                <span className="h-2 w-2 rounded-full" style={{ background: ended && safe ? "#F6BC2F" : "#06C167", animation: "blink 1.4s ease infinite" }} />
+                <span className="text-[10.5px] font-bold text-safe-dark">{ended ? "TRIP ENDED" : "LIVE GPS"}</span>
+              </div>
+              <div className="text-[11px] text-ink-faint">saferide.demo · link {linkStatus}</div>
+            </div>
+            <span className="rounded-lg bg-[#F3F3F3] px-2 py-1 text-[10.5px] font-extrabold tracking-[1px]">PIN {TRIP_PIN}</span>
+          </div>
+
+          {/* live map */}
+          <div className="relative h-[286px] flex-none overflow-hidden bg-[#E9EDF0]">
+            <svg viewBox="0 0 402 250" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" aria-label="Live map with the rider's car moving along the route">
+              <CityMapLayers />
+              <path d={MAP_ROUTE_PATH} fill="none" stroke="#C9CED4" strokeWidth="4" strokeLinecap="round" />
+              <path d={MAP_ROUTE_PATH} fill="none" stroke="#276EF1" strokeWidth="4" strokeLinecap="round" pathLength={1} strokeDasharray={`${progress} 1`} />
+              <CityMapMarkers />
+              <g transform={`translate(${cx} ${cy})`}>
+                <circle r="16" fill="rgba(39,110,241,.25)" style={{ animation: "softpulse 1.8s ease infinite" }} />
+                <circle r="10" fill="#276EF1" />
+                <path d="M-5 2.5 l1.4-4.2 a1.8 1.8 0 011.7-1.3 h3.8 a1.8 1.8 0 011.7 1.3 L5 2.5 v3 h-1.6 v-1.2 h-6.8 V5.5 H-5 z" fill="#fff" />
+              </g>
+            </svg>
+            <div className="absolute left-3 top-3 rounded-full bg-white px-3 py-1.5 text-[11px] font-bold shadow-[0_2px_8px_rgba(0,0,0,.15)]">
+              {progress >= 1
+                ? replaying
+                  ? `Replaying trip to ${dropShort}`
+                  : `Reached ${dropShort}`
+                : `${outstation ? etaNow : `${etaLeft} min`} to ${dropShort}`}
+            </div>
+            {outstation && (
+              <div className="absolute right-3 top-3 rounded-full bg-[#16264A] px-2.5 py-1.5 text-[10px] font-bold text-[#8FB0FF] shadow-[0_2px_8px_rgba(0,0,0,.2)]">
+                OUTSTATION
+              </div>
+            )}
+            {ended && !replaying && (
+              <button
+                type="button"
+                onClick={() => {
+                  setProgress(0);
+                  setReplaying(true);
+                }}
+                className="absolute bottom-3 right-3 rounded-full bg-black px-3.5 py-2 text-[11.5px] font-bold text-white shadow-[0_4px_12px_rgba(0,0,0,.3)]"
+              >
+                Replay trip ↺
+              </button>
+            )}
+          </div>
+
+          {/* driver + actions */}
+          <div className="hscroll min-h-0 flex-1 overflow-y-auto px-4 pb-5 pt-3">
+            {ended && !safe && (
+              <div className="mb-2.5 rounded-xl border border-[#F0DCC8] bg-[#FFF1D6] px-3 py-2.5 text-[11.5px] leading-[1.55] text-[#7A4E00]" style={{ animation: "slideup .3s ease" }}>
+                {riderName} has not answered her arrival check-in yet. Use the driver&apos;s number
+                below to reach the car. This link and the replay stay active for {NO_RESPONSE_LINK_HOURS} hours.
+              </div>
+            )}
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white p-3.5">
+              <div className="flex items-center gap-3">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-[#111] text-[13.5px] font-bold text-white">
+                  {driver.initials}
+                </span>
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-1.5 text-[14.5px] font-extrabold">
+                    {driver.name}
+                    {info?.driverKind !== "standard" && (
+                      <span className="rounded-full bg-[#EFF4FE] px-2 py-0.5 text-[9.5px] font-bold text-brand-dark">SafeRide eligible</span>
+                    )}
+                  </div>
+                  <div className="text-[12px] text-ink-faint">
+                    {vehicleLine(driver)} · ★ {driver.rating}
+                  </div>
+                </div>
+                <div className="rounded-lg bg-[#F3F3F3] px-2.5 py-1.5 text-center">
+                  <div className="text-[13px] font-extrabold leading-none">{etaNow}</div>
+                  <div className="mt-0.5 text-[9px] font-semibold text-ink-faint">{ended ? "safe stop" : "ETA"}</div>
+                </div>
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {callRow(`Call ${riderName}`, "+91 98765 43210", true)}
+                {callRow("Call driver", driver.phone)}
+                <button
+                  type="button"
+                  onClick={() => setView("details")}
+                  className="flex items-center justify-center gap-2 rounded-[10px] border-[1.5px] border-[#D8DCE0] p-3 text-center text-[13px] font-bold"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="5" y="3.5" width="14" height="17" rx="2" stroke="currentColor" strokeWidth="1.8" />
+                    <path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                  View trip details
+                </button>
+                {callRow("Uber helpline", UBER_HELPLINE)}
+              </div>
+            </div>
+            <div className="mt-3 rounded-xl bg-[#EAF6EF] px-3.5 py-2.5 text-[11.5px] leading-[1.55] text-safe-dark">
+              Live GPS is shared with you because {riderName} added you to her Safety Circle and gave
+              consent. The link stays live for the whole trip, in the city or outstation, and expires{" "}
+              {TRACKING_LINK_EXPIRY_MINUTES} minutes after she confirms she is safe.
+            </div>
+            <div className="mt-2.5 text-center text-[10px] leading-[1.5] text-[#9AA0A6]">
+              Simulated tracking view. No real location, driver, calls or SMS are involved.
+            </div>
+          </div>
+        </>
+      )}
+
+      {view === "details" && (
+        <>
+          <div className="flex flex-none items-center gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 pb-2.5">
+            <button type="button" onClick={() => setView("track")} aria-label="Back to tracking" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F3F3F3]">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M15 5l-7 7 7 7" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <div className="flex-1">
+              <div className="text-[14px] font-extrabold">Trip details</div>
+              <div className="text-[11px] text-ink-faint">{riderName}&apos;s ride · link {linkStatus}</div>
+            </div>
+          </div>
+          <div className="hscroll min-h-0 flex-1 overflow-y-auto px-4 pb-6 pt-3">
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white px-3.5 py-1">
+              {[
+                ["Booked from", pickup],
+                ["Drop point", dropShort],
+                ["Booked for", `Tonight · ${bookedTime}`],
+                ["Trip type", outstation ? "Outstation" : "In city"],
+                ["Progress", progress >= 1 ? "Trip completed · reached drop point" : `${Math.round(progress * 100)}% of the route done`],
+                ["ETA", ended ? "Arrived · 12:45 AM" : etaNow],
+                ["Trip PIN", TRIP_PIN],
+              ].map(([k, v], i, arr) => (
+                <div key={k} className={`flex items-start justify-between gap-4 py-2.5 ${i < arr.length - 1 ? "border-b border-[#F0F0F0]" : ""}`}>
+                  <span className="text-[12px] font-semibold text-ink-faint">{k}</span>
+                  <span className="text-right text-[13px] font-bold">{v}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-3 rounded-2xl border border-[#E5E7EB] bg-white p-3.5">
+              <div className="mb-2 text-[11px] font-bold tracking-[1px] text-ink-faint">DRIVER</div>
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#111] text-[13px] font-bold text-white">
+                  {driver.initials}
+                </span>
+                <div className="flex-1">
+                  <div className="text-[14px] font-extrabold">{driver.name}</div>
+                  <div className="text-[11.5px] text-ink-faint">
+                    {vehicleLine(driver)} · ★ {driver.rating} · {driver.phone}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-2.5">{callRow("Call driver", driver.phone, true)}</div>
+            </div>
+
+            <div className="mt-3 rounded-2xl border border-[#E5E7EB] bg-white p-3.5">
+              <div className="mb-1 text-[11px] font-bold tracking-[1px] text-ink-faint">EMERGENCY</div>
+              <div className="mb-2.5 text-[12.5px] leading-[1.5] text-ink-soft">
+                Uber 24x7 safety helpline: <strong>{UBER_HELPLINE}</strong>. Call if you cannot reach{" "}
+                {riderName} or the driver.
+              </div>
+              {callRow("Call Uber helpline", UBER_HELPLINE)}
+            </div>
+            <div className="mt-2.5 text-center text-[10px] leading-[1.5] text-[#9AA0A6]">
+              Numbers are fictional. Nothing is contacted in this demo.
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
