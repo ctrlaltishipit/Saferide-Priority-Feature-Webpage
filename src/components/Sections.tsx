@@ -433,64 +433,106 @@ export function ResponsibleAI() {
   );
 }
 
-/* ───────────────────────── Architecture ───────────────────────── */
+/* ──────────────── Why we built this (replaces the old build stack) ──────────────── */
 export function Architecture() {
   return (
-    <Reveal className="mt-12 rounded-2xl bg-mist p-4 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
-      <div className="mb-[22px] flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">BUILD ARCHITECTURE</div>
-          <h2 className="m-0 text-[clamp(24px,3vw,36px)] font-extrabold tracking-[-1px]">
-            A real, deployable prototype stack.
-          </h2>
+    <Reveal className="mt-12 rounded-2xl bg-mist p-5 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
+      <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">WHY WE BUILT THIS</div>
+      <h2 className="m-0 mb-3 text-[clamp(24px,3vw,36px)] font-extrabold tracking-[-1px]">
+        The tools exist. The flow is missing.
+      </h2>
+      <div className="max-w-[72ch] text-[14.5px] leading-[1.65] text-ink-soft">
+        <p className="m-0">
+          Getting into a stranger&apos;s car at night asks for real trust. Uber already ships strong
+          tools for that moment: SOS, live trip sharing, RideCheck, trip PINs, audio recording and a
+          24x7 safety line. Each one works. Each one is also a separate switch, and most of them only
+          matter after you are already sitting inside the car.
+        </p>
+        <p className="mb-0 mt-3">
+          The gap shows up in the numbers. Even with all of these tools live, Uber&apos;s own US
+          safety report counted 998 sexual assault reports in 2020 alone.{" "}
+          <a
+            href="https://www.cnn.com/2022/06/30/tech/uber-safety-report"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whitespace-nowrap rounded-full bg-black px-2.5 py-1 text-[11px] font-bold text-white"
+          >
+            source ↗
+          </a>
+        </p>
+        <p className="mb-0 mt-3">
+          SafeRide Priority moves the safety work to before the door closes. One pre-ride check runs
+          the whole plan: it reviews the trip, alerts the driver, picks a safer drop point, and sends
+          your contact a link with the driver&apos;s name, plate, PIN and live GPS. By the time you
+          sit down, everyone who should know already knows.
+        </p>
+        <p className="mb-0 mt-3">
+          It covers any reason you ride at night: a late shift, an event, an emergency, a long
+          outstation trip. The goal is simple. Reach the destination safely, and feel safe the whole
+          way there.
+        </p>
+      </div>
+
+      {/* what exists today, and what this concept adds on top */}
+      <div className="mt-6 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
+        <div className="rounded-2xl border border-line bg-white p-4">
+          <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-ink-faint">ON UBER TODAY</div>
+          <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-ink-soft">
+            {["SOS button", "Live trip sharing", "RideCheck", "Trip PIN", "Audio recording", "24x7 safety line"].map((x) => (
+              <li key={x} className="flex items-center gap-2 py-1">
+                <span className="h-1.5 w-1.5 flex-none rounded-full bg-[#C9CED4]" />
+                {x}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-2 text-[12px] font-semibold text-ink-faint">
+            Six good tools. Six separate switches, mostly used mid-ride.
+          </div>
         </div>
-        <div className="text-xs text-ink-faint">
-          No Uber APIs · no real dispatch, GPS, payments or messaging
+        <div className="rounded-2xl bg-black p-4 text-white">
+          <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-[#8FB0FF]">WHAT SAFERIDE PRIORITY ADDS</div>
+          <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-[#D6DCE4]">
+            {[
+              "One pre-ride check, done before you board",
+              "Driver alerted before pickup when a female rider is on",
+              "Safer, staffed drop points suggested up front",
+              "Contact SMS with driver, plate, PIN and live GPS",
+              "Tracking that lasts the whole trip, city or outstation",
+              "A calm, tiered check-in after you arrive",
+            ].map((x) => (
+              <li key={x} className="flex items-start gap-2 py-1">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-safe" />
+                {x}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-2 text-[12px] font-semibold text-[#A6A6A6]">
+            One flow, finished before the door closes. That is the whole idea.
+          </div>
         </div>
       </div>
-      {/* mobile: the stack, top to bottom */}
-      <div className="flex flex-col gap-0 sm:hidden">
+
+      {/* the plan, at concept level */}
+      <div className="mt-5 flex flex-col items-stretch gap-1.5 sm:flex-row sm:items-center sm:gap-2">
         {[
-          ["Visitor browser", "mobile-first · 375px up", "bg-white border border-line", "text-ink-faint"],
-          ["Next.js · Vercel", "TypeScript · Tailwind · React 19", "bg-black text-white", "text-[#A6A6A6]"],
-          ["Supabase", "Postgres · Auth · RLS policies", "bg-brand text-white", "text-[#D6E4FE]"],
-          ["Seeded data", "locations · drivers · anchors", "bg-white border border-line", "text-ink-faint"],
-        ].map(([title, sub, cls, subCls], i) => (
-          <div key={title as string} className="contents">
-            {i > 0 && <div className="py-1 text-center text-lg leading-none text-[#A6A6A6]">↓</div>}
-            <div className={`rounded-2xl px-4 py-3.5 text-center ${cls}`}>
-              <div className="text-[15px] font-extrabold">{title}</div>
-              <div className={`mt-0.5 text-[11.5px] ${subCls}`}>{sub}</div>
+          ["The night trip", "any ride, 8 PM to 5 AM"],
+          ["Pre-ride check", "guidance, driver, drop point"],
+          ["Share and track", "contacts see the trip live"],
+          ["Arrive and confirm", "a quiet check-in closes it"],
+        ].map(([title, sub], i) => (
+          <div key={title} className="contents">
+            {i > 0 && (
+              <div className="text-center text-lg leading-none text-[#A6A6A6] sm:flex-none">
+                <span className="sm:hidden">↓</span>
+                <span className="hidden sm:inline">→</span>
+              </div>
+            )}
+            <div className="flex-1 rounded-xl border border-line bg-white px-3.5 py-2.5 text-center">
+              <div className="text-[13.5px] font-extrabold">{title}</div>
+              <div className="mt-0.5 text-[11px] text-ink-faint">{sub}</div>
             </div>
           </div>
         ))}
-      </div>
-      <div className="hidden sm:block">
-        <svg
-          viewBox="0 0 1080 150"
-          className="block h-auto w-full"
-          aria-label="Architecture: browser to Next.js on Vercel to Supabase to seeded mock data"
-        >
-          <g fontFamily="Helvetica,Arial">
-            <rect x="10" y="34" width="220" height="82" rx="14" fill="#fff" stroke="#E2E2E2" />
-            <text x="120" y="68" textAnchor="middle" fontSize="16" fontWeight="800">Visitor browser</text>
-            <text x="120" y="90" textAnchor="middle" fontSize="11.5" fill="#6B6B6B">mobile-first · 375px up</text>
-            <path d="M234 75 H290" stroke="#000" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.4s linear infinite" }} />
-            <rect x="294" y="24" width="240" height="102" rx="14" fill="#000" />
-            <text x="414" y="60" textAnchor="middle" fontSize="16" fontWeight="800" fill="#fff">Next.js · Vercel</text>
-            <text x="414" y="82" textAnchor="middle" fontSize="11.5" fill="#A6A6A6">TypeScript · Tailwind · React 19</text>
-            <text x="414" y="100" textAnchor="middle" fontSize="11.5" fill="#F6BC2F">deterministic rules engine</text>
-            <path d="M538 75 H594" stroke="#000" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.4s linear infinite" }} />
-            <rect x="598" y="24" width="240" height="102" rx="14" fill="#276EF1" />
-            <text x="718" y="60" textAnchor="middle" fontSize="16" fontWeight="800" fill="#fff">Supabase</text>
-            <text x="718" y="82" textAnchor="middle" fontSize="11.5" fill="#D6E4FE">Postgres · Auth · RLS policies</text>
-            <text x="718" y="100" textAnchor="middle" fontSize="11.5" fill="#D6E4FE">privacy-safe analytics events</text>
-            <path d="M842 75 H898" stroke="#000" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.4s linear infinite" }} />
-            <rect x="902" y="34" width="170" height="82" rx="14" fill="#fff" stroke="#E2E2E2" />
-            <text x="987" y="68" textAnchor="middle" fontSize="15" fontWeight="800">Seeded data</text>
-            <text x="987" y="90" textAnchor="middle" fontSize="11.5" fill="#6B6B6B">locations · drivers · anchors</text>
-          </g>
-        </svg>
       </div>
     </Reveal>
   );
