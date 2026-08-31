@@ -39,9 +39,20 @@ export function Ticker() {
 }
 
 /* ───────────────────────────── Stats ───────────────────────────── */
-/* Every card flips. Front: the number. Back: where it comes from,
-   with one small link that opens the source in a new tab. */
-const STATS = [
+/* The research cards flip to show their source, with one small link
+   that opens in a new tab. The product cards stay plain. */
+const STATS: {
+  big: string;
+  text: string;
+  cls: string;
+  textCls: string;
+  hintCls?: string;
+  pillCls?: string;
+  smaller?: boolean;
+  sourceName?: string;
+  sourceNote?: string;
+  sourceUrl?: string;
+}[] = [
   {
     big: "4 in 10",
     text: "women said they feel unsafe in their cities, and that feeling grows after dark, as reported in the NARI 2025 study.",
@@ -69,28 +80,32 @@ const STATS = [
     text: "the window where SafeRide reviews your ride plan. An 8 PM booking can end well past 10, so late hours count too.",
     cls: "bg-black text-white",
     textCls: "text-[#A6A6A6]",
-    hintCls: "text-[#757575]",
-    pillCls: "bg-white text-black",
     smaller: true,
-    sourceName: "Product decision · SafeRide PRD",
-    sourceNote: "A design decision in this project's PRD, built to sit alongside Uber's existing safety toolkit for night rides.",
-    sourceUrl: "/saferide-priority-prd.pdf",
   },
   {
     big: "< 2 min",
     text: "to complete the full 7 step safety flow. Built for a stressful moment.",
     cls: "bg-brand text-white",
     textCls: "text-[#D6E4FE]",
-    hintCls: "text-[#A9C4F7]",
-    pillCls: "bg-white text-black",
-    sourceName: "Design target · SafeRide PRD",
-    sourceNote: "The PRD sets under 2 minutes as the target for the 7-step flow. You can time it yourself in the prototype below.",
-    sourceUrl: "/saferide-priority-prd.pdf",
   },
 ];
 
 function StatCard({ s, delay }: { s: (typeof STATS)[number]; delay: number }) {
   const [flipped, setFlipped] = useState(false);
+  if (!s.sourceUrl) {
+    return (
+      <Reveal delay={delay} className={`rounded-2xl p-6 ${s.cls}`}>
+        <div
+          className={`font-extrabold tracking-[-1.5px] ${
+            s.smaller ? "whitespace-nowrap text-[clamp(30px,3.4vw,40px)]" : "text-[clamp(34px,4vw,46px)]"
+          }`}
+        >
+          {s.big}
+        </div>
+        <div className={`mt-1.5 text-[13.5px] leading-[1.5] ${s.textCls}`}>{s.text}</div>
+      </Reveal>
+    );
+  }
   return (
     <Reveal delay={delay} className="[perspective:1200px]">
       <div
