@@ -94,7 +94,7 @@ function StatCard({ s, delay }: { s: (typeof STATS)[number]; delay: number }) {
   const [flipped, setFlipped] = useState(false);
   if (!s.sourceUrl) {
     return (
-      <Reveal delay={delay} className={`rounded-2xl p-6 ${s.cls}`}>
+      <Reveal delay={delay} className={`h-full rounded-2xl p-6 ${s.cls}`}>
         <div
           className={`font-extrabold tracking-[-1.5px] ${
             s.smaller ? "whitespace-nowrap text-[clamp(30px,3.4vw,40px)]" : "text-[clamp(34px,4vw,46px)]"
@@ -107,7 +107,7 @@ function StatCard({ s, delay }: { s: (typeof STATS)[number]; delay: number }) {
     );
   }
   return (
-    <Reveal delay={delay} className="[perspective:1200px]">
+    <Reveal delay={delay} className="h-full [perspective:1200px]">
       <div
         role="button"
         tabIndex={0}
@@ -171,7 +171,13 @@ export function Stats() {
   return (
     <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
       {STATS.map((s, i) => (
-        <StatCard key={s.big} s={s} delay={i * 0.08} />
+        /* mobile: the cards deck up and cover each other on scroll,
+           and every card wears the travelling border beam */
+        <div key={s.big} className="sticky sm:static" style={{ top: 64 + i * 8, zIndex: i + 1 }}>
+          <div className="beam h-full">
+            <StatCard s={s} delay={i * 0.08} />
+          </div>
+        </div>
       ))}
     </div>
   );

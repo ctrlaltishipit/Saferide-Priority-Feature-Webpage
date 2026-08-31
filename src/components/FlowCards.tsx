@@ -120,13 +120,20 @@ export default function FlowCards() {
           </svg>
         </div>
       </div>
-      <div className="hscroll mx-auto flex max-w-[1240px] flex-col gap-3 px-5 pb-1.5 pt-6 sm:snap-x sm:snap-mandatory sm:flex-row sm:gap-3.5 sm:overflow-x-auto sm:pt-[30px]">
+      <div className="hscroll relative mx-auto flex max-w-[1240px] flex-col px-5 pb-1.5 pt-6 sm:snap-x sm:snap-mandatory sm:flex-row sm:gap-3.5 sm:overflow-x-auto sm:pt-[30px]">
         {STEP_NAMES.map((s, i) => (
-          <button
+          /* mobile: a sticky deck, each step card slides up and covers the
+             one before it; from sm up the wrapper vanishes (display:contents)
+             and the cards ride the horizontal snap rail instead */
+          <div
             key={s.title}
+            className={`sticky sm:contents ${i < STEP_NAMES.length - 1 ? "pb-4 sm:pb-0" : ""}`}
+            style={{ top: 64 + i * 8, zIndex: i + 1 }}
+          >
+          <button
             type="button"
             onClick={() => jumpToStep(i + 2)}
-            className="w-full flex-none rounded-[18px] border border-[#2A2A2A] bg-[#111111] p-4 text-left transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_18px_40px_rgba(39,110,241,.18)] sm:w-[min(78vw,270px)] sm:snap-start sm:p-5"
+            className="w-full flex-none rounded-[18px] border border-[#2A2A2A] bg-[#111111] p-4 text-left shadow-[0_-14px_34px_rgba(0,0,0,.6)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_18px_40px_rgba(39,110,241,.18)] sm:w-[min(78vw,270px)] sm:snap-start sm:p-5 sm:shadow-none"
           >
             <div className="mb-3.5 flex items-center justify-between">
               <span className="text-[34px] font-extrabold tracking-[-1.5px] text-[#333333]">
@@ -148,6 +155,7 @@ export default function FlowCards() {
             </div>
             <div className="mt-3 text-xs font-bold text-brand">Open this step ↓</div>
           </button>
+          </div>
         ))}
       </div>
     </section>
