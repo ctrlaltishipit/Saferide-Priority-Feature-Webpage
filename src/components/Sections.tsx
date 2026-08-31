@@ -280,32 +280,32 @@ export function DecisionEngine() {
         scores. When the data is thin it says <strong>Limited Data</strong>{" "}
         instead of guessing.
       </p>
-      <Reveal className="hscroll overflow-x-auto rounded-3xl bg-mist p-[clamp(10px,2vw,22px)]">
+      <Reveal className="rounded-2xl bg-mist p-[clamp(8px,1.6vw,20px)] sm:rounded-3xl">
         <svg
           viewBox="0 0 1080 300"
-          className="block h-auto w-full min-w-[720px]"
+          className="block h-auto w-full"
           aria-label="Diagram: five observable inputs flow through a deterministic rules engine into four guidance categories"
         >
           <g fontFamily="Helvetica,Arial">
             <rect x="16" y="22" width="220" height="44" rx="12" fill="#FFFFFF" stroke="#E2E2E2" />
             <circle cx="42" cy="44" r="10" fill="#000" />
             <path d="M42 38v6l4 3" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
-            <text x="62" y="49" fontSize="15" fontWeight="700">Time &amp; duration</text>
+            <text x="62" y="49" fontSize="19" fontWeight="700">Time &amp; duration</text>
             <rect x="16" y="76" width="220" height="44" rx="12" fill="#FFFFFF" stroke="#E2E2E2" />
             <rect x="32" y="90" width="20" height="16" rx="3" fill="none" stroke="#000" strokeWidth="2" />
             <path d="M32 98h20" stroke="#000" strokeWidth="2" />
-            <text x="62" y="103" fontSize="15" fontWeight="700">Route context</text>
+            <text x="62" y="103" fontSize="19" fontWeight="700">Route context</text>
             <rect x="16" y="130" width="220" height="44" rx="12" fill="#FFFFFF" stroke="#E2E2E2" />
             <path d="M42 138c-5 0-8.5 3.6-8.5 8.2 0 5.8 8.5 12.3 8.5 12.3s8.5-6.5 8.5-12.3C50.5 141.6 47 138 42 138z" fill="#06C167" />
-            <text x="62" y="157" fontSize="15" fontWeight="700">Nearby anchors</text>
+            <text x="62" y="157" fontSize="19" fontWeight="700">Nearby anchors</text>
             <rect x="16" y="184" width="220" height="44" rx="12" fill="#FFFFFF" stroke="#E2E2E2" />
             <path d="M42 192l8 3.2v4.4c0 4.8-3.4 8.8-8 10.4-4.6-1.6-8-5.6-8-10.4v-4.4z" fill="#276EF1" />
-            <text x="62" y="211" fontSize="15" fontWeight="700">Eligible-driver supply</text>
+            <text x="62" y="211" fontSize="19" fontWeight="700">Eligible-driver supply</text>
             <rect x="16" y="238" width="220" height="44" rx="12" fill="#FFFFFF" stroke="#E2E2E2" />
             <rect x="30" y="258" width="7" height="10" rx="2" fill="#000" />
             <rect x="40" y="252" width="7" height="16" rx="2" fill="#6B6B6B" />
             <rect x="50" y="246" width="7" height="22" rx="2" fill="#C9CED4" />
-            <text x="66" y="265" fontSize="15" fontWeight="700">Data confidence</text>
+            <text x="66" y="265" fontSize="19" fontWeight="700">Data confidence</text>
             {[
               "M240 44 C300 44 300 128 356 138",
               "M240 98 C295 98 300 138 356 146",
@@ -316,9 +316,9 @@ export function DecisionEngine() {
               <path key={d} d={d} fill="none" stroke="#A6A6A6" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: `dashflow ${1.4 + (i % 3) * 0.1}s linear infinite` }} />
             ))}
             <rect x="360" y="92" width="300" height="120" rx="18" fill="#000000" />
-            <text x="510" y="136" textAnchor="middle" fontSize="17" fontWeight="800" fill="#fff">DETERMINISTIC RULES</text>
-            <text x="510" y="158" textAnchor="middle" fontSize="12.5" fill="#A6A6A6">explainable · auditable · no ML in MVP</text>
-            <text x="510" y="186" textAnchor="middle" fontSize="12.5" fill="#F6BC2F" style={{ animation: "blink 2.2s ease infinite" }}>
+            <text x="510" y="136" textAnchor="middle" fontSize="21" fontWeight="800" fill="#fff">DETERMINISTIC RULES</text>
+            <text x="510" y="158" textAnchor="middle" fontSize="15" fill="#A6A6A6">explainable · auditable · no ML in MVP</text>
+            <text x="510" y="186" textAnchor="middle" fontSize="15" fill="#F6BC2F" style={{ animation: "blink 2.2s ease infinite" }}>
               ✕ crime data · ✕ protected attributes · ✕ ratings alone
             </text>
             <path d="M664 118 C720 110 724 66 776 58" fill="none" stroke="#0E8345" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.4s linear infinite" }} />
@@ -327,16 +327,16 @@ export function DecisionEngine() {
             <path d="M664 186 C720 194 724 238 776 238" fill="none" stroke="#6B6B6B" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.6s linear infinite" }} />
             <rect x="780" y="36" width="284" height="44" rx="22" fill="#EAF6EF" />
             <circle cx="806" cy="58" r="7" fill="#06C167" />
-            <text x="822" y="63" fontSize="15" fontWeight="800" fill="#0E8345">Lower contextual risk</text>
+            <text x="822" y="63" fontSize="18" fontWeight="800" fill="#0E8345">Lower contextual risk</text>
             <rect x="780" y="96" width="284" height="44" rx="22" fill="#FFF1D6" />
             <circle cx="806" cy="118" r="7" fill="#F6BC2F" />
-            <text x="822" y="123" fontSize="15" fontWeight="800" fill="#7A4E00">Elevated contextual risk</text>
+            <text x="822" y="123" fontSize="18" fontWeight="800" fill="#7A4E00">Elevated contextual risk</text>
             <rect x="780" y="156" width="284" height="44" rx="22" fill="#FDE8EC" />
             <circle cx="806" cy="178" r="7" fill="#DE1135" />
-            <text x="822" y="183" fontSize="15" fontWeight="800" fill="#A50D28">Higher contextual risk</text>
+            <text x="822" y="183" fontSize="18" fontWeight="800" fill="#A50D28">Higher contextual risk</text>
             <rect x="780" y="216" width="284" height="44" rx="22" fill="#EEEEEE" />
             <circle cx="806" cy="238" r="7" fill="#A6A6A6" />
-            <text x="822" y="243" fontSize="15" fontWeight="800" fill="#545454">Limited Data · abstain</text>
+            <text x="822" y="243" fontSize="18" fontWeight="800" fill="#545454">Limited Data · abstain</text>
           </g>
         </svg>
       </Reveal>

@@ -58,8 +58,23 @@ export default function Prototype() {
       setTourOn(false);
       return;
     }
-    jumpToStep(next);
+    jumpToStep(next, true);
   };
+
+  /* The tour plays itself: the splash runs its own launch timer, then
+     every screen holds for about 3 seconds. The whole demo lands under
+     30 seconds and ends on the check-in screen. */
+  useEffect(() => {
+    if (!tourOn) return;
+    if (step >= 1 && step < 8) {
+      const t = setTimeout(() => jumpToStep(step + 1, true), 3000);
+      return () => clearTimeout(t);
+    }
+    if (step === 8) {
+      const t = setTimeout(() => setTourOn(false), 4000);
+      return () => clearTimeout(t);
+    }
+  }, [tourOn, step]);
 
   const phone = (
     <PhoneApp
@@ -96,7 +111,7 @@ export default function Prototype() {
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M8 5.5v13l11-6.5-11-6.5z" fill="currentColor" />
             </svg>
-            Take the guided tour
+            Take the guided tour · 30 s
           </button>
           <button
             type="button"
@@ -230,20 +245,17 @@ export default function Prototype() {
                 </div>
                 <div className="text-sm font-extrabold text-white">{TOUR[tour].title}</div>
                 <div className="mt-1 text-[12.5px] leading-[1.55] text-[#C8D4EA]">{TOUR[tour].text}</div>
-                <div className="mt-2.5 flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => tourGo(-1)}
-                    className="rounded-lg border border-[#3A5EA8] px-3 py-1.5 text-xs font-bold text-[#8FB0FF]"
-                  >
-                    ← Back
-                  </button>
+                <div className="mt-2.5 flex items-center gap-2">
+                  <span className="flex items-center gap-1.5 text-[10.5px] font-bold text-[#8FB0FF]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-safe" style={{ animation: "blink 1s ease infinite" }} />
+                    playing by itself
+                  </span>
                   <button
                     type="button"
                     onClick={() => tourGo(1)}
-                    className="rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-white"
+                    className="ml-auto rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-white"
                   >
-                    {tour === 8 ? "Finish tour ✓" : "Next step →"}
+                    {tour === 8 ? "Finish ✓" : "Skip ahead →"}
                   </button>
                 </div>
               </div>

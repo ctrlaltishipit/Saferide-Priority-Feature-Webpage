@@ -166,7 +166,7 @@ export default function ContactView({
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8A96A6] text-[16px] font-bold text-white">
               SR
             </div>
-            <div className="mt-1 text-[12.5px] font-semibold">SafeRide</div>
+            <div className="mt-1 text-[12.5px] font-semibold">SafeRide Priority</div>
             <div className="text-[10.5px] text-[#8A8A8E]">SMS · {contactName}&apos;s phone</div>
           </div>
           <div className="hscroll min-h-0 flex-1 overflow-y-auto px-4 pb-6">

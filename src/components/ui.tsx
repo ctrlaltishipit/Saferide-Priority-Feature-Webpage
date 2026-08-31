@@ -75,13 +75,19 @@ export function Logo({ size = 26 }: { size?: number }) {
   );
 }
 
-/* Small event bus so the flow cards / rail can drive the prototype. */
+/* Small event bus so the flow cards / rail / tour can drive the prototype. */
 export const JUMP_EVENT = "saferide:jump";
 
-export function jumpToStep(step: number) {
-  window.dispatchEvent(new CustomEvent(JUMP_EVENT, { detail: step }));
-  const el = document.getElementById("prototype");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+export interface JumpDetail {
+  n: number;
+  auto: boolean;
+}
+
+export function jumpToStep(step: number, auto = false) {
+  window.dispatchEvent(
+    new CustomEvent<JumpDetail>(JUMP_EVENT, { detail: { n: step, auto } })
+  );
+  if (!auto) {
+    document.getElementById("prototype")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }

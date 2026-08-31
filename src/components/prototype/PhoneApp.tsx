@@ -223,12 +223,16 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
     onStepChange?.(s.step);
   }, [s.step, onStepChange]);
 
-  /* jump-to-step from flow cards / rail */
+  /* jump-to-step from flow cards / rail / auto tour */
   useEffect(() => {
     const onJump = (e: Event) => {
-      const n = (e as CustomEvent<number>).detail;
+      const detail = (e as CustomEvent<number | { n: number; auto: boolean }>).detail;
+      const n = typeof detail === "number" ? detail : detail.n;
+      const auto = typeof detail === "number" ? false : detail.auto;
       setS((prev) => {
         const p: typeof INITIAL = { ...prev, step: n, sheet: false, circleOpen: false };
+        /* the auto tour makes a sensible choice on each screen it passes */
+        if (auto && n >= 5 && !prev.anchor) p.anchor = "Metro Station Entrance";
         if (n >= 3) {
           p.safeRide = true;
           const h = parseTimeLabel(prev.time);
