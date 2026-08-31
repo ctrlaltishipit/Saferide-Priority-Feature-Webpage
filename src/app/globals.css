@@ -29,7 +29,9 @@
     color: #000000;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    /* clip, not hidden: hidden silently kills position sticky for the
+       whole page, clip trims overflow without a scroll container */
+    overflow-x: clip;
   }
 
   ::selection {

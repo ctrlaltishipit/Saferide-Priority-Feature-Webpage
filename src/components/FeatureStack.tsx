@@ -204,7 +204,7 @@ export default function FeatureStack() {
       {CARDS.map((c, i) => (
         <div
           key={c.badge}
-          className={i < CARDS.length - 1 ? "pb-4 sm:sticky sm:pb-[26px]" : "sm:sticky"}
+          className={i < CARDS.length - 1 ? "sticky pb-4 sm:pb-[26px]" : "sticky"}
           style={{ top: c.top, zIndex: c.z }}
         >
           <div
