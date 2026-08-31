@@ -73,26 +73,25 @@ export default function Prototype() {
 
   return (
     <section id="prototype" className="mt-24 bg-black text-white">
-      <div className="mx-auto max-w-[1240px] px-5 py-6">
+      <div className="mx-auto max-w-[1240px] px-5 py-5">
         <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
           INTERACTIVE PROTOTYPE
         </div>
-        <h2 className="m-0 mb-1.5 text-[clamp(24px,2.6vw,34px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+        <h2 className="m-0 mb-1 text-[clamp(22px,2.2vw,30px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
           Walk all 8 screens yourself.
         </h2>
-        <p className="m-0 mb-3 max-w-[720px] text-[13.5px] leading-[1.5] text-[#A6A6A6]">
-          The app opens on the Uber splash, lands on home, and the safety flow runs in 7 steps. It
-          works for in-city trips and outstation getaways alike, on every ride type except Parcel.
-          Sample Hyderabad locations, fictional drivers and contacts. Nothing real is booked, tracked
-          or contacted.
+        <p className="m-0 mb-2.5 text-[13.5px] leading-[1.5] text-[#A6A6A6]">
+          The app opens on the Uber splash, lands on home, and the safety flow runs in 7 steps: in the city or outstation, on
+          every ride type except Parcel. Sample Hyderabad locations, fictional drivers and contacts. Nothing real is booked,
+          tracked or contacted.
         </p>
 
         {/* demo controls */}
-        <div className="mb-4 flex flex-wrap items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={startTour}
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-[18px] py-[10px] text-[13px] font-bold text-white transition-all hover:bg-brand-dark hover:shadow-[0_8px_24px_rgba(39,110,241,.45)]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-brand px-3.5 py-2 text-[12.5px] font-bold text-white transition-all hover:bg-brand-dark hover:shadow-[0_8px_24px_rgba(39,110,241,.45)]"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M8 5.5v13l11-6.5-11-6.5z" fill="currentColor" />
@@ -102,7 +101,7 @@ export default function Prototype() {
           <button
             type="button"
             onClick={() => setFullscreen(true)}
-            className="inline-flex items-center gap-2 rounded-full border border-[#3A3A3A] px-[18px] py-[10px] text-[13px] font-bold text-white transition-colors hover:border-brand"
+            className="inline-flex items-center gap-1.5 rounded-full border border-[#3A3A3A] px-3.5 py-2 text-[12.5px] font-bold text-white transition-colors hover:border-brand"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -115,7 +114,7 @@ export default function Prototype() {
                 key={sc}
                 type="button"
                 onClick={() => setScenario(sc)}
-                className="rounded-full px-3 py-[7px] capitalize transition-colors"
+                className="rounded-full px-2.5 py-1.5 capitalize transition-colors"
                 style={{
                   background: scenario === sc ? "#FFFFFF" : "transparent",
                   color: scenario === sc ? "#000000" : "#A6A6A6",
@@ -125,7 +124,7 @@ export default function Prototype() {
               </button>
             ))}
           </div>
-          <label className="flex items-center gap-2 rounded-full border border-[#2A2A2A] px-3.5 py-[7px] text-[12px] font-semibold text-[#A6A6A6]">
+          <label className="flex items-center gap-1.5 rounded-full border border-[#2A2A2A] px-3 py-1.5 text-[12px] font-semibold text-[#A6A6A6]">
             Rider
             <input
               value={riderName}
@@ -136,7 +135,7 @@ export default function Prototype() {
           </label>
         </div>
 
-        <div className="flex flex-wrap items-start justify-center gap-8">
+        <div className="flex flex-wrap items-start justify-center gap-6">
           {/* phone */}
           <Reveal
             variant="scale"
@@ -146,14 +145,14 @@ export default function Prototype() {
                 "radial-gradient(62% 55% at 50% 42%, rgba(39,110,241,.25), transparent 72%)",
             }}
           >
-            <PhoneScaler desktopScale={0.66}>
+            <PhoneScaler desktopScale={0.56}>
               <IOSDevice>{phone}</IOSDevice>
             </PhoneScaler>
           </Reveal>
 
           {/* rail */}
-          <div className="flex min-w-[min(100%,250px)] max-w-[340px] flex-1 flex-col gap-1.5">
-            <div className="mb-0.5 text-[11px] font-bold tracking-[1.2px] text-[#A6A6A6]">
+          <div className="flex min-w-[min(100%,240px)] max-w-[320px] flex-1 flex-col gap-1">
+            <div className="text-[10.5px] font-bold tracking-[1.2px] text-[#A6A6A6]">
               THE APP · TAP TO JUMP
             </div>
             {APP_SCREENS.map((r) => {
@@ -163,14 +162,14 @@ export default function Prototype() {
                   key={r.title}
                   type="button"
                   onClick={() => jumpToStep(1)}
-                  className="flex items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
+                  className="flex items-center gap-2 rounded-[10px] border px-2.5 py-1.5 text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
                   style={{
                     borderColor: active ? "#276EF1" : "#333333",
                     background: active ? "rgba(39,110,241,.12)" : "transparent",
                   }}
                 >
                   <span
-                    className="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full border border-[#333333]"
+                    className="flex h-[22px] w-[22px] flex-none items-center justify-center rounded-full border border-[#333333]"
                     style={{ background: active ? "#276EF1" : "transparent" }}
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -178,13 +177,13 @@ export default function Prototype() {
                     </svg>
                   </span>
                   <span className="flex-1">
-                    <span className="block text-[13px] font-bold leading-tight text-white">{r.title}</span>
-                    <span className="mt-px block text-[11px] leading-tight text-[#A6A6A6]">{r.desc}</span>
+                    <span className="block text-[12.5px] font-bold leading-tight text-white">{r.title}</span>
+                    <span className="block text-[10.5px] leading-tight text-[#A6A6A6]">{r.desc}</span>
                   </span>
                 </button>
               );
             })}
-            <div className="mb-0.5 mt-1.5 text-[11px] font-bold tracking-[1.2px] text-[#A6A6A6]">
+            <div className="mt-1 text-[10.5px] font-bold tracking-[1.2px] text-[#A6A6A6]">
               THE SAFETY FLOW · 7 STEPS
             </div>
             {FLOW_SCREENS.map((r, i) => {
@@ -196,14 +195,14 @@ export default function Prototype() {
                   key={r.title}
                   type="button"
                   onClick={() => jumpToStep(target)}
-                  className="flex items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
+                  className="flex items-center gap-2 rounded-[10px] border px-2.5 py-1.5 text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
                   style={{
                     borderColor: active ? "#276EF1" : "#333333",
                     background: active ? "rgba(39,110,241,.12)" : "transparent",
                   }}
                 >
                   <span
-                    className="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full border border-[#333333] text-[12.5px] font-extrabold"
+                    className="flex h-[22px] w-[22px] flex-none items-center justify-center rounded-full border border-[#333333] text-[11px] font-extrabold"
                     style={{
                       background: done ? "#FFFFFF" : active ? "#276EF1" : "transparent",
                       color: done ? "#000000" : active ? "#FFFFFF" : "#A6A6A6",
@@ -212,8 +211,8 @@ export default function Prototype() {
                     {r.n}
                   </span>
                   <span className="flex-1">
-                    <span className="block text-[13px] font-bold leading-tight text-white">{r.title}</span>
-                    <span className="mt-px block text-[11px] leading-tight text-[#A6A6A6]">{r.desc}</span>
+                    <span className="block text-[12.5px] font-bold leading-tight text-white">{r.title}</span>
+                    <span className="block text-[10.5px] leading-tight text-[#A6A6A6]">{r.desc}</span>
                   </span>
                 </button>
               );
@@ -249,7 +248,7 @@ export default function Prototype() {
                 </div>
               </div>
             ) : (
-              <div className="mt-1 rounded-xl border border-dashed border-[#333333] px-3.5 py-2 text-[11.5px] leading-[1.55] text-[#A6A6A6]">
+              <div className="mt-1 rounded-lg border border-dashed border-[#333333] px-3 py-1.5 text-[10.5px] leading-[1.5] text-[#A6A6A6]">
                 Scenario and rider name are tweakable in the controls above. On step 1, pick In city
                 or Outstation, and try turning the SafeRide toggle off to book a standard ride. The
                 Elevated, Lower and Limited Data buttons change what the Safety Brief on step 2 says.
@@ -259,21 +258,19 @@ export default function Prototype() {
         </div>
 
         {/* ── what the Safety Circle contact sees ── */}
-        <div id="circle-view" className="mt-12 border-t border-[#2A2A2A] pt-10">
+        <div id="circle-view" className="mt-10 border-t border-[#2A2A2A] pt-6">
           <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
             SAFETY CIRCLE VIEW
           </div>
-          <h3 className="m-0 mb-2 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.08] tracking-[-1px]">
+          <h3 className="m-0 mb-1 text-[clamp(20px,2vw,28px)] font-extrabold leading-[1.08] tracking-[-1px]">
             The SMS and live tracking contacts get.
           </h3>
-          <p className="m-0 mb-5 max-w-[680px] text-[14px] leading-[1.55] text-[#A6A6A6]">
-            The moment {riderName} saves her Safety Circle, each selected contact gets an SMS with
-            the driver&apos;s name, vehicle, plate number, trip PIN and a live tracking link. This
-            phone belongs to {circle?.selNames?.[0] || "Ananya"}. Tap the blue link to watch the trip
-            on live GPS, open the trip details, and call the driver or the helpline. It follows the
-            choices you make in the demo above, in the city or outstation.
+          <p className="m-0 mb-3 text-[13.5px] leading-[1.5] text-[#A6A6A6]">
+            The moment {riderName} saves her Safety Circle, each contact gets an SMS with the driver&apos;s name, vehicle, plate, trip PIN
+            and a live tracking link. This phone belongs to {circle?.selNames?.[0] || "Ananya"}: tap the blue link for live GPS, trip details and
+            calls. It mirrors every choice you make in the demo above, in the city or outstation.
           </p>
-          <div className="flex flex-wrap items-start justify-center gap-8">
+          <div className="flex flex-wrap items-start justify-center gap-6">
             <Reveal
               variant="scale"
               className="max-w-full rounded-[40px] p-[clamp(6px,1.2vw,12px)]"
@@ -282,14 +279,14 @@ export default function Prototype() {
                   "radial-gradient(62% 55% at 50% 42%, rgba(6,193,103,.18), transparent 72%)",
               }}
             >
-              <PhoneScaler desktopScale={0.66}>
+              <PhoneScaler desktopScale={0.56}>
                 <IOSDevice>
                   <ContactView riderName={riderName} info={circle} />
                 </IOSDevice>
               </PhoneScaler>
             </Reveal>
-            <div className="flex min-w-[min(100%,250px)] max-w-[340px] flex-1 flex-col gap-1.5">
-              <div className="mb-0.5 text-[11px] font-bold tracking-[1.2px] text-[#A6A6A6]">
+            <div className="flex min-w-[min(100%,240px)] max-w-[330px] flex-1 flex-col gap-1">
+              <div className="text-[10.5px] font-bold tracking-[1.2px] text-[#A6A6A6]">
                 HOW THE SHARE BEHAVES
               </div>
               {[
@@ -299,9 +296,9 @@ export default function Prototype() {
                 ["Trip details and calls, one tap away", "Booked route, time, progress, ETA, PIN, driver contact and the Uber helpline live behind 'View trip details'."],
                 ["Consent first, always", "The SMS is only sent after the rider selects contacts and ticks the consent box on step 5."],
               ].map(([t, d]) => (
-                <div key={t} className="rounded-[13px] border border-[#333333] px-3.5 py-2.5">
-                  <div className="text-sm font-bold text-white">{t}</div>
-                  <div className="mt-1 text-[12px] leading-[1.55] text-[#A6A6A6]">{d}</div>
+                <div key={t} className="rounded-[10px] border border-[#333333] px-3 py-1.5">
+                  <div className="text-[12.5px] font-bold text-white">{t}</div>
+                  <div className="text-[10.5px] leading-[1.45] text-[#A6A6A6]">{d}</div>
                 </div>
               ))}
             </div>
