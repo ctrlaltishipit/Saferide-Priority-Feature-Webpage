@@ -286,45 +286,7 @@ export function DecisionEngine() {
         scores. When the data is thin it says <strong>Limited Data</strong>{" "}
         instead of guessing.
       </p>
-      {/* mobile: the same story told top to bottom, sized for a phone */}
-      <Reveal className="rounded-2xl bg-mist p-4 sm:hidden">
-        <div className="flex flex-col gap-2">
-          {[
-            "Time & duration",
-            "Route context",
-            "Nearby anchors",
-            "Eligible-driver supply",
-            "Data confidence",
-          ].map((label) => (
-            <div key={label} className="rounded-xl border border-line bg-white px-3.5 py-2.5 text-[13.5px] font-bold">
-              {label}
-            </div>
-          ))}
-        </div>
-        <div className="my-2.5 text-center text-lg leading-none text-[#A6A6A6]">↓</div>
-        <div className="rounded-2xl bg-black p-4 text-center">
-          <div className="text-[15px] font-extrabold text-white">DETERMINISTIC RULES</div>
-          <div className="mt-1 text-[11.5px] text-[#A6A6A6]">explainable · auditable · no ML in MVP</div>
-          <div className="mt-1.5 text-[11.5px] text-caution" style={{ animation: "blink 2.2s ease infinite" }}>
-            ✕ crime data · ✕ protected attributes · ✕ ratings alone
-          </div>
-        </div>
-        <div className="my-2.5 text-center text-lg leading-none text-[#A6A6A6]">↓</div>
-        <div className="flex flex-col gap-2">
-          {[
-            ["Lower contextual risk", "#EAF6EF", "#0E8345", "#06C167"],
-            ["Elevated contextual risk", "#FFF1D6", "#7A4E00", "#F6BC2F"],
-            ["Higher contextual risk", "#FDE8EC", "#A50D28", "#DE1135"],
-            ["Limited Data · abstain", "#EEEEEE", "#545454", "#A6A6A6"],
-          ].map(([label, bg, fg, dot]) => (
-            <div key={label} className="flex items-center gap-2.5 rounded-full px-4 py-2.5" style={{ background: bg }}>
-              <span className="h-2.5 w-2.5 flex-none rounded-full" style={{ background: dot }} />
-              <span className="text-[13.5px] font-extrabold" style={{ color: fg }}>{label}</span>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-      <Reveal className="hidden rounded-2xl bg-mist p-[clamp(8px,1.6vw,20px)] sm:block sm:rounded-3xl">
+      <Reveal className="rounded-2xl bg-mist p-[clamp(8px,1.6vw,20px)] sm:rounded-3xl">
         <svg
           viewBox="0 0 1080 300"
           className="block h-auto w-full"
