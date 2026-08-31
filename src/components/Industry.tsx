@@ -264,6 +264,7 @@ function PlayerCard({ p, delay }: { p: (typeof PLAYERS)[number]; delay: number }
 
 const FIT: string[] = [
   "Almost every tool above starts working after the car does. The minutes before booking stay empty, and that is exactly where SafeRide Priority lives.",
+  "Regulators now fine drivers who cancel, 10% of the fare capped at ₹100. A penalty after the fact still leaves the rider on the kerb. A committed pickup removes the cancel before it happens.",
   "Riders in the US can now ask to match with a woman driver. Riders in India cannot yet. The Female rider toggle and priority match close that gap at booking time.",
   "Hyderabad police built T-Safe and have said they want cab apps to plug into it. SafeRide's tracking link and circle SMS are shaped to be that bridge.",
   "Telangana records 117.6 crimes against women per lakh, close to double the national rate. The pilot city is the one that needs this first.",

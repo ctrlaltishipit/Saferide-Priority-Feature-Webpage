@@ -781,6 +781,8 @@ export function Architecture() {
           <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-[#D6DCE4]">
             {[
               "One pre-ride check, done before you board",
+              "A committed pickup: the driver accepts before you see the match",
+              "A priority queue that puts urgent and hospital trips first",
               "Driver alerted before pickup when a female rider is on",
               "Safer, staffed drop points suggested up front",
               "Contact SMS with driver, plate, PIN and live GPS",

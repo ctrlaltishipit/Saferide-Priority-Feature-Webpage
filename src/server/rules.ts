@@ -45,6 +45,13 @@ export const FEMALE_RIDER_DRIVER_ALERT =
 export const FEMALE_RIDER_GPS_NOTE =
   "Live GPS tracking is mandatory for this trip.";
 
+/* Committed pickup. A SafeRide match is a promise the ride will come.
+   The driver accepts the trip before the rider sees the match, cannot
+   drop it for a ride on another app, and a cancel means an instant
+   first-in-line rematch. Urgent and hospital trips head the queue. */
+export const MATCH_COMMIT_NOTE =
+  "This driver accepted your trip before you saw this match and cannot drop it for a ride on another app. If anything changes, you are rematched first in line.";
+
 /* Turns a label like "10:45 PM" into an hour in 24 hour time. */
 export function parseTimeLabel(label: string): number | null {
   const m = label.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);

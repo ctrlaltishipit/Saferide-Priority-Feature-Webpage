@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "SafeRide Priority · Uber feature concept",
   description:
-    "A safety planning layer for the Uber rider app: contextual guidance, live trip sharing with trusted contacts, safer pickup and drop points, and a vetted driver match for late-night rides. Independent portfolio concept, not affiliated with Uber.",
+    "A safety and reliability layer for the Uber rider app: contextual guidance, live trip sharing with trusted contacts, safer pickup and drop points, and a vetted driver who commits to the pickup on late-night rides. Independent portfolio concept. Not affiliated with Uber.",
   keywords: [
     "SafeRide Priority",
     "ride hailing safety",

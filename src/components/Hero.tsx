@@ -149,13 +149,14 @@ export default function Hero() {
           The late-night ride, planned safer.
         </h1>
         <p className="mb-6 max-w-[480px] text-[16.5px] leading-[1.6] text-ink-soft [text-wrap:pretty]">
-          SafeRide Priority is a safety planning layer for the Uber rider app. It
-          brings contextual guidance, live trip sharing with trusted contacts,
-          safer pickup and drop points, and a vetted driver match into one simple
-          flow for rides between 8 PM and 5 AM: late hours and late night alike.
-          It works for short in-city trips and long outstation hauls, on every
-          ride type except Parcel. Built for every rider, with immediate
-          priority when a female rider is travelling.
+          SafeRide Priority is a safety and reliability layer for the Uber rider
+          app. It brings contextual guidance, live trip sharing with trusted
+          contacts, safer pickup and drop points, and a vetted driver who commits
+          to your pickup into one simple flow for rides between 8 PM and 5 AM:
+          late hours and late night alike. It works for short in-city trips, long
+          outstation hauls and urgent runs that cannot wait, on every ride type
+          except Parcel. Built for every rider, with immediate priority when a
+          female rider is travelling.
         </p>
         {/* trip card */}
         <div className="relative max-w-[420px] rounded-[14px] bg-mist px-3.5 py-1">

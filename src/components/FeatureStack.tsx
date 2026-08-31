@@ -156,7 +156,7 @@ const CARDS: Card[] = [
     badge: "P0 · SAFETY PRIORITY MATCH",
     badgeCls: "text-[#8FB0FF] bg-[#16264A]",
     title: (<>See the full trade-off<br />before you choose.</>),
-    body: "Verification complete · safety training · 1000+ trips · clear review status. Driver eligibility rests on several audited signals, and star ratings are only one small part. The +4 min and +₹20 trade off sits right on the card before you pick.",
+    body: "Verification complete · safety training · 1000+ trips · clear review status. Driver eligibility rests on several audited signals, and star ratings are only one small part. The +4 min and +₹20 trade off sits right on the card before you pick. And every SafeRide match is a committed pickup: the driver accepts your trip before you see the match, and a cancel means an instant first-in-line rematch.",
     visual: <MatchVisual />,
     cardCls: "bg-black text-white",
     bodyColor: "text-[#A6A6A6]",

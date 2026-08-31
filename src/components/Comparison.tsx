@@ -41,6 +41,13 @@ const ROWS: {
     onIcon: "auto",
   },
   {
+    label: "Getting the cab to actually come",
+    off: "Drivers cancel when they hear the destination, and the night search drags on.",
+    on: "A committed pickup: the driver accepts before you see the match. A cancel means an instant first-in-line rematch.",
+    offIcon: "none",
+    onIcon: "auto",
+  },
+  {
     label: "After you arrive",
     off: "\"Reached?\" texts, until someone forgets to send one.",
     on: "A quiet check-in 5 minutes after the trip. Neutral note if you don't respond.",

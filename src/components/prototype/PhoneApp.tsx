@@ -6,6 +6,7 @@ import {
   DRIVERS,
   FEMALE_RIDER_DRIVER_ALERT,
   FEMALE_RIDER_GPS_NOTE,
+  MATCH_COMMIT_NOTE,
   OUTSTATION_DROPS,
   OUTSTATION_ETA_LABEL,
   TRIP_ETA_MINUTES,
@@ -641,7 +642,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                 <div className="flex-1">
                   <div className="text-[15px] font-bold">Plan a safer late-night ride</div>
                   <div className="mt-[3px] text-[12.5px] leading-[1.5] text-ink-faint">
-                    SafeRide Priority reviews your trip between 8 PM and 5 AM: guidance, trip sharing, safer drop points and a vetted driver option. For every rider.
+                    SafeRide Priority reviews your trip between 8 PM and 5 AM: guidance, trip sharing, safer drop points and a vetted driver who commits to your pickup. For every rider.
                   </div>
                 </div>
                 <button
@@ -971,6 +972,10 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                   trips, clear review status. Eligibility uses several audited signals, never star
                   ratings alone. Drivers get a training path and an appeal process.
                 </div>
+              </div>
+              <div className="mt-2 rounded-xl bg-[#EAF6EF] px-[13px] py-3">
+                <div className="mb-1 text-xs font-bold text-[#0E8345]">Committed pickup</div>
+                <div className="text-xs leading-[1.55] text-[#2A5A3F]">{MATCH_COMMIT_NOTE}</div>
               </div>
               <button
                 type="button"
