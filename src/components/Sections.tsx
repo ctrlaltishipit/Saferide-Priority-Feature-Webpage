@@ -11,7 +11,7 @@ const TICKER = [
   ["SAFER ANCHORS", "#F6BC2F"],
   ["ARRIVAL CHECK-IN", "#276EF1"],
   ["CONSENT BY DEFAULT", "#06C167"],
-  ["GUIDANCE, NOT SCORES", "#F6BC2F"],
+  ["PLAIN LANGUAGE GUIDANCE", "#F6BC2F"],
 ] as const;
 
 export function Ticker() {
@@ -270,7 +270,9 @@ export function DecisionEngine() {
     <div className="mt-24">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">HOW IT DECIDES</div>
       <h2 className="m-0 mb-2 max-w-[680px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
-        Observable signals in. Plain-language guidance out.
+        Observable signals in.
+        <br />
+        Plain-language guidance out.
       </h2>
       <p className="mb-[26px] max-w-[640px] text-[15px] leading-[1.6] text-ink-soft">
         Simple, explainable rules decide what you see. No machine learning in the
@@ -345,8 +347,8 @@ export function DecisionEngine() {
 /* ───────────────────────── Responsible AI strip ───────────────────────── */
 const PRINCIPLES = [
   {
-    title: "Assist, don't guarantee",
-    text: "Contextual guidance with visible limits, never a safety guarantee.",
+    title: "Honest about its limits",
+    text: "SafeRide gives contextual guidance and says so clearly. It makes no safety promises.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
         <circle cx="15" cy="15" r="13" stroke="#000" strokeWidth="2" />

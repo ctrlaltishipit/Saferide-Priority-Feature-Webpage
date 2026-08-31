@@ -34,7 +34,7 @@ export default function Home() {
           <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">
             THE FEATURE SET
           </div>
-          <h2 className="m-0 mb-[34px] max-w-[640px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+          <h2 className="m-0 mb-[34px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] md:whitespace-nowrap">
             Five features, one flow built on consent.
           </h2>
           <FeatureStack />

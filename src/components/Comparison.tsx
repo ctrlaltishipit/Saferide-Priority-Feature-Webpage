@@ -78,7 +78,7 @@ export default function Comparison() {
   return (
     <div className="mt-24">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">BEFORE / AFTER</div>
-      <h2 className="m-0 mb-2 max-w-[680px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+      <h2 className="m-0 mb-2 text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] md:whitespace-nowrap">
         The difference one toggle makes.
       </h2>
       <p className="mb-7 max-w-[620px] text-[15px] leading-[1.6] text-ink-soft">

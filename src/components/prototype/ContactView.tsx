@@ -73,7 +73,8 @@ export default function ContactView({
   const etaLabel = info?.etaLabel || `${TRIP_ETA_MINUTES} minutes`;
   const ended = info?.tripEnded ?? false;
   const safe = info?.checkInSafe ?? false;
-  const sms = buildCircleSms({ riderName, dropShort, driver, etaLabel });
+  const anchor = info?.anchor ?? null;
+  const sms = buildCircleSms({ riderName, dropShort, driver, etaLabel, anchor });
 
   /* snap to the drop point the moment the rider's trip ends, and rewind
      the 30 minute clock whenever the safe-confirmed state resets */
@@ -237,6 +238,16 @@ export default function ContactView({
               <path d={MAP_ROUTE_PATH} fill="none" stroke="#C9CED4" strokeWidth="4" strokeLinecap="round" />
               <path d={MAP_ROUTE_PATH} fill="none" stroke="#276EF1" strokeWidth="4" strokeLinecap="round" pathLength={1} strokeDasharray={`${progress} 1`} />
               <CityMapMarkers />
+              {anchor && (
+                <g aria-label={`Safer anchor: ${anchor}`}>
+                  <circle cx="352" cy="118" r="11" fill="#0E8345" />
+                  <path d="M347.5 118l3 3 6-6.5" stroke="#fff" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <rect x="252" y="98" width="132" height="15" rx="7.5" fill="#FFFFFF" opacity=".92" />
+                  <text x="318" y="109" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">
+                    anchor · {anchor.length > 20 ? `${anchor.slice(0, 19)}…` : anchor}
+                  </text>
+                </g>
+              )}
               <g transform={`translate(${cx} ${cy})`}>
                 <circle r="16" fill="rgba(39,110,241,.25)" style={{ animation: "softpulse 1.8s ease infinite" }} />
                 <circle r="10" fill="#276EF1" />
@@ -352,6 +363,7 @@ export default function ContactView({
                 ["Drop point", dropShort],
                 ["Booked for", `Tonight · ${bookedTime}`],
                 ["Trip type", outstation ? "Outstation" : "In city"],
+                ["Safer anchor", anchor ? `${anchor} (staffed)` : "None · original drop kept"],
                 ["Progress", progress >= 1 ? "Trip completed · reached drop point" : `${Math.round(progress * 100)}% of the route done`],
                 ["ETA", ended ? "Arrived · 12:45 AM" : etaNow],
                 ["Trip PIN", TRIP_PIN],

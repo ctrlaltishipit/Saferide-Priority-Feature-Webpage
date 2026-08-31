@@ -90,9 +90,11 @@ Never show this file or its text on any screen. It is for developers only.
 51. Trip PIN verification is shown before boarding. The PIN comes from one shared constant, never typed twice.
 52. Analytics events must be privacy safe. No precise locations stored after the trip.
 
-## Writing style for all frontend copy
+## Brand voice for all frontend copy
 
-53. Use simple English and short sentences. Write like a person, not like a press release.
+53. Write like a person explaining something to a friend. Simple words, short sentences.
 54. Never use em dashes in any text shown to users. Use a colon or a comma instead.
-55. Avoid jargon. If a plain word works, use the plain word.
-56. When asked to check the frontend content, check these three rules first.
+55. Never use the "X, not Y" sentence pattern. Lines like "guidance, not scores" are banned. Say what the thing is in plain words instead.
+56. Avoid jargon. If a plain word works, use the plain word.
+57. Every section should answer one simple question for the reader: what is this, why does it matter, what can I do with it.
+58. When asked to check the frontend content, check these rules first.

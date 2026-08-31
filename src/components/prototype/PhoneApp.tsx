@@ -54,6 +54,7 @@ export interface CircleInfo {
   checkInSafe: boolean;
   tripType: "city" | "outstation";
   etaLabel: string;
+  anchor: string | null;
   step: number;
 }
 
@@ -287,6 +288,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
       checkInSafe: s.checkIn === "safe",
       tripType: s.tripType,
       etaLabel,
+      anchor: s.anchor,
       step: s.step,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -354,7 +356,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
       addRel: "",
     });
   };
-  const sms = buildCircleSms({ riderName, dropShort, driver: drv, etaLabel });
+  const sms = buildCircleSms({ riderName, dropShort, driver: drv, etaLabel, anchor: s.anchor });
 
   const primaryBtn =
     "block w-full rounded-[10px] bg-[#111111] p-3.5 text-center text-[14.5px] font-bold text-white transition-colors";
@@ -398,6 +400,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
           checkInSafe: s.checkIn === "safe",
           tripType: s.tripType,
           etaLabel,
+          anchor: s.anchor,
           step: s.step,
         }}
         onExit={() => set({ circleOpen: false })}

@@ -11,9 +11,9 @@ const TOUR: { title: string; text: string }[] = [
   { title: "Every ride starts here", text: "The app the rider already opens every night. SafeRide asks her to download nothing new. It lives inside the flow she trusts. The splash moves on by itself, like the real launch." },
   { title: "The entry point meets riders where they are", text: "A faithful Uber home. Scroll it, tap 'Later' to open Plan your ride (try the Pickup and For me pills, and Send a ride), tap an Outstation getaway to book a long haul, or tap the SafeRide card to start in the city." },
   { title: "Step 1: one familiar booking sheet", text: "Pickup, drop, 15-minute slots from 8 PM to 5 AM, and an In city or Outstation trip type. SafeRide adds an opt-in toggle, and a Female rider switch: immediate priority, driver alert, mandatory GPS." },
-  { title: "Step 2: guidance, not a score", text: "The Contextual Safety Brief gives a category with plain-language reasons and a confidence meter. Open 'Why am I seeing this?': explainability is the feature." },
-  { title: "Step 3: move the drop, not the destination", text: "Safer Anchors suggests staffed, well-lit drop points within a short walk. Notice: the original drop is never labelled unsafe and stays one tap away." },
-  { title: "Step 4: a transparent trade-off", text: "Safety Priority Match shows the +4 min / +₹20 cost up front. Eligibility uses several audited signals, never star ratings alone." },
+  { title: "Step 2: guidance you can question", text: "The Contextual Safety Brief gives a category with plain-language reasons and a confidence meter. Open 'Why am I seeing this?': explainability is the feature." },
+  { title: "Step 3: a safer spot to step out", text: "Safer Anchors suggests staffed, well-lit drop points within a short walk. The original drop stays one tap away the whole time." },
+  { title: "Step 4: the trade-off, up front", text: "Safety Priority Match shows the +4 min / +₹20 cost before you pick. Eligibility rests on several audited signals, and star ratings are only one small part." },
   { title: "Step 5: consent before sharing", text: "Pick contacts, set one policy, and give explicit consent before anything is shared. Try 'Add contact': type a name and number, or pick from your phone." },
   { title: "Step 6: the trip, with the toolkit one tap away", text: "Driver card, verification PIN, live status, and SOS always visible. Use 'Advance Demo' to simulate the ride progressing." },
   { title: "Step 7: the loop closes quietly", text: "Five minutes after the trip: 'Did you reach safely?' Tap 'See what your Circle saw' to open the contact's view right here in the phone, or scroll down to the Safety Circle View section." },
@@ -73,14 +73,14 @@ export default function Prototype() {
 
   return (
     <section id="prototype" className="mt-24 bg-black text-white">
-      <div className="mx-auto max-w-[1240px] px-5 pb-20 pt-[70px]">
-        <div className="mb-3 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
+      <div className="mx-auto max-w-[1240px] px-5 py-6">
+        <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
           INTERACTIVE PROTOTYPE
         </div>
-        <h2 className="m-0 mb-2.5 text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+        <h2 className="m-0 mb-1.5 text-[clamp(24px,2.6vw,34px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
           Walk all 8 screens yourself.
         </h2>
-        <p className="m-0 mb-6 max-w-[620px] text-[15px] leading-[1.6] text-[#A6A6A6]">
+        <p className="m-0 mb-3 max-w-[720px] text-[13.5px] leading-[1.5] text-[#A6A6A6]">
           The app opens on the Uber splash, lands on home, and the safety flow runs in 7 steps. It
           works for in-city trips and outstation getaways alike, on every ride type except Parcel.
           Sample Hyderabad locations, fictional drivers and contacts. Nothing real is booked, tracked
@@ -88,7 +88,7 @@ export default function Prototype() {
         </p>
 
         {/* demo controls */}
-        <div className="mb-9 flex flex-wrap items-center gap-2.5">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={startTour}
@@ -136,24 +136,24 @@ export default function Prototype() {
           </label>
         </div>
 
-        <div className="flex flex-wrap items-start justify-center gap-11">
+        <div className="flex flex-wrap items-start justify-center gap-8">
           {/* phone */}
           <Reveal
             variant="scale"
-            className="max-w-full rounded-[44px] p-[clamp(8px,2vw,22px)]"
+            className="max-w-full rounded-[40px] p-[clamp(6px,1.2vw,12px)]"
             style={{
               background:
                 "radial-gradient(62% 55% at 50% 42%, rgba(39,110,241,.25), transparent 72%)",
             }}
           >
-            <PhoneScaler>
+            <PhoneScaler desktopScale={0.66}>
               <IOSDevice>{phone}</IOSDevice>
             </PhoneScaler>
           </Reveal>
 
           {/* rail */}
-          <div className="flex min-w-[min(100%,270px)] max-w-[360px] flex-1 flex-col gap-2">
-            <div className="mb-1 text-xs font-bold tracking-[1.2px] text-[#A6A6A6]">
+          <div className="flex min-w-[min(100%,250px)] max-w-[340px] flex-1 flex-col gap-1.5">
+            <div className="mb-0.5 text-[11px] font-bold tracking-[1.2px] text-[#A6A6A6]">
               THE APP · TAP TO JUMP
             </div>
             {APP_SCREENS.map((r) => {
@@ -163,7 +163,7 @@ export default function Prototype() {
                   key={r.title}
                   type="button"
                   onClick={() => jumpToStep(1)}
-                  className="flex items-center gap-3 rounded-[14px] border px-[15px] py-[13px] text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
+                  className="flex items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
                   style={{
                     borderColor: active ? "#276EF1" : "#333333",
                     background: active ? "rgba(39,110,241,.12)" : "transparent",
@@ -178,13 +178,13 @@ export default function Prototype() {
                     </svg>
                   </span>
                   <span className="flex-1">
-                    <span className="block text-sm font-bold text-white">{r.title}</span>
-                    <span className="mt-px block text-[11.5px] text-[#A6A6A6]">{r.desc}</span>
+                    <span className="block text-[13px] font-bold leading-tight text-white">{r.title}</span>
+                    <span className="mt-px block text-[11px] leading-tight text-[#A6A6A6]">{r.desc}</span>
                   </span>
                 </button>
               );
             })}
-            <div className="mb-1 mt-2 text-xs font-bold tracking-[1.2px] text-[#A6A6A6]">
+            <div className="mb-0.5 mt-1.5 text-[11px] font-bold tracking-[1.2px] text-[#A6A6A6]">
               THE SAFETY FLOW · 7 STEPS
             </div>
             {FLOW_SCREENS.map((r, i) => {
@@ -196,7 +196,7 @@ export default function Prototype() {
                   key={r.title}
                   type="button"
                   onClick={() => jumpToStep(target)}
-                  className="flex items-center gap-3 rounded-[14px] border px-[15px] py-[13px] text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
+                  className="flex items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-all duration-200 hover:translate-x-1 hover:border-brand"
                   style={{
                     borderColor: active ? "#276EF1" : "#333333",
                     background: active ? "rgba(39,110,241,.12)" : "transparent",
@@ -212,8 +212,8 @@ export default function Prototype() {
                     {r.n}
                   </span>
                   <span className="flex-1">
-                    <span className="block text-sm font-bold text-white">{r.title}</span>
-                    <span className="mt-px block text-[11.5px] text-[#A6A6A6]">{r.desc}</span>
+                    <span className="block text-[13px] font-bold leading-tight text-white">{r.title}</span>
+                    <span className="mt-px block text-[11px] leading-tight text-[#A6A6A6]">{r.desc}</span>
                   </span>
                 </button>
               );
@@ -249,7 +249,7 @@ export default function Prototype() {
                 </div>
               </div>
             ) : (
-              <div className="mt-1.5 rounded-xl border border-dashed border-[#333333] px-3.5 py-[13px] text-xs leading-[1.6] text-[#A6A6A6]">
+              <div className="mt-1 rounded-xl border border-dashed border-[#333333] px-3.5 py-2 text-[11.5px] leading-[1.55] text-[#A6A6A6]">
                 Scenario and rider name are tweakable in the controls above. On step 1, pick In city
                 or Outstation, and try turning the SafeRide toggle off to book a standard ride. The
                 Elevated, Lower and Limited Data buttons change what the Safety Brief on step 2 says.
@@ -259,37 +259,37 @@ export default function Prototype() {
         </div>
 
         {/* ── what the Safety Circle contact sees ── */}
-        <div id="circle-view" className="mt-20 border-t border-[#2A2A2A] pt-16">
-          <div className="mb-3 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
+        <div id="circle-view" className="mt-12 border-t border-[#2A2A2A] pt-10">
+          <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
             SAFETY CIRCLE VIEW
           </div>
-          <h3 className="m-0 mb-2.5 text-[clamp(24px,3vw,38px)] font-extrabold leading-[1.08] tracking-[-1px]">
+          <h3 className="m-0 mb-2 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.08] tracking-[-1px]">
             The SMS and live tracking contacts get.
           </h3>
-          <p className="m-0 mb-9 max-w-[640px] text-[15px] leading-[1.6] text-[#A6A6A6]">
+          <p className="m-0 mb-5 max-w-[680px] text-[14px] leading-[1.55] text-[#A6A6A6]">
             The moment {riderName} saves her Safety Circle, each selected contact gets an SMS with
             the driver&apos;s name, vehicle, plate number, trip PIN and a live tracking link. This
             phone belongs to {circle?.selNames?.[0] || "Ananya"}. Tap the blue link to watch the trip
             on live GPS, open the trip details, and call the driver or the helpline. It follows the
             choices you make in the demo above, in the city or outstation.
           </p>
-          <div className="flex flex-wrap items-start justify-center gap-11">
+          <div className="flex flex-wrap items-start justify-center gap-8">
             <Reveal
               variant="scale"
-              className="max-w-full rounded-[44px] p-[clamp(8px,2vw,22px)]"
+              className="max-w-full rounded-[40px] p-[clamp(6px,1.2vw,12px)]"
               style={{
                 background:
                   "radial-gradient(62% 55% at 50% 42%, rgba(6,193,103,.18), transparent 72%)",
               }}
             >
-              <PhoneScaler>
+              <PhoneScaler desktopScale={0.66}>
                 <IOSDevice>
                   <ContactView riderName={riderName} info={circle} />
                 </IOSDevice>
               </PhoneScaler>
             </Reveal>
-            <div className="flex min-w-[min(100%,270px)] max-w-[360px] flex-1 flex-col gap-2.5">
-              <div className="mb-1 text-xs font-bold tracking-[1.2px] text-[#A6A6A6]">
+            <div className="flex min-w-[min(100%,250px)] max-w-[340px] flex-1 flex-col gap-1.5">
+              <div className="mb-0.5 text-[11px] font-bold tracking-[1.2px] text-[#A6A6A6]">
                 HOW THE SHARE BEHAVES
               </div>
               {[
@@ -299,7 +299,7 @@ export default function Prototype() {
                 ["Trip details and calls, one tap away", "Booked route, time, progress, ETA, PIN, driver contact and the Uber helpline live behind 'View trip details'."],
                 ["Consent first, always", "The SMS is only sent after the rider selects contacts and ticks the consent box on step 5."],
               ].map(([t, d]) => (
-                <div key={t} className="rounded-[14px] border border-[#333333] px-[15px] py-[13px]">
+                <div key={t} className="rounded-[13px] border border-[#333333] px-3.5 py-2.5">
                   <div className="text-sm font-bold text-white">{t}</div>
                   <div className="mt-1 text-[12px] leading-[1.55] text-[#A6A6A6]">{d}</div>
                 </div>

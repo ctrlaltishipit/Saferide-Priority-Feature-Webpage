@@ -109,7 +109,7 @@ export default function FlowCards() {
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-end justify-between gap-4 px-5">
         <div>
           <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">THE FLOW</div>
-          <h2 className="m-0 max-w-[560px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+          <h2 className="m-0 text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] md:whitespace-nowrap">
             Seven steps, under two minutes.
           </h2>
         </div>

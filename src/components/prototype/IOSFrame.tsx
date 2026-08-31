@@ -63,26 +63,39 @@ export function IOSDevice({ children }: { children: ReactNode }) {
   );
 }
 
-/* Scales the fixed-size device down to fit narrow viewports. */
-export function PhoneScaler({ children }: { children: ReactNode }) {
+/* Scales the fixed-size device down to fit narrow viewports. On desktop
+   (min-width 1024px) it also shrinks to desktopScale so the whole phone
+   fits one screen without scrolling. */
+export function PhoneScaler({
+  children,
+  desktopScale = 1,
+}: {
+  children: ReactNode;
+  desktopScale?: number;
+}) {
   const outer = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(desktopScale);
 
   useEffect(() => {
     const el = outer.current;
     if (!el) return;
     const measure = () => {
-      const w = el.clientWidth;
-      setScale(w >= 402 ? 1 : Math.max(0.62, w / 402));
+      const avail = el.parentElement?.clientWidth ?? 402;
+      const cap = window.innerWidth >= 1024 ? desktopScale : 1;
+      setScale(Math.min(cap, Math.max(0.62, Math.min(1, avail / 402))));
     };
     measure();
     const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
+    ro.observe(el.parentElement ?? el);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [desktopScale]);
 
   return (
-    <div ref={outer} className="w-full max-w-[402px]">
+    <div ref={outer} style={{ width: 402 * scale }}>
       <div
         style={{
           width: 402,

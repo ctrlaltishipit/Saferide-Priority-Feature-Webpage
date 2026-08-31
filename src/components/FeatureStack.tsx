@@ -129,7 +129,7 @@ function CheckinVisual() {
 type Card = {
   badge: string;
   badgeCls: string;
-  title: string;
+  title: React.ReactNode;
   body: React.ReactNode;
   visual: React.ReactNode;
   cardCls: string;
@@ -143,8 +143,8 @@ const CARDS: Card[] = [
   {
     badge: "P0 · CONTEXTUAL SAFETY BRIEF",
     badgeCls: "text-caution-dark bg-[#FFF1D6]",
-    title: "A category you can question, not a score you have to trust.",
-    body: "Lower, Elevated, Higher, or Limited Data. Every result comes with 2 to 4 plain language reasons, a data confidence meter and a Why am I seeing this panel. It never blocks your booking.",
+    title: (<>A safety brief<br />you can question.</>),
+    body: "Lower, Elevated, Higher, or Limited Data. Every result comes with 2 to 4 plain language reasons, a data confidence meter and a Why am I seeing this panel. Your booking always goes through either way.",
     visual: <GaugeVisual />,
     cardCls: "bg-mist border border-line",
     bodyColor: "text-ink-soft",
@@ -155,8 +155,8 @@ const CARDS: Card[] = [
   {
     badge: "P0 · SAFETY PRIORITY MATCH",
     badgeCls: "text-[#8FB0FF] bg-[#16264A]",
-    title: 'A transparent trade-off, not a "safe driver" label.',
-    body: "Verification complete · safety training · 1000+ trips · clear review status. Driver eligibility uses several audited signals, never star ratings alone, and the +4 min and +₹20 trade off is shown before you choose.",
+    title: (<>See the full trade-off<br />before you choose.</>),
+    body: "Verification complete · safety training · 1000+ trips · clear review status. Driver eligibility rests on several audited signals, and star ratings are only one small part. The +4 min and +₹20 trade off sits right on the card before you pick.",
     visual: <MatchVisual />,
     cardCls: "bg-black text-white",
     bodyColor: "text-[#A6A6A6]",
@@ -166,7 +166,7 @@ const CARDS: Card[] = [
   {
     badge: "P0 · SAFETY CIRCLE",
     badgeCls: "text-safe-dark bg-[#EAF6EF]",
-    title: "Sharing that asks first. Links that expire.",
+    title: (<>Sharing that asks first.<br />Links that expire.</>),
     body: "Up to five trusted contacts and one sharing policy set once: ask every time, after 8 PM, higher risk trips only, or never. You give clear consent before the first automatic share, and every live tracking link expires in 30 minutes. When Female rider is on, live GPS sharing is mandatory.",
     visual: <CircleVisual />,
     cardCls: "bg-white border border-line",
@@ -177,8 +177,8 @@ const CARDS: Card[] = [
   {
     badge: "P1 · SAFER ANCHORS",
     badgeCls: "text-ink-soft bg-[#EEEEEE]",
-    title: "Move the drop 180 m, not the destination.",
-    body: "Staffed gates, metro entrances and 24/7 venues within a short walk, each with a clear reason and the extra minutes it adds. Your original drop point is never labelled unsafe and stays one tap away.",
+    title: (<>A safer spot to step out,<br />a short walk away.</>),
+    body: "Staffed gates, metro entrances and 24/7 venues within a short walk, each with a clear reason and the extra minutes it adds. Your original drop point stays one tap away, and the app says nothing bad about it.",
     visual: <AnchorsVisual />,
     cardCls: "bg-mist border border-line",
     bodyColor: "text-ink-soft",
@@ -188,7 +188,7 @@ const CARDS: Card[] = [
   {
     badge: "P1 · ARRIVAL CHECK-IN",
     badgeCls: "text-[#8FB0FF] bg-[#16264A]",
-    title: "The loop closes quietly, never with an alarm.",
+    title: (<>A quiet check-in<br />after you arrive.</>),
     body: 'Five minutes after the trip: "Did you reach safely?" One reminder at ten. Only then a calm note goes to your Safety Circle, and the message itself says this is not an emergency alert. Escalation always needs a human.',
     visual: <CheckinVisual />,
     cardCls: "bg-[#0D1B36] text-white",

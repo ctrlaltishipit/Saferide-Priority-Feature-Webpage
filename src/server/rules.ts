@@ -85,6 +85,7 @@ export function buildCircleSms(input: {
   dropShort: string;
   driver: Driver;
   etaLabel?: string;
+  anchor?: string | null;
 }): { lines: string[]; footer: string } {
   const { riderName, dropShort, driver } = input;
   return {
@@ -94,6 +95,7 @@ export function buildCircleSms(input: {
       `Driver: ${driver.name} (${driver.rating} ★)`,
       `Vehicle: ${driver.car} · Plate ${driver.plate}`,
       `Trip PIN: ${TRIP_PIN}`,
+      ...(input.anchor ? [`Safer drop anchor: ${input.anchor} (staffed spot)`] : []),
       `ETA: ${input.etaLabel ?? `${TRIP_ETA_MINUTES} minutes`}`,
     ],
     footer: `This is an automated safety message. Reply HELP if concerned. The link stays live for the whole trip and expires ${TRACKING_LINK_EXPIRY_MINUTES} minutes after it ends.`,
