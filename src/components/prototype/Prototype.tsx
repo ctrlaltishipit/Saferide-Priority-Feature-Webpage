@@ -160,7 +160,7 @@ export default function Prototype() {
                 "radial-gradient(62% 55% at 50% 42%, rgba(39,110,241,.25), transparent 72%)",
             }}
           >
-            <PhoneScaler desktopScale={0.56}>
+            <PhoneScaler reserve={320}>
               <IOSDevice>{phone}</IOSDevice>
             </PhoneScaler>
           </Reveal>
@@ -291,7 +291,7 @@ export default function Prototype() {
                   "radial-gradient(62% 55% at 50% 42%, rgba(6,193,103,.18), transparent 72%)",
               }}
             >
-              <PhoneScaler desktopScale={0.56}>
+              <PhoneScaler reserve={185}>
                 <IOSDevice>
                   <ContactView riderName={riderName} info={circle} />
                 </IOSDevice>

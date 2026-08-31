@@ -98,3 +98,9 @@ Never show this file or its text on any screen. It is for developers only.
 56. Avoid jargon. If a plain word works, use the plain word.
 57. Every section should answer one simple question for the reader: what is this, why does it matter, what can I do with it.
 58. When asked to check the frontend content, check these rules first.
+
+## Responsive layout
+
+59. Every section, card, diagram and prototype must read cleanly on both mobile and web, on any screen size. Nothing ever needs sideways scrolling.
+60. The interactive prototype phones scale to the viewer's window. The section heading, the phone and the step list share one view with a little air below, and the user never scrolls to see the bottom half of the phone.
+61. The user gives custom instructions per SVG or feature. Everything else defaults to clean and responsive on both versions.

@@ -63,26 +63,33 @@ export function IOSDevice({ children }: { children: ReactNode }) {
   );
 }
 
-/* Scales the fixed-size device down to fit narrow viewports. On desktop
-   (min-width 1024px) it also shrinks to desktopScale so the whole phone
-   fits one screen without scrolling. */
+/* Scales the fixed-size device to the viewer's screen. Width always
+   caps the scale. On screens 1024px and wider, `reserve` says how much
+   vertical room the section heading and controls need: the phone then
+   shrinks so heading, phone and a little air below all share one view,
+   on any laptop or monitor, with no scrolling to see the bottom half. */
 export function PhoneScaler({
   children,
-  desktopScale = 1,
+  reserve = 0,
 }: {
   children: ReactNode;
-  desktopScale?: number;
+  reserve?: number;
 }) {
   const outer = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(desktopScale);
+  const [scale, setScale] = useState(0.6);
 
   useEffect(() => {
     const el = outer.current;
     if (!el) return;
     const measure = () => {
       const avail = el.parentElement?.clientWidth ?? 402;
-      const cap = window.innerWidth >= 1024 ? desktopScale : 1;
-      setScale(Math.min(cap, Math.max(0.62, Math.min(1, avail / 402))));
+      const wScale = Math.max(0.55, Math.min(1, avail / 402));
+      let s = wScale;
+      if (reserve > 0 && window.innerWidth >= 1024) {
+        const hScale = (window.innerHeight - reserve) / 874;
+        s = Math.min(wScale, Math.max(0.4, Math.min(0.78, hScale)));
+      }
+      setScale(s);
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -92,7 +99,7 @@ export function PhoneScaler({
       ro.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, [desktopScale]);
+  }, [reserve]);
 
   return (
     <div ref={outer} style={{ width: 402 * scale }}>
