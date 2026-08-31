@@ -87,7 +87,7 @@ function SheetShell({ title, onClose, children }: { title: string; onClose: () =
         className="flex-1 bg-[rgba(10,14,20,.5)]"
         style={{ animation: "fadein .25s ease both" }}
       />
-      <div className="rounded-t-[24px] bg-white px-5 pb-8 pt-3" style={{ animation: "sheetup .32s cubic-bezier(.32,.72,.35,1) both" }}>
+      <div className="hscroll max-h-[78%] overflow-y-auto rounded-t-[24px] bg-white px-5 pb-8 pt-3 text-[#111]" style={{ animation: "sheetup .32s cubic-bezier(.32,.72,.35,1) both" }}>
         <div className="mb-2 flex justify-center">
           <div className="h-1 w-[38px] rounded-full bg-[#E2E4E8]" />
         </div>
@@ -130,7 +130,7 @@ function PlanRide({
   );
 
   return (
-    <div className="relative flex h-full flex-col" style={{ fontFamily: "-apple-system,'Helvetica Neue',system-ui,sans-serif" }}>
+    <div className="relative flex h-full flex-col text-[#111]" style={{ fontFamily: "-apple-system,'Helvetica Neue',system-ui,sans-serif" }}>
       {/* map peeking behind the sheet */}
       <div className="relative h-[128px] flex-none overflow-hidden bg-[#E9EDF0]">
         <svg viewBox="0 0 402 250" className="absolute inset-0 w-full" aria-hidden="true">
@@ -310,7 +310,7 @@ function PlanRide({
       {/* switch rider sheet */}
       {sheet === "rider" && (
         <SheetShell title="Switch rider" onClose={() => setSheet(null)}>
-          <button type="button" onClick={() => setRider("Me")} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3.5 text-left">
+          <button type="button" onClick={() => setRider("Me")} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3 text-left">
             <span className="flex h-11 w-11 flex-none items-center justify-center overflow-hidden rounded-full bg-[#8FD6B4]">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="9" r="4" fill="#1F2937" />
@@ -320,17 +320,17 @@ function PlanRide({
             <span className="flex-1 text-[16px] font-bold">Me</span>
             <Radio on={rider === "Me"} />
           </button>
-          <button type="button" onClick={() => setRider("Meera")} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3.5 text-left">
+          <button type="button" onClick={() => setRider("Meera")} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3 text-left">
             <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-[#3B6FE0] text-[17px] font-bold text-white">
               M
             </span>
             <span className="flex-1">
               <span className="block text-[16px] font-bold">Meera</span>
-              <span className="block text-[13px] text-ink-faint">+91 98765 43210</span>
+              <span className="block text-[13px] text-ink-faint">+91 98XXX XXX42</span>
             </span>
             <Radio on={rider === "Meera"} />
           </button>
-          <button type="button" onClick={onSend} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3.5 text-left">
+          <button type="button" onClick={onSend} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3 text-left">
             <span className="flex w-11 flex-none justify-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M4 12l16-7-4.5 14-4-5.5L4 12z" stroke="#111" strokeWidth="1.8" strokeLinejoin="round" />
@@ -345,7 +345,7 @@ function PlanRide({
               <path d="M9 5l7 7-7 7" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <button type="button" onClick={() => setGroup(!plan.group)} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3.5 text-left">
+          <button type="button" onClick={() => setGroup(!plan.group)} className="flex w-full items-center gap-4 border-b border-[#F0F0F0] py-3 text-left">
             <span className="flex w-11 flex-none justify-center">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="7" cy="10" r="2.2" stroke="#111" strokeWidth="1.6" />
@@ -360,7 +360,7 @@ function PlanRide({
             </span>
             <Radio on={group} />
           </button>
-          <button type="button" onClick={onGuest} className="flex w-full items-center gap-4 py-3.5 text-left">
+          <button type="button" onClick={onGuest} className="flex w-full items-center gap-4 py-3 text-left">
             <span className="flex w-11 flex-none justify-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="10" cy="8" r="3.2" stroke="#111" strokeWidth="1.8" />
