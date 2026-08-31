@@ -204,11 +204,11 @@ export default function FeatureStack() {
       {CARDS.map((c, i) => (
         <div
           key={c.badge}
-          className={i < CARDS.length - 1 ? "sticky pb-[26px]" : "sticky"}
+          className={i < CARDS.length - 1 ? "pb-4 sm:sticky sm:pb-[26px]" : "sm:sticky"}
           style={{ top: c.top, zIndex: c.z }}
         >
           <div
-            className={`grid min-h-[min(62vh,430px)] items-center gap-[30px] rounded-[26px] p-[clamp(20px,3vw,40px)] [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))] ${c.cardCls}`}
+            className={`grid items-center gap-5 rounded-[22px] p-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))] sm:min-h-[min(62vh,430px)] sm:gap-[30px] sm:rounded-[26px] sm:p-[clamp(20px,3vw,40px)] ${c.cardCls}`}
             style={{
               boxShadow:
                 c.cardCls.includes("bg-black") || c.cardCls.includes("#0D1B36")

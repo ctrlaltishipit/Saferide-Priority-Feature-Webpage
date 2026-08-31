@@ -229,7 +229,7 @@ function JugglingIllustration() {
 
 export function Problem() {
   return (
-    <div className="mt-24 grid items-center gap-12 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
+    <div className="mt-14 grid items-center gap-8 sm:mt-24 sm:gap-12 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
       <Reveal variant="left">
         <h2 className="mb-4 text-[clamp(30px,4vw,52px)] font-extrabold leading-[1.06] tracking-[-1.5px]">
           The safety plan is manual, and it happens at the worst moment.
@@ -267,7 +267,7 @@ export function Problem() {
 /* ──────────────────────── Decision engine diagram ──────────────────────── */
 export function DecisionEngine() {
   return (
-    <div className="mt-24">
+    <div className="mt-14 sm:mt-24">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">HOW IT DECIDES</div>
       <h2 className="m-0 mb-2 max-w-[680px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
         Observable signals in.
@@ -280,7 +280,45 @@ export function DecisionEngine() {
         scores. When the data is thin it says <strong>Limited Data</strong>{" "}
         instead of guessing.
       </p>
-      <Reveal className="rounded-2xl bg-mist p-[clamp(8px,1.6vw,20px)] sm:rounded-3xl">
+      {/* mobile: the same story told top to bottom, sized for a phone */}
+      <Reveal className="rounded-2xl bg-mist p-4 sm:hidden">
+        <div className="flex flex-col gap-2">
+          {[
+            "Time & duration",
+            "Route context",
+            "Nearby anchors",
+            "Eligible-driver supply",
+            "Data confidence",
+          ].map((label) => (
+            <div key={label} className="rounded-xl border border-line bg-white px-3.5 py-2.5 text-[13.5px] font-bold">
+              {label}
+            </div>
+          ))}
+        </div>
+        <div className="my-2.5 text-center text-lg leading-none text-[#A6A6A6]">↓</div>
+        <div className="rounded-2xl bg-black p-4 text-center">
+          <div className="text-[15px] font-extrabold text-white">DETERMINISTIC RULES</div>
+          <div className="mt-1 text-[11.5px] text-[#A6A6A6]">explainable · auditable · no ML in MVP</div>
+          <div className="mt-1.5 text-[11.5px] text-caution" style={{ animation: "blink 2.2s ease infinite" }}>
+            ✕ crime data · ✕ protected attributes · ✕ ratings alone
+          </div>
+        </div>
+        <div className="my-2.5 text-center text-lg leading-none text-[#A6A6A6]">↓</div>
+        <div className="flex flex-col gap-2">
+          {[
+            ["Lower contextual risk", "#EAF6EF", "#0E8345", "#06C167"],
+            ["Elevated contextual risk", "#FFF1D6", "#7A4E00", "#F6BC2F"],
+            ["Higher contextual risk", "#FDE8EC", "#A50D28", "#DE1135"],
+            ["Limited Data · abstain", "#EEEEEE", "#545454", "#A6A6A6"],
+          ].map(([label, bg, fg, dot]) => (
+            <div key={label} className="flex items-center gap-2.5 rounded-full px-4 py-2.5" style={{ background: bg }}>
+              <span className="h-2.5 w-2.5 flex-none rounded-full" style={{ background: dot }} />
+              <span className="text-[13.5px] font-extrabold" style={{ color: fg }}>{label}</span>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+      <Reveal className="hidden rounded-2xl bg-mist p-[clamp(8px,1.6vw,20px)] sm:block sm:rounded-3xl">
         <svg
           viewBox="0 0 1080 300"
           className="block h-auto w-full"
@@ -411,7 +449,7 @@ const PRINCIPLES = [
 
 export function ResponsibleAI() {
   return (
-    <div className="mt-20 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
+    <div className="mt-12 grid gap-3 sm:mt-20 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
       {PRINCIPLES.map((p, i) => (
         <Reveal
           key={p.title}
@@ -430,7 +468,7 @@ export function ResponsibleAI() {
 /* ───────────────────────── Architecture ───────────────────────── */
 export function Architecture() {
   return (
-    <Reveal className="mt-20 rounded-3xl bg-mist p-[clamp(20px,3vw,36px)]">
+    <Reveal className="mt-12 rounded-2xl bg-mist p-4 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
       <div className="mb-[22px] flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">BUILD ARCHITECTURE</div>
@@ -442,10 +480,27 @@ export function Architecture() {
           No Uber APIs · no real dispatch, GPS, payments or messaging
         </div>
       </div>
-      <div className="hscroll overflow-x-auto">
+      {/* mobile: the stack, top to bottom */}
+      <div className="flex flex-col gap-0 sm:hidden">
+        {[
+          ["Visitor browser", "mobile-first · 375px up", "bg-white border border-line", "text-ink-faint"],
+          ["Next.js · Vercel", "TypeScript · Tailwind · React 19", "bg-black text-white", "text-[#A6A6A6]"],
+          ["Supabase", "Postgres · Auth · RLS policies", "bg-brand text-white", "text-[#D6E4FE]"],
+          ["Seeded data", "locations · drivers · anchors", "bg-white border border-line", "text-ink-faint"],
+        ].map(([title, sub, cls, subCls], i) => (
+          <div key={title as string} className="contents">
+            {i > 0 && <div className="py-1 text-center text-lg leading-none text-[#A6A6A6]">↓</div>}
+            <div className={`rounded-2xl px-4 py-3.5 text-center ${cls}`}>
+              <div className="text-[15px] font-extrabold">{title}</div>
+              <div className={`mt-0.5 text-[11.5px] ${subCls}`}>{sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="hidden sm:block">
         <svg
           viewBox="0 0 1080 150"
-          className="block h-auto w-full min-w-[680px]"
+          className="block h-auto w-full"
           aria-label="Architecture: browser to Next.js on Vercel to Supabase to seeded mock data"
         >
           <g fontFamily="Helvetica,Arial">

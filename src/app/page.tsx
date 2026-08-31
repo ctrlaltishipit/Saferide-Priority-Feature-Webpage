@@ -23,14 +23,14 @@ export default function Home() {
       <main>
         <Hero />
         <Ticker />
-        <div id="case-study" className="mx-auto max-w-[1240px] px-5 pt-20">
+        <div id="case-study" className="mx-auto max-w-[1240px] px-5 pt-12 sm:pt-20">
           <Stats />
           <Problem />
           <Comparison />
           <DecisionEngine />
         </div>
         <FlowCards />
-        <div id="features" className="mx-auto max-w-[1240px] px-5 pt-24">
+        <div id="features" className="mx-auto max-w-[1240px] px-5 pt-14 sm:pt-24">
           <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">
             THE FEATURE SET
           </div>

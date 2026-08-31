@@ -87,7 +87,7 @@ export default function Prototype() {
   );
 
   return (
-    <section id="prototype" className="mt-24 bg-black text-white">
+    <section id="prototype" className="mt-14 bg-black text-white sm:mt-24">
       <div className="mx-auto max-w-[1240px] px-5 py-5">
         <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
           INTERACTIVE PROTOTYPE

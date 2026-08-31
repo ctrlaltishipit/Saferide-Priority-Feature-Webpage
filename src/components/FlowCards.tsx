@@ -105,7 +105,7 @@ const FLOW_META = [
 
 export default function FlowCards() {
   return (
-    <section id="flow" className="mt-[100px] bg-black py-[76px] text-white">
+    <section id="flow" className="mt-16 bg-black py-12 text-white sm:mt-[100px] sm:py-[76px]">
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-end justify-between gap-4 px-5">
         <div>
           <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">THE FLOW</div>
@@ -113,20 +113,20 @@ export default function FlowCards() {
             Seven steps, under two minutes.
           </h2>
         </div>
-        <div className="flex items-center gap-2 pb-1.5 text-[13px] text-[#A6A6A6]">
+        <div className="hidden items-center gap-2 pb-1.5 text-[13px] text-[#A6A6A6] sm:flex">
           scroll sideways
           <svg width="30" height="14" viewBox="0 0 30 14" fill="none" aria-hidden="true">
             <path d="M0 7h26m-5-5l5 5-5 5" stroke="#A6A6A6" strokeWidth="2" />
           </svg>
         </div>
       </div>
-      <div className="hscroll mx-auto flex max-w-[1240px] snap-x snap-mandatory gap-3.5 overflow-x-auto px-5 pb-1.5 pt-[30px]">
+      <div className="hscroll mx-auto flex max-w-[1240px] flex-col gap-3 px-5 pb-1.5 pt-6 sm:snap-x sm:snap-mandatory sm:flex-row sm:gap-3.5 sm:overflow-x-auto sm:pt-[30px]">
         {STEP_NAMES.map((s, i) => (
           <button
             key={s.title}
             type="button"
             onClick={() => jumpToStep(i + 2)}
-            className="w-[min(78vw,270px)] flex-none snap-start rounded-[18px] border border-[#2A2A2A] bg-[#111111] p-5 text-left transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_18px_40px_rgba(39,110,241,.18)]"
+            className="w-full flex-none rounded-[18px] border border-[#2A2A2A] bg-[#111111] p-4 text-left transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_18px_40px_rgba(39,110,241,.18)] sm:w-[min(78vw,270px)] sm:snap-start sm:p-5"
           >
             <div className="mb-3.5 flex items-center justify-between">
               <span className="text-[34px] font-extrabold tracking-[-1.5px] text-[#333333]">
