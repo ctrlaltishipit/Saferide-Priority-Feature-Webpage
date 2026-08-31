@@ -77,7 +77,7 @@ const STATS: {
   },
   {
     big: "8 PM–5 AM",
-    text: "the window where SafeRide reviews your ride plan. An 8 PM booking can end well past 10, so late hours count too.",
+    text: "the window where SafeRide reviews your ride plan. Emergency, medical and urgent trips can use it at any hour of the day.",
     cls: "bg-black text-white",
     textCls: "text-[#A6A6A6]",
     smaller: true,
@@ -187,17 +187,86 @@ export function Stats() {
 function JugglingIllustration() {
   return (
     <svg
-      viewBox="0 0 440 340"
+      viewBox="0 0 480 340"
       className="block h-auto w-full"
-      aria-label="After midnight in Hyderabad: a tired rider juggles Uber, Ola, Rapido, Maps and the family chat while six safety chores float around her phone, and the tired driver in the waiting cab is something no app tells her about"
+      aria-label="After midnight in Hyderabad: a tired rider has Uber, Ola, Rapido, inDrive, Mana Yatri and Maps open plus the family chat, runs a six-point safety checklist by hand, and the tired driver in the waiting cab is something no app tells her about"
     >
       {/* moon clock */}
-      <circle cx="388" cy="52" r="30" fill="#0A0D13" />
-      <text x="388" y="57" textAnchor="middle" fontSize="15" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">12:15</text>
-      <text x="388" y="96" textAnchor="middle" fontSize="10" fontWeight="600" fill="#6B6B6B" fontFamily="Helvetica,Arial">after midnight</text>
+      <circle cx="434" cy="50" r="28" fill="#0A0D13" />
+      <text x="434" y="55" textAnchor="middle" fontSize="14" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">12:15</text>
+      <text x="434" y="92" textAnchor="middle" fontSize="9.5" fontWeight="600" fill="#6B6B6B" fontFamily="Helvetica,Arial">after midnight</text>
+
+      {/* ── every ride app running in Hyderabad, all open at once ── */}
+      <text x="16" y="20" fontSize="8.5" fontWeight="800" letterSpacing="1.4" fill="#9AA0A6" fontFamily="Helvetica,Arial">
+        SIX APPS OPEN, STILL NO RIDE
+      </text>
+      {/* row 1 */}
+      <g style={{ animation: "bobY 4.6s ease-in-out infinite" }}>
+        <rect x="16" y="30" width="56" height="26" rx="13" fill="#0A0D13" />
+        <text x="44" y="47" textAnchor="middle" fontSize="11.5" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">Uber</text>
+      </g>
+      <g style={{ animation: "bobY 5s .4s ease-in-out infinite" }}>
+        <rect x="80" y="30" width="54" height="26" rx="13" fill="#fff" stroke="#E2E2E2" />
+        <circle cx="95" cy="43" r="6" fill="#B3D243" />
+        <circle cx="95" cy="43" r="2.4" fill="#fff" />
+        <text x="105" y="47" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Ola</text>
+      </g>
+      <g style={{ animation: "bobY 4.8s .8s ease-in-out infinite" }}>
+        <rect x="142" y="30" width="78" height="26" rx="13" fill="#fff" stroke="#E2E2E2" />
+        <circle cx="157" cy="43" r="6.5" fill="#F6BC2F" />
+        <text x="157" y="46.5" textAnchor="middle" fontSize="8.5" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">R</text>
+        <text x="168" y="47" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Rapido</text>
+      </g>
+      <g style={{ animation: "bobY 5.2s 1.2s ease-in-out infinite" }}>
+        <rect x="228" y="30" width="62" height="26" rx="13" fill="#fff" stroke="#E2E2E2" />
+        <path d="M243 35 c-3.4 0 -5.6 2.4 -5.6 5.4 c0 3.8 5.6 8 5.6 8 s5.6 -4.2 5.6 -8 c0 -3 -2.2 -5.4 -5.6 -5.4z" fill="#DE1135" />
+        <text x="253" y="47" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Maps</text>
+      </g>
+      {/* row 2 */}
+      <g style={{ animation: "bobY 5s .6s ease-in-out infinite" }}>
+        <rect x="16" y="64" width="82" height="26" rx="13" fill="#fff" stroke="#E2E2E2" />
+        <rect x="27" y="71" width="13" height="13" rx="3.5" fill="#A7E92F" />
+        <text x="33.5" y="80.5" textAnchor="middle" fontSize="8" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">in</text>
+        <text x="46" y="81" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">inDrive</text>
+      </g>
+      <g style={{ animation: "bobY 4.7s 1s ease-in-out infinite" }}>
+        <rect x="106" y="64" width="100" height="26" rx="13" fill="#fff" stroke="#E2E2E2" />
+        <circle cx="121" cy="77" r="6.5" fill="#0AA1A7" />
+        <text x="121" y="80.5" textAnchor="middle" fontSize="8" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">M</text>
+        <text x="132" y="81" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Mana Yatri</text>
+      </g>
+      <g style={{ animation: "bobY 5.4s 1.4s ease-in-out infinite" }}>
+        <rect x="214" y="64" width="112" height="26" rx="13" fill="#EAF6EF" stroke="#BFE6CE" />
+        <circle cx="229" cy="77" r="6.5" fill="#06C167" />
+        <path d="M226.2 77 l2 2 4-4" stroke="#fff" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+        <text x="240" y="81" fontSize="10" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">Amma: reached?</text>
+      </g>
+
+      {/* ── the checklist she runs by hand ── */}
+      <g>
+        <rect x="16" y="128" width="142" height="178" rx="14" fill="#fff" stroke="#E2E2E2" />
+        <text x="32" y="150" fontSize="8" fontWeight="800" letterSpacing="1.2" fill="#9AA0A6" fontFamily="Helvetica,Arial">
+          HER CHECKLIST, BY HAND
+        </text>
+        {[
+          "check the plate",
+          "share the link",
+          "call amma",
+          "pick the gate",
+          "watch the route",
+          "text reached",
+        ].map((label, i) => (
+          <g key={label}>
+            <circle cx="36" cy={166 + i * 23} r="3" fill={i < 3 ? "#276EF1" : "#F6BC2F"} />
+            <text x="46" y={169.5 + i * 23} fontSize="10" fontWeight="700" fill="#545454" fontFamily="Helvetica,Arial">
+              {label}
+            </text>
+          </g>
+        ))}
+      </g>
 
       {/* ── the tired rider ── */}
-      <g>
+      <g transform="translate(84 10)">
         {/* shadow */}
         <ellipse cx="120" cy="308" rx="52" ry="7" fill="#000" opacity=".08" />
         {/* legs */}
@@ -235,51 +304,8 @@ function JugglingIllustration() {
         <text x="160" y="102" fontSize="14" fontWeight="800" fill="#C9CED4" fontFamily="Helvetica,Arial" style={{ animation: "blink 3s .5s ease infinite" }}>Z</text>
       </g>
 
-      {/* ── five apps she is juggling ── */}
-      <g style={{ animation: "floaty 5.4s ease-in-out infinite" }}>
-        <rect x="16" y="46" width="64" height="24" rx="12" fill="#0A0D13" />
-        <text x="48" y="62" textAnchor="middle" fontSize="11" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial">Uber</text>
-      </g>
-      <g style={{ animation: "floaty 6s .5s ease-in-out infinite" }}>
-        <rect x="92" y="24" width="58" height="24" rx="12" fill="#fff" stroke="#E2E2E2" />
-        <circle cx="106" cy="36" r="6" fill="#B3D243" />
-        <text x="128" y="40" textAnchor="middle" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Ola</text>
-      </g>
-      <g style={{ animation: "floaty 5s 1s ease-in-out infinite" }}>
-        <rect x="162" y="42" width="76" height="24" rx="12" fill="#fff" stroke="#E2E2E2" />
-        <circle cx="176" cy="54" r="6" fill="#F6BC2F" />
-        <text x="204" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Rapido</text>
-      </g>
-      <g style={{ animation: "floaty 6.4s 1.4s ease-in-out infinite" }}>
-        <rect x="250" y="26" width="66" height="24" rx="12" fill="#fff" stroke="#E2E2E2" />
-        <path d="M264 32 c-3.6 0 -6 2.6 -6 5.8 c0 4 6 8.6 6 8.6 s6 -4.6 6 -8.6 c0 -3.2 -2.4 -5.8 -6 -5.8z" fill="#DE1135" />
-        <text x="292" y="42" textAnchor="middle" fontSize="11" fontWeight="800" fill="#111" fontFamily="Helvetica,Arial">Maps</text>
-      </g>
-      <g style={{ animation: "floaty 5.8s .8s ease-in-out infinite" }}>
-        <rect x="16" y="86" width="104" height="26" rx="13" fill="#EAF6EF" stroke="#BFE6CE" />
-        <circle cx="31" cy="99" r="7" fill="#06C167" />
-        <path d="M28 99 l2 2 4-4" stroke="#fff" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-        <text x="44" y="103" fontSize="10" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">Amma: reached?</text>
-      </g>
-
-      {/* ── six manual decisions orbiting the phone ── */}
-      {[
-        [10, 140, "check the plate"],
-        [10, 170, "share the link"],
-        [10, 200, "call amma"],
-        [156, 170, "pick the gate"],
-        [162, 200, "watch the route"],
-        [156, 230, "text reached"],
-      ].map(([x, y, label], i) => (
-        <g key={String(label)} style={{ animation: `floaty ${5 + i * 0.4}s ${i * 0.3}s ease-in-out infinite` }}>
-          <rect x={Number(x)} y={Number(y)} width={Number(x) < 100 ? 84 : 88} height="20" rx="10" fill="#fff" stroke="#E2E2E2" />
-          <circle cx={Number(x) + 11} cy={Number(y) + 10} r="3" fill={i < 3 ? "#276EF1" : "#F6BC2F"} />
-          <text x={Number(x) + 20} y={Number(y) + 13.5} fontSize="9" fontWeight="700" fill="#545454" fontFamily="Helvetica,Arial">{String(label)}</text>
-        </g>
-      ))}
-
       {/* ── the waiting cab with a tired driver ── */}
-      <g>
+      <g transform="translate(30 0)">
         <ellipse cx="340" cy="304" rx="78" ry="7" fill="#000" opacity=".1" />
         <path d="M268 296 v-16 c0-6.5 4.6-11.5 11-12.5 l14-2.5 14-15 c3-3.2 7-5 11.4-5 h42 c4.4 0 8.4 1.8 11.4 5 l13.5 14.5 14.5 2.5 c6 1 10.2 6 10.2 12.5 v16.5 z" fill="#0A0D13" />
         {/* windows: tired driver at the wheel */}
@@ -303,11 +329,11 @@ function JugglingIllustration() {
         <text x="376" y="244" fontSize="10" fontWeight="800" fill="#9AA0A6" fontFamily="Helvetica,Arial" style={{ animation: "blink 2.6s ease infinite" }}>z</text>
         <text x="384" y="236" fontSize="13" fontWeight="800" fill="#C9CED4" fontFamily="Helvetica,Arial" style={{ animation: "blink 2.6s .4s ease infinite" }}>Z</text>
         {/* the notification nobody gets today */}
-        <g style={{ animation: "floaty 5s ease-in-out infinite" }}>
-          <rect x="282" y="196" width="148" height="30" rx="10" fill="#FFF1D6" stroke="#F0DCC8" />
-          <circle cx="296" cy="211" r="4.5" fill="#F6BC2F" style={{ animation: "blink 1.8s ease infinite" }} />
-          <text x="305" y="208" fontSize="9" fontWeight="800" fill="#7A4E00" fontFamily="Helvetica,Arial">driver on a long night shift</text>
-          <text x="305" y="219" fontSize="8" fontWeight="600" fill="#B26205" fontFamily="Helvetica,Arial">a heads-up no app sends today</text>
+        <g style={{ animation: "bobY 4.8s ease-in-out infinite" }}>
+          <rect x="284" y="182" width="152" height="32" rx="10" fill="#FFF1D6" stroke="#F0DCC8" />
+          <circle cx="298" cy="198" r="4.5" fill="#F6BC2F" style={{ animation: "blink 1.8s ease infinite" }} />
+          <text x="307" y="195" fontSize="9" fontWeight="800" fill="#7A4E00" fontFamily="Helvetica,Arial">driver on a long night shift</text>
+          <text x="307" y="206" fontSize="8" fontWeight="600" fill="#B26205" fontFamily="Helvetica,Arial">a heads-up no app sends today</text>
         </g>
       </g>
     </svg>
@@ -343,8 +369,8 @@ export function Problem() {
           <JugglingIllustration />
         </Reveal>
         <div className="mt-2.5 text-xs text-[#A6A6A6]">
-          Five apps, six decisions, one tired rider. That is tonight&apos;s manual
-          safety plan.
+          Six apps open, a checklist run by hand, one tired rider. That is
+          tonight&apos;s manual safety plan.
         </div>
       </div>
     </div>
@@ -405,9 +431,14 @@ export function DecisionEngine() {
             <rect x="360" y="92" width="300" height="120" rx="18" fill="#000000" />
             <text x="510" y="136" textAnchor="middle" fontSize="21" fontWeight="800" fill="#fff">DETERMINISTIC RULES</text>
             <text x="510" y="158" textAnchor="middle" fontSize="15" fill="#A6A6A6">explainable · auditable · no ML in MVP</text>
-            <text x="510" y="186" textAnchor="middle" fontSize="15" fill="#F6BC2F" style={{ animation: "blink 2.2s ease infinite" }}>
-              ✕ crime data · ✕ protected attributes · ✕ ratings alone
-            </text>
+            <g style={{ animation: "blink 2.2s ease infinite" }}>
+              <text x="510" y="181" textAnchor="middle" fontSize="14" fill="#F6BC2F">
+                ✕ crime data · ✕ protected attributes
+              </text>
+              <text x="510" y="200" textAnchor="middle" fontSize="14" fill="#F6BC2F">
+                ✕ ratings alone
+              </text>
+            </g>
             <path d="M664 118 C720 110 724 66 776 58" fill="none" stroke="#0E8345" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.4s linear infinite" }} />
             <path d="M664 140 C716 136 726 122 776 118" fill="none" stroke="#B26205" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.5s linear infinite" }} />
             <path d="M664 164 C716 168 726 182 776 178" fill="none" stroke="#DE1135" strokeWidth="2.5" strokeDasharray="7 6" style={{ animation: "dashflow 1.5s linear infinite" }} />
@@ -782,7 +813,8 @@ export function Architecture() {
             {[
               "One pre-ride check, done before you board",
               "A committed pickup: the driver accepts before you see the match",
-              "A priority queue that puts urgent and hospital trips first",
+              "One tap says why you ride: emergency, medical, urgent, work",
+              "A priority queue that puts urgent and hospital trips first, any hour",
               "Driver alerted before pickup when a female rider is on",
               "Safer, staffed drop points suggested up front",
               "Contact SMS with driver, plate, PIN and live GPS",

@@ -84,7 +84,7 @@ const VISUALS: ReactNode[] = [
 ];
 
 export const STEP_NAMES = [
-  { n: "1", title: "Demo Booking", desc: "Seeded Hyderabad trip + SafeRide toggle" },
+  { n: "1", title: "Demo Booking", desc: "Trip, why this ride, SafeRide toggle" },
   { n: "2", title: "Contextual Safety Brief", desc: "Category, reasons, confidence" },
   { n: "3", title: "Safer Anchors", desc: "Visible, staffed drop alternatives" },
   { n: "4", title: "Safety Priority Match", desc: "Standard vs eligible driver trade-off" },

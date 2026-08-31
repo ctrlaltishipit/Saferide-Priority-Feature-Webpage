@@ -330,7 +330,7 @@ const OBJECTIVES: { label: string; title: string; text: string; icon: React.Reac
     label: "HOW",
     title: "How we will do it",
     text:
-      "Deterministic rules on audited signals, and clear consent before anything is shared. SafeRide trips go to committed drivers first, with hospital runs and urgent trips at the head of the queue. Seven steps, under two minutes, piloted in Hyderabad between 8 PM and 5 AM.",
+      "Deterministic rules on audited signals, and clear consent before anything is shared. One tap says why you ride, and the reason sets the queue: hospital runs and emergencies go first, at any hour of the day. Seven steps, under two minutes, piloted in Hyderabad.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M4 6h16M4 12h10M4 18h13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
@@ -344,7 +344,7 @@ const DIFFERENT: string[] = [
   "Every safety tool the app ships today stays exactly where it is. SafeRide arms them before pickup, so the rider never has to remember them mid ride.",
   "Today's tools respond once something already feels wrong. SafeRide works earlier and lowers the chance that moment arrives at all.",
   "A SafeRide match is a committed pickup. The driver accepts your trip before you see the match, cannot drop it for a ride on another app, and if anything changes you are rematched first in line.",
-  "It is an add-on for the moments that matter most: a late shift, an emergency, a hospital run, a night you simply need the ride to come. The rider stays in charge, and every share, match and anchor is her explicit choice.",
+  "It is an add-on for the moments that matter most: a late shift, an emergency, a hospital run, a night you simply need the ride to come. One tap says why you ride, and emergency, medical and urgent trips can switch it on at any hour, day or night. The rider stays in charge, and every share, match and anchor is her explicit choice.",
 ];
 
 export default function Evidence() {

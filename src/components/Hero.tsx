@@ -153,10 +153,11 @@ export default function Hero() {
           app. It brings contextual guidance, live trip sharing with trusted
           contacts, safer pickup and drop points, and a vetted driver who commits
           to your pickup into one simple flow for rides between 8 PM and 5 AM:
-          late hours and late night alike. It works for short in-city trips, long
-          outstation hauls and urgent runs that cannot wait, on every ride type
-          except Parcel. Built for every rider, with immediate priority when a
-          female rider is travelling.
+          late hours and late night alike. One tap says why you ride, and
+          emergency, medical and urgent trips can use it at any hour of the day.
+          It works for short in-city trips, long outstation hauls and every ride
+          type except Parcel. Built for every rider, with immediate priority when
+          a female rider is travelling.
         </p>
         {/* trip card */}
         <div className="relative max-w-[420px] rounded-[14px] bg-mist px-3.5 py-1">

@@ -10,7 +10,7 @@ import { Reveal, jumpToStep } from "../ui";
 const TOUR: { title: string; text: string }[] = [
   { title: "Every ride starts here", text: "The app the rider already opens every night. SafeRide asks her to download nothing new. It lives inside the flow she trusts. The splash moves on by itself, like the real launch." },
   { title: "The entry point meets riders where they are", text: "A faithful Uber home. Scroll it, tap 'Later' to open Plan your ride (try the Pickup and For me pills, and Send a ride), tap an Outstation getaway to book a long haul, or tap the SafeRide card to start in the city." },
-  { title: "Step 1: one familiar booking sheet", text: "Pickup, drop, 15-minute slots from 8 PM to 5 AM, and an In city or Outstation trip type. SafeRide adds an opt-in toggle, and a Female rider switch: immediate priority, driver alert, mandatory GPS." },
+  { title: "Step 1: one familiar booking sheet", text: "Pickup, drop, 15-minute slots, and a 'Why this ride?' tap: emergency, medical and urgent trips jump the queue and work at any hour. Plus the Female rider switch: immediate priority, driver alert, mandatory GPS." },
   { title: "Step 2: guidance you can question", text: "The Contextual Safety Brief gives a category with plain-language reasons and a confidence meter. Open 'Why am I seeing this?': explainability is the feature." },
   { title: "Step 3: a safer spot to step out", text: "Safer Anchors suggests staffed, well-lit drop points within a short walk. The original drop stays one tap away the whole time." },
   { title: "Step 4: the trade-off, up front", text: "Safety Priority Match shows the +4 min / +₹20 cost before you pick. Eligibility rests on several audited signals, and star ratings are only one small part." },
@@ -160,7 +160,7 @@ export default function Prototype() {
                 "radial-gradient(62% 55% at 50% 42%, rgba(39,110,241,.25), transparent 72%)",
             }}
           >
-            <PhoneScaler reserve={320}>
+            <PhoneScaler reserve={260}>
               <IOSDevice>{phone}</IOSDevice>
             </PhoneScaler>
           </Reveal>
@@ -291,7 +291,7 @@ export default function Prototype() {
                   "radial-gradient(62% 55% at 50% 42%, rgba(6,193,103,.18), transparent 72%)",
               }}
             >
-              <PhoneScaler reserve={320}>
+              <PhoneScaler reserve={260}>
                 <IOSDevice>
                   <ContactView riderName={riderName} info={circle} />
                 </IOSDevice>

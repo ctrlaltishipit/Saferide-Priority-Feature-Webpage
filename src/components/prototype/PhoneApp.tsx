@@ -8,6 +8,12 @@ import {
   FEMALE_RIDER_GPS_NOTE,
   MATCH_COMMIT_NOTE,
   OUTSTATION_DROPS,
+  REASON_ANY_HOUR_NOTE,
+  REASON_PRIVACY_NOTE,
+  REASON_QUEUE_LABELS,
+  REASON_TIER_LINES,
+  TRIP_REASONS,
+  tripReason,
   OUTSTATION_ETA_LABEL,
   TRIP_ETA_MINUTES,
   TRIP_PIN,
@@ -34,7 +40,7 @@ export const APP_SCREENS = [
   { n: "1", title: "Uber Home", desc: "Familiar home, with the SafeRide entry point" },
 ];
 export const FLOW_SCREENS = [
-  { n: "1", title: "Demo Booking", desc: "Seeded Hyderabad trip + SafeRide toggle" },
+  { n: "1", title: "Demo Booking", desc: "Trip, why this ride, SafeRide toggle" },
   { n: "2", title: "Contextual Safety Brief", desc: "Category, reasons, confidence" },
   { n: "3", title: "Safer Anchors", desc: "Visible, staffed drop alternatives" },
   { n: "4", title: "Safety Priority Match", desc: "Standard vs eligible driver trade-off" },
@@ -167,6 +173,7 @@ const INITIAL = {
   tripType: "city" as "city" | "outstation",
   time: "12:15 AM",
   safeRide: true,
+  reason: "work",
   female: false,
   whyOpen: false,
   anchor: null as string | null,
@@ -233,6 +240,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
       setS((prev) => {
         const p: typeof INITIAL = { ...prev, step: n, sheet: false, circleOpen: false };
         /* the auto tour makes a sensible choice on each screen it passes */
+        if (auto && n >= 2) p.reason = "urgent";
         if (auto && n >= 5 && !prev.anchor) p.anchor = "Metro Station Entrance";
         if (n >= 3) {
           p.safeRide = true;
@@ -633,7 +641,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
               </div>
               <div
                 className="mt-3.5 flex items-start gap-3 rounded-[14px] p-3.5 transition-colors"
-                style={{ border: `1.5px solid ${safeOn ? "#276EF1" : "#E2E2E2"}`, opacity: inWindow ? 1 : 0.85 }}
+                style={{ border: `1.5px solid ${safeOn ? "#276EF1" : "#E2E2E2"}`, opacity: inWindow || tripReason(s.reason).anyHour ? 1 : 0.85 }}
               >
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" className="mt-px flex-none" aria-hidden="true">
                   <path d="M12 2.5l7.5 3v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6l7.5-3z" fill="#EFF4FE" stroke="#276EF1" strokeWidth="1.6" strokeLinejoin="round" />
@@ -647,13 +655,13 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                 </div>
                 <button
                   type="button"
-                  onClick={() => inWindow && set({ safeRide: !s.safeRide })}
+                  onClick={() => (inWindow || tripReason(s.reason).anyHour) && set({ safeRide: !s.safeRide })}
                   role="switch"
                   aria-checked={safeOn}
-                  aria-disabled={!inWindow}
+                  aria-disabled={!inWindow && !tripReason(s.reason).anyHour}
                   aria-label="Use SafeRide Priority"
                   className="relative h-7 w-[46px] flex-none rounded-full transition-colors duration-200"
-                  style={{ background: safeOn ? "#111111" : "#D8DCE0", cursor: inWindow ? "pointer" : "not-allowed" }}
+                  style={{ background: safeOn ? "#111111" : "#D8DCE0", cursor: inWindow || tripReason(s.reason).anyHour ? "pointer" : "not-allowed" }}
                 >
                   <span
                     className="absolute top-[3px] h-[22px] w-[22px] rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,.3)] transition-[left] duration-200"
@@ -661,10 +669,52 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                   />
                 </button>
               </div>
-              {!inWindow && (
+              {!inWindow && !tripReason(s.reason).anyHour && (
                 <div className="mt-2 rounded-[10px] border border-[#F0DCC8] bg-[#FFF1D6] px-3 py-2.5 text-xs leading-[1.5] text-[#7A4E00]" style={{ animation: "slideup .25s ease" }}>
                   SafeRide Priority is available for rides between 8 PM and 5 AM. Pick a time in that
-                  window to plan a safer ride. You can still book normally.
+                  window, or mark the trip emergency, medical or urgent to use it at any hour. You can
+                  still book normally.
+                </div>
+              )}
+              {/* Rules 35 to 40: why this ride. One tap sets the queue,
+                  the top reasons work at any hour, the reason stays private. */}
+              {safeOn && (
+                <div className="mt-2 rounded-[14px] border-[1.5px] border-[#E2E2E2] p-3.5">
+                  <div className="text-[15px] font-bold">Why this ride?</div>
+                  <div className="mt-[3px] text-[12.5px] leading-[1.5] text-ink-faint">
+                    One tap sets your place in the priority queue. {REASON_ANY_HOUR_NOTE}
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {TRIP_REASONS.map((r) => {
+                      const on = s.reason === r.key;
+                      return (
+                        <button
+                          key={r.key}
+                          type="button"
+                          onClick={() => set({ reason: r.key })}
+                          aria-pressed={on}
+                          className="rounded-full px-3 py-[7px] text-[11.5px] font-bold transition-colors"
+                          style={
+                            on
+                              ? { background: "#111111", color: "#FFFFFF" }
+                              : { background: "#F3F3F3", color: "#545454" }
+                          }
+                        >
+                          {r.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-2.5 rounded-[10px] bg-[#F3F7FF] px-3 py-2.5" style={{ animation: "fadein .25s ease" }}>
+                    <div className="text-xs font-bold text-brand-dark">
+                      {tripReason(s.reason).label} · {tripReason(s.reason).sub}
+                    </div>
+                    <div className="mt-0.5 text-xs leading-[1.5] text-[#3D4E6B]">
+                      {REASON_TIER_LINES[tripReason(s.reason).tier]}
+                      {tripReason(s.reason).anyHour ? " Works at any hour, day or night." : ""}
+                    </div>
+                    <div className="mt-1 text-[10.5px] leading-[1.45] text-ink-faint">{REASON_PRIVACY_NOTE}</div>
+                  </div>
                 </div>
               )}
               {safeOn && (
@@ -974,7 +1024,13 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                 </div>
               </div>
               <div className="mt-2 rounded-xl bg-[#EAF6EF] px-[13px] py-3">
-                <div className="mb-1 text-xs font-bold text-[#0E8345]">Committed pickup</div>
+                <div className="mb-1 flex flex-wrap items-center gap-1.5 text-xs font-bold text-[#0E8345]">
+                  Committed pickup
+                  <span className="rounded-full bg-[#0E8345] px-2 py-px text-[9.5px] font-bold text-white">
+                    {s.female ? "Top of the queue" : REASON_QUEUE_LABELS[tripReason(s.reason).tier]} ·{" "}
+                    {tripReason(s.reason).label}
+                  </span>
+                </div>
                 <div className="text-xs leading-[1.55] text-[#2A5A3F]">{MATCH_COMMIT_NOTE}</div>
               </div>
               <button

@@ -52,6 +52,48 @@ export const FEMALE_RIDER_GPS_NOTE =
 export const MATCH_COMMIT_NOTE =
   "This driver accepted your trip before you saw this match and cannot drop it for a ride on another app. If anything changes, you are rematched first in line.";
 
+/* Why this ride. One tap tells SafeRide why the rider is travelling.
+   The reason sets the place in the priority queue, and the top reasons
+   unlock SafeRide at any hour of the day. The reason stays private:
+   the driver only ever sees a priority flag. */
+export type ReasonTier = "top" | "high" | "standard";
+export type TripReason = {
+  key: string;
+  label: string;
+  sub: string;
+  tier: ReasonTier;
+  anyHour: boolean;
+};
+export const TRIP_REASONS: TripReason[] = [
+  { key: "emergency", label: "Emergency", sub: "personal or accident", tier: "top", anyHour: true },
+  { key: "medical", label: "Medical", sub: "hospital or pharmacy run", tier: "top", anyHour: true },
+  { key: "urgent", label: "Urgent", sub: "cannot wait", tier: "high", anyHour: true },
+  { key: "work", label: "Work or shift", sub: "office or late shift home", tier: "standard", anyHour: false },
+  { key: "study", label: "Classes or exams", sub: "tuition, college, exam hall", tier: "standard", anyHour: false },
+  { key: "catch", label: "Train, bus or flight", sub: "a departure to catch", tier: "high", anyHour: false },
+  { key: "family", label: "Family pickup", sub: "child or elderly pickup", tier: "standard", anyHour: false },
+  { key: "event", label: "Late event", sub: "dinner, party, wedding", tier: "standard", anyHour: false },
+  { key: "alone", label: "Travelling alone", sub: "extra eyes on the trip", tier: "standard", anyHour: false },
+  { key: "just", label: "Just a ride", sub: "no special reason needed", tier: "standard", anyHour: false },
+];
+export const REASON_TIER_LINES: Record<ReasonTier, string> = {
+  top: "Top of the queue. A committed driver is assigned to you first.",
+  high: "High priority. You are matched ahead of standard requests.",
+  standard: "Standard priority queue, with every SafeRide protection on.",
+};
+export const REASON_QUEUE_LABELS: Record<ReasonTier, string> = {
+  top: "Top of the queue",
+  high: "High priority",
+  standard: "Standard priority",
+};
+export const REASON_PRIVACY_NOTE =
+  "Your reason stays private. The driver only sees a priority flag, never the reason.";
+export const REASON_ANY_HOUR_NOTE =
+  "Emergency, medical and urgent trips can use SafeRide Priority at any hour, day or night.";
+export function tripReason(key: string): TripReason {
+  return TRIP_REASONS.find((r) => r.key === key) ?? TRIP_REASONS[TRIP_REASONS.length - 1];
+}
+
 /* Turns a label like "10:45 PM" into an hour in 24 hour time. */
 export function parseTimeLabel(label: string): number | null {
   const m = label.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
