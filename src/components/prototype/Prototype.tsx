@@ -291,7 +291,7 @@ export default function Prototype() {
                   "radial-gradient(62% 55% at 50% 42%, rgba(6,193,103,.18), transparent 72%)",
               }}
             >
-              <PhoneScaler reserve={185}>
+              <PhoneScaler reserve={320}>
                 <IOSDevice>
                   <ContactView riderName={riderName} info={circle} />
                 </IOSDevice>
