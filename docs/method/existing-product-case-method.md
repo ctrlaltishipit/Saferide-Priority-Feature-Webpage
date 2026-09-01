@@ -197,7 +197,23 @@ These ratings are the strength values in the gate calculator. Rate against the b
 - Service Design Tools, the open tool library: https://servicedesigntools.org/tools
 - NN/g, Service Blueprints: https://www.nngroup.com/articles/service-blueprints-definition/ and Service Design 101: https://www.nngroup.com/articles/service-design-101/
 - Strategyzer, Business Model Canvas and Value Proposition Canvas: https://www.strategyzer.com/library/the-business-model-canvas
-- Doblin / Deloitte, Ten Types of Innovation (framework brochure, six principles, per-type tactics)
-- Ainna, What is venture building (factory model, PMF signals, sunset protocol)
-- d.MBA, IDEO U, Board of Innovation on business design (the four-circle sweet spot comes from Board of Innovation)
-- Designlab, Service Design 101
+- Doblin / Deloitte, Ten Types of Innovation: https://www.doblin.com/ten-types
+- Ainna, venture building FAQ (factory model, PMF signals, sunset protocol): https://ainna.ai/resources/faq/venture-building-faq
+- d.MBA, What is business design: https://d.mba/guides/what-is-business-design-guide
+- IDEO U, How to build a better business through design: https://www.ideou.com/blogs/inspiration/how-to-build-a-better-business-through-design
+- Board of Innovation, What is business design (source of the four-circle sweet spot): https://www.boardofinnovation.com/what-is-business-design/
+- Designlab blog, Service Design 101: https://designlab.com/blog
+
+These links are static references. Notes skimmed from them are in Appendix C.
+
+## Appendix C: notes skimmed from the extra references (Sep 1, 2026)
+
+**Doblin, Ten Types of Innovation** (site refused the connection at skim time; from the published framework). Configuration: Profit Model (how you make money), Network (connections with others to create value), Structure (alignment of talent and assets), Process (signature or superior methods). Offering: Product Performance (distinguishing features and functionality), Product System (complementary products and services). Experience: Service (support and enhancements around the offering), Channel (how offerings reach customers), Brand (representation of the offering), Customer Engagement (distinctive interactions fostered). Principle: strong innovators combine five or more types; the weakest cases lean only on Product Performance. For SafeRide the lit types are Process (one pre-ride check), Service (circle SMS, check-in), Product System (a layer over Uber's toolkit), Network (T-Safe bridge), Customer Engagement (consent-first, plain-language brief), and Profit Model (the optional priority fee). Product Performance is deliberately not the story.
+
+**Board of Innovation, What is business design.** Business design is the design of the business itself: customer-centric design methods applied to developing and validating profitable business models, bridging what customers want and what makes money. The recurring failure: teams confirm desirability and never confirm anyone will pay. Their redesigned innovation sweet spot adds social and environmental impact to the classic desirability, feasibility, viability circles, which is where the fourth lens, Integrity, comes from. Deliverables: business model prototypes, go-to-market roadmaps, market opportunity assessments, revenue model options. The two questions a business designer keeps asking: what do we know, and how do we know it. (Our gate card columns are a direct descendant.)
+
+**d.MBA, What is business design.** Three ingredients: design methods (iteration, abductive reasoning), design mindset (customer-centric, comfortable with ambiguity, prototype to learn), business tools (financial models, competitive analysis, strategy frameworks). Six mindsets: start with customers and stakeholders; think in extremes; prototype to learn; combine qualitative and quantitative; embrace small rich data sets; think visually. Process: empathize, define, ideate, prototype, test. Tools it recommends that map onto this case: Business Model Canvas, Ecosystem Map (actors, information, goods and money flows), Discovery-Driven Planning (reverse the financials from the required outcome), Porter's Five Forces for the industry read.
+
+**Ainna, venture building FAQ.** Venture building is a repeatable capability, a factory: Discover, Validate, Realize, Experiment, Scale. Product-market-fit signals converge on four dimensions: desirability, retention, economics, organic pull. A sunset protocol sets timeboxed evaluations and kill triggers: repeated experiment cycles that fail to move retention, a market too small to justify the spend, technology that cannot meet the quality bar, unit economics that do not work at any scale. Sunsetting ends with a postmortem and captured learning. (Our Chapter 4 stop rules are the internal-feature version of this.)
+
+**IDEO U and Designlab** were listed as static references; not skimmed in this pass.

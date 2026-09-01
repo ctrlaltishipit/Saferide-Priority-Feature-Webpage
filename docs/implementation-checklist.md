@@ -56,7 +56,7 @@ Legend: `[ ]` open · `[x]` done · `[~]` done with a note
 - [x] GateCard 2 minimal (H1–H4 as assumptions; clears = pilot stages 2 and 3)
 - [x] RULES.md: rules 79+ for chapters, gate cards, number tags, no outcome claimed, scroll-mt convention
 - Check: build, full visual pass at 390 and 1440, Reveal fires on gate cards
-- [ ] Commit ("Case restructure phase 1: chapters by gate, Gate 1 content, chapter nav"), deploy via clean-dir rsync, confirm live, update memory
+- [x] Commit ("Case restructure phase 1: chapters by gate, Gate 1 content, chapter nav"), deploy via clean-dir rsync, confirm live, update memory
 - [ ] **Pause for user review**: centre nav labels, chapter titles, Chapter 1 copy
 
 ## Phase 2: Chapter 2 complete (Gate 2)
