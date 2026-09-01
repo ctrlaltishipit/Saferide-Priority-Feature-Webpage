@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./ui";
 import { SourceSnippet } from "./case/primitives";
 import { TiltCard } from "./case/Motion";
@@ -23,16 +23,15 @@ const MARKET: {
   sourceUrl: string;
 }[] = [
   {
-    big: "$2.5B",
-    text: "the India ride-hailing market in 2025, growing about 21% a year through 2033.",
+    big: "$3.8B",
+    text: "where India's ride-hailing market is headed by FY2032, from about $950 million in FY2024, growing near 19% a year.",
     cls: "bg-mist",
     textCls: "text-ink-soft",
     hintCls: "text-[#9AA0A6]",
     pillCls: "bg-black text-white",
-    sourceName: "Grand View Research · India ride-hailing outlook",
-    sourceNote:
-      "India's ride-hailing services market is estimated at USD 2.51 billion for 2025, with a projected 20.7% CAGR from 2026 to 2033.",
-    sourceUrl: "https://www.grandviewresearch.com/horizon/outlook/ride-hailing-services-market/india",
+    sourceName: "Markets and Data · India ride-hailing, Jan 2025",
+    sourceNote: "Markets and Data projects USD 950.66 million in FY2024 rising to USD 3,766.79 million in FY2032, a CAGR of 18.78%.",
+    sourceUrl: "https://www.marketsandata.com/industry-reports/india-ride-hailing-market",
   },
   {
     big: "1.6M",
@@ -74,112 +73,175 @@ const MARKET: {
   },
 ];
 
-function FlipStat({ s, delay }: { s: (typeof MARKET)[number]; delay: number }) {
-  const [flipped, setFlipped] = useState(false);
+/* One market number with its source shown, the same way the proof cards do
+   it: a screenshot of the page that opens the original on tap. No flip. */
+function StatCard({ s, delay }: { s: (typeof MARKET)[number]; delay: number }) {
+  const dark = s.cls.includes("text-white");
   return (
-    <Reveal delay={delay} className="h-full [perspective:1200px]">
-      <div
-        role="button"
-        tabIndex={0}
-        aria-pressed={flipped}
-        aria-label={flipped ? "Flip back to the number" : `Flip to see the source for ${s.big}`}
-        onClick={() => setFlipped(!flipped)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setFlipped(!flipped);
-          }
-        }}
-        className="grid h-full cursor-pointer transition-transform duration-500 [transform-style:preserve-3d]"
-        style={{ transform: flipped ? "rotateY(180deg)" : "none" }}
-      >
-        <div className={`flex flex-col rounded-2xl p-6 [backface-visibility:hidden] [grid-area:1/1] ${s.cls}`}>
-          <div className="whitespace-nowrap text-[clamp(30px,3.4vw,40px)] font-extrabold tracking-[-1.5px]">
-            {s.big}
-          </div>
-          <div className={`mt-1.5 text-[13.5px] leading-[1.5] ${s.textCls}`}>{s.text}</div>
-          <div className={`mt-auto flex items-center gap-1 pt-3 text-[11px] font-semibold ${s.hintCls}`}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 12a8 8 0 0114.9-4M20 12a8 8 0 01-14.9 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <path d="M18 4v4h-4M6 20v-4h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Flip for source
-          </div>
-        </div>
-        <div className={`flex flex-col rounded-2xl p-6 [backface-visibility:hidden] [grid-area:1/1] [transform:rotateY(180deg)] ${s.cls}`}>
-          <div className={`text-[10.5px] font-bold tracking-[1.4px] ${s.hintCls}`}>SOURCE</div>
-          <div className="mt-1.5 text-[13.5px] font-bold leading-snug">{s.sourceName}</div>
-          <div className={`mt-1.5 text-[12.5px] leading-[1.5] ${s.textCls}`}>{s.sourceNote}</div>
-          <div className="mt-auto pt-3" onClick={(e) => e.stopPropagation()}>
-            <SourceSnippet url={s.sourceUrl} compact dark={s.cls.includes("text-white")} />
-            <div className={`mt-2 text-right text-[11px] font-semibold ${s.hintCls}`}>Flip back</div>
-          </div>
+    <Reveal delay={delay} className="h-full">
+      <div className={`flex h-full flex-col rounded-2xl p-6 ${s.cls}`}>
+        <div className="whitespace-nowrap text-[clamp(30px,3.4vw,40px)] font-extrabold tracking-[-1.5px]">{s.big}</div>
+        <div className={`mt-1.5 text-[13.5px] leading-[1.5] ${s.textCls}`}>{s.text}</div>
+        <div className="mt-auto pt-4">
+          <div className={`mb-1.5 text-[10.5px] font-bold tracking-[1.4px] ${s.hintCls}`}>SOURCE</div>
+          <SourceSnippet url={s.sourceUrl} compact dark={dark} />
+          <div className={`mt-2 text-[11.5px] leading-[1.45] ${s.hintCls}`}>{s.sourceNote}</div>
         </div>
       </div>
     </Reveal>
   );
 }
 
-/* TAM / SAM / SOM as nested layers. Pure HTML, responsive by default. */
-const FUNNEL: { tag: string; title: string; text: string; srcName?: string; srcUrl?: string }[] = [
+/* TAM / SAM / SOM as three rings. Hover or tap a ring, or its card below,
+   and it grows with its number, its tag and its source beside it. The rings
+   pop in the first time they scroll into view. */
+const RINGS: { tag: string; title: string; big: string; sub: string; text: string; kind: "SOURCED" | "ASSUMPTION"; srcUrl?: string }[] = [
   {
     tag: "TAM",
     title: "India ride-hailing",
-    text: "USD 2.5 billion in 2025, growing about 21% a year. Around 1.6 million app cab trips run every day across the big three.",
+    big: "$3.8B",
+    sub: "by FY2032, from about $950 million in FY2024",
+    text: "The whole market. Growing near 19% a year, with around 1.6 million app cab trips every day across the big three.",
+    kind: "SOURCED",
+    srcUrl: MARKET[0].sourceUrl,
   },
   {
     tag: "SAM",
-    title: "Late night rides in the big metros",
-    text: "My estimate: 10 to 15% of daily cab trips run between 8 PM and 5 AM, near 2 lakh rides a night. No platform publishes the exact night share, so we label this clearly as an assumption.",
+    title: "Late nights in the big metros",
+    big: "~2 lakh",
+    sub: "rides a night, 8 PM to 5 AM",
+    text: "My estimate: 10 to 15% of daily cab trips run at night. No platform publishes the night share, so this number is an assumption and says so.",
+    kind: "ASSUMPTION",
   },
   {
     tag: "SOM",
-    title: "Hyderabad after dark, the pilot",
-    text: "A top 3 Uber city of 11.3 million people. Hyderabad police's T-Safe monitored 36,000 rides in its first year, so demand for watched night travel is already proven here.",
-    srcName: "Telangana Today on T-Safe",
+    title: "Hyderabad after dark",
+    big: "36,000",
+    sub: "rides watched by T-Safe in its first year",
+    text: "The first bite: one city of 11.3 million people, a top 3 Uber city. Demand for watched night travel is already proven here.",
+    kind: "SOURCED",
     srcUrl: "https://telanganatoday.com/explainer-what-is-t-safe-and-how-to-use-it",
   },
 ];
 
-function FunnelHead({ i, tagCls, textCls }: { i: number; tagCls: string; textCls: string }) {
-  const f = FUNNEL[i];
-  return (
-    <>
-      <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-        <span className={`rounded-full px-2.5 py-1 text-[10.5px] font-extrabold tracking-[1.2px] ${tagCls}`}>
-          {f.tag}
-        </span>
-        <span className="text-[15.5px] font-extrabold tracking-[-0.3px]">{f.title}</span>
-      </div>
-      <p className={`m-0 mt-1.5 max-w-[720px] text-[13px] leading-[1.55] ${textCls}`}>
-        {f.text}
-        {f.srcUrl && (
-          <>
-            {" "}
-            <a
-              href={f.srcUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whitespace-nowrap text-[11.5px] font-bold underline decoration-current/40 underline-offset-2 hover:decoration-current"
-            >
-              {f.srcName} →
-            </a>
-          </>
-        )}
-      </p>
-    </>
-  );
-}
+const RING_R = [200, 140, 80];
+const RING_FILL = ["#E3EDFE", "#BED4FB", "#276EF1"];
+const RING_STROKE = ["#A9C7FA", "#7FA6F5", "#1D4FB8"];
 
-function Funnel() {
+function MarketRings() {
+  const [active, setActive] = useState(2);
+  const [shown, setShown] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (es) => {
+        if (es.some((e) => e.isIntersecting)) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const r = RINGS[active];
   return (
-    <div className="rounded-2xl border border-[#CFE0FD] bg-[#F3F7FF] p-4 sm:p-5">
-      <FunnelHead i={0} tagCls="bg-[#D9E6FD] text-[#1D4FB8]" textCls="text-ink-soft" />
-      <div className="mt-4 rounded-xl border border-[#A9C7FA] bg-[#E3EDFE] p-4 sm:p-5">
-        <FunnelHead i={1} tagCls="bg-[#BED4FB] text-[#153E93]" textCls="text-[#3D4E6B]" />
-        <div className="mt-4 rounded-xl border border-brand bg-brand p-4 text-white sm:p-5">
-          <FunnelHead i={2} tagCls="bg-white/20 text-white" textCls="text-[#D6E4FE]" />
+    <div ref={ref} className="grid items-center gap-6 lg:grid-cols-2">
+      {/* the rings */}
+      <div className="mx-auto w-full max-w-[460px]">
+        <svg viewBox="0 0 440 440" className="block h-auto w-full" role="group" aria-label="Three rings: the whole market, the late-night slice, the Hyderabad pilot">
+          <style>{`@keyframes ringIn { from { transform: scale(.55); opacity: 0; } to { transform: scale(1); opacity: 1; } }`}</style>
+          {RINGS.map((ring, i) => {
+            const on = active === i;
+            return (
+              <g
+                key={ring.tag}
+                role="button"
+                tabIndex={0}
+                aria-label={`${ring.tag}: ${ring.title}, ${ring.big}`}
+                aria-pressed={on}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                style={{
+                  transformOrigin: "220px 220px",
+                  transformBox: "view-box",
+                  transform: on ? "scale(1.06)" : "scale(1)",
+                  transition: "transform .35s cubic-bezier(.16,1,.3,1)",
+                  animation: shown ? `ringIn .7s ${i * 0.12}s cubic-bezier(.16,1,.3,1) both` : "none",
+                  opacity: shown ? undefined : 0,
+                  cursor: "pointer",
+                  outline: "none",
+                }}
+              >
+                <circle cx="220" cy="220" r={RING_R[i]} fill={RING_FILL[i]} stroke={on ? "#000" : RING_STROKE[i]} strokeWidth={on ? 3 : 1.5} />
+                {i < 2 && (
+                  <text x="220" y={220 - RING_R[i] + 32} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={i === 0 ? "#1D4FB8" : "#153E93"} fontFamily="Helvetica,Arial">
+                    {ring.tag} · {ring.big}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+          <text x="220" y="212" textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1.5" fill="#fff" fontFamily="Helvetica,Arial" pointerEvents="none">
+            SOM
+          </text>
+          <text x="220" y="240" textAnchor="middle" fontSize="24" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial" pointerEvents="none">
+            {RINGS[2].big}
+          </text>
+        </svg>
+      </div>
+
+      {/* the detail for the active ring */}
+      <div className="glow rounded-2xl border border-line bg-white p-5 sm:p-6" aria-live="polite">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-black px-2.5 py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-white">{r.tag}</span>
+          <span className={`rounded-full px-2 py-0.5 text-[9.5px] font-extrabold tracking-[1px] ${r.kind === "SOURCED" ? "bg-[#E3EDFE] text-brand" : "bg-[#FFF1D6] text-[#8A5A00]"}`}>{r.kind}</span>
+          <span className="ml-auto text-[12px] font-bold text-ink-faint">{active + 1} of 3</span>
         </div>
+        <div className="mt-3 text-[clamp(30px,3.4vw,40px)] font-extrabold tracking-[-1.5px]">{r.big}</div>
+        <div className="text-[13px] font-semibold text-ink-faint">{r.sub}</div>
+        <div className="mt-3 text-[16px] font-extrabold tracking-[-0.3px]">{r.title}</div>
+        <p className="m-0 mt-1.5 text-[13.5px] leading-[1.6] text-ink-soft">{r.text}</p>
+        <div className="mt-4">
+          {r.srcUrl ? (
+            <SourceSnippet url={r.srcUrl} compact />
+          ) : (
+            <div className="rounded-xl border border-dashed border-[#E2C79A] bg-[#FFF7EC] p-3 text-[12.5px] leading-[1.5] text-[#7A4B00]">
+              No public source publishes the night share. This is my assumption. The pilot&apos;s first stage replaces it with Uber&apos;s own number.
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* the three rings as cards, so the numbers read without hovering */}
+      <div className="grid gap-2.5 sm:grid-cols-3 lg:col-span-2">
+        {RINGS.map((ring, i) => {
+          const on = active === i;
+          return (
+            <button
+              key={ring.tag}
+              type="button"
+              onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
+              aria-pressed={on}
+              className={`glow flex items-center gap-3 rounded-2xl border p-4 text-left transition-colors ${on ? "border-black bg-black text-white" : "border-line bg-white hover:border-brand"}`}
+            >
+              <span className="h-3.5 w-3.5 flex-none rounded-full" style={{ background: RING_FILL[i], boxShadow: `0 0 0 2px ${RING_STROKE[i]}` }} aria-hidden="true" />
+              <span className="min-w-0">
+                <span className={`block text-[10.5px] font-bold tracking-[1.4px] ${on ? "text-[#8FB0FF]" : "text-ink-faint"}`}>{ring.tag}</span>
+                <span className="block truncate text-[14px] font-extrabold tracking-[-0.2px]">
+                  {ring.big} · {ring.title}
+                </span>
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -337,7 +399,7 @@ export default function Industry() {
       <p className="mb-8 max-w-[640px] text-base leading-[1.65] text-ink-soft [text-wrap:pretty]">
         Ride-hailing in India is huge, growing fast, and fought over by three big apps. Here is
         the market in numbers, the slice I am aiming at, and what every player already ships
-        for safety. Flip the number cards for their sources.
+        for safety. Every number carries its source on the card.
       </p>
 
       {/* Market snapshot */}
@@ -345,31 +407,27 @@ export default function Industry() {
         {MARKET.map((s, i) => (
           <div key={s.big} className="sticky sm:static" style={{ top: 64 + i * 8, zIndex: i + 1 }}>
             <div className="beam h-full">
-              <FlipStat s={s} delay={i * 0.08} />
+              <StatCard s={s} delay={i * 0.08} />
             </div>
           </div>
         ))}
       </div>
 
       {/* TAM / SAM / SOM */}
-      <div className="mt-10 grid items-start gap-6 sm:mt-14 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
-        <Reveal variant="left">
+      <div className="mt-10 sm:mt-14">
+        <Reveal className="mx-auto max-w-[720px] text-center">
           <h3 className="m-0 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
             The slice I am aiming at.
           </h3>
           <p className="mt-3 text-[15px] leading-[1.65] text-ink-soft [text-wrap:pretty]">
-            The whole market is the outer ring. The serviceable slice is the late night window
-            in the big metros, where the fear actually lives. The first bite is one city:
-            Hyderabad, between 8 PM and 5 AM.
-          </p>
-          <p className="mt-3 text-[13px] leading-[1.6] text-ink-faint">
-            One number here is an assumption and is labelled as one: the night share of daily
-            rides. Everything else links to a public source.
+            The whole market is the outer ring. The late-night window in the big metros is the middle one, where the fear
+            actually lives. The first bite is the centre: Hyderabad, 8 PM to 5 AM. Hover or tap a ring to see its number,
+            its tag and its source.
           </p>
         </Reveal>
-        <Reveal variant="right">
-          <Funnel />
-        </Reveal>
+        <div className="mt-8">
+          <MarketRings />
+        </div>
       </div>
 
       {/* Competitor safety features */}

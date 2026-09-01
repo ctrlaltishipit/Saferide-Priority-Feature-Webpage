@@ -388,13 +388,27 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
         type="button"
         onClick={() => set({ step: 1 })}
         aria-label="Open the app"
-        className="flex h-full w-full items-center justify-center bg-black"
+        className="flex h-full w-full flex-col items-center justify-center gap-5 bg-black"
       >
         <span
           className="text-[64px] font-medium tracking-[-1px] text-white"
           style={{ fontFamily: "'Uber Move','Helvetica Neue',Helvetica,Arial,sans-serif", animation: "slideup 1s ease both" }}
         >
           Uber
+        </span>
+        {/* the one thing that tells you this is not the normal Uber launch */}
+        <span
+          className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[12px] font-bold tracking-[0.2px] text-white"
+          style={{ animation: "slideup 1s .35s ease both" }}
+        >
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" fill="#fff" />
+              <path d="M9 12l2 2 4-4.5" stroke="#276EF1" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          Uber × SafeRide Priority
+          <span className="rounded-full bg-brand px-1.5 py-0.5 text-[9px] font-extrabold tracking-[1px]">FEATURE</span>
         </span>
       </button>
     );

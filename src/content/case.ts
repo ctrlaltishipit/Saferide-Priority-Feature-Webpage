@@ -64,7 +64,7 @@ export const CHAPTERS: ChapterMeta[] = [
     summary: [
       "I am Deekshitha Sreerala. Every part of this case, from the research to the prototype, is my own work.",
       "Four people share one night ride: the rider, the contact who waits, the driver, and the platform that decides.",
-      "India's ride-hailing market is about $2.5 billion a year. Uber, Ola, Rapido, inDrive and Mana Yatri all start their safety work after pickup.",
+      "India's ride-hailing market is heading for $3.8 billion by FY2032, near 19% growth a year. Uber, Ola, Rapido, inDrive and Mana Yatri all start their safety work after pickup.",
     ],
     status: "live",
   },
@@ -975,6 +975,12 @@ export interface SourceRef {
 }
 
 export const SOURCES: SourceRef[] = [
+  {
+    url: "https://www.marketsandata.com/industry-reports/india-ride-hailing-market",
+    name: "Markets and Data · Jan 2025",
+    headline: "India ride-hailing: USD 950 million in FY2024 to USD 3.8 billion by FY2032, growing 18.8% a year",
+    img: "/sources/marketsandata.jpg",
+  },
   {
     url: "https://feminisminindia.com/2025/09/05/what-does-it-mean-to-feel-safe-nari-report-2025-on-womens-safety-in-indian-cities/",
     name: "Feminism in India · NARI 2025",

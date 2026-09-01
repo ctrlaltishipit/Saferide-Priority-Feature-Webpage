@@ -40,7 +40,7 @@ export function Ticker() {
 }
 
 /* ───────────────────────────── Stats ───────────────────────────── */
-/* The research cards flip to show their source, with one small link
+/* The research cards carry their source on the front: a screenshot that opens the original,
    that opens in a new tab. The product cards stay plain. */
 const STATS: {
   big: string;
@@ -99,67 +99,24 @@ const STATS: {
 ];
 
 function StatCard({ s, delay }: { s: (typeof STATS)[number]; delay: number }) {
-  const [flipped, setFlipped] = useState(false);
-  if (!s.sourceUrl) {
-    return (
-      <Reveal delay={delay} className={`h-full rounded-2xl p-6 ${s.cls}`}>
-        <div
-          className={`font-extrabold tracking-[-1.5px] ${
-            s.smaller ? "whitespace-nowrap text-[clamp(30px,3.4vw,40px)]" : "text-[clamp(34px,4vw,46px)]"
-          }`}
-        >
-          {s.big}
-        </div>
-        <div className={`mt-1.5 text-[13.5px] leading-[1.5] ${s.textCls}`}>{s.text}</div>
-      </Reveal>
-    );
-  }
+  const dark = s.cls.includes("text-white");
   return (
-    <Reveal delay={delay} className="h-full [perspective:1200px]">
+    <Reveal delay={delay} className={`flex h-full flex-col rounded-2xl p-6 ${s.cls}`}>
       <div
-        role="button"
-        tabIndex={0}
-        aria-pressed={flipped}
-        aria-label={flipped ? "Flip back to the number" : `Flip to see the source for ${s.big}`}
-        onClick={() => setFlipped(!flipped)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setFlipped(!flipped);
-          }
-        }}
-        className="grid h-full cursor-pointer transition-transform duration-500 [transform-style:preserve-3d]"
-        style={{ transform: flipped ? "rotateY(180deg)" : "none" }}
+        className={`font-extrabold tracking-[-1.5px] ${
+          s.smaller ? "whitespace-nowrap text-[clamp(30px,3.4vw,40px)]" : "text-[clamp(34px,4vw,46px)]"
+        }`}
       >
-        {/* front */}
-        <div className={`flex flex-col rounded-2xl p-6 [backface-visibility:hidden] [grid-area:1/1] ${s.cls}`}>
-          <div
-            className={`font-extrabold tracking-[-1.5px] ${
-              s.smaller ? "whitespace-nowrap text-[clamp(30px,3.4vw,40px)]" : "text-[clamp(34px,4vw,46px)]"
-            }`}
-          >
-            {s.big}
-          </div>
-          <div className={`mt-1.5 text-[13.5px] leading-[1.5] ${s.textCls}`}>{s.text}</div>
-          <div className={`mt-auto flex items-center gap-1 pt-3 text-[11px] font-semibold ${s.hintCls}`}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 12a8 8 0 0114.9-4M20 12a8 8 0 01-14.9 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <path d="M18 4v4h-4M6 20v-4h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Flip for source
-          </div>
-        </div>
-        {/* back */}
-        <div className={`flex flex-col rounded-2xl p-6 [backface-visibility:hidden] [grid-area:1/1] [transform:rotateY(180deg)] ${s.cls}`}>
-          <div className={`text-[10.5px] font-bold tracking-[1.4px] ${s.hintCls}`}>SOURCE</div>
-          <div className="mt-1.5 text-[13.5px] font-bold leading-snug">{s.sourceName}</div>
-          <div className={`mt-1.5 text-[12.5px] leading-[1.5] ${s.textCls}`}>{s.sourceNote}</div>
-          <div className="mt-auto pt-3" onClick={(e) => e.stopPropagation()}>
-            <SourceSnippet url={s.sourceUrl} compact dark={s.cls.includes("text-white")} />
-            <div className={`mt-2 text-right text-[11px] font-semibold ${s.hintCls}`}>Flip back</div>
-          </div>
-        </div>
+        {s.big}
       </div>
+      <div className={`mt-1.5 text-[13.5px] leading-[1.5] ${s.textCls}`}>{s.text}</div>
+      {s.sourceUrl && (
+        <div className="mt-auto pt-4">
+          <div className={`mb-1.5 text-[10.5px] font-bold tracking-[1.4px] ${s.hintCls}`}>SOURCE</div>
+          <SourceSnippet url={s.sourceUrl} compact dark={dark} />
+          {s.sourceNote && <div className={`mt-2 text-[11.5px] leading-[1.45] ${s.hintCls}`}>{s.sourceNote}</div>}
+        </div>
+      )}
     </Reveal>
   );
 }
@@ -747,7 +704,9 @@ export function Architecture() {
     <Reveal className="mt-12 rounded-2xl bg-mist p-5 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
       <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">WHAT CHANGES IN UBER&apos;S FLOW</div>
       <h2 className="m-0 mb-3 text-[clamp(22px,3vw,36px)] font-extrabold tracking-[-1px]">
-        The tools exist. The flow is missing.
+        The tools exist.
+        <br />
+        The flow is missing.
       </h2>
 
       <div className="grid items-center gap-4 sm:gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
@@ -775,7 +734,7 @@ export function Architecture() {
         </div>
       </div>
 
-      {/* the India numbers behind the decision: flip a card for its source */}
+      {/* the India numbers behind the decision, each with its source on the card */}
       <div className="mt-4 grid gap-3 sm:mt-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
         {INDIA_FACTS.filter((f) => !("hidden" in f && f.hidden)).map((f, i) => (
           <div key={f.big} className="sticky sm:static" style={{ top: 64 + i * 6, zIndex: i + 1 }}>
