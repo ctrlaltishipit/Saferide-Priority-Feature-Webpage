@@ -475,6 +475,7 @@ export function DecisionEngine() {
 const PRINCIPLES = [
   {
     title: "Honest about its limits",
+    risk: "Risk: a false sense of security. A rider reads the brief as a promise.",
     text: "SafeRide gives contextual guidance and says so clearly. It makes no safety promises.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -485,6 +486,7 @@ const PRINCIPLES = [
   },
   {
     title: "No crime prediction",
+    risk: "Risk: profiling riders or drivers, and a number that looks more precise than it is.",
     text: "No crime data, no personal risk profiles, no sensitive attributes. Ever.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -495,6 +497,7 @@ const PRINCIPLES = [
   },
   {
     title: "Abstains on thin data",
+    risk: "Risk: a confident label built on two data points.",
     text: "Limited Data replaces confident labels when there is not enough coverage.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -506,6 +509,7 @@ const PRINCIPLES = [
   },
   {
     title: "Driver fairness",
+    risk: "Risk: eligibility that quietly punishes some drivers, or that drivers learn to game.",
     text: "Multiple audited signals, regular fairness checks, driver training and appeals.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -516,6 +520,7 @@ const PRINCIPLES = [
   },
   {
     title: "Consent by default",
+    risk: "Risk: a location shared with someone the rider never agreed to.",
     text: "Automatic sharing only after you set it up, with per trip override and expiring links.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -526,6 +531,7 @@ const PRINCIPLES = [
   },
   {
     title: "Safety without stigma",
+    risk: "Risk: neighbourhoods labelled unsafe by an app.",
     text: "Well lit, staffed places only. No unsafe area labels, no public risk maps.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -536,6 +542,7 @@ const PRINCIPLES = [
   },
   {
     title: "Sharing that expires",
+    risk: "Risk: a live link that outlives the trip.",
     text: "Tracking links live for the trip, 30 minutes after a safe arrival, and 12 hours only when there is no response.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -547,6 +554,7 @@ const PRINCIPLES = [
   },
   {
     title: "Built for every rider",
+    risk: "Risk: a feature that guesses who a rider is, or excludes riders who want it.",
     text: "Anyone can turn SafeRide on. The Female rider switch is optional and self declared, never guessed.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
@@ -569,7 +577,8 @@ export function ResponsibleAI() {
             className="h-full rounded-2xl border border-line bg-white p-[18px] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_14px_34px_rgba(0,0,0,.08)]"
           >
             {p.icon}
-            <div className="mb-1 mt-2.5 text-[14.5px] font-extrabold">{p.title}</div>
+            <div className="mt-2.5 text-[11px] font-semibold leading-[1.45] text-[#B26205]">{p.risk}</div>
+            <div className="mb-1 mt-1.5 text-[14.5px] font-extrabold">{p.title}</div>
             <div className="text-[12.5px] leading-[1.55] text-ink-soft">{p.text}</div>
           </Reveal>
         </div>

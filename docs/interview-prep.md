@@ -108,14 +108,24 @@ H4 Safety Priority Match improves trust only if its wait premium stays inside an
 
 Null hypotheses stated for each; analysis pre-registered before stage 2.
 
-## 6. Willingness-to-pay probe *(fill in Phase 2)*
+## 6. Willingness-to-pay probe
 Design sketch: Van Westendorp price ladder on the priority match (₹0, ₹10, ₹20, ₹40, ₹60), then a stage-3 split between wait premium and rupee premium. Open questions from the PRD: map data availability for staffed entrances and 24/7 venues in Hyderabad; legally permissible driver criteria; how to serve riders who do not identify as women; SMS vs WhatsApp vs push.
 
-## 7. Assumption map *(fill in Phase 2)*
+## 7. Assumption map
+Top-right (important, little evidence), each with the fact that would kill it:
+- Riders switch the layer on at booking (35 to 45%). Killed by: activation under 15% in stage 2 with good comprehension.
+- A committed pickup saves half the destination cancels. Killed by: shadow mode showing cancels are not destination-linked.
+- Riders accept ₹20 or 4 minutes for a committed driver. Killed by: priority match under 10% selection in stage 3 at both premiums.
+- Priority matching does not push standard night waits past 5 minutes. Killed by: median added wait above 5 minutes in stage 3.
+- Map data on lit, staffed places exists for Hyderabad. Killed by: anchor coverage under 60% of pilot drop points.
+Important and evidenced (build on it): the fear is measured; cancels are measured; the toolkit exists; T-Safe demand exists.
+Less important, unknown (ignore for now): SMS vs WhatsApp; Telugu copy comprehension; outstation demand.
 
-## 8. Baseline metric request list *(fill in Phase 3)*
+## 8. Baseline metric request list (stage 1, shadow mode)
+By hour of day, Hyderabad, last two quarters: booking requests; completion rate; cancel-after-accept rate and who cancelled; time to match; Share My Trip usage; SOS and safety-line contacts per 1,000 trips; support tickets naming safety or cancellation; late-night NPS by gender where self-declared; repeat night riders; standard night ETA distribution (for the cannibalization watch); driver supply per zone after 8 PM.
 
-## 9. Value model skeleton *(fill in Phase 3)*
+## 9. Value model skeleton (with blanks)
+Revenue lift = (night bookings × activation × cancel-share-today × share saved) × average fare × platform share + (activated × elevated share × priority selection × ₹20). Cost saved = support contacts avoided × cost per contact + cancel-handling minutes × loaded cost. Experience gained = NPS delta and perceived control, priced only if finance has an NPS-to-retention curve. Costs = one squad-quarter build + run (SMS, link hosting, audit hours) + the marketplace cost of the wait premium. Cannibalization check: standard night ETA before and during stage 3. Adoption-drag check: booking completion for non-activators, weekly. The site shows the illustrative range (₹0.7 to 1.4 crore a year, Hyderabad nights) with every input tagged; the blanks above are what stage 1 fills.
 
 ## 10. Stakeholder map
 
@@ -132,11 +142,19 @@ Design sketch: Van Westendorp price ladder on the priority match (₹0, ₹10, �
 
 Positioning map sketch (for the interview, not the page): x axis "when protection starts" (after the ride starts → before booking), y axis "who does the work" (rider by hand → system with consent). Uber, Ola, Rapido cluster bottom-left; T-Safe mid-left; SafeRide top-right.
 
-## 11. Loop log *(fill in Phase 4)*
+## 11. Loop log (reconstructed from the build history)
+1. Started as a women's-safety feature: brief, anchors, circle, check-in. Belief: fear is the whole problem. Evidence: reviews and cancellation data. Decision: pivot the frame to fear plus the ride that never comes; add the committed pickup.
+2. Window was 10 PM to 5 AM. Evidence: late-hour rides that end past 10 PM; user feedback. Decision: persist with the layer, widen to 8 PM, add any-hour access for emergencies.
+3. Rebuilt review cards as text. Evidence: user wanted proof that looks real. Decision: real screenshots grouped by app.
+4. Page told the story in the order it was built. Evidence: the method audit (13 full / 18 partial / 18 missing). Decision: re-sequence into four chapters by the question each answers, and add the people, the pain-to-metric bridge and the commercial half.
 
-## 12. How I built it *(fill in Phase 4)*
+## 12. How I built it
+PRD first, with a one-line hypothesis and a measurement note that forbids invented outcomes. Then 84 plain-English rules for what the product will and will never do, before any screen. Then the prototype, reading every value from the shared rules. Then evidence: real reports, real reviews, sourced market data. Then this page, audited against the checklist and restructured into chapters. Every number carries a tag. Tools are not the story; the method is.
 
-## 13. First analyses with real data *(fill in Phase 4)*
+## 13. First analyses with real data
+1. Is the cancel destination-linked? Cancel-after-accept rate by destination zone and hour, drivers' next-trip fare after cancelling. If not linked, the committed pickup loses its main claim.
+2. Where does the brief say Elevated, and does it match where riders report low control? Label distribution vs perceived-control survey, by corridor.
+3. What does a priority match cost the pool? Standard night ETA with and without priority matching, by zone and hour.
 
 ## 14. Likely hiring-manager questions, answer sketches
 

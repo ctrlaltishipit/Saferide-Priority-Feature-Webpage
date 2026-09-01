@@ -90,7 +90,7 @@ export default function Prototype() {
     <section id="prototype" className="mt-14 bg-black text-white sm:mt-24">
       <div className="mx-auto max-w-[1240px] px-5 py-5">
         <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
-          INTERACTIVE PROTOTYPE
+          INTERACTIVE PROTOTYPE · THE EVIDENCE FOR CHAPTER 2
         </div>
         <h2 className="m-0 mb-1 text-[clamp(22px,2.2vw,30px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
           Walk all 8 screens yourself.

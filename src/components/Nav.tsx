@@ -10,6 +10,8 @@ import { CHAPTER_ICONS, useActiveChapter } from "./case/ChapterNav";
    with a label that pops up on tap. The bar stays one row and 50px tall,
    because every sticky card deck on the page assumes that height. */
 
+/* The prototype is reached through the pill, so it stays out of the centre links. */
+const NAV_CHAPTERS = LIVE_CHAPTERS.filter((c) => c.id !== "prototype");
 const CHAPTER_IDS = LIVE_CHAPTERS.map((c) => c.id);
 
 export default function Nav() {
@@ -23,7 +25,7 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const iconChapters = LIVE_CHAPTERS.filter((c) => c.id !== "prototype");
+  const iconChapters = NAV_CHAPTERS;
 
   return (
     <header
@@ -40,14 +42,15 @@ export default function Nav() {
         {/* brand, always top left */}
         <a href="#top" className="flex items-center gap-1.5 text-white">
           <Logo size={22} />
-          <span className="text-[12.5px] font-extrabold tracking-[-0.3px] sm:text-lg sm:tracking-[-0.4px]">
+          {/* four chapter icons plus the pill need the width on the smallest phones, so the wordmark waits for 380px */}
+          <span className="hidden text-[12.5px] font-extrabold tracking-[-0.3px] min-[380px]:inline sm:text-lg sm:tracking-[-0.4px]">
             SafeRide Priority
           </span>
         </a>
 
         {/* web: chapter names, centred */}
         <div className="hidden items-center justify-center gap-0.5 sm:flex" aria-label="Chapters">
-          {LIVE_CHAPTERS.map((c) => {
+          {NAV_CHAPTERS.map((c) => {
             const on = active === c.id;
             return (
               <a
@@ -71,7 +74,7 @@ export default function Nav() {
         </div>
 
         {/* phone: one icon per chapter, label pops up on tap */}
-        <div className="flex items-center justify-end gap-1 sm:hidden">
+        <div className="flex items-center justify-end gap-0.5 sm:hidden">
           {iconChapters.map((c) => {
             const on = active === c.id;
             return (
@@ -80,7 +83,7 @@ export default function Nav() {
                 href={`#${c.id}`}
                 aria-label={c.label}
                 aria-current={on ? "true" : undefined}
-                className={`group relative flex h-[30px] w-[30px] items-center justify-center rounded-full border transition-colors active:bg-white/15 ${
+                className={`group relative flex h-[28px] w-[28px] items-center justify-center rounded-full border transition-colors active:bg-white/15 ${
                   on ? "border-brand text-brand" : "border-white/25 text-white"
                 }`}
               >
@@ -98,7 +101,8 @@ export default function Nav() {
           href="#prototype"
           className="col-start-3 whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[11px] font-bold text-black transition-all duration-200 hover:bg-brand hover:text-white hover:shadow-[0_6px_20px_rgba(39,110,241,.45)] sm:px-4 sm:text-[13px]"
         >
-          Try the prototype
+          <span className="sm:hidden">Prototype</span>
+          <span className="hidden sm:inline">Try the prototype</span>
         </a>
       </nav>
     </header>

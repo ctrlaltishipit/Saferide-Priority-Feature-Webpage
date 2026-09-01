@@ -62,36 +62,39 @@ Standing rule (user, Sep 1 2026): the page never uses the method's internal voca
 - [ ] **Pause for user review**: centre nav labels, chapter titles, Chapter 1 copy
 
 ## Phase 2: Chapter 2 complete (Gate 2)
-- [ ] OptionsWeighed (standalone app vs Ola vs Uber layer; SOS-plus vs pre-booking layer; why the layer won)
-- [ ] Doblin "Where the innovation sits" grid (ten types, SafeRide touches lit, plain words)
-- [ ] Boundaries ("What SafeRide will never do", merges constraints + MVP out of scope)
-- [ ] ResponsibleAI cards gain a "Risk:" line each (risk register in disguise)
-- [ ] DecisionEngine jargon gloss ("fixed, readable rules")
-- [ ] FeatureStack legend: "P0 ships in the pilot. P1 follows once the pilot holds."
-- [ ] Full GATE_2 with "What we know" column (prototype, rules, baseline toolkit)
-- [ ] Prototype kicker "THE PROTOTYPE · CHAPTER 2 EVIDENCE"
+- [x] OptionsWeighed (standalone app vs Ola vs Uber layer; SOS-plus vs pre-booking layer; why the layer won)
+- [x] Doblin "Where the innovation sits" grid (ten types, SafeRide touches lit, plain words)
+- [x] NotList ("What SafeRide will never build"; the out-of-scope chip moved here from Constraints)
+- [x] ResponsibleAI cards gain a "Risk:" line each (risk register in disguise)
+- [~] DecisionEngine intro already read "Simple, explainable rules"; no change needed
+- [x] FeatureStack lede: "P0 ships in the pilot. P1 follows once the pilot holds."
+- [x] Full GATE_2 with "What we know" column (prototype, rules, baseline toolkit)
+- [x] Prototype kicker "INTERACTIVE PROTOTYPE · THE EVIDENCE FOR CHAPTER 2"
 - Check: build, voice greps, 390 audit, screenshots; commit + deploy; interview-prep sections 6–7 filled
 
 ## Phase 3: Chapter 3 The money (Gate 3)
-- [ ] Chapter opener: "This chapter has no pilot data. Every number here is a pilot hypothesis, marked as one."
-- [ ] MetricTree (north star, KPI targets, guardrails; every value tagged)
-- [ ] RevenueModel (₹20 priority fee × night trips × attach rate; illustrative range; inputs tagged; WTP open question)
-- [ ] ValueLogic (revenue lift / cost saved / experience gained; cannibalization + adoption drag watchpoints)
-- [ ] BusinessModelCanvas (9 blocks, qualitative, stacks below `sm`)
-- [ ] PilotPlan (corridors, cohort, 8 weeks, 5-stage stepper, what stage 1 validates)
-- [ ] Squad (roles, governance owners + cadence, "what I covered as the PM, what I would hire or borrow")
-- [ ] GATE_3; CHAPTERS money status → live; mobile nav width re-checked
+- [x] Chapter opener: "This chapter has no pilot data. Every number here is a pilot hypothesis, marked as one."
+- [x] MetricTree (north star, KPI targets, guardrails; every value tagged)
+- [x] RevenueModel (₹20 priority fee × night trips × attach rate; illustrative range; inputs tagged; WTP open question)
+- [x] ValueLogic (revenue lift / cost saved / experience gained; cannibalization + adoption drag watchpoints)
+- [x] BusinessModelCanvas (9 blocks, qualitative, stacks below `sm`)
+- [x] PilotPlan (corridors, cohort, 8 weeks, 5-stage stepper, what stage 1 validates)
+- [x] Squad (roles, governance owners + cadence, "what I covered as the PM, what I would hire or borrow")
+- [x] GATE_3; CHAPTERS money status → live; mobile nav: 28px icons, wordmark from 380px, pill reads "Prototype" on phones
 - Check: build, voice greps, 390 audit, screenshots; commit + deploy; interview-prep sections 8–9 filled
 
 ## Phase 4: Chapter 4 The case (Gate 4)
-- [ ] Roadmap (stages → quarters, direction only)
-- [ ] AfterHyderabad (zone expansion, other metros, T-Safe bridge, outstation, "a layer any app could adopt")
-- [ ] TheAsk (pilot slot, cohort, squad, stop rules)
-- [ ] Impact statement
-- [ ] CaseInSixtySeconds (pitch map: one line per gate + verdicts)
-- [ ] AboutThisCase (how it was built, tools unnamed)
-- [ ] GATE_4; CHAPTERS the-case status → live; footer index complete
+- [x] Roadmap (stages → quarters, direction only)
+- [x] AfterHyderabad folded into the Roadmap "Next" and "Later" horizons
+- [x] TheAsk (pilot slot, cohort, squad, stop rules)
+- [x] Impact statement
+- [x] CaseInSixtySeconds (pitch map: one line per gate + verdicts)
+- [x] AboutThisCase (how it was built, tools unnamed)
+- [x] GATE_4; CHAPTERS the-case status → live; footer index complete
 - Check: final voice + source audit across the page; build; 390 audit; screenshots; commit + deploy; interview-prep sections 11–13, 15 filled; method doc appendix updated with final numbers
+
+
+Phases 2 to 4 shipped together on Sep 1, 2026 at the user's request ("go for it and implement all the changes"). Prototype removed from the centre nav links (the pill covers it).
 
 ## Standing verification routine (every phase)
 1. `npm run build`
