@@ -1,5 +1,5 @@
 /* ─────────────── The person, the method, the iterations, the lessons ───────────────
-   Blocks for the seven-chapter story that are about how the case was made:
+   Blocks for the eight-chapter story that are about how the case was made:
    who built it (one person), how the research was done and where it stops,
    which design decisions changed while building, and what the work taught.
    Server components; the only motion comes from the shared Motion helpers. */

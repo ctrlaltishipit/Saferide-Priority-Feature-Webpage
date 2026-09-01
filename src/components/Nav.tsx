@@ -5,7 +5,7 @@ import { Logo } from "./ui";
 import { LIVE_CHAPTERS } from "@/content/case";
 import { CHAPTER_ICONS, useActiveChapter } from "./case/ChapterNav";
 
-/* Three zones: brand left, the seven chapter names centred, the prototype
+/* Three zones: brand left, the eight chapter names centred, the prototype
    pill right. Below md the centre collapses to one small icon per chapter,
    with a label that pops up on tap. The bar stays one row and 50px tall,
    because every sticky card deck on the page assumes that height. */
@@ -38,8 +38,8 @@ export default function Nav() {
         {/* brand, always top left */}
         <a href="#top" className="flex items-center gap-1.5 text-white">
           <Logo size={22} />
-          {/* seven icons plus the pill need the width on small phones, and seven names need it on small laptops */}
-          <span className="hidden text-[12.5px] font-extrabold tracking-[-0.3px] min-[480px]:inline md:hidden lg:inline lg:text-lg lg:tracking-[-0.4px]">
+          {/* eight icons plus the pill need the width on small phones, and eight names need it on small laptops */}
+          <span className="hidden text-[12.5px] font-extrabold tracking-[-0.3px] min-[480px]:inline md:hidden xl:inline xl:text-lg xl:tracking-[-0.4px]">
             SafeRide Priority
           </span>
         </a>
@@ -53,14 +53,14 @@ export default function Nav() {
                 key={c.id}
                 href={`#${c.id}`}
                 aria-current={on ? "true" : undefined}
-                className={`relative whitespace-nowrap rounded-md px-2 py-1.5 text-[12.5px] font-bold transition-colors lg:px-3 lg:text-[13px] ${
+                className={`relative whitespace-nowrap rounded-md px-1.5 py-1.5 text-[12px] font-bold transition-colors lg:px-2.5 lg:text-[12.5px] xl:px-3 xl:text-[13px] ${
                   on ? "text-white" : "text-white/70 hover:text-white"
                 }`}
               >
                 {c.short}
                 <span
                   aria-hidden="true"
-                  className={`absolute inset-x-2 -bottom-[3px] h-[2px] rounded-full bg-brand transition-opacity duration-200 lg:inset-x-3 ${
+                  className={`absolute inset-x-1.5 -bottom-[3px] h-[2px] rounded-full bg-brand transition-opacity duration-200 lg:inset-x-2.5 xl:inset-x-3 ${
                     on ? "opacity-100" : "opacity-0"
                   }`}
                 />
@@ -79,7 +79,7 @@ export default function Nav() {
                 href={`#${c.id}`}
                 aria-label={c.label}
                 aria-current={on ? "true" : undefined}
-                className={`group relative flex h-[28px] w-[28px] items-center justify-center rounded-full border transition-colors active:bg-white/15 ${
+                className={`group relative flex h-[26px] w-[26px] items-center justify-center rounded-full border transition-colors active:bg-white/15 sm:h-[28px] sm:w-[28px] ${
                   on ? "border-brand text-brand" : "border-white/25 text-white"
                 }`}
               >
@@ -95,7 +95,7 @@ export default function Nav() {
         {/* the pill, always top right */}
         <a
           href="#prototype"
-          className="col-start-3 whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[11px] font-bold text-black transition-all duration-200 hover:bg-brand hover:text-white hover:shadow-[0_6px_20px_rgba(39,110,241,.45)] md:px-4 md:text-[13px]"
+          className="col-start-3 hidden whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[11px] font-bold text-black min-[380px]:inline-block transition-all duration-200 hover:bg-brand hover:text-white hover:shadow-[0_6px_20px_rgba(39,110,241,.45)] md:px-4 md:text-[13px]"
         >
           <span className="md:hidden">Try it</span>
           <span className="hidden md:inline">Try the prototype</span>

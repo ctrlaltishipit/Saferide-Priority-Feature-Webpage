@@ -1,17 +1,17 @@
 import { CHAPTERS } from "@/content/case";
 import { SectionHeader } from "./primitives";
 
-/* The case at a glance: seven chapters, one card each, with the takeaway a
+/* The case at a glance: eight chapters, one card each, with the takeaway a
    reader leaves with. This is what the hero's "Read the case" lands on. */
 export default function CaseMap() {
   return (
     <section id="case-study" className="mx-auto max-w-[1240px] scroll-mt-[50px] px-5 pt-12 sm:pt-16">
       <SectionHeader
         eyebrow="THE CASE AT A GLANCE"
-        title="Seven chapters, five minutes."
+        title="Eight chapters, five minutes."
         lede="Each chapter answers one question and ends with a takeaway. Read in order, or jump to the part you care about."
       />
-      <ol className="m-0 grid list-none gap-2.5 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))]">
+      <ol className="m-0 grid list-none gap-2.5 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr))]">
         {CHAPTERS.filter((c) => c.status === "live").map((c) => (
           <li key={c.id} className="flex">
             <a

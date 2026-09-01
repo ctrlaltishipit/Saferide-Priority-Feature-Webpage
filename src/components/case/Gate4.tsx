@@ -151,7 +151,7 @@ export function CaseInSixty() {
       <SectionHeader
         eyebrow="THE CASE IN SIXTY SECONDS"
         glyph="timer"
-        title="Seven chapters, seven takeaways."
+        title="Eight chapters, eight takeaways."
         lede="If you read nothing else, read these. Each links to the chapter that earns it."
       />
       <div className="flex flex-col gap-2.5">

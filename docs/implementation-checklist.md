@@ -115,6 +115,12 @@ Phases 2 to 4 shipped together on Sep 1, 2026 at the user's request ("go for it 
 - [x] Verdict cards close Research, Design, Outcomes and Conclusion; Prototype chapter wraps the demo, the feature set and the with/without comparison
 - Check: build green, nav fits 360/390/768/1024/1440 without overflow, anchors land at 50, width = viewport at 390, screenshots reviewed; commit + deploy
 
+## Phase 7: Validate chapter, tighter hero (shipped Sep 1, 2026)
+- [x] Chapter 6 "Validate" between Prototype and Outcomes: four hypotheses with stop rules, who I would sit with first (56 conversations, 6 shadowed rides), the ₹0 to ₹60 price ladder, the five pilot stages, the assumption map (`Validate.tsx`, content in case.ts)
+- [x] Outcomes renumbered to 7, Conclusion to 8; case map, takeaways and footer follow
+- [x] Hero type and spacing reduced so the landing fits one screen on web and phone; header holds one row at 360/768/1024/1280/1440 with eight chapters
+- Check: build green, nav fit, anchors, screenshots; commit + deploy
+
 ## Standing verification routine (every phase)
 1. `npm run build`
 2. `grep -rn "—" src/components src/content`; review `grep -rn ", not " src/components src/content`

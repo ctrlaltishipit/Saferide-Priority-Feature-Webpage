@@ -20,7 +20,7 @@ export const WINDOW_LABEL = `${hour12(LATE_NIGHT_START_HOUR)} to ${hour12(LATE_N
 export type ChapterStatus = "live" | "next";
 export interface ChapterMeta {
   id: string;
-  n?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  n?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   kicker: string;
   label: string;
   short: string;
@@ -119,16 +119,32 @@ export const CHAPTERS: ChapterMeta[] = [
     status: "live",
   },
   {
-    id: "outcomes",
+    id: "validate",
     n: 6,
     kicker: "CHAPTER 6",
+    label: "Validate",
+    short: "Validate",
+    title: "Four bets, each with the number that would kill it.",
+    question: "How the concept gets tested before anyone calls it a result.",
+    verdict: "Four hypotheses, an eight-week pilot in five stages, a price ladder, and the assumptions that die first if they are wrong.",
+    summary: [
+      "Four hypotheses, each with a metric, a sample, a duration and a stop rule written before the pilot starts.",
+      "The people I would sit with first: 25 women who ride after 8 PM, 8 students, 10 contacts, 10 night drivers, 3 safety operators.",
+      "Eight weeks in Hyderabad, five stages. Money and permission unlock only on evidence from the stage before.",
+    ],
+    status: "live",
+  },
+  {
+    id: "outcomes",
+    n: 7,
+    kicker: "CHAPTER 7",
     label: "Outcomes",
     short: "Outcomes",
-    title: "Nothing tested yet. Here is exactly what would count.",
-    question: "The test design, the metrics, the money, and what I learned building it.",
+    title: "Nothing measured yet. Here is exactly what would count.",
+    question: "What the pilot would read out: the metrics, the money, and what I learned building it.",
     verdict: "Open until the pilot reads out. Every target is a hypothesis with a stop rule next to it.",
     summary: [
-      "No pilot has run. Eight weeks in Hyderabad, five stages, each unlocking the next on evidence.",
+      "No pilot has run. Every number here is what the pilot in chapter 6 would read out, marked as a hypothesis.",
       "One north star, eight targets, six guardrails. The money model shows its working: ₹0.7 to 1.4 crore a year, illustrative.",
       "Four lessons from building it alone, including the one I would do differently.",
     ],
@@ -137,15 +153,15 @@ export const CHAPTERS: ChapterMeta[] = [
   },
   {
     id: "conclusion",
-    n: 7,
-    kicker: "CHAPTER 7",
+    n: 8,
+    kicker: "CHAPTER 8",
     label: "Conclusion",
     short: "Conclusion",
     title: "Eight weeks in Hyderabad, then every riding app.",
     question: "Key takeaways, the recommendation, and next steps.",
     verdict: "The ask is on the table: one pilot slot, one corridor, one quarter. Decision pending.",
     summary: [
-      "Seven takeaways, one per chapter, each linked to the evidence that earns it.",
+      "Eight takeaways, one per chapter, each linked to the evidence that earns it.",
       "The recommendation: an eight-week opt-in pilot in Hyderabad, with five rules that would stop it.",
       "Next: the pilot, then an MVP, then the same layer inside Ola, Rapido, inDrive and Mana Yatri. Feedback welcome on LinkedIn.",
     ],
@@ -218,6 +234,49 @@ export const LESSONS: { title: string; text: string }[] = [
   { title: "Evidence has to show its face", text: "Retyped quotes read as opinion. Real screenshots with a link read as proof. I rebuilt the review wall for that reason." },
   { title: "Say what has not been tested", text: "Nothing on this page is an outcome. Every target is a hypothesis with a stop rule next to it. That honesty is the case." },
   { title: "One person can reach a prototype, and no further", text: "The next step needs Uber's baselines and real riders. That is why the ask is small: eight weeks, one corridor." },
+];
+
+/* ── chapter 6: how the concept gets validated ── */
+export interface Hypothesis {
+  id: string;
+  claim: string;
+  metric: string;
+  sample: string;
+  when: string;
+  stop: string;
+  screen: number;
+}
+
+export const HYPOTHESES: Hypothesis[] = [
+  { id: "H1", claim: "A plain-language brief raises a rider's sense of control on a late-night trip.", metric: "Perceived control, 5-point scale, and comprehension of the brief", sample: "Opt-in cohort against a matched control group", when: "Stages 2 and 3", stop: "Comprehension under 70%: riders reading the brief as a guarantee", screen: 2 },
+  { id: "H2", claim: "A saved Safety Circle removes the manual trip-sharing ritual.", metric: "Share actions per night trip, time from open to booked", sample: "Cohort against control", when: "Stage 2", stop: "A single consent complaint", screen: 5 },
+  { id: "H3", claim: "Riders accept a safer drop point when it adds under 3 minutes of walking.", metric: "Acceptance rate by added minutes", sample: "Every cohort trip offered an anchor", when: "Stage 2", stop: "Acceptance under 10% at any added time", screen: 3 },
+  { id: "H4", claim: "A committed driver is worth a small wait or fee, as long as the wait stays short.", metric: "Match selection by added ETA, NPS by selection", sample: "Half see the wait premium, half the rupee premium", when: "Stage 3", stop: "Median added wait above 5 minutes, or standard night supply falling", screen: 4 },
+];
+
+export const RESEARCH_PLAN: { who: string; count: string; why: string }[] = [
+  { who: "Women who ride after 8 PM weekly", count: "25", why: "HITEC City, Gachibowli, Financial District. The last night ride, step by step, and the moment of least control." },
+  { who: "Students riding late", count: "8", why: "Cheaper rides, later hours, a different set of workarounds." },
+  { who: "Trusted contacts", count: "10", why: "What they need to stop asking: plate, driver, and when to worry." },
+  { who: "Night drivers with 1000+ trips", count: "10", why: "Whether a committed pickup and a priority flag feel fair, and what an appeal path should look like." },
+  { who: "Trust and Safety operators", count: "3", why: "Where escalations come from tonight, and what a calm check-in note must never say." },
+  { who: "Shadowed night bookings", count: "6", why: "With permission, timing every manual step. The as-is map, measured." },
+];
+
+export const WTP_LADDER: { price: string; read: string }[] = [
+  { price: "₹0", read: "Everyone would take it. Tells me nothing about value." },
+  { price: "₹10", read: "The floor. Below here the fee reads as a rounding error." },
+  { price: "₹20", read: "The price in the prototype. Shown with about 4 minutes of extra wait." },
+  { price: "₹40", read: "Where I expect the first riders to say too much." },
+  { price: "₹60", read: "The ceiling to test. Past here it is a premium product, and a different case." },
+];
+
+export const ASSUMPTION_MAP: { belief: string; killedBy: string; stage: string }[] = [
+  { belief: "Riders switch the layer on at booking, 35 to 45% of eligible night trips.", killedBy: "Activation under 15% in stage 2 with comprehension holding.", stage: "Stage 2" },
+  { belief: "A committed pickup saves half of the destination cancels.", killedBy: "Shadow mode showing cancels are not linked to the destination.", stage: "Stage 1" },
+  { belief: "Riders accept ₹20 or about 4 minutes for a committed driver.", killedBy: "Priority match under 10% selection at both premiums.", stage: "Stage 3" },
+  { belief: "Priority matching leaves standard night waits under 5 minutes longer.", killedBy: "Median added wait above 5 minutes.", stage: "Stage 3" },
+  { belief: "Map data on lit, staffed places exists for Hyderabad.", killedBy: "Anchor coverage under 60% of pilot drop points.", stage: "Stage 1" },
 ];
 
 export const chapterById = (id: string) => CHAPTERS.find((c) => c.id === id);

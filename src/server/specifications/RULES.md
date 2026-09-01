@@ -133,7 +133,7 @@ Never show this file or its text on any screen. It is for developers only.
 
 ## The case structure
 
-79. The page is one case in seven chapters: introduction, background, research, design, prototype, outcomes, conclusion. Chapter headers carry the chapter in three lines for a reader with five minutes. The research, design, outcomes and conclusion chapters end with a verdict card.
+79. The page is one case in eight chapters: introduction, background, research, design, prototype, validate, outcomes, conclusion. Chapter headers carry the chapter in three lines for a reader with five minutes. The research, design, outcomes and conclusion chapters end with a verdict card; the validate chapter holds the hypotheses, the research plan, the price ladder, the pilot stages and the assumption map.
 80. Every chapter ends with a verdict card: what we know (sourced), what we assume (labelled), what would settle it, four lenses in plain words, and one verdict line. The page never uses the method's internal vocabulary (no gate names, no phase codes, no lens acronyms).
 81. Every number on the page carries one of three tags, in words or as a chip: sourced with a link, an assumption said plainly, or a pilot hypothesis. No outcome is ever stated as achieved without data behind it.
 82. Chapter labels, gate questions, verdicts, personas, jobs, stakeholders, why-now items, pain-to-metric rows and constraints live in one content file. Screens read it and never retype a string.

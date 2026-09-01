@@ -16,10 +16,11 @@ import { OptionsWeighed, Doblin, NotList, HowWeGotHere } from "@/components/case
 import { NoPilotNote, MetricTree, RevenueModel, ValueLogic, BusinessModelCanvas, PilotPlan, Squad } from "@/components/case/Gate3";
 import { Roadmap, TheAsk, Impact, CaseInSixty, AboutThisCase } from "@/components/case/Gate4";
 import { TheBrain, Methods, Iterations, Lessons, TalkToMe } from "@/components/case/Story";
+import { Hypotheses, ResearchPlan, PriceLadder, AssumptionMap } from "@/components/case/Validate";
 import { GATE_1, GATE_2, GATE_3, GATE_4 } from "@/content/case";
 
-/* The page is the case, in seven chapters: introduction, background,
-   research, design, prototype, outcomes, conclusion. Four of them close
+/* The page is the case, in eight chapters: introduction, background,
+   research, design, prototype, validate, outcomes, conclusion. Four of them close
    with a verdict card. One person wrote and built all of it. */
 export default function Home() {
   return (
@@ -103,10 +104,18 @@ export default function Home() {
           </Container>
         </Chapter>
 
-        {/* 6. Testing and outcomes: the test design, the metrics, the money, the lessons */}
+        {/* 6. Validate: hypotheses, who to talk to, the price ladder, the pilot stages, the assumptions */}
+        <Chapter id="validate">
+          <Hypotheses />
+          <ResearchPlan />
+          <PriceLadder />
+          <PilotPlan />
+          <AssumptionMap />
+        </Chapter>
+
+        {/* 7. Outcomes: what the pilot would read out, the money, the lessons */}
         <Chapter id="outcomes">
           <NoPilotNote />
-          <PilotPlan />
           <MetricTree />
           <RevenueModel />
           <ValueLogic />
@@ -115,7 +124,7 @@ export default function Home() {
           <GateCard gate={GATE_3} />
         </Chapter>
 
-        {/* 7. Conclusion and recommendations */}
+        {/* 8. Conclusion and recommendations */}
         <Chapter id="conclusion" className="pb-14 sm:pb-24">
           <CaseInSixty />
           <TheAsk />

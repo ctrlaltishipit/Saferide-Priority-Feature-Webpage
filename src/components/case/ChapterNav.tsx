@@ -61,6 +61,12 @@ export const CHAPTER_ICONS: Record<string, ReactNode> = {
       <path d="M10 18h4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
     </svg>
   ),
+  validate: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9 3h6M10 3v6l-5.5 9.5A1.5 1.5 0 006 21h12a1.5 1.5 0 001.3-2.3L14 9V3" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8.5 15h7" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+    </svg>
+  ),
   outcomes: (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M4 20h16" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
