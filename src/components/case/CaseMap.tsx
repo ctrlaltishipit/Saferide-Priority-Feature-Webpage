@@ -14,7 +14,7 @@ export default function CaseMap() {
         lede="A business case is an argument built from evidence. Each chapter answers one question and ends with a verdict. Jump in anywhere."
       />
       <ol className="m-0 grid list-none gap-2.5 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
-        {CHAPTERS.map((c) => {
+        {CHAPTERS.filter((c) => c.id !== "prototype").map((c) => {
           const live = c.status === "live";
           const inner = (
             <>
