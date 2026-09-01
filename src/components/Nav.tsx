@@ -94,11 +94,13 @@ export default function Nav() {
 
         {/* the pill, always top right */}
         <a
-          href="#prototype"
+          href="https://saferide-priority-app.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
           className="col-start-3 hidden whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[11px] font-bold text-black min-[380px]:inline-block transition-all duration-200 hover:bg-brand hover:text-white hover:shadow-[0_6px_20px_rgba(39,110,241,.45)] md:px-4 md:text-[13px]"
         >
-          <span className="md:hidden">Try it</span>
-          <span className="hidden md:inline">Try the prototype</span>
+          <span className="md:hidden">Try the app</span>
+          <span className="hidden md:inline">Try the pilot app</span>
         </a>
       </nav>
     </header>

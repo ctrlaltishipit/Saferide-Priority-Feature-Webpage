@@ -110,6 +110,18 @@ export default function Prototype() {
 
         {/* demo controls */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
+          <a
+            href="https://saferide-priority-app.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-[12.5px] font-bold text-black transition-all hover:bg-brand hover:text-white hover:shadow-[0_8px_24px_rgba(39,110,241,.45)]"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="7" y="2.5" width="10" height="19" rx="2.5" stroke="currentColor" strokeWidth="2" />
+              <path d="M11 18h2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+            Try the pilot app on your phone
+          </a>
           <button
             type="button"
             onClick={startTour}
