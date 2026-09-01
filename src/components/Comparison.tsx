@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import { Reveal } from "./ui";
+import { JOBS } from "@/content/case";
 
-/* Interactive before/after: what one toggle changes about a late-night booking. */
+/* Interactive before/after: the six jobs a rider does by hand tonight, and
+   what one toggle changes about each. Row labels are the job statements
+   from the shared content file, so the Jobs block and this table agree. */
+
+const jobLabel = (i: number) => `${JOBS[i].when}, ${JOBS[i].want}.`;
 
 const ROWS: {
   label: string;
@@ -13,42 +18,42 @@ const ROWS: {
   onIcon: "auto";
 }[] = [
   {
-    label: "Understanding trip conditions",
+    label: jobLabel(0),
     off: "You guess, or ask a friend who knows the area.",
     on: "Contextual Safety Brief with plain reasons and a confidence meter.",
     offIcon: "risk",
     onIcon: "auto",
   },
   {
-    label: "Telling someone you're on the way",
+    label: jobLabel(1),
     off: "Manually share a link, then remember to update the group chat.",
     on: "Safety Circle auto-shares under your saved policy, links expire in 30 min.",
     offIcon: "manual",
     onIcon: "auto",
   },
   {
-    label: "Choosing where to get dropped",
+    label: jobLabel(2),
     off: "You remember too late that the lane is dark and empty.",
     on: "Safer Anchors suggests staffed, well-lit points 180 to 300 m away, before booking.",
     offIcon: "risk",
     onIcon: "auto",
   },
   {
-    label: "Choosing who drives",
+    label: jobLabel(3),
     off: "A star rating is all you have to go on.",
     on: "Safety Priority Match: audited eligibility signals, trade-off shown up front.",
     offIcon: "none",
     onIcon: "auto",
   },
   {
-    label: "Getting the cab to actually come",
+    label: jobLabel(4),
     off: "Drivers cancel when they hear the destination, and the night search drags on.",
     on: "A committed pickup: the driver accepts before you see the match. A cancel means an instant first-in-line rematch.",
     offIcon: "none",
     onIcon: "auto",
   },
   {
-    label: "After you arrive",
+    label: jobLabel(5),
     off: "\"Reached?\" texts, until someone forgets to send one.",
     on: "A quiet check-in 5 minutes after the trip. Neutral note if you don't respond.",
     offIcon: "manual",
@@ -80,17 +85,18 @@ function OffIcon({ kind }: { kind: "manual" | "none" | "risk" }) {
 }
 
 export default function Comparison() {
-  const [on, setOn] = useState(true);
+  const [on, setOn] = useState(false);
 
   return (
     <div className="mt-14 sm:mt-24">
-      <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">BEFORE / AFTER</div>
+      <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">SIX JOBS, ONE TOGGLE</div>
       <h2 className="m-0 mb-2 text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] md:whitespace-nowrap">
-        The difference one toggle makes.
+        The jobs she does by hand tonight.
       </h2>
       <p className="mb-7 max-w-[620px] text-[15px] leading-[1.6] text-ink-soft">
-        Same rider, same 12:15 AM trip from HITEC City. Flip the toggle to compare tonight&apos;s manual
-        safety plan with the SafeRide Priority flow.
+        Same rider, same 12:15 AM trip from HITEC City. Each row is one of the six jobs from
+        chapter 1. It starts as tonight looks. Flip the toggle to see how SafeRide Priority does
+        each job.
       </p>
 
       {/* the toggle */}

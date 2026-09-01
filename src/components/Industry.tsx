@@ -129,7 +129,7 @@ function FlipStat({ s, delay }: { s: (typeof MARKET)[number]; delay: number }) {
 }
 
 /* TAM / SAM / SOM as nested layers. Pure HTML, responsive by default. */
-const FUNNEL: { tag: string; title: string; text: string }[] = [
+const FUNNEL: { tag: string; title: string; text: string; srcName?: string; srcUrl?: string }[] = [
   {
     tag: "TAM",
     title: "India ride-hailing",
@@ -143,7 +143,9 @@ const FUNNEL: { tag: string; title: string; text: string }[] = [
   {
     tag: "SOM",
     title: "Hyderabad after dark, the pilot",
-    text: "A top 3 Uber city of 11.3 million people. Hyderabad police's T-Safe monitored 36,000 rides in its first year, so paid-nothing demand for watched night travel is already proven here.",
+    text: "A top 3 Uber city of 11.3 million people. Hyderabad police's T-Safe monitored 36,000 rides in its first year, so demand for watched night travel is already proven here.",
+    srcName: "Telangana Today on T-Safe",
+    srcUrl: "https://telanganatoday.com/explainer-what-is-t-safe-and-how-to-use-it",
   },
 ];
 
@@ -157,7 +159,22 @@ function FunnelHead({ i, tagCls, textCls }: { i: number; tagCls: string; textCls
         </span>
         <span className="text-[15.5px] font-extrabold tracking-[-0.3px]">{f.title}</span>
       </div>
-      <p className={`m-0 mt-1.5 max-w-[720px] text-[13px] leading-[1.55] ${textCls}`}>{f.text}</p>
+      <p className={`m-0 mt-1.5 max-w-[720px] text-[13px] leading-[1.55] ${textCls}`}>
+        {f.text}
+        {f.srcUrl && (
+          <>
+            {" "}
+            <a
+              href={f.srcUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whitespace-nowrap text-[11.5px] font-bold underline decoration-current/40 underline-offset-2 hover:decoration-current"
+            >
+              {f.srcName} ↗
+            </a>
+          </>
+        )}
+      </p>
     </>
   );
 }
@@ -185,7 +202,7 @@ const PLAYERS: {
 }[] = [
   {
     name: "Uber India",
-    note: "The deepest in-ride toolkit of the three.",
+    note: "The baseline this case is measured against. The deepest in-ride toolkit of the three.",
     srcUrl: "https://www.uber.com/en-IN/newsroom/uber-introduces-new-features-to-elevate-safety",
     items: [
       { t: "Trip PIN before boarding", when: "at pickup" },
@@ -262,12 +279,13 @@ function PlayerCard({ p, delay }: { p: (typeof PLAYERS)[number]; delay: number }
   );
 }
 
+/* The white space, with the structural reason it persists. The timing
+   argument (fines, T-Safe, the US-only driver preference) lives in the
+   Why now block of chapter 1. */
 const FIT: string[] = [
   "Almost every tool above starts working after the car does. The minutes before booking stay empty, and that is exactly where SafeRide Priority lives.",
-  "Regulators now fine drivers who cancel, 10% of the fare capped at ₹100. A penalty after the fact still leaves the rider on the kerb. A committed pickup removes the cancel before it happens.",
-  "Riders in the US can now ask to match with a woman driver. Riders in India cannot yet. The Female rider toggle and priority match close that gap at booking time.",
+  "The gap persists for a structural reason: each app added safety tools one switch at a time, and no team owns the moment before the booking. Sequencing those switches into one flow is a product job, and none of the three has done it.",
   "Hyderabad police built T-Safe and have said they want cab apps to plug into it. SafeRide's tracking link and circle SMS are shaped to be that bridge.",
-  "Telangana records 117.6 crimes against women per lakh, close to double the national rate. The pilot city is the one that needs this first.",
 ];
 
 export default function Industry() {

@@ -365,10 +365,67 @@ const DIFFERENT: string[] = [
   "It is an add-on for the moments that matter most: a late shift, an emergency, a hospital run, a night you simply need the ride to come. One tap says why you ride, and emergency, medical and urgent trips can switch it on at any hour, day or night. The rider stays in charge, and every share, match and anchor is her explicit choice.",
 ];
 
+/* The concept on one page: why, what, how, and how it differs from what
+   ships today. Rendered in chapter 2, where the solution starts. */
+export function ConceptOnePage() {
+  return (
+    <div>
+      <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">THE CONCEPT ON ONE PAGE</div>
+      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+        A decision layer that runs
+        <br />
+        before the booking.
+      </h2>
+      <p className="mb-8 max-w-[640px] text-base leading-[1.65] text-ink-soft [text-wrap:pretty]">
+        The SOS button and every tool Uber ships today stay exactly where they are. SafeRide
+        Priority sits in front of them: one toggle at booking that plans the trip, commits the
+        driver, tells the right people, and closes the loop when you arrive.
+      </p>
+
+      {/* Why, what, how */}
+      <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
+        {OBJECTIVES.map((o, i) => (
+          <div key={o.label} className="sticky sm:static" style={{ top: 64 + i * 8, zIndex: i + 1 }}>
+            <Reveal delay={i * 0.08} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-line bg-mist p-6">
+                <div className="flex items-center gap-2.5 text-brand">
+                  {o.icon}
+                  <span className="text-[11px] font-bold tracking-[1.8px]">{o.label}</span>
+                </div>
+                <div className="mt-3 text-[17px] font-extrabold tracking-[-0.3px]">{o.title}</div>
+                <p className="m-0 mt-2 text-[13.5px] leading-[1.6] text-ink-soft">{o.text}</p>
+              </div>
+            </Reveal>
+          </div>
+        ))}
+      </div>
+
+      {/* How this is different from what already exists */}
+      <Reveal className="mt-5">
+        <div className="rounded-2xl border border-line bg-white p-6 sm:p-8">
+          <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">
+            HOW THIS IS DIFFERENT FROM TODAY&apos;S SAFETY FEATURES
+          </div>
+          <ul className="m-0 mt-4 grid list-none gap-4 p-0 sm:grid-cols-2">
+            {DIFFERENT.map((d, i) => (
+              <li key={i} className="flex gap-3 text-[13.5px] leading-[1.6] text-ink-soft">
+                <span className="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-brand text-[11px] font-extrabold text-white">
+                  {i + 1}
+                </span>
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+    </div>
+  );
+}
+
 export default function Evidence() {
   return (
     <div className="mt-14 sm:mt-24">
-      <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">THE EVIDENCE</div>
+      <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">THE PROOF</div>
       <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
         The same headline,
         <br />
@@ -444,43 +501,6 @@ export default function Evidence() {
               will come at all.
             </p>
           </div>
-        </div>
-      </Reveal>
-
-      {/* Why, what, how */}
-      <div className="mt-5 grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
-        {OBJECTIVES.map((o, i) => (
-          <div key={o.label} className="sticky sm:static" style={{ top: 72 + i * 8, zIndex: i + 1 }}>
-            <Reveal delay={i * 0.08} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-line bg-mist p-6">
-                <div className="flex items-center gap-2.5 text-brand">
-                  {o.icon}
-                  <span className="text-[11px] font-bold tracking-[1.8px]">{o.label}</span>
-                </div>
-                <div className="mt-3 text-[17px] font-extrabold tracking-[-0.3px]">{o.title}</div>
-                <p className="m-0 mt-2 text-[13.5px] leading-[1.6] text-ink-soft">{o.text}</p>
-              </div>
-            </Reveal>
-          </div>
-        ))}
-      </div>
-
-      {/* How this is different from what already exists */}
-      <Reveal className="mt-5">
-        <div className="rounded-2xl border border-line bg-white p-6 sm:p-8">
-          <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">
-            HOW THIS IS DIFFERENT FROM TODAY&apos;S SAFETY FEATURES
-          </div>
-          <ul className="m-0 mt-4 grid list-none gap-4 p-0 sm:grid-cols-2">
-            {DIFFERENT.map((d, i) => (
-              <li key={i} className="flex gap-3 text-[13.5px] leading-[1.6] text-ink-soft">
-                <span className="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-brand text-[11px] font-extrabold text-white">
-                  {i + 1}
-                </span>
-                {d}
-              </li>
-            ))}
-          </ul>
         </div>
       </Reveal>
     </div>

@@ -130,3 +130,12 @@ Never show this file or its text on any screen. It is for developers only.
 76. Every section, card, diagram and prototype must read cleanly on both mobile and web, on any screen size. Nothing ever needs sideways scrolling.
 77. The interactive prototype phones scale to the viewer's window. The section heading, the phone and the step list share one view with a little air below, and the user never scrolls to see the bottom half of the phone.
 78. The user gives custom instructions per SVG or feature. Everything else defaults to clean and responsive on both versions.
+
+## The case structure
+
+79. The page is one case in four chapters, one per gate: the problem, the solution, the money, the case. The interactive prototype sits right after the solution chapter as its evidence.
+80. Every chapter ends with a gate card: what we know (sourced), what we assume (labelled), what would clear the gate, four lenses in plain words, and one verdict line. The card never uses internal checklist vocabulary.
+81. Every number on the page carries one of three tags, in words or as a chip: sourced with a link, an assumption said plainly, or a pilot hypothesis. No outcome is ever stated as achieved without data behind it.
+82. Chapter labels, gate questions, verdicts, personas, jobs, stakeholders, why-now items, pain-to-metric rows and constraints live in one content file. Screens read it and never retype a string.
+83. The header is one row and 50 pixels tall. Every anchor target carries a scroll margin of 50 pixels so it lands under the header. On web the chapter names sit centred in the header as text; on phones they are icons with a label that pops up on tap.
+84. Chapters that are not built yet appear in the case map as coming next, with no link, and stay out of the header.

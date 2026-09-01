@@ -105,7 +105,7 @@ const FLOW_META = [
 
 export default function FlowCards() {
   return (
-    <section id="flow" className="mt-16 bg-black py-12 text-white sm:mt-[100px] sm:py-[76px]">
+    <section id="flow" className="mt-16 scroll-mt-[50px] bg-black py-12 text-white sm:mt-[100px] sm:py-[76px]">
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-end justify-between gap-4 px-5">
         <div>
           <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">THE FLOW</div>

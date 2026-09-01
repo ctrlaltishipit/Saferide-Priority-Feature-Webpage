@@ -9,14 +9,21 @@ import {
   ResponsibleAI,
   Architecture,
 } from "@/components/Sections";
-import Evidence from "@/components/Evidence";
+import Evidence, { ConceptOnePage } from "@/components/Evidence";
 import Industry from "@/components/Industry";
 import Comparison from "@/components/Comparison";
 import FlowCards from "@/components/FlowCards";
 import FeatureStack from "@/components/FeatureStack";
 import Prototype from "@/components/prototype/Prototype";
 import Footer from "@/components/Footer";
+import CaseMap from "@/components/case/CaseMap";
+import { Chapter, Container, GateCard, SectionHeader } from "@/components/case/primitives";
+import { WhoDecides, Personas, Jobs, WhyNow, GapToMetric, Constraints } from "@/components/case/Gate1";
+import { GATE_1, GATE_2 } from "@/content/case";
 
+/* The page is the case. Four chapters, one per gate, with the prototype
+   sitting right after chapter 2 as its evidence. Chapters 3 and 4 arrive
+   in later phases; the case map shows them as coming next until then. */
 export default function Home() {
   return (
     <div className="overflow-x-clip">
@@ -25,26 +32,47 @@ export default function Home() {
       <main>
         <Hero />
         <Ticker />
-        <div id="case-study" className="mx-auto max-w-[1240px] px-5 pt-12 sm:pt-20">
-          <Stats />
+        <CaseMap />
+
+        {/* Chapter 1: the problem (Gate 1) */}
+        <Chapter id="problem">
+          <WhoDecides />
+          <div className="mt-14 sm:mt-24">
+            <Stats />
+          </div>
           <Problem />
+          <Personas />
+          <Jobs />
           <Evidence />
           <Industry />
-          <Comparison />
-          <DecisionEngine />
-        </div>
-        <FlowCards />
-        <div id="features" className="mx-auto max-w-[1240px] px-5 pt-14 sm:pt-24">
-          <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">
-            THE FEATURE SET
-          </div>
-          <h2 className="m-0 mb-[34px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] md:whitespace-nowrap">
-            Five features, one flow built on consent.
-          </h2>
-          <FeatureStack />
-          <ResponsibleAI />
-          <Architecture />
-        </div>
+          <WhyNow />
+          <GapToMetric />
+          <Constraints />
+          <GateCard gate={GATE_1} />
+        </Chapter>
+
+        {/* Chapter 2: the solution (Gate 2) */}
+        <Chapter id="solution" contained={false}>
+          <Container>
+            <ConceptOnePage />
+            <Comparison />
+            <DecisionEngine />
+          </Container>
+          <FlowCards />
+          <Container id="features" className="pt-14 sm:pt-24">
+            <SectionHeader
+              eyebrow="THE FEATURE SET"
+              title="Five features, one flow built on consent."
+              titleClassName="md:whitespace-nowrap"
+            />
+            <FeatureStack />
+            <ResponsibleAI />
+            <Architecture />
+            <GateCard gate={GATE_2} />
+          </Container>
+        </Chapter>
+
+        {/* The prototype: evidence for chapter 2 */}
         <Prototype />
       </main>
       <Footer />

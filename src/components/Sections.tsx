@@ -76,17 +76,24 @@ const STATS: {
     sourceUrl: "https://www.insightsonindia.com/2025/08/29/nari-2025-report/",
   },
   {
+    big: "82%",
+    text: "of app taxi users say drivers cancel on them, and 74% say it happens after the driver hears the destination.",
+    cls: "bg-brand text-white",
+    textCls: "text-[#D6E4FE]",
+    hintCls: "text-[#B9CEFA]",
+    pillCls: "bg-white text-black",
+    sourceName: "LocalCircles survey · Business Standard, Aug 2026",
+    sourceNote:
+      "A LocalCircles survey of app taxi users found 82% experience driver cancellations and 74% say the cancel follows the driver hearing the destination. 76% back Maharashtra-style penalties.",
+    sourceUrl:
+      "https://www.business-standard.com/india-news/app-taxi-users-back-maharashtra-style-penalty-for-driver-cancellations-126080300462_1.html",
+  },
+  {
     big: "8 PM–5 AM",
-    text: "the window where SafeRide reviews your ride plan. Emergency, medical and urgent trips can use it at any hour of the day.",
+    text: "the hours this case is about, and the window where SafeRide reviews the ride plan. Emergency, medical and urgent trips can use it at any hour.",
     cls: "bg-black text-white",
     textCls: "text-[#A6A6A6]",
     smaller: true,
-  },
-  {
-    big: "< 2 min",
-    text: "to complete the full 7 step safety flow. Built for a stressful moment.",
-    cls: "bg-brand text-white",
-    textCls: "text-[#D6E4FE]",
   },
 ];
 
@@ -354,14 +361,16 @@ export function Problem() {
         </p>
         <p className="mb-5 text-base leading-[1.65] text-ink-soft [text-wrap:pretty]">
           The platform already ships a strong safety toolkit: SOS, trip sharing,
-          RideCheck, trip PINs, audio recording and a 24x7 safety line. The gap
-          is not missing features. The booking flow still leaves riders juggling
-          those tools alone at midnight.
+          RideCheck, trip PINs, audio recording and a 24x7 safety line. The
+          features exist. The booking flow still leaves riders juggling those
+          tools alone at midnight.
         </p>
         <div className="rounded-r-xl border-l-4 border-brand bg-mist px-[18px] py-[15px] text-[14.5px] leading-[1.6]">
-          Late-night riders need a transparent, low-friction way to choose and
-          switch on precautions <strong>before</strong> a ride begins, while
-          staying in control, with no false promises.
+          <div className="mb-1 text-[10.5px] font-bold tracking-[1.4px] text-brand">THE PROBLEM HYPOTHESIS</div>
+          Women should not need to build a safety plan by hand every time they
+          book a late-night ride. The app can turn what it already knows into
+          plain choices <strong>before</strong> the trip begins, with no promise
+          that any system can guarantee her safety.
         </div>
       </Reveal>
       <div>
@@ -707,9 +716,12 @@ function PreRideCheckScene() {
   );
 }
 
+/* The "4 in 10" NARI card lives in the chapter 1 Stats row now, so this
+   strip carries only the two facts that are not shown elsewhere. */
 const INDIA_FACTS = [
   {
     big: "4 in 10",
+    hidden: true,
     text: "women in Indian cities said they feel unsafe, and the feeling grows after dark.",
     src: "NARI 2025 · National Commission for Women",
     note: "The National Annual Report and Index on Women's Safety surveyed 12,770 women across 31 Indian cities.",
@@ -734,7 +746,7 @@ const INDIA_FACTS = [
 export function Architecture() {
   return (
     <Reveal className="mt-12 rounded-2xl bg-mist p-5 sm:mt-20 sm:rounded-3xl sm:p-[clamp(20px,3vw,36px)]">
-      <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">WHY WE BUILT THIS</div>
+      <div className="mb-2 text-xs font-bold tracking-[1.6px] text-ink-faint">WHAT CHANGES IN UBER&apos;S FLOW</div>
       <h2 className="m-0 mb-3 text-[clamp(22px,3vw,36px)] font-extrabold tracking-[-1px]">
         The tools exist. The flow is missing.
       </h2>
@@ -766,7 +778,7 @@ export function Architecture() {
 
       {/* the India numbers behind the decision: flip a card for its source */}
       <div className="mt-4 grid gap-3 sm:mt-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
-        {INDIA_FACTS.map((f, i) => (
+        {INDIA_FACTS.filter((f) => !("hidden" in f && f.hidden)).map((f, i) => (
           <div key={f.big} className="sticky sm:static" style={{ top: 64 + i * 6, zIndex: i + 1 }}>
             <div className="beam h-full">
               <StatCard
@@ -788,25 +800,9 @@ export function Architecture() {
         ))}
       </div>
 
-      {/* what exists today, and what this concept adds on top */}
+      {/* what this concept adds on top of the baseline named in chapter 1 */}
       <div className="mt-3 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
-        <div className="sticky sm:static" style={{ top: 84, zIndex: 4 }}>
-        <div className="h-full rounded-2xl border border-line bg-white p-4">
-          <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-ink-faint">ON UBER INDIA TODAY</div>
-          <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-ink-soft">
-            {["SOS button", "Live trip sharing", "RideCheck", "Trip PIN", "Audio recording", "Women Rider Preference, in select cities"].map((x) => (
-              <li key={x} className="flex items-center gap-2 py-1">
-                <span className="h-1.5 w-1.5 flex-none rounded-full bg-[#C9CED4]" />
-                {x}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-2 text-[12px] font-semibold text-ink-faint">
-            Good tools, each a separate switch, mostly used mid-ride.
-          </div>
-        </div>
-        </div>
-        <div className="sticky sm:static" style={{ top: 90, zIndex: 5 }}>
+        <div>
         <div className="h-full rounded-2xl bg-black p-4 text-white">
           <div className="mb-2 text-[11px] font-bold tracking-[1.2px] text-[#8FB0FF]">WHAT SAFERIDE PRIORITY ADDS</div>
           <ul className="m-0 list-none p-0 text-[13px] leading-[1.5] text-[#D6DCE4]">
