@@ -175,3 +175,56 @@
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ───────────────────── case-study motion helpers ─────────────────────
+   .glow: a gradient border that follows the pointer (desktop hover only).
+   .car: a snap carousel on phones that fades and scales the card in view;
+   from sm up it lays out as an auto-fit grid with no horizontal scroll. */
+.glow { position: relative; }
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(240px circle at var(--gx, 50%) var(--gy, 50%), rgba(39,110,241,.95), rgba(6,193,103,.55) 45%, transparent 72%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .glow:hover::before { opacity: 1; }
+}
+.car {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding: 4px 20px 14px;
+  margin: 0 -20px;
+  scrollbar-width: none;
+}
+.car::-webkit-scrollbar { display: none; }
+.car > * {
+  flex: 0 0 min(78vw, 320px);
+  scroll-snap-align: center;
+  opacity: .55;
+  transform: scale(.96);
+  transition: opacity .45s ease, transform .45s cubic-bezier(.16,1,.3,1);
+}
+.car > .is-on { opacity: 1; transform: none; }
+@media (min-width: 640px) {
+  .car {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--car-min, 250px)), 1fr));
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    gap: 12px;
+  }
+  .car > * { flex: none; opacity: 1; transform: none; }
+}

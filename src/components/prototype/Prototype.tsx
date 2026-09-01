@@ -6,6 +6,13 @@ import PhoneApp, { APP_SCREENS, FLOW_SCREENS, type CircleInfo, type Scenario } f
 import ContactView from "./ContactView";
 import { Reveal, jumpToStep } from "../ui";
 
+/* What each demo scenario means, in one plain sentence. */
+const SCENARIO_MEANING: Record<Scenario, string> = {
+  elevated: "Tonight looks riskier than usual, so the brief suggests extra steps.",
+  lower: "Tonight looks calm, so the brief keeps things simple.",
+  "limited-data": "Too little data to judge, so the brief says so instead of guessing.",
+};
+
 /* One caption per internal step: 0 splash, 1 home, 2 to 8 the 7-step flow. */
 const TOUR: { title: string; text: string }[] = [
   { title: "Every ride starts here", text: "The app the rider already opens every night. SafeRide asks her to download nothing new. It lives inside the flow she trusts. The splash moves on by itself, like the real launch." },
@@ -123,21 +130,32 @@ export default function Prototype() {
             </svg>
             Open full-screen app
           </button>
-          <div className="flex items-center gap-1.5 rounded-full border border-[#2A2A2A] p-1 text-[12px] font-bold">
-            {(["elevated", "lower", "limited-data"] as Scenario[]).map((sc) => (
-              <button
-                key={sc}
-                type="button"
-                onClick={() => setScenario(sc)}
-                className="rounded-full px-2.5 py-1.5 capitalize transition-colors"
-                style={{
-                  background: scenario === sc ? "#FFFFFF" : "transparent",
-                  color: scenario === sc ? "#000000" : "#A6A6A6",
-                }}
-              >
-                {sc === "limited-data" ? "Limited data" : sc}
-              </button>
-            ))}
+          {/* the three demo scenarios, each with a one-line meaning: a pop-up on hover, a line below on phones */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-1.5 rounded-full border border-[#2A2A2A] p-1 text-[12px] font-bold">
+              {(["elevated", "lower", "limited-data"] as Scenario[]).map((sc) => (
+                <button
+                  key={sc}
+                  type="button"
+                  onClick={() => setScenario(sc)}
+                  aria-pressed={scenario === sc}
+                  title={SCENARIO_MEANING[sc]}
+                  className="group relative rounded-full px-2.5 py-1.5 capitalize transition-colors"
+                  style={{
+                    background: scenario === sc ? "#FFFFFF" : "transparent",
+                    color: scenario === sc ? "#000000" : "#A6A6A6",
+                  }}
+                >
+                  {sc === "limited-data" ? "Limited data" : sc}
+                  <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 hidden w-[220px] -translate-x-1/2 rounded-lg bg-white px-3 py-2 text-left text-[11.5px] font-semibold normal-case leading-[1.45] text-black opacity-0 shadow-[0_8px_24px_rgba(0,0,0,.35)] transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block">
+                    {SCENARIO_MEANING[sc]}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="max-w-[280px] px-1 text-[11.5px] leading-[1.45] text-[#A6A6A6] sm:hidden" aria-live="polite">
+              {SCENARIO_MEANING[scenario]}
+            </div>
           </div>
           <label className="flex items-center gap-1.5 rounded-full border border-[#2A2A2A] px-3 py-1.5 text-[12px] font-semibold text-[#A6A6A6]">
             Rider

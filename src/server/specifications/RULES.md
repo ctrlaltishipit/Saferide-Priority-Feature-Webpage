@@ -63,7 +63,7 @@ Never show this file or its text on any screen. It is for developers only.
 ## Why this ride
 
 35. When SafeRide Priority is on, the booking screen asks why the rider is travelling. One tap, never typed.
-36. The reasons are: emergency (personal or accident), medical (hospital or pharmacy run), urgent (cannot wait), work or shift, classes or exams, a train, bus or flight to catch, a family pickup (child or elderly), a late event, travelling alone, or just a ride.
+36. The reasons are: emergency (personal or accident), medical (hospital or pharmacy run), urgent (cannot wait), work or shift, classes or exams, a train, bus or flight to catch, an airport run, a family pickup (child or elderly), a late event, caring for someone, an outstation trip, travelling alone, just a ride, or other. "Other" opens a short free-text box so the rider can say it in her own words; the text stays private like every other reason and sets the standard queue.
 37. The reason sets the queue. Emergency and medical trips go to the top, urgent trips and departure catches ride high priority, every other reason takes the standard priority queue with all SafeRide protections on.
 38. Emergency, medical and urgent trips can use SafeRide at any hour, day or night. Every other reason follows the 8 PM to 5 AM window.
 39. The booking screen shows what the chosen reason buys in plain words: the queue position and the protections. The match screen repeats the queue position, so the rider always sees what she is paying for.

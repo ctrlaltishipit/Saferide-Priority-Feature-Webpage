@@ -66,6 +66,7 @@ export default function ContactView({
 
   const driver = DRIVERS[info?.driverKind ?? "priority"];
   const dropShort = info?.dropShort || "Kondapur";
+  const destination = info?.destination || dropShort;
   const pickup = info?.pickup || "Cyber Towers, HITEC City";
   const bookedTime = info?.time || "12:15 AM";
   const contactName = info?.selNames?.[0] || "Ananya";
@@ -233,17 +234,34 @@ export default function ContactView({
 
           {/* live map fills the free space so nothing sits empty below */}
           <div className="relative min-h-[240px] flex-1 overflow-hidden bg-[#E9EDF0]">
-            <svg viewBox="0 0 402 250" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" aria-label="Live map with the rider's car moving along the route">
+            {/* "meet" keeps the whole route and every label inside the frame on any phone width */}
+            <svg viewBox="0 0 402 250" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet" aria-label="Live map: the car moves from the pickup, past the chosen safer anchor, to the drop">
               <CityMapLayers />
               <path d={MAP_ROUTE_PATH} fill="none" stroke="#C9CED4" strokeWidth="4" strokeLinecap="round" />
               <path d={MAP_ROUTE_PATH} fill="none" stroke="#276EF1" strokeWidth="4" strokeLinecap="round" pathLength={1} strokeDasharray={`${progress} 1`} />
               <CityMapMarkers />
+              {/* pickup */}
+              <g aria-label={`Pickup: ${pickup}`}>
+                <circle cx={ROUTE[0][0]} cy={ROUTE[0][1]} r="7" fill="#000" stroke="#fff" strokeWidth="2" />
+                <rect x={Math.min(Math.max(ROUTE[0][0] - 4, 4), 402 - 124)} y={ROUTE[0][1] - 30} width="120" height="15" rx="7.5" fill="#FFFFFF" opacity=".94" />
+                <text x={Math.min(Math.max(ROUTE[0][0] - 4, 4), 402 - 124) + 60} y={ROUTE[0][1] - 19} textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#111" fontFamily="Helvetica,Arial">
+                  pickup · {pickup.length > 16 ? `${pickup.slice(0, 15)}…` : pickup}
+                </text>
+              </g>
+              {/* drop */}
+              <g aria-label={`Drop: ${destination}`}>
+                <rect x={ROUTE[ROUTE.length - 1][0] - 6} y={ROUTE[ROUTE.length - 1][1] - 6} width="12" height="12" rx="2" fill="#000" stroke="#fff" strokeWidth="2" />
+                <rect x={Math.min(Math.max(ROUTE[ROUTE.length - 1][0] - 100, 4), 402 - 108)} y={ROUTE[ROUTE.length - 1][1] + 12} width="104" height="15" rx="7.5" fill="#FFFFFF" opacity=".94" />
+                <text x={Math.min(Math.max(ROUTE[ROUTE.length - 1][0] - 100, 4), 402 - 108) + 52} y={ROUTE[ROUTE.length - 1][1] + 23} textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#111" fontFamily="Helvetica,Arial">
+                  {anchor ? "drop area" : "drop"} · {destination.length > 14 ? `${destination.slice(0, 13)}…` : destination}
+                </text>
+              </g>
               {anchor && (
                 <g aria-label={`Safer anchor: ${anchor}`}>
                   <circle cx="352" cy="118" r="11" fill="#0E8345" />
                   <path d="M347.5 118l3 3 6-6.5" stroke="#fff" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  <rect x="252" y="98" width="132" height="15" rx="7.5" fill="#FFFFFF" opacity=".92" />
-                  <text x="318" y="109" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">
+                  <rect x="226" y="98" width="132" height="15" rx="7.5" fill="#FFFFFF" opacity=".94" />
+                  <text x="292" y="109" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#0E8345" fontFamily="Helvetica,Arial">
                     anchor · {anchor.length > 20 ? `${anchor.slice(0, 19)}…` : anchor}
                   </text>
                 </g>
@@ -278,6 +296,36 @@ export default function ContactView({
                 Replay trip ↺
               </button>
             )}
+          </div>
+
+          {/* the stops on this trip, in order, so the contact can read where the car is without the map */}
+          <div className="border-t border-line bg-white px-4 py-3">
+            <div className="text-[10px] font-bold tracking-[1.2px] text-ink-faint">THE STOPS ON THIS TRIP</div>
+            <ol className="m-0 mt-2 flex list-none items-center gap-1.5 p-0">
+              {[
+                { label: pickup, kind: "Pickup", at: 0 },
+                { label: destination, kind: anchor ? "Drop area" : "Drop", at: anchor ? 0.9 : 1 },
+                ...(anchor ? [{ label: anchor, kind: "Safer drop", at: 1 }] : []),
+              ].map((stop, i, arr) => {
+                const reached = progress >= stop.at - 0.02;
+                return (
+                  <li key={stop.kind} className="flex min-w-0 flex-1 items-center gap-1.5">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className={`h-2.5 w-2.5 flex-none rounded-full ${reached ? (stop.kind === "Safer drop" ? "bg-[#0E8345]" : "bg-black") : "bg-[#D8DCE0]"}`} />
+                        <span className="text-[10px] font-bold tracking-[0.6px] text-ink-faint">{stop.kind.toUpperCase()}</span>
+                      </div>
+                      <div className={`mt-0.5 truncate text-[11.5px] font-semibold ${reached ? "text-ink" : "text-ink-faint"}`}>{stop.label}</div>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <svg width="14" height="10" viewBox="0 0 14 10" className="flex-none" aria-hidden="true">
+                        <path d="M0 5h11m-4-4l4 4-4 4" stroke={progress >= arr[i + 1].at - 0.02 ? "#276EF1" : "#C9CED4"} strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
           </div>
 
           {/* driver + actions */}

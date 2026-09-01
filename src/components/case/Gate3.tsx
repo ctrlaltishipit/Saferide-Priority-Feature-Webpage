@@ -1,5 +1,7 @@
 import { Reveal } from "../ui";
-import { SectionHeader, Tag } from "./primitives";
+import { SectionHeader, SourceSnippet, Tag } from "./primitives";
+import { Carousel, GlowCard } from "./Motion";
+import { FunnelBars, NorthStarTree, StageTimeline } from "./Figures";
 import {
   BMC,
   COMPLIANCE,
@@ -19,15 +21,15 @@ import {
 } from "@/content/case";
 
 /* ────────────────── Chapter 3: the business model ──────────────────
-   No pilot has run, so this chapter is the shape of the money, with every
+   No pilot has run. This chapter shows the shape of the money, with every
    number tagged for what it is. */
 
 export function NoPilotNote() {
   return (
     <Reveal className="rounded-2xl border border-[#F0DCC8] bg-[#FFF7EC] p-5 text-[14.5px] leading-[1.6] text-[#5A3A00] sm:p-6">
-      <span className="font-extrabold">This chapter has no pilot data.</span> Every target here is a pilot hypothesis,
-      marked as one. Every input to the money model is a sourced figure, a labelled assumption, or a hypothesis. The
-      baselines are Uber&apos;s internal numbers, and the first pilot stage exists to pull them.
+      <span className="font-extrabold">This chapter has no pilot data.</span> Every target is a hypothesis the pilot would
+      test. Every input to the money model is sourced, assumed or a hypothesis, and says which. The baselines are
+      Uber&apos;s own numbers. The first pilot stage pulls them.
     </Reveal>
   );
 }
@@ -37,28 +39,36 @@ export function MetricTree() {
     <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="THE NORTH STAR AND WHAT FEEDS IT"
+        glyph="star"
         title="One number to read every week."
-        lede="A north star should track value delivered, never activity. Under it sit the eight targets the pilot would test, and the six lines that would make us stop."
+        lede="Under it: eight targets the pilot would test, and six lines that would make us stop."
       />
       <Reveal className="beam">
         <div className="rounded-2xl bg-black p-6 text-white sm:p-8">
           <div className="text-[11px] font-bold tracking-[1.8px] text-[#8FB0FF]">NORTH STAR</div>
-          <p className="m-0 mt-2 max-w-[860px] text-[clamp(18px,2.2vw,26px)] font-bold leading-[1.4] tracking-[-0.4px]">
-            {NORTH_STAR.metric}
-          </p>
+          <p className="m-0 mt-2 max-w-[860px] text-[clamp(18px,2.2vw,26px)] font-bold leading-[1.4] tracking-[-0.4px]">{NORTH_STAR.metric}</p>
           <p className="m-0 mt-3 max-w-[760px] text-[13px] leading-[1.6] text-[#A6A6A6]">{NORTH_STAR.note}</p>
+          <div className="mt-5">
+            <NorthStarTree labels={KPIS.map((k) => k.label)} />
+          </div>
         </div>
       </Reveal>
-      <div className="mt-5 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))]">
-        {KPIS.map((k, i) => (
-          <Reveal key={k.label} delay={Math.min(i * 0.04, 0.24)} className="flex h-full flex-col rounded-2xl border border-line bg-white p-5">
-            <div className="text-[11px] font-bold tracking-[1.4px] text-ink-faint">{k.label.toUpperCase()}</div>
-            <div className="mt-1.5 text-[14.5px] font-extrabold leading-[1.4] tracking-[-0.2px]">{k.target}</div>
-            <div className="mt-1.5 text-[12.5px] leading-[1.5] text-ink-soft">{k.why}</div>
-            <Tag kind="hypothesis" className="mt-auto pt-3" />
-          </Reveal>
-        ))}
+
+      {/* one label for the whole grid, so the cards stay clean */}
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <Tag kind="hypothesis" />
+        <span className="text-[13px] font-semibold text-ink-soft">Eight targets the pilot would test. Swipe on a phone, hover on a desktop.</span>
       </div>
+      <Carousel className="mt-3" minWidth={240} ariaLabel="Pilot targets">
+        {KPIS.map((k) => (
+          <GlowCard key={k.label} className="flex h-full flex-col rounded-2xl border border-line bg-white p-5">
+            <div className="text-[11px] font-bold tracking-[1.4px] text-brand">{k.label.toUpperCase()}</div>
+            <div className="mt-1.5 text-[15px] font-extrabold leading-[1.4] tracking-[-0.2px]">{k.target}</div>
+            <div className="mt-2 text-[12.5px] leading-[1.5] text-ink-soft">{k.why}</div>
+          </GlowCard>
+        ))}
+      </Carousel>
+
       <Reveal className="mt-5 rounded-2xl border border-line bg-mist p-5 sm:p-6">
         <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">THE GUARDRAILS, READ WEEKLY</div>
         <ul className="m-0 mt-3 grid list-none gap-x-6 gap-y-2.5 p-0 sm:grid-cols-2">
@@ -81,33 +91,38 @@ export function RevenueModel() {
     <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="THE MONEY MODEL, SHOWN WITH ITS WORKING"
+        glyph="coins"
         title="What one night in Hyderabad could be worth."
-        lede="Two lines of value: the optional priority fee, and the fares that complete because the driver committed. Every input is tagged. The rupee range is an order of magnitude to argue with, never a forecast."
+        lede="Two lines of value: the optional fee, and fares that complete because the driver committed. Every input wears its tag. The range is something to argue with, no more."
       />
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
         <Reveal className="rounded-2xl border border-line bg-white p-5 sm:p-6">
           <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">THE INPUTS</div>
           <ul className="m-0 mt-3 flex list-none flex-col gap-2.5 p-0">
             {REVENUE_INPUTS.map((r) => (
-              <li key={r.label} className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-line-soft pb-2 text-[13px] last:border-0 last:pb-0" style={{ borderColor: "#EFEFEF" }}>
+              <li key={r.label} className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b pb-2 text-[13px] last:border-0 last:pb-0" style={{ borderColor: "#EFEFEF" }}>
                 <span className="text-ink-soft">{r.label}</span>
                 <span className="flex items-center gap-2 font-extrabold">
                   {r.value}
-                  {r.url ? (
-                    <a href={r.url} target="_blank" rel="noopener noreferrer" className="text-[10.5px] font-bold text-brand">
-                      Source ↗
-                    </a>
-                  ) : (
-                    <Tag kind={r.kind} />
-                  )}
+                  <Tag kind={r.kind} />
                 </span>
               </li>
             ))}
           </ul>
+          {REVENUE_INPUTS[0].url && <SourceSnippet url={REVENUE_INPUTS[0].url} compact className="mt-4" />}
         </Reveal>
         <div className="flex flex-col gap-3">
           <Reveal className="rounded-2xl border border-line bg-white p-5 sm:p-6">
             <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">THE WORKING</div>
+            <div className="mt-3">
+              <FunnelBars
+                rows={[
+                  { label: "Night trips, Hyderabad", range: REVENUE_LINES[0].range, share: 1 },
+                  { label: "Layer switched on", range: REVENUE_LINES[1].range, share: 0.42 },
+                  { label: "Priority match chosen", range: REVENUE_LINES[2].range, share: 0.09 },
+                ]}
+              />
+            </div>
             <ul className="m-0 mt-3 flex list-none flex-col gap-2.5 p-0">
               {REVENUE_LINES.map((l) => (
                 <li key={l.label} className="grid gap-x-3 gap-y-0.5 text-[13px] sm:grid-cols-[1.3fr_1fr_auto]">
@@ -130,7 +145,7 @@ export function RevenueModel() {
         </div>
       </div>
       <div className="mt-3 text-xs text-[#A6A6A6]">
-        Willingness to pay is untested. Pilot stage 3 splits the cohort: half sees the extra minutes, half sees the extra rupees, and the readout says which one riders accept.
+        What riders will pay is untested. Stage 3 splits the cohort: half sees extra minutes, half sees extra rupees. The readout says which one they accept.
       </div>
     </div>
   );
@@ -141,15 +156,18 @@ export function ValueLogic() {
     <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="THE VALUE, AGAINST THE BASELINE"
+        glyph="levers"
         title="Three levers, two things that could go wrong."
-        lede="For a feature inside a live product, the money story is a delta: which metric moves, against today's Uber. And an honest case names the two ways a feature like this can hurt the product it sits in."
+        lede="Inside a live product, the money story is a delta against today's numbers. It also names how the feature could hurt the product it sits in."
       />
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
         {VALUE_LEVERS.map((v, i) => (
-          <Reveal key={v.label} delay={i * 0.06} className="flex h-full flex-col rounded-2xl border border-line bg-mist p-5">
-            <div className="text-[11px] font-bold tracking-[1.8px] text-brand">{v.label.toUpperCase()}</div>
-            <p className="m-0 mt-2 text-[14px] leading-[1.55]">{v.line}</p>
-            <div className="mt-auto pt-3 text-[12px] text-ink-faint">Read on: {v.metric}</div>
+          <Reveal key={v.label} delay={i * 0.06} className="h-full">
+            <GlowCard className="flex h-full flex-col rounded-2xl border border-line bg-mist p-5">
+              <div className="text-[11px] font-bold tracking-[1.8px] text-brand">{v.label.toUpperCase()}</div>
+              <p className="m-0 mt-2 text-[14px] leading-[1.55]">{v.line}</p>
+              <div className="mt-auto pt-3 text-[12px] text-ink-faint">Read on: {v.metric}</div>
+            </GlowCard>
           </Reveal>
         ))}
       </div>
@@ -175,39 +193,41 @@ export function BusinessModelCanvas() {
     <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="THE BUSINESS MODEL ON ONE CANVAS"
+        glyph="canvas"
         title="Nine blocks, each marked by how sure we are."
-        lede="The canvas is where the parts of a case prove they fit each other. Every block carries a tag: evidenced by public data, a design answer, an assumption, or unknown until the pilot. A blank block would be unpriced risk, so none is blank."
+        lede="Where the parts of the case prove they fit. Every block carries a tag: evidenced, a design answer, assumed, or unknown until the pilot."
       />
       <Reveal>
         {/* one column on phones; the classic nine-block layout from sm up, placed by named areas */}
         <style>{`@media (min-width: 640px){ .bmc-grid { grid-template-columns: repeat(10, 1fr); grid-template-areas: ${BMC_AREAS}; } ${BMC.map((b) => `.bmc-grid > [data-area="${b.area}"] { grid-area: ${b.area}; }`).join(" ")} }`}</style>
         <div className="bmc-grid grid gap-2.5">
           {BMC.map((b) => {
-              const c = CONFIDENCE[b.conf];
-              const vp = b.area === "vp";
-              return (
-                <div
-                  key={b.area}
-                  data-area={b.area}
-                  className={`flex flex-col rounded-2xl border p-4 ${vp ? "border-brand bg-[rgba(39,110,241,.05)]" : "border-line bg-white"}`}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="text-[11px] font-bold tracking-[1.4px] text-ink-faint">{b.title.toUpperCase()}</div>
-                    <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-line px-2 py-0.5 text-[9.5px] font-extrabold tracking-[0.6px] text-ink-soft">
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: c.color }} aria-hidden="true" />
-                      {c.label.toUpperCase()}
-                    </span>
-                  </div>
-                  <ul className="m-0 mt-2 flex list-none flex-col gap-1.5 p-0 text-[13px] leading-[1.5] text-ink-soft">
-                    {b.items.map((it) => (
-                      <li key={it} className={vp ? "font-semibold text-ink" : ""}>
-                        {it}
-                      </li>
-                    ))}
-                  </ul>
+            const c = CONFIDENCE[b.conf];
+            const vp = b.area === "vp";
+            return (
+              <GlowCard
+                key={b.area}
+                className={`flex flex-col rounded-2xl border p-4 ${vp ? "border-brand bg-[rgba(39,110,241,.05)]" : "border-line bg-white"}`}
+                style={undefined}
+              >
+                <div data-area={b.area} className="contents" />
+                <div className="flex items-start justify-between gap-2">
+                  <div className="text-[11px] font-bold tracking-[1.4px] text-ink-faint">{b.title.toUpperCase()}</div>
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-line px-2 py-0.5 text-[9.5px] font-extrabold tracking-[0.6px] text-ink-soft">
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: c.color }} aria-hidden="true" />
+                    {c.label.toUpperCase()}
+                  </span>
                 </div>
-              );
-            })}
+                <ul className="m-0 mt-2 flex list-none flex-col gap-1.5 p-0 text-[13px] leading-[1.5] text-ink-soft">
+                  {b.items.map((it) => (
+                    <li key={it} className={vp ? "font-semibold text-ink" : ""}>
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </GlowCard>
+            );
+          })}
         </div>
       </Reveal>
     </div>
@@ -219,12 +239,16 @@ export function PilotPlan() {
     <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="THE PILOT, AND THE STAGES AFTER IT"
+        glyph="path"
         title="Five stages. Money and permission unlock on evidence."
-        lede={`${PILOT.city}: ${PILOT.corridors}. ${PILOT.cohort} ${PILOT.duration} Stage one shows riders nothing at all. It exists to pull the baseline every later claim is measured against.`}
+        lede={`${PILOT.city}: ${PILOT.corridors}. ${PILOT.cohort} ${PILOT.duration}`}
       />
-      <ol className="m-0 grid list-none gap-3 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))]">
-        {STAGES.map((s, i) => (
-          <Reveal key={s.n} delay={i * 0.06} className={`flex h-full flex-col rounded-2xl border p-4 ${s.n === 1 || s.n === 2 || s.n === 3 ? "border-brand bg-white" : "border-line bg-mist"}`}>
+      <Reveal className="mb-4 rounded-2xl border border-line bg-white p-3 sm:p-5">
+        <StageTimeline names={STAGES.map((s) => s.name)} />
+      </Reveal>
+      <Carousel minWidth={210} ariaLabel="Pilot stages">
+        {STAGES.map((s) => (
+          <GlowCard key={s.n} className={`flex h-full flex-col rounded-2xl border p-4 ${s.n >= 1 && s.n <= 3 ? "border-brand bg-white" : "border-line bg-mist"}`}>
             <div className="flex items-center justify-between">
               <span className={`flex h-7 w-7 items-center justify-center rounded-full text-[12px] font-extrabold ${s.n === 0 ? "bg-black text-white" : "bg-brand text-white"}`}>{s.n}</span>
               <span className="text-[10.5px] font-bold tracking-[0.8px] text-ink-faint">{s.weeks.toUpperCase()}</span>
@@ -235,11 +259,11 @@ export function PilotPlan() {
               <div className="text-[10.5px] font-bold tracking-[1.2px] text-ink-faint">WHAT IT PROVES</div>
               <p className="m-0 mt-0.5 text-[12.5px] leading-[1.5]">{s.proves}</p>
             </div>
-          </Reveal>
+          </GlowCard>
         ))}
-      </ol>
+      </Carousel>
       <div className="mt-3 text-xs text-[#A6A6A6]">
-        Product requirements the pilot ships with: the brief returns in under a second, the safety entry points stay available, and the flow reads in English, Telugu and Hindi.
+        The pilot ships with a brief that returns in under a second, safety entry points that stay available, and copy in English, Telugu and Hindi.
       </div>
     </div>
   );
@@ -250,18 +274,19 @@ export function Squad() {
     <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="THE SQUAD, AND WHO KEEPS IT HONEST"
+        glyph="team"
         title="Eight roles, most of them borrowed."
-        lede="A pilot inside a live product does not hire a company. It borrows. Here is what the eight weeks need, who covers each part, and the reviews that run on a calendar so nobody has to remember them."
+        lede="A pilot inside a live product borrows more than it hires. What the eight weeks need, who covers it, and the reviews on the calendar."
       />
-      <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))]">
+      <Carousel minWidth={270} ariaLabel="The squad">
         {SQUAD.map((r, i) => (
-          <Reveal key={r.role} delay={Math.min(i * 0.04, 0.24)} className={`flex h-full flex-col rounded-2xl border p-5 ${i === 0 ? "border-brand bg-[rgba(39,110,241,.04)]" : "border-line bg-white"}`}>
+          <GlowCard key={r.role} className={`flex h-full flex-col rounded-2xl border p-5 ${i === 0 ? "border-brand bg-[rgba(39,110,241,.04)]" : "border-line bg-white"}`}>
             <div className="text-[14.5px] font-extrabold tracking-[-0.2px]">{r.role}</div>
             <p className="m-0 mt-1.5 text-[13px] leading-[1.5] text-ink-soft">{r.covers}</p>
             <div className={`mt-auto pt-3 text-[12.5px] leading-[1.5] ${i === 0 ? "font-semibold text-brand" : "text-ink-faint"}`}>{r.source}</div>
-          </Reveal>
+          </GlowCard>
         ))}
-      </div>
+      </Carousel>
       <div className="mt-5 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
         <Reveal className="rounded-2xl border border-line bg-mist p-5">
           <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">THE REVIEWS ON THE CALENDAR</div>

@@ -9,22 +9,41 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SafeRide Priority · Uber feature concept",
-  description:
-    "A safety and reliability layer for the Uber rider app: contextual guidance, live trip sharing with trusted contacts, safer pickup and drop points, and a vetted driver who commits to the pickup on late-night rides. Independent portfolio concept. Not affiliated with Uber.",
-  keywords: [
-    "SafeRide Priority",
-    "ride hailing safety",
-    "late night cab safety",
-    "product design case study",
-    "Uber feature concept",
-  ],
-  openGraph: {
-    title: "SafeRide Priority: The late-night ride, planned safer.",
-    description:
-      "A product design case study on women's safety in ride hailing. Walk the 7-step interactive prototype.",
-    type: "website",
+  metadataBase: new URL("https://saferidepriorityuber.vercel.app"),
+  title: {
+    default: "SafeRide Priority: a women's safety layer for late-night Uber rides in India",
+    template: "%s · SafeRide Priority",
   },
+  description:
+    "A product management case study: women's safety and cab reliability for late-night rides in Hyderabad. Real evidence, four chapters (problem, solution, business model, ask), an 8-screen interactive prototype, and a pilot plan with labelled assumptions. An independent concept with no affiliation to Uber.",
+  keywords: [
+    "women safety ride hailing India",
+    "late night cab safety Hyderabad",
+    "Uber safety feature concept",
+    "product manager case study",
+    "business case for a feature",
+    "committed pickup driver cancellation",
+    "trusted contact trip sharing",
+    "safer drop point",
+    "T-Safe Hyderabad",
+    "interactive prototype PM portfolio",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "SafeRide Priority: the late-night ride, planned safer.",
+    description:
+      "Every night, she builds her own safety plan. A PM case study with real evidence, a business model with labelled assumptions, and an 8-screen interactive prototype.",
+    type: "website",
+    url: "/",
+    siteName: "SafeRide Priority",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SafeRide Priority: the late-night ride, planned safer.",
+    description: "A women's safety and reliability layer for late-night cab rides in Hyderabad. Case study and interactive prototype.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {

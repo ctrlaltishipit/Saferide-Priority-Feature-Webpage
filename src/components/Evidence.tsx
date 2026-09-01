@@ -208,29 +208,25 @@ const SHOTS: Shot[] = [
 
 function ShotCard({ s, delay, onOpen }: { s: Shot; delay: number; onOpen: (s: Shot) => void }) {
   return (
-    <Reveal delay={delay} className="mb-4 [break-inside:avoid]">
+    <Reveal delay={delay} className="h-full">
       <button
         type="button"
         onClick={() => onOpen(s)}
-        className="group block w-full cursor-zoom-in rounded-2xl border border-line bg-white p-2 text-left shadow-[0_2px_10px_rgba(0,0,0,0.04)]"
+        className="group flex h-full w-full cursor-zoom-in flex-col rounded-2xl border border-line bg-white p-2 text-left shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_14px_34px_rgba(0,0,0,.08)]"
         aria-label={`Open the full screenshot. ${s.alt}`}
       >
-        <span className={`relative block overflow-hidden rounded-xl ${s.tall ? "max-h-[340px]" : ""}`}>
+        {/* every card gets the same image box, so rows align top and bottom */}
+        <span className="relative block h-[300px] overflow-hidden rounded-xl bg-white">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={s.img} alt={s.alt} loading="lazy" className="block w-full" />
-          {s.tall && (
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent"
-            />
-          )}
+          <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
         </span>
         <span className="mt-2 flex items-center justify-between px-1 pb-1">
           <span className="rounded-full bg-mist px-2.5 py-1 text-[10px] font-bold tracking-[0.3px] text-ink-faint">
             {APP_CHIP[s.app]} · {s.store}
           </span>
           <span className="text-[11px] font-bold text-brand opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-            {s.tall ? "Read in full" : "Zoom"}
+            Read in full
           </span>
         </span>
       </button>
@@ -279,7 +275,7 @@ function AppReviews() {
           );
         })}
       </div>
-      <div key={app} className="gap-4 [column-width:290px]">
+      <div key={app} className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
         {shots.map((s, i) => (
           <ShotCard key={s.img} s={s} delay={Math.min(i * 0.05, 0.25)} onOpen={setOpen} />
         ))}

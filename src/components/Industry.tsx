@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Reveal } from "./ui";
+import { SourceSnippet } from "./case/primitives";
+import { TiltCard } from "./case/Motion";
+import { COVERAGE, PHASES, PORTABLE } from "@/content/case";
 
 /* ─────────────────────────── Industry 101 ───────────────────────────
    Sourced market numbers for Indian ride-hailing, a TAM / SAM / SOM
@@ -107,20 +110,9 @@ function FlipStat({ s, delay }: { s: (typeof MARKET)[number]; delay: number }) {
           <div className={`text-[10.5px] font-bold tracking-[1.4px] ${s.hintCls}`}>SOURCE</div>
           <div className="mt-1.5 text-[13.5px] font-bold leading-snug">{s.sourceName}</div>
           <div className={`mt-1.5 text-[12.5px] leading-[1.5] ${s.textCls}`}>{s.sourceNote}</div>
-          <div className="mt-auto flex items-center justify-between gap-2 pt-3">
-            <a
-              href={s.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[11.5px] font-bold transition-transform hover:scale-[1.04] ${s.pillCls}`}
-            >
-              Open source
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-            <span className={`text-[11px] font-semibold ${s.hintCls}`}>Flip back</span>
+          <div className="mt-auto pt-3" onClick={(e) => e.stopPropagation()}>
+            <SourceSnippet url={s.sourceUrl} compact dark={s.cls.includes("text-white")} />
+            <div className={`mt-2 text-right text-[11px] font-semibold ${s.hintCls}`}>Flip back</div>
           </div>
         </div>
       </div>
@@ -170,7 +162,7 @@ function FunnelHead({ i, tagCls, textCls }: { i: number; tagCls: string; textCls
               rel="noopener noreferrer"
               className="whitespace-nowrap text-[11.5px] font-bold underline decoration-current/40 underline-offset-2 hover:decoration-current"
             >
-              {f.srcName} ↗
+              {f.srcName} →
             </a>
           </>
         )}
@@ -250,6 +242,7 @@ const PLAYERS: {
 function PlayerCard({ p, delay }: { p: (typeof PLAYERS)[number]; delay: number }) {
   return (
     <Reveal delay={delay} className="h-full">
+      <TiltCard className="h-full">
       <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
         <div className="text-[16px] font-extrabold tracking-[-0.3px]">{p.name}</div>
         <div className="mt-0.5 text-[12.5px] text-ink-faint">{p.note}</div>
@@ -263,17 +256,61 @@ function PlayerCard({ p, delay }: { p: (typeof PLAYERS)[number]; delay: number }
             </li>
           ))}
         </ul>
-        <a
-          href={p.srcUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-auto inline-flex items-center gap-1 pt-4 text-[11.5px] font-bold text-ink-faint transition-colors hover:text-brand"
-        >
-          Source
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
+        <div className="mt-auto pt-4">
+          <SourceSnippet url={p.srcUrl} compact />
+        </div>
+      </div>
+      </TiltCard>
+    </Reveal>
+  );
+}
+
+/* The aha: where each app's safety work starts today, and where SafeRide
+   starts. The empty first column is the whole case in one picture. */
+const DOT = { 0: "bg-[#E2E2E2]", 1: "bg-caution", 2: "bg-safe" } as const;
+function CoverageStrip() {
+  return (
+    <Reveal className="mt-6 overflow-hidden rounded-2xl border border-line bg-white">
+      <style>{`@keyframes ahaPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(39,110,241,.45); } 50% { box-shadow: 0 0 0 10px rgba(39,110,241,0); } }`}</style>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 pt-5">
+        <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">WHEN THE SAFETY WORK STARTS</div>
+        <div className="text-[12px] text-ink-faint">green: full · amber: partial · grey: nothing yet</div>
+      </div>
+      <div className="px-5 pb-5 pt-3">
+        {/* header row: phases. On phones the phase names sit above each dot column as short labels */}
+        <div className="grid grid-cols-[1.4fr_repeat(4,1fr)] items-end gap-2 pb-2">
+          <div />
+          {PHASES.map((ph) => (
+            <div key={ph.key} className={`rounded-lg px-1 py-1 text-center text-[10px] font-bold leading-tight tracking-[0.4px] sm:text-[11px] ${ph.key === "before" ? "bg-[rgba(39,110,241,.08)] text-brand" : "text-ink-faint"}`}>
+              {ph.label.toUpperCase()}
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col gap-1.5">
+          {COVERAGE.map((row) => (
+            <div key={row.app} className={`grid grid-cols-[1.4fr_repeat(4,1fr)] items-center gap-2 rounded-xl px-2 py-2 ${row.ours ? "bg-black text-white" : "bg-mist"}`}>
+              <div className="min-w-0">
+                <div className="truncate text-[13px] font-extrabold tracking-[-0.2px]">{row.app}</div>
+                <div className={`hidden text-[11px] leading-[1.35] sm:block ${row.ours ? "text-[#C9C9C9]" : "text-ink-faint"}`}>{row.note}</div>
+              </div>
+              {PHASES.map((ph) => {
+                const c = row.cover[ph.key];
+                return (
+                  <div key={ph.key} className="flex justify-center">
+                    <span
+                      className={`h-3.5 w-3.5 rounded-full ${DOT[c]} ${row.ours && ph.key === "before" ? "ring-2 ring-brand" : ""}`}
+                      style={row.ours && c === 2 ? { animation: "ahaPulse 2.2s ease-out infinite" } : undefined}
+                      aria-label={`${row.app}: ${ph.label}: ${["nothing yet", "partial", "full"][c]}`}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+        <p className="m-0 mt-4 max-w-[760px] text-[13.5px] leading-[1.6] text-ink-soft">
+          <span className="font-extrabold text-ink">{PORTABLE.title}</span> {PORTABLE.text}
+        </p>
       </div>
     </Reveal>
   );
@@ -352,6 +389,8 @@ export default function Industry() {
           ))}
         </div>
       </div>
+
+      <CoverageStrip />
 
       {/* Where SafeRide fits */}
       <Reveal className="mt-6">

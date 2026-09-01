@@ -71,10 +71,14 @@ export const TRIP_REASONS: TripReason[] = [
   { key: "work", label: "Work or shift", sub: "office or late shift home", tier: "standard", anyHour: false },
   { key: "study", label: "Classes or exams", sub: "tuition, college, exam hall", tier: "standard", anyHour: false },
   { key: "catch", label: "Train, bus or flight", sub: "a departure to catch", tier: "high", anyHour: false },
+  { key: "airport", label: "Airport run", sub: "to or from the airport", tier: "high", anyHour: false },
   { key: "family", label: "Family pickup", sub: "child or elderly pickup", tier: "standard", anyHour: false },
   { key: "event", label: "Late event", sub: "dinner, party, wedding", tier: "standard", anyHour: false },
+  { key: "care", label: "Caring for someone", sub: "hospital visit, elder care", tier: "standard", anyHour: false },
+  { key: "outstation", label: "Outstation trip", sub: "a long ride out of town", tier: "standard", anyHour: false },
   { key: "alone", label: "Travelling alone", sub: "extra eyes on the trip", tier: "standard", anyHour: false },
   { key: "just", label: "Just a ride", sub: "no special reason needed", tier: "standard", anyHour: false },
+  { key: "other", label: "Other", sub: "tell us in a few words", tier: "standard", anyHour: false },
 ];
 export const REASON_TIER_LINES: Record<ReasonTier, string> = {
   top: "Top of the queue. A committed driver is assigned to you first.",

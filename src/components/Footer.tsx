@@ -11,12 +11,19 @@ export default function Footer() {
             <span className="text-sm font-extrabold">SafeRide Priority · Uber feature concept</span>
           </div>
           {/* the chapter index, so the end of the page can send you back to any part of the case */}
-          <nav aria-label="Chapter index" className="flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] font-semibold">
-            {CHAPTERS.filter((c) => c.status === "live").map((c) => (
-              <a key={c.id} href={`#${c.id}`} className="text-[#C9C9C9] transition-colors hover:text-white">
-                {c.n ? `${c.n} · ` : ""}
-                {c.label}
-              </a>
+          {/* phones: a two-column list; from sm up: one dotted row */}
+          <nav aria-label="Chapter index" className="grid w-full grid-cols-2 gap-y-2 text-[13px] font-semibold sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:gap-y-1.5">
+            {CHAPTERS.filter((c) => c.status === "live" && c.n).map((c, i) => (
+              <span key={c.id} className="flex items-center">
+                {i > 0 && (
+                  <span aria-hidden="true" className="mx-3 hidden text-[#5A5A5A] sm:inline">
+                    ·
+                  </span>
+                )}
+                <a href={`#${c.id}`} className="text-[#C9C9C9] transition-colors hover:text-white">
+                  {c.label}
+                </a>
+              </span>
             ))}
           </nav>
         </div>

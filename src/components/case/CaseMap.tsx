@@ -11,7 +11,7 @@ export default function CaseMap() {
       <SectionHeader
         eyebrow="THE CASE AT A GLANCE"
         title="Four questions, asked in order."
-        lede="A business case is an argument built from evidence. Each chapter answers one question and closes with a verdict: what we know, what we assume, and what would settle it. Jump to any chapter from here."
+        lede="A business case is an argument built from evidence. Each chapter answers one question and ends with a verdict. Jump in anywhere."
       />
       <ol className="m-0 grid list-none gap-2.5 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
         {CHAPTERS.map((c) => {

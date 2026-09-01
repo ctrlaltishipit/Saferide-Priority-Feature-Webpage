@@ -148,17 +148,20 @@ export default function Hero() {
         <h1 className="mb-[18px] text-[clamp(42px,6.2vw,84px)] font-extrabold leading-[1.02] tracking-[-2.2px] [text-wrap:balance]">
           The late-night ride, planned safer.
         </h1>
-        <p className="mb-6 max-w-[480px] text-[16.5px] leading-[1.6] text-ink-soft [text-wrap:pretty]">
-          SafeRide Priority is a safety and reliability layer for the Uber rider
-          app. It brings contextual guidance, live trip sharing with trusted
-          contacts, safer pickup and drop points, and a vetted driver who commits
-          to your pickup into one simple flow for rides between 8 PM and 5 AM:
-          late hours and late night alike. One tap says why you ride, and
-          emergency, medical and urgent trips can use it at any hour of the day.
-          It works for short in-city trips, long outstation hauls and every ride
-          type except Parcel. Built for every rider, with immediate priority when
-          a female rider is travelling.
+        <p className="mb-4 max-w-[480px] text-[16.5px] leading-[1.6] text-ink-soft [text-wrap:pretty]">
+          At midnight in Hyderabad, a woman booking a cab runs her own safety
+          check by hand. SafeRide Priority is one toggle inside the Uber app
+          that does it for her before the door closes: a plain brief, a safer
+          drop point, a driver who has already committed, and a circle that
+          knows without asking.
         </p>
+        <ul className="mb-6 flex max-w-[480px] flex-wrap gap-2 text-[12.5px] font-semibold">
+          {["8 PM to 5 AM, any hour for emergencies", "Every ride type except Parcel", "Immediate priority for female riders"].map((t) => (
+            <li key={t} className="rounded-full border border-line bg-white px-3 py-1.5">
+              {t}
+            </li>
+          ))}
+        </ul>
         {/* trip card */}
         <div className="relative max-w-[420px] rounded-[14px] bg-mist px-3.5 py-1">
           <div className="absolute bottom-[34px] left-[21px] top-[34px] w-0.5 bg-[#C9CED4]" />

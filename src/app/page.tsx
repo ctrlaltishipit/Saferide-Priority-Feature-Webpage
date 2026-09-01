@@ -19,7 +19,7 @@ import Footer from "@/components/Footer";
 import CaseMap from "@/components/case/CaseMap";
 import { Chapter, Container, GateCard, SectionHeader } from "@/components/case/primitives";
 import { WhoDecides, Personas, Jobs, WhyNow, GapToMetric, Constraints } from "@/components/case/Gate1";
-import { OptionsWeighed, Doblin, NotList } from "@/components/case/Gate2";
+import { OptionsWeighed, Doblin, NotList, HowWeGotHere } from "@/components/case/Gate2";
 import { NoPilotNote, MetricTree, RevenueModel, ValueLogic, BusinessModelCanvas, PilotPlan, Squad } from "@/components/case/Gate3";
 import { Roadmap, TheAsk, Impact, CaseInSixty, AboutThisCase } from "@/components/case/Gate4";
 import { GATE_1, GATE_2, GATE_3, GATE_4 } from "@/content/case";
@@ -67,22 +67,24 @@ export default function Home() {
             <SectionHeader
               eyebrow="THE FEATURE SET"
               title="Five features, one flow built on consent."
-              lede="P0 ships in the pilot. P1 follows once the pilot holds. Every feature reads its limits from the same written rules."
+              lede="P0 ships in the pilot. P1 follows once the pilot holds."
               titleClassName="md:whitespace-nowrap"
             />
             <FeatureStack />
             <div className="mt-12 sm:mt-20">
               <SectionHeader
                 eyebrow="THE RISKS WE DESIGNED AGAINST"
+                glyph="shield"
                 size="h3"
                 title="Eight principles, each answering a named risk."
-                lede="A feature about safety can do harm of its own: false comfort, stigma, unfair eligibility, a share nobody agreed to. Each card names the risk first, then the design that answers it."
+                lede="A safety feature can do harm of its own. Each card names the risk first, then the design that answers it."
               />
             </div>
             <ResponsibleAI />
             <NotList />
             <Doblin />
             <Architecture />
+            <HowWeGotHere />
             <GateCard gate={GATE_2} />
           </Container>
         </Chapter>

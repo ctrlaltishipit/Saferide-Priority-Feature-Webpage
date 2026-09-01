@@ -96,6 +96,16 @@ Standing rule (user, Sep 1 2026): the page never uses the method's internal voca
 
 Phases 2 to 4 shipped together on Sep 1, 2026 at the user's request ("go for it and implement all the changes"). Prototype removed from the centre nav links (the pill covers it).
 
+## Phase 5: Craft pass (shipped Sep 1, 2026)
+- [x] Visual source snippets: every market number links out through a screenshot card (`SourceSnippet`, registry `SOURCES` in case.ts, `public/sources/*.jpg`); no "Source ↗" text left, straight → arrows only
+- [x] Responsive SVG figures (`Figures.tsx`: north star tree, revenue funnel, stage timeline, road, ripples) and motion helpers (`Motion.tsx`: pointer-following gradient border, tilt cards, phone carousels with pop and fade)
+- [x] "How we got here" insights strip before the prototype (evidence → insight → decision → screen, tap jumps into the prototype)
+- [x] One PILOT HYPOTHESIS label above the KPI grid; competitor coverage strip (before / at pickup / during / after) with the SafeRide row lit; "Built for Uber first. Made for every riding app." card and roadmap line
+- [x] Review grid aligned top and bottom; hero hook rewritten; SEO metadata in layout
+- [x] Prototype: more "Why this ride?" reasons (airport, care, outstation) plus Other with a short free-text box; scenario pills explain Elevated / Lower / Limited Data (hover on web, line below on phones)
+- [x] Safety Circle tracking map: fits the frame on every width (meet, never slice), labelled pickup, drop area and chosen safer anchor, car passes them, stops row under the map
+- Check: build green, voice greps clean, 390 width = viewport, no broken images, screenshots reviewed; commit + deploy
+
 ## Standing verification routine (every phase)
 1. `npm run build`
 2. `grep -rn "—" src/components src/content`; review `grep -rn ", not " src/components src/content`

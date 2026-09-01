@@ -53,6 +53,8 @@ export interface CircleInfo {
   selNames: string[];
   driverKind: "standard" | "priority";
   dropShort: string;
+  /** the destination she typed, before any safer anchor */
+  destination: string;
   pickup: string;
   time: string;
   policy: string;
@@ -174,6 +176,7 @@ const INITIAL = {
   time: "12:15 AM",
   safeRide: true,
   reason: "work",
+  reasonOther: "",
   female: false,
   whyOpen: false,
   anchor: null as string | null,
@@ -293,6 +296,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
       selNames,
       driverKind: s.match === "standard" ? "standard" : "priority",
       dropShort,
+      destination: s.drop.split(",")[0],
       pickup: s.pickup,
       time: s.time,
       policy: s.policy,
@@ -405,6 +409,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
           selNames,
           driverKind: s.match === "standard" ? "standard" : "priority",
           dropShort,
+          destination: s.drop.split(",")[0],
           pickup: s.pickup,
           time: s.time,
           policy: s.policy,
@@ -705,9 +710,27 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                       );
                     })}
                   </div>
+                  {/* Rule 36: "Other" lets the rider say it in her own words. Private, like every reason. */}
+                  {s.reason === "other" && (
+                    <div className="mt-2.5" style={{ animation: "fadein .25s ease" }}>
+                      <label htmlFor="reason-other" className="text-[11px] font-bold tracking-[0.4px] text-ink-faint">
+                        IN YOUR OWN WORDS
+                      </label>
+                      <input
+                        id="reason-other"
+                        type="text"
+                        value={s.reasonOther}
+                        maxLength={60}
+                        placeholder="e.g. picking up my mother from the station"
+                        onChange={(e) => set({ reasonOther: e.target.value })}
+                        className="mt-1 w-full rounded-[10px] border-[1.5px] border-[#E2E2E2] bg-white px-3 py-2 text-[13px] outline-none placeholder:text-[#9AA0A6] focus:border-brand"
+                      />
+                      <div className="mt-1 text-right text-[10px] text-ink-faint">{s.reasonOther.length}/60</div>
+                    </div>
+                  )}
                   <div className="mt-2.5 rounded-[10px] bg-[#F3F7FF] px-3 py-2.5" style={{ animation: "fadein .25s ease" }}>
                     <div className="text-xs font-bold text-brand-dark">
-                      {tripReason(s.reason).label} · {tripReason(s.reason).sub}
+                      {tripReason(s.reason).label} · {s.reason === "other" && s.reasonOther.trim() ? s.reasonOther.trim() : tripReason(s.reason).sub}
                     </div>
                     <div className="mt-0.5 text-xs leading-[1.5] text-[#3D4E6B]">
                       {REASON_TIER_LINES[tripReason(s.reason).tier]}
