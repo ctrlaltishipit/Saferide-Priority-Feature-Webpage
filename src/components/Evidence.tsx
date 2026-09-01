@@ -318,7 +318,7 @@ function AppReviews() {
 const OBJECTIVES: { label: string; title: string; text: string; icon: React.ReactNode }[] = [
   {
     label: "WHY",
-    title: "Why we are building it",
+    title: "Why I am building it",
     text:
       "The fear is measurable and the headlines have not stopped in twelve years. On top of it, 82% of app taxi users say drivers cancel on them, and nights make it worse. When riders cannot trust the ride to come, they stop riding, and the night market shrinks with them.",
     icon: (
@@ -330,7 +330,7 @@ const OBJECTIVES: { label: string; title: string; text: string; icon: React.Reac
   },
   {
     label: "WHAT",
-    title: "What we are building",
+    title: "What I am building",
     text:
       "A planning layer inside the booking flow. Before pickup it reviews the ride plan, suggests safer drop points, matches an audited driver who has already committed to your trip, alerts a trusted circle and checks that you reached. One toggle covers the fear and the no-show.",
     icon: (
@@ -342,7 +342,7 @@ const OBJECTIVES: { label: string; title: string; text: string; icon: React.Reac
   },
   {
     label: "HOW",
-    title: "How we will do it",
+    title: "How I will do it",
     text:
       "Deterministic rules on audited signals, and clear consent before anything is shared. One tap says why you ride, and the reason sets the queue: hospital runs and emergencies go first, at any hour of the day. Seven steps, under two minutes, piloted in Hyderabad.",
     icon: (
@@ -428,7 +428,7 @@ export default function Evidence() {
         twelve years apart.
       </h2>
       <p className="mb-8 max-w-[640px] text-base leading-[1.65] text-ink-soft [text-wrap:pretty]">
-        We did not invent this problem. It lives in the papers, in app store reviews, and in
+        I did not invent this problem. It lives in the papers, in app store reviews, and in
         viral posts on Reddit, X and LinkedIn that the press keeps picking up. If you read
         nothing else, read this wall: every card is real, and every article opens the original
         report.

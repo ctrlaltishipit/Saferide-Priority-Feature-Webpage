@@ -19,7 +19,7 @@ export function OptionsWeighed() {
   return (
     <div className="mt-14 sm:mt-24">
       <SectionHeader
-        eyebrow="THE OPTIONS WE WEIGHED"
+        eyebrow="THE OPTIONS I WEIGHED"
         glyph="scale"
         title="Four ways to answer the problem. One won."
         lede="The four criteria were written before scoring. The losers stay on the table in case a pivot needs one."
@@ -75,7 +75,7 @@ export function Doblin() {
   return (
     <div className="mt-14 sm:mt-24">
       <SectionHeader
-        eyebrow="HOW WE INNOVATED"
+        eyebrow="HOW I INNOVATED"
         glyph="grid"
         title={`${WORDS[yes]} of the ten types, and none of them is a new feature.`}
         lede="Ten types of innovation is a public checklist: four about how the business is set up, two about what it offers, four about how it feels. A type is ticked only where SafeRide truly changes something. The rest stay unticked, with the reason."
@@ -195,10 +195,10 @@ export function HowWeGotHere() {
   return (
     <div className="mt-14 sm:mt-24">
       <SectionHeader
-        eyebrow="HOW WE GOT HERE"
+        eyebrow="HOW I GOT HERE"
         glyph="compass"
         title="Six insights, six screens."
-        lede="Every screen in the prototype traces back to something we read or heard. Here is the chain, and a tap takes you to the screen it produced."
+        lede="Every screen in the prototype traces back to something I read. Here is the chain, and a tap takes you to the screen it produced."
       />
       <Reveal className="mb-6 rounded-2xl border border-line bg-mist p-4 sm:p-6">
         <Chain />
@@ -214,7 +214,7 @@ export function HowWeGotHere() {
             </div>
             <dl className="m-0 mt-4 flex flex-1 flex-col gap-3 text-[13px] leading-[1.55]">
               <div>
-                <dt className="text-[10.5px] font-bold tracking-[1.4px] text-ink-faint">WHAT WE SAW</dt>
+                <dt className="text-[10.5px] font-bold tracking-[1.4px] text-ink-faint">WHAT I SAW</dt>
                 <dd className="m-0 mt-0.5 text-ink-soft">
                   {it.evidence}
                   {it.sourceUrl && <SourceSnippet url={it.sourceUrl} compact className="mt-2" />}
@@ -225,7 +225,7 @@ export function HowWeGotHere() {
                 <dd className="m-0 mt-0.5 font-semibold text-ink">{it.insight}</dd>
               </div>
               <div>
-                <dt className="text-[10.5px] font-bold tracking-[1.4px] text-ink-faint">WHAT WE BUILT</dt>
+                <dt className="text-[10.5px] font-bold tracking-[1.4px] text-ink-faint">WHAT I BUILT</dt>
                 <dd className="m-0 mt-0.5 text-ink-soft">{it.decision}</dd>
               </div>
             </dl>

@@ -95,7 +95,7 @@ export default function Comparison() {
       </h2>
       <p className="mb-7 max-w-[620px] text-[15px] leading-[1.6] text-ink-soft">
         Same rider, same 12:15 AM trip from HITEC City. Each row is one of the six jobs from
-        chapter 1. It starts as tonight looks. Flip the toggle to see how SafeRide Priority does
+        chapter 3. It starts as tonight looks. Flip the toggle to see how SafeRide Priority does
         each job.
       </p>
 

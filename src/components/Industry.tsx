@@ -130,7 +130,7 @@ const FUNNEL: { tag: string; title: string; text: string; srcName?: string; srcU
   {
     tag: "SAM",
     title: "Late night rides in the big metros",
-    text: "Our estimate: 10 to 15% of daily cab trips run between 8 PM and 5 AM, near 2 lakh rides a night. No platform publishes the exact night share, so we label this clearly as an assumption.",
+    text: "My estimate: 10 to 15% of daily cab trips run between 8 PM and 5 AM, near 2 lakh rides a night. No platform publishes the exact night share, so we label this clearly as an assumption.",
   },
   {
     tag: "SOM",
@@ -330,13 +330,13 @@ export default function Industry() {
     <div id="industry" className="mt-14 sm:mt-24">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">INDUSTRY 101</div>
       <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
-        The market we are
+        The market I am
         <br />
         building into.
       </h2>
       <p className="mb-8 max-w-[640px] text-base leading-[1.65] text-ink-soft [text-wrap:pretty]">
         Ride-hailing in India is huge, growing fast, and fought over by three big apps. Here is
-        the market in numbers, the slice we are aiming at, and what every player already ships
+        the market in numbers, the slice I am aiming at, and what every player already ships
         for safety. Flip the number cards for their sources.
       </p>
 
@@ -355,10 +355,10 @@ export default function Industry() {
       <div className="mt-10 grid items-start gap-6 sm:mt-14 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
         <Reveal variant="left">
           <h3 className="m-0 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
-            The slice we are aiming at.
+            The slice I am aiming at.
           </h3>
           <p className="mt-3 text-[15px] leading-[1.65] text-ink-soft [text-wrap:pretty]">
-            The whole market is the outer ring. Our serviceable slice is the late night window
+            The whole market is the outer ring. The serviceable slice is the late night window
             in the big metros, where the fear actually lives. The first bite is one city:
             Hyderabad, between 8 PM and 5 AM.
           </p>

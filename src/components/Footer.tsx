@@ -1,5 +1,5 @@
 import { Logo } from "./ui";
-import { CHAPTERS } from "@/content/case";
+import { CHAPTERS, LINKEDIN_URL } from "@/content/case";
 
 export default function Footer() {
   return (
@@ -27,6 +27,12 @@ export default function Footer() {
             ))}
           </nav>
         </div>
+        <p className="m-0 max-w-[720px] text-[13px] leading-[1.6] text-[#C9C9C9]">
+          Researched, designed and built by Dixita Sreerala, working alone. Criticism, inputs and advice are welcome:{" "}
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="font-bold text-white underline decoration-brand decoration-2 underline-offset-2 hover:text-brand">
+            write to me on LinkedIn →
+          </a>
+        </p>
         <p className="m-0 max-w-[720px] text-[12.5px] leading-[1.6] text-[#A6A6A6]">
           Independent portfolio concept. Not affiliated with, endorsed by, or sponsored by Uber. All
           data and interactions are simulated. This guidance is based on available prototype context.

@@ -27,7 +27,7 @@ import {
 export function NoPilotNote() {
   return (
     <Reveal className="rounded-2xl border border-[#F0DCC8] bg-[#FFF7EC] p-5 text-[14.5px] leading-[1.6] text-[#5A3A00] sm:p-6">
-      <span className="font-extrabold">This chapter has no pilot data.</span> Every target is a hypothesis the pilot would
+      <span className="font-extrabold">Nothing in this chapter has been tested.</span> Every target is a hypothesis the pilot would
       test. Every input to the money model is sourced, assumed or a hypothesis, and says which. The baselines are
       Uber&apos;s own numbers. The first pilot stage pulls them.
     </Reveal>
@@ -41,7 +41,7 @@ export function MetricTree() {
         eyebrow="THE NORTH STAR AND WHAT FEEDS IT"
         glyph="star"
         title="One number to read every week."
-        lede="Under it: eight targets the pilot would test, and six lines that would make us stop."
+        lede="Under it: eight targets the pilot would test, and six lines that would stop it."
       />
       <Reveal className="beam">
         <div className="rounded-2xl bg-black p-6 text-white sm:p-8">
@@ -177,7 +177,7 @@ export function ValueLogic() {
             <div className="text-[11px] font-bold tracking-[1.8px] text-[#B26205]">WATCH FOR {w.label.toUpperCase()}</div>
             <p className="m-0 mt-2 text-[13.5px] leading-[1.55] text-[#5A3A00]">{w.risk}</p>
             <p className="m-0 mt-2 text-[13px] leading-[1.55] text-[#7A4E00]">
-              <span className="font-extrabold">How we watch it:</span> {w.watch}
+              <span className="font-extrabold">How I watch it:</span> {w.watch}
             </p>
           </Reveal>
         ))}
@@ -194,7 +194,7 @@ export function BusinessModelCanvas() {
       <SectionHeader
         eyebrow="THE BUSINESS MODEL ON ONE CANVAS"
         glyph="canvas"
-        title="Nine blocks, each marked by how sure we are."
+        title="Nine blocks, each marked by how sure I am."
         lede="Where the parts of the case prove they fit. Every block carries a tag: evidenced, a design answer, assumed, or unknown until the pilot."
       />
       <Reveal>
@@ -273,10 +273,10 @@ export function Squad() {
   return (
     <div className="mt-14 sm:mt-24">
       <SectionHeader
-        eyebrow="THE SQUAD, AND WHO KEEPS IT HONEST"
+        eyebrow="THE SEATS A PILOT NEEDS"
         glyph="team"
-        title="Eight roles, most of them borrowed."
-        lede="A pilot inside a live product borrows more than it hires. What the eight weeks need, who covers it, and the reviews on the calendar."
+        title="Eight seats. Today one person holds all of them."
+        lede="A pilot inside a live product borrows more than it hires. What the eight weeks would need at Uber, who would cover it, and the reviews on the calendar. Until then, every seat is me."
       />
       <Carousel minWidth={270} ariaLabel="The squad">
         {SQUAD.map((r, i) => (

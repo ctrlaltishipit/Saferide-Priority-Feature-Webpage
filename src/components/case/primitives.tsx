@@ -92,9 +92,24 @@ export function Chapter({
         </span>
         <span className="text-[13px] font-semibold text-ink-faint">The question: {meta.question}</span>
       </div>
-      <h2 className="m-0 mb-8 max-w-[820px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.05] tracking-[-1.5px] [text-wrap:balance] sm:mb-10">
+      <h2 className={`m-0 max-w-[820px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.05] tracking-[-1.5px] [text-wrap:balance] ${meta.summary?.length ? "mb-6" : "mb-8 sm:mb-10"}`}>
         {meta.title}
       </h2>
+      {meta.summary?.length ? (
+        <div className="mb-10 rounded-2xl border border-line bg-mist p-4 sm:mb-12 sm:p-5">
+          <div className="mb-3 flex items-center gap-2 text-[11px] font-bold tracking-[1.8px] text-ink-faint">
+            <span className="h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
+            THIS CHAPTER IN 20 SECONDS
+          </div>
+          <ul className="m-0 grid list-none gap-3 p-0 sm:grid-cols-3">
+            {meta.summary.map((line) => (
+              <li key={line} className="border-l-2 border-brand pl-3 text-[13.5px] leading-[1.55] text-ink-soft">
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </Container>
   );
   return (
@@ -284,7 +299,7 @@ export function GateCard({ gate }: { gate: Gate }) {
             <div className="text-[11px] font-bold tracking-[1.8px] text-[#8f8f8f]">
               WHERE {gate.name.toUpperCase()} STANDS
             </div>
-            <div className="text-[11px] font-semibold text-[#8f8f8f]">What we know, what we assume, what would settle it</div>
+            <div className="text-[11px] font-semibold text-[#8f8f8f]">What I know, what I assume, what would settle it</div>
           </div>
           <div className="mt-2 max-w-[820px] text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
             {gate.question}
@@ -295,7 +310,7 @@ export function GateCard({ gate }: { gate: Gate }) {
             ))}
           </div>
           <div className="mt-6 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
-            <GateColumn label="WHAT WE KNOW" dot={LENS_STATE.evidence.color}>
+            <GateColumn label="WHAT I KNOW" dot={LENS_STATE.evidence.color}>
               {gate.know.map((k) => (
                 <li key={k.text} className="flex items-start gap-2">
                   <span className="mt-[9px] h-1.5 w-1.5 flex-none rounded-full bg-safe" aria-hidden="true" />
@@ -312,7 +327,7 @@ export function GateCard({ gate }: { gate: Gate }) {
                 </li>
               )}
             </GateColumn>
-            <GateColumn label="WHAT WE ASSUME" dot={LENS_STATE.open.color}>
+            <GateColumn label="WHAT I ASSUME" dot={LENS_STATE.open.color}>
               {gate.assume.map((a) => (
                 <li key={a} className="flex items-start gap-2">
                   <span className="mt-[9px] h-1.5 w-1.5 flex-none rounded-full bg-caution" aria-hidden="true" />

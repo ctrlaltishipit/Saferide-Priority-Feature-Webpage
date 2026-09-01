@@ -32,7 +32,7 @@ export function WhoDecides() {
         glyph="room"
         size="h3"
         title="Written backwards from the room that decides."
-        lede="Before any research, we named the reader, the decision and what done looks like."
+        lede="Before any research, I named the reader, the decision and what done looks like."
       />
       <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
         {DECISION.map((d, i) => (
@@ -69,7 +69,7 @@ export function Personas() {
         eyebrow="WHO IS IN THE CAR"
         glyph="people"
         title="Four people, one night ride."
-        lede="The rider is the user. Her contact carries the worry. The driver decides whether the ride comes. Inside Uber, the buyer is the council above."
+        lede="The rider is the user. Her contact carries the worry. The driver decides whether the ride comes. Inside Uber, the buyer is the council named in chapter 1."
       />
       <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))]">
         {PERSONAS.map((p, i) => (
@@ -122,7 +122,7 @@ export function Jobs() {
         glyph="list"
         size="h3"
         title="Six jobs, every night, all manual."
-        lede="A job is the progress a person wants to make, in her words. The toggle in chapter 2 competes for these six."
+        lede="A job is the progress a person wants to make, in her words. The toggle in chapter 5 competes for these six."
       />
       <ol className="m-0 flex list-none flex-col gap-2.5 p-0">
         {JOBS.map((j, i) => (
@@ -225,7 +225,7 @@ export function Constraints() {
   return (
     <div className="mt-10 sm:mt-14">
       <SectionHeader
-        eyebrow="THE LINES WE DO NOT CROSS"
+        eyebrow="THE LINES I DO NOT CROSS"
         glyph="lines"
         size="h3"
         title="Fixed before the first screen was drawn."

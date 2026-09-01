@@ -20,76 +20,204 @@ export const WINDOW_LABEL = `${hour12(LATE_NIGHT_START_HOUR)} to ${hour12(LATE_N
 export type ChapterStatus = "live" | "next";
 export interface ChapterMeta {
   id: string;
-  n?: 1 | 2 | 3 | 4;
+  n?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
   kicker: string;
   label: string;
   short: string;
   title: string;
+  /** what the chapter covers, one line */
   question: string;
+  /** the takeaway a reader leaves with */
   verdict: string;
+  /** the chapter in three lines, for a reader with five minutes */
+  summary: string[];
   gateId?: string;
   status: ChapterStatus;
 }
 
 export const CHAPTERS: ChapterMeta[] = [
   {
-    id: "problem",
+    id: "intro",
     n: 1,
     kicker: "CHAPTER 1",
-    label: "The problem",
-    short: "Problem",
-    title: "Every night, she builds her own safety plan.",
-    question: "Is the problem real, big, and still open on Uber?",
-    verdict: "Cleared on public evidence. Uber's own baselines still to pull.",
+    label: "Introduction",
+    short: "Introduction",
+    title: "At midnight, she runs her own safety check by hand.",
+    question: "The problem, my thesis, and what this case covers.",
+    verdict: "One toggle before pickup can replace six manual steps. Built by one person. Tested with nobody yet.",
+    summary: [
+      "Women booking cabs after 8 PM in Hyderabad check the driver, share the trip and text a friend by hand. 4 in 10 fear the ride.",
+      "Every safety tool Uber ships starts once the car is moving. The minutes before booking stay empty.",
+      "My thesis: one toggle that does the checking before pickup, and a driver who has already committed to the trip.",
+    ],
+    status: "live",
+  },
+  {
+    id: "context",
+    n: 2,
+    kicker: "CHAPTER 2",
+    label: "Background",
+    short: "Background",
+    title: "One person, one city, one gap nobody is filling.",
+    question: "Who is building this, who it is for, and the market it sits in.",
+    verdict: "A solo founder, four people in one night ride, and a night market of about 2 lakh rides where every app works after the car moves.",
+    summary: [
+      "I am Dixita Sreerala. Every part of this case, from the research to the prototype, is my own work.",
+      "Four people share one night ride: the rider, the contact who waits, the driver, and the platform that decides.",
+      "India's ride-hailing market is about $2.5 billion a year. Uber, Ola, Rapido, inDrive and Mana Yatri all start their safety work after pickup.",
+    ],
+    status: "live",
+  },
+  {
+    id: "research",
+    n: 3,
+    kicker: "CHAPTER 3",
+    label: "Research",
+    short: "Research",
+    title: "What the reviews, the reports and the numbers said.",
+    question: "How I researched it, what I found, and what the product must do.",
+    verdict: "The fear is measured, the cancels are measured, and riders describe the workaround in public. Uber's own baselines are still to pull.",
+    summary: [
+      "Desk research on 12 public sources, 29 rider reviews across five apps, six news reports from 2014 to 2026, and a competitor audit.",
+      "Six jobs she does by hand every night, and the number each one suppresses on Uber's dashboards.",
+      "Six insights, each traced to a screen. Nothing here came from a live interview yet; that is the first pilot stage.",
+    ],
     gateId: "problem-verdict",
     status: "live",
   },
   {
-    id: "solution",
-    n: 2,
-    kicker: "CHAPTER 2",
-    label: "The solution",
-    short: "Solution",
-    title: "One toggle, finished before the door closes.",
-    question: "Does one flow fix both halves without breaking what works?",
-    verdict: "Cleared on design and a working prototype. Pilot pending.",
+    id: "design",
+    n: 4,
+    kicker: "CHAPTER 4",
+    label: "Design",
+    short: "Design",
+    title: "From a safety score to four plain words.",
+    question: "The options I weighed, the decisions I made, and what changed along the way.",
+    verdict: "A layer inside Uber's booking flow won over a new app. Six design decisions changed on the way to the prototype.",
+    summary: [
+      "Four options scored on criteria written before the scoring. A layer on Uber's own toolkit won.",
+      "Six decisions changed while building: the score became four words, the window moved to 8 PM, the committed pickup arrived.",
+      "Readable rules decide everything. No crime data, no area labels, no machine learning in the first version.",
+    ],
     gateId: "solution-verdict",
     status: "live",
   },
   {
     id: "prototype",
-    kicker: "TRY IT",
-    label: "The prototype",
+    n: 5,
+    kicker: "CHAPTER 5",
+    label: "Prototype",
     short: "Prototype",
     title: "Walk all 8 screens yourself.",
-    question: "Tap through the eight screens a rider would see.",
-    verdict: "Fully interactive. Nothing real is booked or shared.",
+    question: "The working prototype, its key features, and the view a contact gets.",
+    verdict: "Fully interactive. Eight screens, the contact's tracking view, and nothing real booked or shared.",
+    summary: [
+      "Start on the Uber splash, book a ride, and walk the seven safety steps. Every value comes from the written rules.",
+      "Five features in one flow: the brief, safer anchors, the committed match, the Safety Circle, the check-in.",
+      "Flip the toggle to see the six jobs with and without SafeRide, side by side.",
+    ],
     status: "live",
   },
   {
-    id: "money",
-    n: 3,
-    kicker: "CHAPTER 3",
-    label: "The business model",
-    short: "Business model",
-    title: "What it costs, what it moves.",
-    question: "Which metric moves, by how much, at what cost?",
-    verdict: "Open until the pilot reads out.",
+    id: "outcomes",
+    n: 6,
+    kicker: "CHAPTER 6",
+    label: "Outcomes",
+    short: "Outcomes",
+    title: "Nothing tested yet. Here is exactly what would count.",
+    question: "The test design, the metrics, the money, and what I learned building it.",
+    verdict: "Open until the pilot reads out. Every target is a hypothesis with a stop rule next to it.",
+    summary: [
+      "No pilot has run. Eight weeks in Hyderabad, five stages, each unlocking the next on evidence.",
+      "One north star, eight targets, six guardrails. The money model shows its working: ₹0.7 to 1.4 crore a year, illustrative.",
+      "Four lessons from building it alone, including the one I would do differently.",
+    ],
     gateId: "business-verdict",
     status: "live",
   },
   {
-    id: "the-case",
-    n: 4,
-    kicker: "CHAPTER 4",
-    label: "The ask",
-    short: "The ask",
-    title: "The ask: eight weeks in Hyderabad.",
-    question: "What are we asking for, and what would make us stop?",
-    verdict: "The ask is on the table. Decision pending.",
+    id: "conclusion",
+    n: 7,
+    kicker: "CHAPTER 7",
+    label: "Conclusion",
+    short: "Conclusion",
+    title: "Eight weeks in Hyderabad, then every riding app.",
+    question: "Key takeaways, the recommendation, and next steps.",
+    verdict: "The ask is on the table: one pilot slot, one corridor, one quarter. Decision pending.",
+    summary: [
+      "Seven takeaways, one per chapter, each linked to the evidence that earns it.",
+      "The recommendation: an eight-week opt-in pilot in Hyderabad, with five rules that would stop it.",
+      "Next: the pilot, then an MVP, then the same layer inside Ola, Rapido, inDrive and Mana Yatri. Feedback welcome on LinkedIn.",
+    ],
     gateId: "ask-verdict",
     status: "live",
   },
+];
+
+
+/* ── the person behind this ── */
+export const LINKEDIN_URL = "https://www.linkedin.com/in/deekshitha-sreerala/";
+
+export const FOUNDER = {
+  name: "Dixita Sreerala",
+  role: "Solo founder. The whole team.",
+  lines: [
+    "There is no company behind this page and no team beside me. The research, the rules, the screens, the prototype and this case are one person's work.",
+    "I built it the way I would run a product: problem first, rules before screens, every number tagged, nothing claimed that a pilot has not shown.",
+    "If you see a hole in the argument, a number that looks wrong, or a better way to do any of this, I want to hear it.",
+  ],
+  invite: "Write to me on LinkedIn: criticism, inputs and advice are all welcome.",
+};
+
+export const JOURNEY: { step: string; text: string }[] = [
+  { step: "Noticed the ritual", text: "Women I know book a cab after dark and run the same five checks by hand. Then I found that 4 in 10 say they fear the ride." },
+  { step: "Read what riders wrote", text: "29 public reviews across five apps and six news reports, 2014 to 2026. The same headline, twelve years apart." },
+  { step: "Wrote the rules first", text: "84 plain rules for what the product does and never does, before a single screen. They still decide every value on every screen." },
+  { step: "Built the prototype", text: "Eight screens and the contact's tracking view, fully interactive. Six decisions changed along the way." },
+  { step: "Wrote this case", text: "For the room that decides: every number sourced, assumed or a hypothesis, and a verdict at the end of each part." },
+];
+
+/* ── research methods, with their limits ── */
+export interface Method {
+  name: string;
+  count: string;
+  what: string;
+  limit: string;
+  glyph: "list" | "people" | "grid" | "clock" | "wrench" | "room";
+}
+
+export const METHODS: Method[] = [
+  { name: "Desk research", count: "12 sources", what: "Government reports, market studies and newsroom posts, each shown as a screenshot that opens the original.", limit: "Public numbers only. Uber's own baselines are not public.", glyph: "list" },
+  { name: "Review mining", count: "29 reviews", what: "App store and review site screenshots across Uber, Ola, Rapido, inDrive and Mana Yatri, coded into six jobs.", limit: "Reviews skew to the angry and the grateful. They show the pattern, never the rate.", glyph: "people" },
+  { name: "Competitor audit", count: "5 apps · 4 phases", what: "What every app does before booking, at pickup, during the ride and after arrival.", limit: "Based on public feature pages and the apps themselves, as of this year.", glyph: "grid" },
+  { name: "News timeline", count: "6 reports", what: "Safety and reliability stories from 2014 to 2026, captured clean and linked.", limit: "Headlines prove the problem persists, never how often it happens.", glyph: "clock" },
+  { name: "Rules as requirements", count: "84 rules", what: "Every requirement written as a plain sentence a rider could read, then enforced in the prototype.", limit: "Written by one person. A pilot team would challenge several.", glyph: "wrench" },
+  { name: "Live interviews", count: "0 so far", what: "Composite personas come from reviews, posts and the PRD. Rider conversations in the pilot corridors are stage 1 of the pilot.", limit: "The biggest gap in this research, said plainly.", glyph: "room" },
+];
+
+/* ── design decisions that changed while building ── */
+export interface Iteration {
+  from: string;
+  to: string;
+  why: string;
+  screen?: number;
+}
+
+export const ITERATIONS: Iteration[] = [
+  { from: "A safety score out of 100", to: "Four plain categories with two to four reasons", why: "A number claims a precision the system lacks. A label with reasons invites a question.", screen: 2 },
+  { from: "A 10 PM to 5 AM window", to: "8 PM to 5 AM, and any hour for emergency, medical and urgent trips", why: "A ride booked at 8 PM ends well past 10. Emergencies do not check the clock.", screen: 1 },
+  { from: "Safety only", to: "Safety and reliability: the committed pickup", why: "82% of riders say drivers cancel on them. The ride that never comes is the same fear, in a different shape.", screen: 4 },
+  { from: "A share-trip link", to: "A Safety Circle with a saved policy and the contact's own tracking view", why: "The person waiting needs the plate, the driver, and a clear signal for when to worry.", screen: 5 },
+  { from: "A toggle and nothing else", to: "One tap that says why you ride, with an Other box", why: "The reason sets the queue. Hospital runs go first. The driver sees a flag, never the reason.", screen: 1 },
+  { from: "A fixed list of drop points", to: "Safer anchors: staffed, lit, within 300 metres, with the extra minutes shown", why: "The last 200 metres are decided at booking. The original drop stays available and is never called unsafe.", screen: 3 },
+];
+
+/* ── what building it alone taught me ── */
+export const LESSONS: { title: string; text: string }[] = [
+  { title: "Rules before screens saved weeks", text: "Every screen reads its values from one rules file. When the window moved from 10 PM to 8 PM, one line changed." },
+  { title: "Evidence has to show its face", text: "Retyped quotes read as opinion. Real screenshots with a link read as proof. I rebuilt the review wall for that reason." },
+  { title: "Say what has not been tested", text: "Nothing on this page is an outcome. Every target is a hypothesis with a stop rule next to it. That honesty is the case." },
+  { title: "One person can reach a prototype, and no further", text: "The next step needs Uber's baselines and real riders. That is why the ask is small: eight weeks, one corridor." },
 ];
 
 export const chapterById = (id: string) => CHAPTERS.find((c) => c.id === id);
@@ -461,7 +589,7 @@ export const DOBLIN: DoblinType[] = [
   { group: "Configuration", name: "Network", state: "yes", how: "Hyderabad police's T-Safe as the tracking partner. Metro gates, hospitals and fuel stations as anchors." },
   { group: "Configuration", name: "Structure", state: "no", how: "No new team or org. The pilot borrows people who already exist." },
   { group: "Configuration", name: "Process", state: "yes", how: "One pre-ride check replaces six manual steps. The driver commits before the rider sees the match." },
-  { group: "Offering", name: "Product performance", state: "no", how: "Every feature the flow uses already ships. We add no new capability, we put them in order." },
+  { group: "Offering", name: "Product performance", state: "no", how: "Every feature the flow uses already ships. I add no new capability, I put them in order." },
   { group: "Offering", name: "Product system", state: "yes", how: "A layer over Uber's toolkit, with a contact view and a city bridge that work together." },
   { group: "Experience", name: "Service", state: "yes", how: "The circle SMS, the calm check-in, the first-in-line rematch when a driver drops out." },
   { group: "Experience", name: "Channel", state: "no", how: "Same booking flow, same SMS. Nothing new to install or find." },
@@ -524,7 +652,7 @@ export const INSIGHTS: Insight[] = [
     glyph: "pin",
   },
   {
-    evidence: "Women said in interviews and reviews that a hidden score would feel like being judged, or lull them.",
+    evidence: "Women wrote in reviews and public posts that a hidden score would feel like being judged, or lull them.",
     insight: "A number implies precision. A label with reasons invites a question.",
     decision: "Four plain categories, two to four reasons each, and Limited Data when coverage is thin. No crime data anywhere.",
     screen: { step: 2, label: "Screen 2, why am I seeing this" },
@@ -543,7 +671,7 @@ export const INSIGHTS: Insight[] = [
 
 export const NORTH_STAR = {
   metric: "SafeRide-supported late-night trips completed with a positive rider-reported sense of control and no safety-support escalation.",
-  note: "A health proxy, read weekly. No model measures safety outcomes at pilot scale, so we measure what the pilot can see.",
+  note: "A health proxy, read weekly. No model measures safety outcomes at pilot scale, so I measure what the pilot can see.",
 };
 
 export interface Kpi {
@@ -809,7 +937,7 @@ export const GATE_4: Gate = {
   n: 4,
   id: "ask-verdict",
   name: "The ask",
-  question: "What are we asking for, and what would make us stop?",
+  question: "What am I asking for, and what would make me stop?",
   know: [
     { text: "The problem is measured, the solution is clickable, and the business model is written down with every assumption labelled." },
     { text: "The ask is bounded: one squad, one quarter, one corridor, eight weeks." },

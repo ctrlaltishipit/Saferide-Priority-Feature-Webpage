@@ -133,9 +133,10 @@ Never show this file or its text on any screen. It is for developers only.
 
 ## The case structure
 
-79. The page is one case in four chapters named by their content: the problem, the solution, the business model, the ask. The interactive prototype sits right after the solution chapter as its evidence.
+79. The page is one case in seven chapters: introduction, background, research, design, prototype, outcomes, conclusion. Chapter headers carry the chapter in three lines for a reader with five minutes. The research, design, outcomes and conclusion chapters end with a verdict card.
 80. Every chapter ends with a verdict card: what we know (sourced), what we assume (labelled), what would settle it, four lenses in plain words, and one verdict line. The page never uses the method's internal vocabulary (no gate names, no phase codes, no lens acronyms).
 81. Every number on the page carries one of three tags, in words or as a chip: sourced with a link, an assumption said plainly, or a pilot hypothesis. No outcome is ever stated as achieved without data behind it.
 82. Chapter labels, gate questions, verdicts, personas, jobs, stakeholders, why-now items, pain-to-metric rows and constraints live in one content file. Screens read it and never retype a string.
 83. The header is one row and 50 pixels tall. Every anchor target carries a scroll margin of 50 pixels so it lands under the header. On web the chapter names sit centred in the header as text; on phones they are icons with a label that pops up on tap.
 84. Chapters that are not built yet appear in the case map as coming next, with no link, and stay out of the header.
+85. The case is written in the first person singular. One person researched, designed and built it, and the page never says "we". The author is named in the background chapter and the footer, with a LinkedIn link inviting criticism, inputs and advice.

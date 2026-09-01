@@ -735,7 +735,7 @@ const INDIA_FACTS = [
   },
   {
     big: "331",
-    text: "SHE Teams run by Telangana Police to protect women in public spaces, in our pilot state.",
+    text: "SHE Teams run by Telangana Police to protect women in public spaces, in the pilot state.",
     src: "Telangana Police · Women Safety Wing",
     note: "The official SHE Teams page of the Telangana Police Women Safety Wing, active since 2014.",
     url: "https://womensafetywing.telangana.gov.in/she-module/she-teams/",

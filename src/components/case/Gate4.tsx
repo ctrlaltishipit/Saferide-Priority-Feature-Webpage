@@ -85,7 +85,7 @@ export function TheAsk() {
         eyebrow="THE ASK"
         glyph="hand"
         title="One squad, one quarter, one corridor."
-        lede="Small and bounded. What we ask for, what it costs the roadmap, and the five things that would stop us before week eight."
+        lede="Small and bounded. What I ask for, what it costs the roadmap, and the five things that would stop the pilot before week eight."
       />
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
         <div className="grid gap-3">
@@ -99,7 +99,7 @@ export function TheAsk() {
           ))}
         </div>
         <Reveal className="rounded-2xl bg-black p-6 text-white sm:p-7">
-          <div className="text-[11px] font-bold tracking-[1.8px] text-[#FF8FA3]">WHAT WOULD MAKE US STOP</div>
+          <div className="text-[11px] font-bold tracking-[1.8px] text-[#FF8FA3]">WHAT WOULD STOP THE PILOT</div>
           <p className="m-0 mt-2 text-[13px] leading-[1.55] text-[#A6A6A6]">Written before the pilot starts. Any one of these ends the run and files the learning.</p>
           <ol className="m-0 mt-4 flex list-none flex-col gap-3 p-0">
             {STOP_RULES.map((s, i) => (
@@ -118,7 +118,7 @@ export function TheAsk() {
 export function Impact() {
   return (
     <div className="mt-14 sm:mt-24">
-      <SectionHeader eyebrow="THE IMPACT" glyph="ripple" title="Who is better off, who could be worse off, and what we do about it." />
+      <SectionHeader eyebrow="THE IMPACT" glyph="ripple" title="Who is better off, who could be worse off, and what I do about it." />
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
         <Reveal className="grid items-center gap-4 rounded-2xl border border-line bg-mist p-6 sm:col-span-2 sm:grid-cols-[1.3fr_1fr]">
           <div>
@@ -132,11 +132,11 @@ export function Impact() {
           <p className="m-0 mt-2 text-[13.5px] leading-[1.55] text-[#5A3A00]">{IMPACT.externality}</p>
         </Reveal>
         <Reveal delay={0.12} className="rounded-2xl border border-line bg-white p-5">
-          <div className="text-[11px] font-bold tracking-[1.8px] text-brand">WHAT WE DO ABOUT IT</div>
+          <div className="text-[11px] font-bold tracking-[1.8px] text-brand">WHAT I DO ABOUT IT</div>
           <p className="m-0 mt-2 text-[13.5px] leading-[1.55] text-ink-soft">{IMPACT.response}</p>
         </Reveal>
         <Reveal delay={0.18} className="rounded-2xl bg-black p-5 text-white sm:col-span-2">
-          <div className="text-[11px] font-bold tracking-[1.8px] text-[#8FB0FF]">HOW WE WOULD KNOW</div>
+          <div className="text-[11px] font-bold tracking-[1.8px] text-[#8FB0FF]">HOW I WOULD KNOW</div>
           <p className="m-0 mt-2 text-[13.5px] leading-[1.55] text-[#D6DCE4]">{IMPACT.proxy}</p>
         </Reveal>
       </div>
@@ -151,7 +151,7 @@ export function CaseInSixty() {
       <SectionHeader
         eyebrow="THE CASE IN SIXTY SECONDS"
         glyph="timer"
-        title="Four questions, four answers."
+        title="Seven chapters, seven takeaways."
         lede="If you read nothing else, read these. Each links to the chapter that earns it."
       />
       <div className="flex flex-col gap-2.5">
@@ -167,7 +167,7 @@ export function CaseInSixty() {
                 <span className="block text-[14.5px] font-bold leading-[1.4] tracking-[-0.2px]">{c.question}</span>
               </span>
               <span className="text-[13.5px] leading-[1.5] text-ink-soft">
-                <span className="font-extrabold text-ink">Verdict: </span>
+                <span className="font-extrabold text-ink">Takeaway: </span>
                 {c.verdict}
               </span>
             </a>
