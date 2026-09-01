@@ -450,21 +450,23 @@ export const OPTIONS: Option[] = [
 export interface DoblinType {
   group: "Configuration" | "Offering" | "Experience";
   name: string;
-  state: "innovate" | "match" | "skip";
+  /** yes = SafeRide truly changes something here; no = left as it is, with the reason */
+  state: "yes" | "no";
   how: string;
 }
 
+/* Ten types of innovation, ticked only where SafeRide changes something real. */
 export const DOBLIN: DoblinType[] = [
-  { group: "Configuration", name: "Profit model", state: "innovate", how: "An optional priority fee, plus trips that complete instead of cancelling." },
-  { group: "Configuration", name: "Network", state: "innovate", how: "Hyderabad police's T-Safe as tracking partner. Staffed venues and metro gates as anchors." },
-  { group: "Configuration", name: "Structure", state: "skip", how: "No new org. The pilot borrows from teams that exist." },
-  { group: "Configuration", name: "Process", state: "innovate", how: "One pre-ride check replaces six manual steps. The driver commits before the rider sees the match." },
-  { group: "Offering", name: "Product performance", state: "match", how: "Deliberately quiet. Every feature the flow arms already ships. Sequencing them is the work." },
-  { group: "Offering", name: "Product system", state: "innovate", how: "A layer over Uber's toolkit, with a contact view and a city bridge." },
-  { group: "Experience", name: "Service", state: "innovate", how: "The circle SMS, the calm check-in, the committed pickup with first-in-line rematch." },
-  { group: "Experience", name: "Channel", state: "match", how: "Inside the booking flow. Contacts get an SMS, nothing to install." },
-  { group: "Experience", name: "Brand", state: "match", how: "Uber's. SafeRide is a toggle, and the disclaimer says so." },
-  { group: "Experience", name: "Customer engagement", state: "innovate", how: "Consent before every share. A brief you can question. One tap says why you ride." },
+  { group: "Configuration", name: "Profit model", state: "yes", how: "An optional priority fee, and fares that complete because the driver committed." },
+  { group: "Configuration", name: "Network", state: "yes", how: "Hyderabad police's T-Safe as the tracking partner. Metro gates, hospitals and fuel stations as anchors." },
+  { group: "Configuration", name: "Structure", state: "no", how: "No new team or org. The pilot borrows people who already exist." },
+  { group: "Configuration", name: "Process", state: "yes", how: "One pre-ride check replaces six manual steps. The driver commits before the rider sees the match." },
+  { group: "Offering", name: "Product performance", state: "no", how: "Every feature the flow uses already ships. We add no new capability, we put them in order." },
+  { group: "Offering", name: "Product system", state: "yes", how: "A layer over Uber's toolkit, with a contact view and a city bridge that work together." },
+  { group: "Experience", name: "Service", state: "yes", how: "The circle SMS, the calm check-in, the first-in-line rematch when a driver drops out." },
+  { group: "Experience", name: "Channel", state: "no", how: "Same booking flow, same SMS. Nothing new to install or find." },
+  { group: "Experience", name: "Brand", state: "no", how: "Uber's brand, untouched. SafeRide is a toggle, and the disclaimer says so." },
+  { group: "Experience", name: "Customer engagement", state: "yes", how: "Consent before every share. A brief you can question. One tap says why you ride tonight." },
 ];
 
 export const NOT_LIST: { item: string; why: string }[] = [

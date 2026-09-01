@@ -67,36 +67,59 @@ export function OptionsWeighed() {
 }
 
 const GROUP_ORDER = ["Configuration", "Offering", "Experience"] as const;
-const STATE = {
-  innovate: { label: "We innovate here", dot: "#276EF1", cls: "border-brand bg-white" },
-  match: { label: "We match the market", dot: "#9AA0A6", cls: "border-line bg-white" },
-  skip: { label: "Left alone", dot: "#E2E2E2", cls: "border-line bg-mist" },
-} as const;
+const GROUP_SUB = { Configuration: "how the business is set up", Offering: "what it offers", Experience: "how it feels" } as const;
 
 export function Doblin() {
+  const yes = DOBLIN.filter((d) => d.state === "yes").length;
+  const WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
   return (
     <div className="mt-14 sm:mt-24">
       <SectionHeader
-        eyebrow="WHERE THE INNOVATION SITS"
+        eyebrow="HOW WE INNOVATED"
         glyph="grid"
-        title="Six of ten types, and none of them is a new feature."
-        lede="Ten kinds of innovation: four in how the business is set up, two in what it offers, four in how it feels. New features are the easiest kind to copy, so this case leans on the other nine."
+        title={`${WORDS[yes]} of the ten types, and none of them is a new feature.`}
+        lede="Ten types of innovation is a public checklist: four about how the business is set up, two about what it offers, four about how it feels. A type is ticked only where SafeRide truly changes something. The rest stay unticked, with the reason."
       />
+      <style>{`@keyframes tickdraw { to { stroke-dashoffset: 0; } }`}</style>
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
         {GROUP_ORDER.map((g) => (
-          <div key={g}>
-            <div className="mb-2 text-[11px] font-bold tracking-[1.8px] text-ink-faint">{g.toUpperCase()}</div>
-            <div className="flex flex-col gap-2.5">
+          <div key={g} className="rounded-3xl border border-line bg-white p-4 sm:p-5">
+            <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+              <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">{g.toUpperCase()}</div>
+              <div className="text-[11.5px] text-ink-faint">{GROUP_SUB[g]}</div>
+            </div>
+            <div className="flex flex-col gap-2">
               {DOBLIN.filter((d) => d.group === g).map((d, i) => {
-                const st = STATE[d.state];
+                const on = d.state === "yes";
                 return (
-                  <Reveal key={d.name} delay={i * 0.05} className={`rounded-2xl border p-4 ${st.cls}`}>
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full" style={{ background: st.dot }} aria-hidden="true" />
-                      <span className="text-[14px] font-extrabold tracking-[-0.2px]">{d.name}</span>
-                      <span className="ml-auto text-[10.5px] font-bold text-ink-faint">{st.label}</span>
+                  <Reveal key={d.name} delay={i * 0.05} className={`flex gap-3 rounded-2xl p-3.5 ${on ? "bg-black text-white" : "bg-mist text-ink-faint"}`}>
+                    <span
+                      className={`mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-md border ${on ? "border-brand bg-brand" : "border-line bg-white"}`}
+                      aria-hidden="true"
+                    >
+                      {on && (
+                        <svg width="14" height="14" viewBox="0 0 14 14">
+                          <path
+                            d="M2.5 7.5l3 3 6-7"
+                            fill="none"
+                            stroke="#fff"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeDasharray="14"
+                            strokeDashoffset="14"
+                            style={{ animation: `tickdraw .5s ${0.3 + i * 0.1}s ease-out forwards` }}
+                          />
+                        </svg>
+                      )}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-x-2">
+                        <span className="text-[14px] font-extrabold tracking-[-0.2px]">{d.name}</span>
+                        <span className={`text-[10.5px] font-bold tracking-[0.8px] ${on ? "text-[#8FB0FF]" : ""}`}>{on ? "APPLIES" : "NOT HERE"}</span>
+                      </div>
+                      <p className={`m-0 mt-1 text-[13px] leading-[1.55] ${on ? "text-[#C9C9C9]" : ""}`}>{d.how}</p>
                     </div>
-                    <p className={`m-0 mt-2 text-[13px] leading-[1.55] ${d.state === "skip" ? "text-ink-faint" : "text-ink-soft"}`}>{d.how}</p>
                   </Reveal>
                 );
               })}
@@ -104,6 +127,9 @@ export function Doblin() {
           </div>
         ))}
       </div>
+      <p className="mx-auto mt-6 max-w-[760px] text-center text-[13.5px] leading-[1.6] text-ink-soft">
+        The rule of thumb behind the checklist: three types beyond product features is the floor, and five or more working together is what rivals find hard to copy. SafeRide ticks {yes}. The feature list is left alone on purpose.
+      </p>
     </div>
   );
 }
