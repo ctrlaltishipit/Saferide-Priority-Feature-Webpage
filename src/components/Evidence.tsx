@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Reveal } from "./ui";
 
 /* ─────────────────────────── The evidence wall ───────────────────────────
@@ -135,167 +136,184 @@ function ArticleCard({ a, delay }: { a: Article; delay: number }) {
   );
 }
 
-/* ───────────────────── App store review cards ─────────────────────
-   Rebuilt as clean cards from real public reviews: the rider's name,
-   rating, date and words as posted. No source links by design. */
+/* ─────────────────── Rider reviews, shown as the real thing ───────────────────
+   Actual screenshots of public reviews, captured from the app stores and the
+   review pages, cropped to the review itself. Nothing inside the frame is
+   edited. These pages give a review no link of its own, so the screenshot
+   carries the proof. Grouped by app; a long screenshot shows cut with a fade
+   and opens in full on tap. */
 
-type Review = {
-  name: string;
-  initial: string;
-  avatarBg: string;
-  stars: number;
-  starColor: string;
-  date: string;
-  chip: string;
-  text: string;
-  helpful?: string;
+type AppKey = "uber" | "ola" | "rapido" | "indrive" | "manayatri";
+
+type Shot = {
+  img: string;
+  app: AppKey;
+  store: string;
+  alt: string;
+  tall?: boolean;
 };
 
-const REVIEWS: Review[] = [
-  {
-    name: "Durga Sethu",
-    initial: "D",
-    avatarBg: "#C2185B",
-    stars: 1,
-    starColor: "#0E8345",
-    date: "18 Aug 2026",
-    chip: "Uber · Google Play",
-    text:
-      "Not at all useful... especially when trying to book in evening or night.. even after increasing price also no one is accepting, taking too long.. I waited for 1 hour to get an auto.. for 8 km it showed 250+ and suddenly 350.. even cab also didn't get booked.",
-  },
-  {
-    name: "Karan Kashyap",
-    initial: "K",
-    avatarBg: "#8E24AA",
-    stars: 1,
-    starColor: "#0E8345",
-    date: "21 Aug 2026",
-    chip: "Uber · Google Play",
-    text:
-      "Even during medical emergencies when I urgently needed to reach the hospital, the app kept showing that a ride would be assigned shortly, but it kept searching and causing severe delays. And even when a driver is assigned, they refuse to arrive and ask me to cancel the trip.",
-    helpful: "1 person found this review helpful",
-  },
-  {
-    name: "Nikhil Sir NTCC",
-    initial: "N",
-    avatarBg: "#558B2F",
-    stars: 1,
-    starColor: "#0E8345",
-    date: "30 Aug 2026",
-    chip: "Uber · Google Play",
-    text:
-      "One of the Uber drivers left my wife and me in the middle of the ride, on the road, because he received another ride request from a different application. This was very inconvenient and unsafe, especially because my wife was with me.",
-  },
-  {
-    name: "Sxima Khan",
-    initial: "S",
-    avatarBg: "#263238",
-    stars: 2,
-    starColor: "#0E8345",
-    date: "29 Aug 2026",
-    chip: "Uber · Google Play",
-    text:
-      "I asked to pick me up on the exact location but he refused and said I should walk to the ride, and when I complained about it he just cancelled my ride. It's not the first time this happened, they all do the same. I'm so disappointed.",
-  },
-  {
-    name: "Mohammed Ismail",
-    initial: "M",
-    avatarBg: "#607D8B",
-    stars: 1,
-    starColor: "#0E8345",
-    date: "29 Aug 2026",
-    chip: "Uber · Google Play",
-    text:
-      "Very disappointing and unsafe experience. During my recent bike trip, I had a serious incident involving the driver, and I was physically assaulted. This is completely unacceptable and has made me seriously question the safety standards. Safety should always come first.",
-  },
-  {
-    name: "J J",
-    initial: "J",
-    avatarBg: "#78909C",
-    stars: 1,
-    starColor: "#0E8345",
-    date: "18 Aug 2026",
-    chip: "Uber · Google Play",
-    text:
-      "The driver dropped me at the wrong location approx 1 km away from my destination point. I tried to show him the map in the app and explain that he drove to the wrong place, but he started shouting at me. I didn't feel safe and left the car.",
-    helpful: "2 people found this review helpful",
-  },
-  {
-    name: "Nita Ji",
-    initial: "N",
-    avatarBg: "#FF7043",
-    stars: 1,
-    starColor: "#00B67A",
-    date: "Jun 2026",
-    chip: "Ola · Trustpilot",
-    text: "The moment I tell them the destination, they act completely shocked and cancel the ride.",
-  },
-  {
-    name: "Kavya Vemuri",
-    initial: "K",
-    avatarBg: "#26A69A",
-    stars: 1,
-    starColor: "#00B67A",
-    date: "Jun 2026",
-    chip: "Ola · Trustpilot",
-    text: "Rides keep cancelling and literally had to wait for 4 long hours. Shame on you Ola.",
-  },
-  {
-    name: "Sagar Nakum",
-    initial: "S",
-    avatarBg: "#5C6BC0",
-    stars: 4,
-    starColor: "#FF9500",
-    date: "May 2026",
-    chip: "Rapido · App Store",
-    text:
-      "Ride requests are ignored or canceled by drivers multiple times, leaving users stranded. My sister was left stranded with a child despite the urgent need.",
-  },
+const APP_TABS: { key: AppKey; label: string }[] = [
+  { key: "uber", label: "Uber" },
+  { key: "ola", label: "Ola" },
+  { key: "rapido", label: "Rapido" },
+  { key: "indrive", label: "inDrive" },
+  { key: "manayatri", label: "Mana Yatri" },
 ];
 
-function Stars({ n, color }: { n: number; color: string }) {
+const APP_CHIP: Record<AppKey, string> = {
+  uber: "Uber",
+  ola: "Ola",
+  rapido: "Rapido",
+  indrive: "inDrive",
+  manayatri: "Mana Yatri",
+};
+
+const SHOTS: Shot[] = [
+  /* Uber: the nine App Store reviews gathered for this case study, plus two from Google Play */
+  { img: "/reviews/uber-as-1.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Wrong pick up locations and rude drivers: the driver refused the exact pickup point, cut the call and cancelled the ride" },
+  { img: "/reviews/uber-as-7.jpg", app: "uber", store: "App Store", alt: "Uber App Store review titled Safety concerns with drunk and rude drivers: three bookings in two weeks and a drunk, rude driver every time" },
+  { img: "/reviews/uber-as-3.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Uber is unsafe and drivers are abusive towards women: the driver argued, abused and threatened the rider, and support sent only bot replies" },
+  { img: "/reviews/uber-as-8.jpg", app: "uber", store: "App Store", alt: "Uber App Store review from Hyderabad titled Unsafety hyd: a female rider says the ride did not feel safe for women" },
+  { img: "/reviews/uber-as-4.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Not safe, worst cab drivers: elderly parents were removed from the cab in the middle of the road" },
+  { img: "/reviews/uber-as-9.jpg", app: "uber", store: "App Store", alt: "Uber App Store review titled sabse bekar service not safe for women: drivers skip the set location and demand extra charges" },
+  { img: "/reviews/uber-as-5.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Rude and unprofessional driver hiring: the driver abused the rider and left her on a running road" },
+  { img: "/reviews/uber-play-2.jpg", app: "uber", store: "Google Play", alt: "Uber Google Play review: almost every booking finds no driver, and accepted rides cancel at the last moment" },
+  { img: "/reviews/uber-as-2.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Driver was very rude and drove harshly: the driver refused to come to the rider and drove rashly" },
+  { img: "/reviews/uber-play-1.jpg", app: "uber", store: "Google Play", alt: "Uber Google Play review calling the booking experience a nightmare" },
+  { img: "/reviews/uber-as-6.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Uber Experience: the driver shouted, abused and held the rider until an extra fare was paid" },
+  /* Ola */
+  { img: "/reviews/ola-tp-1.jpg", app: "ola", store: "Trustpilot", tall: true, alt: "Ola Trustpilot review: a woman alone at night watched the pickup time grow while no cab ever arrived" },
+  { img: "/reviews/ola-play-1.jpg", app: "ola", store: "Google Play", alt: "Ola Google Play review: four cab bookings cancelled one after another" },
+  { img: "/reviews/ola-tp-2.jpg", app: "ola", store: "Trustpilot", alt: "Ola Trustpilot review: pathetic services and no security for women passengers" },
+  { img: "/reviews/ola-tp-3.jpg", app: "ola", store: "Trustpilot", alt: "Ola Trustpilot review by Kavya Vemuri: rides kept cancelling and she waited four long hours" },
+  { img: "/reviews/ola-as-1.jpg", app: "ola", store: "App Store", alt: "Ola App Store review titled Safety concern and poor customer care management" },
+  /* Rapido */
+  { img: "/reviews/rapido-as-1.jpg", app: "rapido", store: "App Store", alt: "Rapido App Store review asking for a priority request feature for critical times" },
+  { img: "/reviews/rapido-play-1.jpg", app: "rapido", store: "Google Play", alt: "Rapido Google Play review: locations change midway, prices jump and drivers feel unsafe" },
+  { img: "/reviews/rapido-as-2.jpg", app: "rapido", store: "App Store", alt: "Rapido App Store review titled Abusive driver: a scary situation for the rider and her mom" },
+  { img: "/reviews/rapido-play-2.jpg", app: "rapido", store: "Google Play", alt: "Rapido Google Play review: the ride cancelled itself after ten minutes of waiting" },
+  /* inDrive */
+  { img: "/reviews/indrive-tp-1.jpg", app: "indrive", store: "Trustpilot", alt: "inDrive Trustpilot review from India: the driver tried to touch the rider and she called 100" },
+  { img: "/reviews/indrive-play-1.jpg", app: "indrive", store: "Google Play", alt: "inDrive Google Play review: the driver cancelled fifteen minutes after accepting and support deleted the complaint" },
+  { img: "/reviews/indrive-tp-2.jpg", app: "indrive", store: "Trustpilot", tall: true, alt: "inDrive Trustpilot review from India calling the platform unreliable and unsafe" },
+  { img: "/reviews/indrive-as-1.jpg", app: "indrive", store: "App Store", alt: "inDrive App Store review: a woman alone at midnight got a rude, arrogant driver from the airport" },
+  { img: "/reviews/indrive-as-2.jpg", app: "indrive", store: "App Store", alt: "inDrive App Store review titled Threat to women passengers" },
+  /* Mana Yatri */
+  { img: "/reviews/manayatri-play-1.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: repeat cancellations nearly cost an early morning flight from Hyderabad" },
+  { img: "/reviews/manayatri-play-3.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: a drunk driver misbehaved, and the company wrote back an apology" },
+  { img: "/reviews/manayatri-play-4.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: the auto booked twice and cancelled when the driver was near the pickup" },
+  { img: "/reviews/manayatri-play-2.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: no driver accepts the ride, never usable in an urgency" },
+];
+
+function ShotCard({ s, delay, onOpen }: { s: Shot; delay: number; onOpen: (s: Shot) => void }) {
   return (
-    <span className="inline-flex items-center gap-[2px]" aria-label={`${n} out of 5 stars`}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <svg key={i} width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M12 2.6l2.9 6 6.6 1-4.8 4.6 1.2 6.5L12 17.6l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-1 2.9-6z"
-            fill={i <= n ? color : "#DADCE0"}
-          />
-        </svg>
-      ))}
-    </span>
+    <Reveal delay={delay} className="mb-4 [break-inside:avoid]">
+      <button
+        type="button"
+        onClick={() => onOpen(s)}
+        className="group block w-full cursor-zoom-in rounded-2xl border border-line bg-white p-2 text-left shadow-[0_2px_10px_rgba(0,0,0,0.04)]"
+        aria-label={`Open the full screenshot. ${s.alt}`}
+      >
+        <span className={`relative block overflow-hidden rounded-xl ${s.tall ? "max-h-[340px]" : ""}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={s.img} alt={s.alt} loading="lazy" className="block w-full" />
+          {s.tall && (
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent"
+            />
+          )}
+        </span>
+        <span className="mt-2 flex items-center justify-between px-1 pb-1">
+          <span className="rounded-full bg-mist px-2.5 py-1 text-[10px] font-bold tracking-[0.3px] text-ink-faint">
+            {APP_CHIP[s.app]} · {s.store}
+          </span>
+          <span className="text-[11px] font-bold text-brand opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            {s.tall ? "Read in full" : "Zoom"}
+          </span>
+        </span>
+      </button>
+    </Reveal>
   );
 }
 
-function ReviewCard({ r, delay }: { r: Review; delay: number }) {
+function AppReviews() {
+  const [app, setApp] = useState<AppKey>("uber");
+  const [open, setOpen] = useState<Shot | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(null);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const shots = SHOTS.filter((s) => s.app === app);
   return (
-    <Reveal delay={delay} className="h-full">
-      <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
-        <div className="flex items-center gap-3">
-          <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[14px] font-bold text-white"
-            style={{ background: r.avatarBg }}
-          >
-            {r.initial}
-          </span>
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-[13.5px] font-bold">{r.name}</div>
-            <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-              <Stars n={r.stars} color={r.starColor} />
-              <span className="text-[11px] text-ink-faint">{r.date}</span>
-            </div>
-          </div>
-          <span className="shrink-0 rounded-full bg-mist px-2.5 py-1 text-[10px] font-bold tracking-[0.3px] text-ink-faint">
-            {r.chip}
-          </span>
-        </div>
-        <p className="m-0 mt-3 text-[13px] leading-[1.6] text-ink-soft">&ldquo;{r.text}&rdquo;</p>
-        {r.helpful && (
-          <div className="mt-auto pt-3 text-[11px] text-[#A6A6A6]">{r.helpful}</div>
-        )}
+    <div>
+      <div className="mb-5 flex flex-wrap gap-2">
+        {APP_TABS.map((t) => {
+          const n = SHOTS.filter((s) => s.app === t.key).length;
+          const active = app === t.key;
+          return (
+            <button
+              key={t.key}
+              type="button"
+              onClick={() => setApp(t.key)}
+              aria-pressed={active}
+              className={`rounded-full border px-4 py-2 text-[13px] font-bold transition-colors ${
+                active
+                  ? "border-black bg-black text-white"
+                  : "border-line bg-white text-ink-soft hover:border-black/40"
+              }`}
+            >
+              {t.label} <span className={active ? "text-white/60" : "text-ink-faint"}>{n}</span>
+            </button>
+          );
+        })}
       </div>
-    </Reveal>
+      <div key={app} className="gap-4 [column-width:290px]">
+        {shots.map((s, i) => (
+          <ShotCard key={s.img} s={s} delay={Math.min(i * 0.05, 0.25)} onOpen={setOpen} />
+        ))}
+      </div>
+      {open && (
+        <div
+          className="fixed inset-0 z-[95] overflow-y-auto bg-black/75 p-4 backdrop-blur-sm sm:p-10"
+          role="dialog"
+          aria-modal="true"
+          aria-label={open.alt}
+          onClick={() => setOpen(null)}
+        >
+          <div className="mx-auto w-full max-w-[640px]" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <span className="rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-bold tracking-[0.4px] text-white">
+                {APP_CHIP[open.app]} · {open.store}, as posted
+              </span>
+              <button
+                type="button"
+                onClick={() => setOpen(null)}
+                aria-label="Close the screenshot"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-black"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                  <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={open.img} alt={open.alt} className="block w-full rounded-2xl bg-white" />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -400,16 +418,13 @@ export default function Evidence() {
           Riders are already saying it, in public.
         </h3>
         <p className="mb-6 max-w-[660px] text-[14.5px] leading-[1.6] text-ink-soft [text-wrap:pretty]">
-          These are real reviews from real riders on public review pages, across Uber, Ola and
-          Rapido, shown with the name, rating and date as posted. Left mid ride, refused at
-          night, an hour with no cab, a hospital run that would not confirm. This is the user
-          voice behind the feature.
+          These are screenshots of real reviews from public review pages, captured as they
+          were posted and cropped to the review itself. Review pages give each review no
+          link of its own, so the screenshots carry the proof. Pick an app and read what
+          its riders keep running into at night: refused pickups, cancelled rides, and
+          moments that did not feel safe. Tap any card to read it in full.
         </p>
-        <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
-          {REVIEWS.map((r, i) => (
-            <ReviewCard key={r.name} r={r} delay={Math.min(i * 0.05, 0.3)} />
-          ))}
-        </div>
+        <AppReviews />
       </div>
 
       {/* The problem statement, stated plainly */}

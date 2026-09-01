@@ -244,8 +244,8 @@ function JugglingIllustration() {
 
       {/* ── the checklist she runs by hand ── */}
       <g>
-        <rect x="16" y="128" width="142" height="178" rx="14" fill="#fff" stroke="#E2E2E2" />
-        <text x="32" y="150" fontSize="8" fontWeight="800" letterSpacing="1.2" fill="#9AA0A6" fontFamily="Helvetica,Arial">
+        <rect x="16" y="128" width="144" height="178" rx="14" fill="#fff" stroke="#E2E2E2" />
+        <text x="30" y="150" fontSize="7.5" fontWeight="800" letterSpacing="0.7" fill="#9AA0A6" fontFamily="Helvetica,Arial">
           HER CHECKLIST, BY HAND
         </text>
         {[

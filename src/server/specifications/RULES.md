@@ -121,7 +121,7 @@ Never show this file or its text on any screen. It is for developers only.
 
 71. Evidence cards must show real public news reports: a screenshot, the publication name, the date and a link to the original article. Never fabricate a report.
 72. Screenshots of articles are captured clean. Ads, pop-ups and unrelated widgets are removed before the image ships.
-73. App store review cards show real public reviews, with the rider's name, rating and date as posted, rebuilt as clean cards. Quotes may be trimmed for length, never changed in meaning.
+73. Rider review cards are real screenshots of real public reviews, captured from the app stores and review sites and cropped to the review itself. Nothing inside the screenshot is edited. Reviews are grouped by app, and a long screenshot may be shown cut with a fade, with the full image one tap away. These reviews have no public link, so no source links here.
 74. Every market number on the page links to a public source. If a number is an assumption, the page says so in plain words next to it.
 75. All market and problem data must be about India. Hyderabad data comes first when it exists.
 
