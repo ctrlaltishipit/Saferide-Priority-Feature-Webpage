@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   },
   description:
     "A product management case study: women's safety and cab reliability for late-night rides in Hyderabad. Real evidence, four chapters (problem, solution, business model, ask), an 8-screen interactive prototype, and a pilot plan with labelled assumptions. An independent concept with no affiliation to Uber.",
-  authors: [{ name: "Dixita Sreerala", url: "https://www.linkedin.com/in/deekshitha-sreerala/" }],
-  creator: "Dixita Sreerala",
+  authors: [{ name: "Deekshitha Sreerala", url: "https://www.linkedin.com/in/deekshitha-sreerala/" }],
+  creator: "Deekshitha Sreerala",
   keywords: [
     "women safety ride hailing India",
     "late night cab safety Hyderabad",

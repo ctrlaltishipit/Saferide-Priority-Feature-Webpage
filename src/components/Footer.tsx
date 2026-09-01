@@ -28,7 +28,7 @@ export default function Footer() {
           </nav>
         </div>
         <p className="m-0 max-w-[720px] text-[13px] leading-[1.6] text-[#C9C9C9]">
-          Researched, designed and built by Dixita Sreerala, working alone. Criticism, inputs and advice are welcome:{" "}
+          Researched, designed and built by Deekshitha Sreerala, working alone. Criticism, inputs and advice are welcome:{" "}
           <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="font-bold text-white underline decoration-brand decoration-2 underline-offset-2 hover:text-brand">
             write to me on LinkedIn →
           </a>

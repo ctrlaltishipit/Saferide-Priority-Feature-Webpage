@@ -110,7 +110,7 @@ Phases 2 to 4 shipped together on Sep 1, 2026 at the user's request ("go for it 
 - [x] Re-chaptered the page: Introduction, Background, Research, Design, Prototype, Outcomes, Conclusion (`CHAPTERS` in case.ts, ids intro/context/research/design/prototype/outcomes/conclusion)
 - [x] Chapter headers open with "This chapter in 20 seconds": three lines per chapter for a five-minute reader
 - [x] New blocks in `Story.tsx`: TheBrain (founder card + how I arrived), Methods (six methods with limits, live interviews = 0 said plainly), Iterations (six before → after → why decisions, each linked to a prototype screen), Lessons, TalkToMe (LinkedIn)
-- [x] First person singular everywhere; author Dixita Sreerala named in Background, Conclusion and footer with LinkedIn link; metadata authors/creator
+- [x] First person singular everywhere; author Deekshitha Sreerala named in Background, Conclusion and footer with LinkedIn link; metadata authors/creator
 - [x] Nav: seven chapter names centred from md, seven icons below md, pill "Try it" on phones; case map shows seven cards with takeaways; footer index shows seven chapters
 - [x] Verdict cards close Research, Design, Outcomes and Conclusion; Prototype chapter wraps the demo, the feature set and the with/without comparison
 - Check: build green, nav fits 360/390/768/1024/1440 without overflow, anchors land at 50, width = viewport at 390, screenshots reviewed; commit + deploy

@@ -62,7 +62,7 @@ export const CHAPTERS: ChapterMeta[] = [
     question: "Who is building this, who it is for, and the market it sits in.",
     verdict: "A solo founder, four people in one night ride, and a night market of about 2 lakh rides where every app works after the car moves.",
     summary: [
-      "I am Dixita Sreerala. Every part of this case, from the research to the prototype, is my own work.",
+      "I am Deekshitha Sreerala. Every part of this case, from the research to the prototype, is my own work.",
       "Four people share one night ride: the rider, the contact who waits, the driver, and the platform that decides.",
       "India's ride-hailing market is about $2.5 billion a year. Uber, Ola, Rapido, inDrive and Mana Yatri all start their safety work after pickup.",
     ],
@@ -159,7 +159,7 @@ export const CHAPTERS: ChapterMeta[] = [
 export const LINKEDIN_URL = "https://www.linkedin.com/in/deekshitha-sreerala/";
 
 export const FOUNDER = {
-  name: "Dixita Sreerala",
+  name: "Deekshitha Sreerala",
   role: "Solo founder. The whole team.",
   lines: [
     "There is no company behind this page and no team beside me. The research, the rules, the screens, the prototype and this case are one person's work.",
