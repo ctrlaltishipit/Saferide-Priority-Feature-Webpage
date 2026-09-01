@@ -1,8 +1,9 @@
 /* ───────────────────────── The case, as data ─────────────────────────
-   One source for the chapter structure, the gate cards and the Chapter 1
-   blocks. The nav, the case map, the chapters and the gate cards all read
+   One source for the chapter structure, the verdict cards and the Chapter 1
+   blocks. The nav, the case map, the chapters and the verdict cards all read
    this file, so no label is ever retyped per screen. Plain TypeScript, no
-   JSX, importable from server and client modules alike. */
+   JSX, importable from server and client modules alike. The page never uses
+   the method's internal vocabulary; chapters are named by their content. */
 
 import {
   LATE_NIGHT_START_HOUR,
@@ -39,7 +40,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: "Every night, she builds her own safety plan.",
     question: "Is this problem real, big, and still open on Uber today?",
     verdict: "Cleared on public evidence. Internal baselines still to pull.",
-    gateId: "gate-1",
+    gateId: "problem-verdict",
     status: "live",
   },
   {
@@ -51,7 +52,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: "One toggle, finished before the door closes.",
     question: "Does one flow fix both halves, and can Uber build it without breaking what works?",
     verdict: "Cleared on design and a working prototype. Pilot pending.",
-    gateId: "gate-2",
+    gateId: "solution-verdict",
     status: "live",
   },
   {
@@ -68,24 +69,24 @@ export const CHAPTERS: ChapterMeta[] = [
     id: "money",
     n: 3,
     kicker: "CHAPTER 3",
-    label: "The money",
-    short: "Money",
+    label: "The business model",
+    short: "Business model",
     title: "What it costs, what it moves.",
     question: "Which metric moves, by how much, at what cost to Uber and to the rider?",
     verdict: "Open until the pilot stages read out.",
-    gateId: "gate-3",
+    gateId: "business-verdict",
     status: "next",
   },
   {
     id: "the-case",
     n: 4,
     kicker: "CHAPTER 4",
-    label: "The case",
-    short: "Case",
+    label: "The ask",
+    short: "The ask",
     title: "The ask: eight weeks in Hyderabad.",
     question: "What are we asking for, and what would make us stop?",
     verdict: "The ask, stated. Decision pending.",
-    gateId: "gate-4",
+    gateId: "ask-verdict",
     status: "next",
   },
 ];
@@ -93,7 +94,7 @@ export const CHAPTERS: ChapterMeta[] = [
 export const chapterById = (id: string) => CHAPTERS.find((c) => c.id === id);
 export const LIVE_CHAPTERS = CHAPTERS.filter((c) => c.status === "live");
 
-/* ── lenses and gates ── */
+/* ── lenses and verdicts ── */
 export type LensKey = "riders" | "build" | "business" | "harm";
 export type LensState = "evidence" | "design" | "open";
 
@@ -130,7 +131,7 @@ export interface Gate {
 
 export const GATE_1: Gate = {
   n: 1,
-  id: "gate-1",
+  id: "problem-verdict",
   name: "The problem",
   question: "Is this problem real, big, and still open on Uber today?",
   know: [
@@ -173,7 +174,7 @@ export const GATE_1: Gate = {
 
 export const GATE_2: Gate = {
   n: 2,
-  id: "gate-2",
+  id: "solution-verdict",
   name: "The solution",
   question: "Does one flow fix both halves, and can Uber build it without breaking what works?",
   know: [

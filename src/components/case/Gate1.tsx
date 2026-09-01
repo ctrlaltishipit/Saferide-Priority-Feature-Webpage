@@ -11,7 +11,7 @@ import {
   WHY_UBER_FIRST,
 } from "@/content/case";
 
-/* ────────────────────── Chapter 1 blocks (Gate 1) ──────────────────────
+/* ────────────────────── Chapter 1 blocks: the problem ──────────────────────
    Who decides, who we build for, the jobs she does by hand, why now, the
    bridge from pain to metric, and the lines we never cross. Content comes
    from src/content/case.ts; these files only lay it out. */
@@ -251,7 +251,7 @@ export function Constraints() {
         eyebrow="THE LINES WE DO NOT CROSS"
         size="h3"
         title="Fixed before the first screen was drawn."
-        lede="Constraints found late restart a case. These were set on day one, and nothing at a gate can surprise us."
+        lede="Constraints found late restart a case. These were set on day one, so nothing later in the case can surprise us."
       />
       <Reveal className="flex flex-wrap gap-2">
         {CONSTRAINTS.map((c) => (

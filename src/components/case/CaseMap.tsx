@@ -1,17 +1,17 @@
 import { CHAPTERS } from "@/content/case";
 import { SectionHeader } from "./primitives";
 
-/* The case at a glance: one card per chapter with its gate question and
-   verdict. Doubles as the table of contents, and is what "Read the case
-   study" and the nav's case-study link land on. Chapters that are not
-   built yet render as "Coming next" without a link. */
+/* The case at a glance: one card per chapter with the question it answers
+   and its verdict. Doubles as the table of contents, and is what "Read the
+   case study" lands on. Chapters that are not built yet render as
+   "Coming next" without a link. */
 export default function CaseMap() {
   return (
     <section id="case-study" className="mx-auto max-w-[1240px] scroll-mt-[50px] px-5 pt-12 sm:pt-16">
       <SectionHeader
         eyebrow="THE CASE AT A GLANCE"
         title="Four questions, asked in order."
-        lede="A business case is an argument built from evidence. Each chapter answers one question and ends with a gate: what we know, what we assume, and what would clear it. Jump to any chapter from here."
+        lede="A business case is an argument built from evidence. Each chapter answers one question and closes with a verdict: what we know, what we assume, and what would settle it. Jump to any chapter from here."
       />
       <ol className="m-0 grid list-none gap-2.5 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
         {CHAPTERS.map((c) => {

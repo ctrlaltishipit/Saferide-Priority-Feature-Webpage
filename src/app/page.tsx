@@ -21,9 +21,10 @@ import { Chapter, Container, GateCard, SectionHeader } from "@/components/case/p
 import { WhoDecides, Personas, Jobs, WhyNow, GapToMetric, Constraints } from "@/components/case/Gate1";
 import { GATE_1, GATE_2 } from "@/content/case";
 
-/* The page is the case. Four chapters, one per gate, with the prototype
-   sitting right after chapter 2 as its evidence. Chapters 3 and 4 arrive
-   in later phases; the case map shows them as coming next until then. */
+/* The page is the case. Four chapters (the problem, the solution, the
+   business model, the ask), with the prototype sitting right after chapter 2
+   as its evidence. Chapters 3 and 4 arrive in later phases; the case map
+   shows them as coming next until then. */
 export default function Home() {
   return (
     <div className="overflow-x-clip">
@@ -34,7 +35,7 @@ export default function Home() {
         <Ticker />
         <CaseMap />
 
-        {/* Chapter 1: the problem (Gate 1) */}
+        {/* Chapter 1: the problem */}
         <Chapter id="problem">
           <WhoDecides />
           <div className="mt-14 sm:mt-24">
@@ -51,7 +52,7 @@ export default function Home() {
           <GateCard gate={GATE_1} />
         </Chapter>
 
-        {/* Chapter 2: the solution (Gate 2) */}
+        {/* Chapter 2: the solution */}
         <Chapter id="solution" contained={false}>
           <Container>
             <ConceptOnePage />

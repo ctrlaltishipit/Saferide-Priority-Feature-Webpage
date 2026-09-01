@@ -5,7 +5,7 @@ import { chapterById, LENSES, LENS_STATE, type Gate, type LensRead } from "@/con
 /* ─────────────────────── Case-study primitives ───────────────────────
    Shared building blocks for the chapter structure: the width container,
    the chapter wrapper with its kicker, the section header that used to be
-   copy-pasted per section, the three number tags, and the gate card that
+   copy-pasted per section, the three number tags, and the verdict card that
    closes every chapter. No hooks here, so all of it renders on the server. */
 
 export function Container({
@@ -44,7 +44,7 @@ export function Chapter({
         <span className="text-xs font-bold tracking-[1.6px] text-brand">
           {meta.kicker} · {meta.label.toUpperCase()}
         </span>
-        <span className="text-[13px] font-semibold text-ink-faint">Gate question: {meta.question}</span>
+        <span className="text-[13px] font-semibold text-ink-faint">The question: {meta.question}</span>
       </div>
       <h2 className="m-0 mb-8 max-w-[820px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.05] tracking-[-1.5px] [text-wrap:balance] sm:mb-10">
         {meta.title}
@@ -162,8 +162,8 @@ function GateColumn({
   );
 }
 
-/* The gate card closes a chapter: what we know, what we assume, what
-   would clear the gate, the four lenses in plain words, and one verdict. */
+/* The verdict card closes a chapter: what we know, what we assume, what
+   would settle it, the four lenses in plain words, and one verdict line. */
 export function GateCard({ gate }: { gate: Gate }) {
   return (
     <Reveal className="mt-14 sm:mt-24">
@@ -171,9 +171,9 @@ export function GateCard({ gate }: { gate: Gate }) {
         <div className="rounded-2xl bg-black p-7 text-white sm:p-10">
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
             <div className="text-[11px] font-bold tracking-[1.8px] text-[#8f8f8f]">
-              GATE {gate.n} · {gate.name.toUpperCase()}
+              WHERE {gate.name.toUpperCase()} STANDS
             </div>
-            <div className="text-[11px] font-semibold text-[#8f8f8f]">A checkpoint, read in plain words</div>
+            <div className="text-[11px] font-semibold text-[#8f8f8f]">What we know, what we assume, what would settle it</div>
           </div>
           <div className="mt-2 max-w-[820px] text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
             {gate.question}
@@ -215,7 +215,7 @@ export function GateCard({ gate }: { gate: Gate }) {
                 </li>
               ))}
             </GateColumn>
-            <GateColumn label="WHAT WOULD CLEAR THIS GATE" dot={LENS_STATE.design.color}>
+            <GateColumn label="WHAT WOULD SETTLE IT" dot={LENS_STATE.design.color}>
               {gate.clears.map((c) => (
                 <li key={c} className="flex items-start gap-2">
                   <span className="mt-[9px] h-1.5 w-1.5 flex-none rounded-full bg-[#8FB0FF]" aria-hidden="true" />

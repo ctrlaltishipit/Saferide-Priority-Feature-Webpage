@@ -6,13 +6,15 @@ Everything here is for Deekshitha's own preparation. It is never shipped to the 
 
 ## 1. The story in three minutes
 
-**Gate 1, the problem (40 seconds).** Between 8 PM and 5 AM, booking a cab in India is two problems in one. Fear: four in ten urban women say they feel unsafe, more so after dark (NARI 2025, 12,770 women, 31 cities), and every night a woman like Priya builds her own safety plan by hand: checks the rating, calls a friend, shares the trip, asks for a visible gate. Reliability: 82% of app taxi users say drivers cancel on them, 74% say it happens after the driver hears the destination (LocalCircles via Business Standard, 2026). Uber India already ships a deep toolkit, but every tool starts working after the car does. The pre-booking minutes are empty in every app. Verdict: cleared on public evidence; internal baselines still to pull.
+(Speak it in content words: the problem, the solution, the business model, the ask. The gate and lens vocabulary below is for your own structure only; a hiring manager never needs to hear it.)
 
-**Gate 2, the solution (50 seconds).** SafeRide Priority is one toggle in the booking flow that finishes the safety work before the door closes: a plain-language Contextual Safety Brief, Safer Anchors within 300 m, a Safety Priority Match with a committed pickup (the driver accepts before you see the match, cancel means instant first-in-line rematch), a Safety Circle that shares under your saved policy with links that expire, and a calm Arrival Check-In. Fixed, readable rules on five observable signals, no machine learning in the first version, no crime data, no profiling, abstains on thin data. Everything Uber ships today stays exactly where it is. The 8-screen interactive prototype is the evidence for this gate. Verdict: cleared on design and a working prototype; pilot pending.
+**The problem (40 seconds).** Between 8 PM and 5 AM, booking a cab in India is two problems in one. Fear: four in ten urban women say they feel unsafe, more so after dark (NARI 2025, 12,770 women, 31 cities), and every night a woman like Priya builds her own safety plan by hand: checks the rating, calls a friend, shares the trip, asks for a visible gate. Reliability: 82% of app taxi users say drivers cancel on them, 74% say it happens after the driver hears the destination (LocalCircles via Business Standard, 2026). Uber India already ships a deep toolkit, but every tool starts working after the car does. The pre-booking minutes are empty in every app. Verdict: cleared on public evidence; internal baselines still to pull.
 
-**Gate 3, the money (40 seconds).** Every claim is a delta against Uber's baseline, and I have no pilot data, so every target is a labelled hypothesis: activation 35 to 45% of eligible night bookings, Circle setup 50%+, Priority Match 25%+ on elevated trips, check-in completion 70%+, late-night NPS +8 vs control. Guardrails: median added wait under 5 minutes, zero consent failures, no drop in core booking completion. The rider price signal is +4 min and +₹20 on the priority match; willingness to pay is an open question the pilot's third stage answers. Value logic: trips that complete instead of cancelling (revenue), fewer support escalations (cost), trust (experience). Two watchpoints: priority matching cannibalizing standard night supply, and added wait suppressing bookings. Verdict: open until the pilot reads out.
+**The solution (50 seconds).** SafeRide Priority is one toggle in the booking flow that finishes the safety work before the door closes: a plain-language Contextual Safety Brief, Safer Anchors within 300 m, a Safety Priority Match with a committed pickup (the driver accepts before you see the match, cancel means instant first-in-line rematch), a Safety Circle that shares under your saved policy with links that expire, and a calm Arrival Check-In. Fixed, readable rules on five observable signals, no machine learning in the first version, no crime data, no profiling, abstains on thin data. Everything Uber ships today stays exactly where it is. The 8-screen interactive prototype is the evidence for this gate. Verdict: cleared on design and a working prototype; pilot pending.
 
-**Gate 4, the case (30 seconds).** The ask: an eight-week opt-in pilot in Hyderabad's IT corridor, five stages from research prototype through shadow mode to limited opt-in to priority matching to zone expansion, a small squad, and three stop rules. Impact: fewer nights where a woman is her own safety officer, and a night market that grows because the ride actually comes.
+**The business model (40 seconds).** Every claim is a delta against Uber's baseline, and I have no pilot data, so every target is a labelled hypothesis: activation 35 to 45% of eligible night bookings, Circle setup 50%+, Priority Match 25%+ on elevated trips, check-in completion 70%+, late-night NPS +8 vs control. Guardrails: median added wait under 5 minutes, zero consent failures, no drop in core booking completion. The rider price signal is +4 min and +₹20 on the priority match; willingness to pay is an open question the pilot's third stage answers. Value logic: trips that complete instead of cancelling (revenue), fewer support escalations (cost), trust (experience). Two watchpoints: priority matching cannibalizing standard night supply, and added wait suppressing bookings. Verdict: open until the pilot reads out.
+
+**The ask (30 seconds).** The ask: an eight-week opt-in pilot in Hyderabad's IT corridor, five stages from research prototype through shadow mode to limited opt-in to priority matching to zone expansion, a small squad, and three stop rules. Impact: fewer nights where a woman is her own safety officer, and a night market that grows because the ride actually comes.
 
 ## 2. Checklist crosswalk
 
@@ -153,3 +155,26 @@ Positioning map sketch (for the interview, not the page): x axis "when protectio
 
 ## 15. Brand voice self-check
 Plain words, short sentences. No em dashes. No "X, not Y". No jargon. No tool names on the page. Greps: `grep -rn "—" src/components src/content`; `grep -rn ", not " src/components src/content`.
+
+## 16. What the method asks of an internal feature case (mode notes, from the Casecraft source)
+These are the "existing product upgrade" twists on the standard items. Use them when a hiring manager asks how the case differs from a startup pitch.
+- **Personas**: current users segmented by behaviour in product data, not demographics. (Ours are composite from public evidence; the pilot's shadow stage would re-cut them by behaviour.)
+- **Problem evidence pack**: product data joins the interviews: drop-off at the painful step, tickets naming it, feature requests.
+- **Market sizing**: size the affected user base and the value pool inside it, not the whole market. (Our SAM/SOM does this: night trips, then Hyderabad.)
+- **Concept variants**: score with RICE or ICE against the baseline metrics from the audit.
+- **Willingness to pay**: for an internal case the probe is a chargeback or budget commitment from the benefiting unit. For SafeRide that is the product council's budget, plus the rider-side +₹20 test in pilot stage 3.
+- **Revenue and pricing model**: business value against the baseline, signed by finance: revenue lift (trips completed that would have cancelled), cost saved (support escalations), experience gained (NPS, perceived control).
+- **Unit economics**: incremental margin per affected user per year, from pilot data.
+- **Sales plan**: the funnel is internal rollout: awareness, activation, habit, with owners per stage.
+- **Financial plan**: incremental: cost of build and run against value of the lift, with payback period.
+- **Investment ask**: a budget with opportunity cost stated: what does not get built instead.
+- **Evidence standards**: weak = one source or secondhand; solid = two independent sources, one first degree; strong = triangulated first degree with numbers. Honest read of this case today: solid at best on the problem (NARI + LocalCircles + public reviews agree), design-only on the solution, open on the money. First-degree evidence arrives only with the pilot.
+
+## 17. Where cases die, checked against this case
+- Sizing with no bottom-up check → we have top-down only; the bottom-up (Hyderabad night trips × attach × fee) belongs in the pilot's shadow stage. Say so.
+- Personas from imagination → ours are composite and labelled; interviews are the first thing the pilot buys.
+- Ten features instead of one job → the site leads with one toggle and six jobs; five features sit under it, P0/P1 marked.
+- Pricing asserted, never probed → +₹20 is a design spec, marked as an open question.
+- Unit economics missing while the P&L shows crores → no P&L on the site by design.
+- Competitors listed but white space unexplained → the fit card gives the structural reason (no team owns the pre-booking minute).
+- No kill criteria → stop rules ship in chapter 4: any consent failure, a drop in core booking completion, median added wait above five minutes.

@@ -1,6 +1,6 @@
 # Casecraft checklist reference: "Existing product upgrade" mode
 
-Transcribed from the Casecraft playbook screenshots (Sahasrajit Krishnan's guide) for the mode **Existing product upgrade**. Items marked *(screenshot pending)* were only seen as titles with lens, weight and core flags; drop the P3 to P8 screenshots into a folder on disk (for example `casecraft screenshots/` at the project root) and this file can be completed from them.
+Transcribed from the Casecraft playbook screenshots (Sahasrajit Krishnan's guide) for the mode **Existing product upgrade**. P0 to P2 were transcribed from screenshots; P3 to P8 from the Casecraft app source the author shared (Sep 1, 2026). Mode-only items for other modes are named but not detailed.
 
 Legend: lens letters D Desirability, F Feasibility, V Viability, I Integrity. Weight w1 to w3. "core" means the gate cannot clear while the item is open. Dots in the app show weight (one to three).
 
@@ -177,54 +177,244 @@ Each item in the app has: a three-state marker (open / half / done), WHAT, WHY, 
 - CLEARS: A data partner agrees the suppression estimates are defensible.
 - TOOLS: Success Metrics.
 
-## P3 Ideate *(screenshot pending)*
-- Value proposition · D · w3 · core
-- Solution concept one-pager · D/F · w3 · core
-- Concept variants and selection · D/V · w2
-- Doblin ten-types sweep · V/D · w2
-- To-be journey and blueprint · D/F · w2
-- Assumption map · I · w3 · core
+## P3 Ideate
+"Now, and only now, the solution. Concepts, the value proposition, and the assumptions they smuggle in." What it is: the answer pass. Why: a solution designed before the problem is proven is decoration; one that maps pain to mechanism, with its risks listed, is an argument.
 
-## P4 Validate the solution · Gate 2 *(screenshot pending)*
-- Prototype and visual walkthrough · D/F · w3 · core
-- Experiment cards · I/D · w3 · core
-- Willingness-to-pay probe · V · w3 · core
-- Feasibility spike · F · w2 · core
-- Pilot design · V/I · w2 · core
-- Loop log · I · w1
+### Value proposition · core · w3 · D
+- WHAT: Pains mapped to relievers, gains to creators, compressed into one sentence a buyer can repeat.
+- WHY: The value proposition is the case's spine in miniature. If it needs a paragraph, the concept is not ready.
+- HOW: 1. Fill the canvas: jobs, pains, gains on the right, your relievers and creators on the left. 2. Kill relievers that map to no validated pain. 3. Write the sentence: for [persona] who [pain], [name] does [outcome], unlike [alternative]. 4. Read it to three target users. Ask them to say it back.
+- OUTPUT: A completed canvas and a one-sentence value proposition. CLEARS: Target users can repeat the sentence back in their own words, roughly right. TOOLS: Value Proposition Canvas.
 
-## P5 Materialize and build *(screenshot pending)*
-- Business Model Canvas · V · w2 · core
-- MVP scope · F/D · w2 · core
-- Product roadmap · F/V · w2
-- Operational plan and Gantt · F · w2
-- Team, competences and gaps · F/I · w2 · core
-- Staged development plan · V/I · w2 · core
-- Data and telemetry plan · F/I · w2
+### Solution concept one-pager · core · w3 · D/F
+- WHAT: The solution in plain words: what it is, how it kills each top pain, and what it deliberately does not do.
+- WHY: Simple and understandable is a feature of the thinking. Complexity here predicts scope death later.
+- HOW: 1. Describe the solution in under 150 words. 2. Map each top-three pain to the mechanism that kills it. 3. Write the not-list: adjacent things you will not build, and why. 4. Test comprehension with a stranger after one read.
+- OUTPUT: A concept one-pager with a not-list. CLEARS: A cold reader explains the concept back correctly after one read. TOOLS: Concept Walkthrough, Service Image.
 
-## P6 Monetize and validate · Gate 3 *(screenshot pending)*
-- Revenue and pricing model · V · w3 · core
-- Unit economics · V · w3 · core
-- Pilot run and readout · D/V · w3 · core
-- Retention and pull evidence · D · w2
+### Concept variants and selection · w2 · D/V
+- WHAT: Two or three genuinely different concepts, scored against explicit criteria before one wins.
+- WHY: The first concept is rarely the best one. A documented selection disarms the reader who asks what else you considered.
+- HOW: 1. Generate variants that differ in mechanism. 2. Score against criteria set in advance: pain coverage, feasibility, speed to evidence. 3. Record the losers and why.
+- OUTPUT: A scored variant matrix with a winner. CLEARS: Criteria were written before scoring, and the losing variants are archived with reasons. TOOLS: Brainstorming, Evaluation Matrix.
+- Mode note (existing): Score variants with RICE or ICE against the baseline metrics from your audit.
 
-## P7 Grow and scale *(screenshot pending)*
-- Positioning strategy · V/D · w2
-- PMCs, prioritized · V · w2 · core
-- Marketing mix per PMC · V · w2
-- Growth model and north star · V/D · w2
-- Sales plan · V · w2 · core
-- Channel tests · V/I · w2
+### Doblin ten-types sweep · w2 · V/D
+- WHAT: A pass over Doblin's ten innovation types. Configuration: profit model, network, structure, process. Offering: product performance, product system. Experience: service, channel, brand, customer engagement.
+- WHY: Innovation rarely fails for lack of creativity; it fails for lack of discipline, and focusing only on product is the surest way. Product and technology are the easiest types to copy. Cases that stack types defend themselves.
+- HOW: 1. Walk all ten types against the concept. 2. Mark each: innovate, match the market, or ignore. 3. Diagnose the industry first: which types do incumbents overlook? 4. Use the tactics catalog per type as prompts. 5. Three types beyond product performance is the floor; five, integrated, usually reinvents a category. 6. Fold the strongest types into the concept and the business model.
+- OUTPUT: A ten-types map with the industry diagnostic. CLEARS: At least three types used deliberately, you can say how each shows up, and at least one sits where your industry underinvests. TOOLS: Doblin Ten Types.
 
-## P8 Assemble the case · Gate 4 *(screenshot pending)*
-- Financial plan · V · w3 · core
-- Scenarios and sensitivity · V/I · w2
-- Model-specific metrics · V · w1
-- Investment ask and use of funds · V/I · w2 · core
-- Risk register · I/V · w2 · core
-- Legal, regulatory and IP · I/F · w1
-- Impact statement · I · w2 · core
-- The narrative and pitch map · I/D · w3 · core
+### To-be journey and blueprint · w2 · D/F
+- WHAT: The same journey, redrawn with your solution in it. The delta from the as-is map is the pitch.
+- WHY: Readers feel journeys more than feature lists. The before and after pair is your most persuasive visual.
+- HOW: 1. Redraw the journey with your solution at the breakpoints. 2. Update the blueprint layers. 3. Annotate the delta: minutes saved, steps removed, moments of truth turned. 4. Keep the honest parts: steps that stay painful.
+- OUTPUT: A to-be journey map paired with the as-is. CLEARS: The delta is annotated step by step. TOOLS: Journey Map, Service Blueprint, Emotional Journey.
+
+### Assumption map · core · w3 · I
+- WHAT: Every belief the concept smuggles in, plotted by importance against certainty. The top-right corner is your test list.
+- WHY: Silent assumptions are how confident teams die. Naming them is the highest-leverage hour in the whole case.
+- HOW: 1. List assumptions across desirability, feasibility, viability and integrity. 2. Plot importance against how little evidence you hold. 3. The important-and-unknown corner becomes the experiment backlog. 4. Beliefs like "users will naturally share this" or "customers will pay a premium" go straight to the corner.
+- OUTPUT: An assumption grid and a riskiest-assumptions list. CLEARS: Each top-corner assumption has an experiment card queued. TOOLS: Hypothesis Generation.
+
+(Mode-only items skipped here: Flywheel design, ecosystem mode only.)
+
+## P4 Validate the solution · Gate 2
+"Prototype, test, price-probe. Built to loop: persist, pivot or kill, and log every pass."
+
+### Prototype and visual walkthrough · core · w3 · D/F
+- WHAT: Something a user can see or touch: clickable prototype, storyboard, concierge run. The demo your case shows.
+- WHY: Words let people be polite. Prototypes force a reaction you can read. This is also the visual walkthrough the final document needs.
+- HOW: 1. Build the cheapest artifact that carries the core job end to end. 2. Put it in front of 5 to 10 target users. Watch, do not pitch. 3. Run the five-second test. 4. Record the walkthrough.
+- OUTPUT: A prototype plus a recorded walkthrough. CLEARS: Five plus target users interacted with it, and their reactions are logged. TOOLS: Rough Prototyping, Experience Prototypes, Service Prototype.
+
+### Experiment cards · core · w3 · I/D
+- WHAT: One card per riskiest assumption: hypothesis, method, metric, threshold written before the run, result, decision.
+- WHY: The threshold written in advance is what separates evidence from rationalization.
+- HOW: 1. One card per top assumption. 2. Pick the cheapest honest method: discovery tests first, validation tests as risk grows. 3. Write metric and pass threshold before running. 4. Mind rigor: one variable, a baseline, enough n. 5. Run, record, decide: persist, pivot or kill.
+- OUTPUT: Completed experiment cards with learning cards. CLEARS: Every card had its threshold written before the experiment ran. TOOLS: Hypothesis Generation, Success Metrics.
+
+### Willingness-to-pay probe · core · w3 · V
+- WHAT: Real price signals before you build: price-sensitivity questions, LOIs, pre-orders, paid pilot commitments.
+- WHY: Interest is free. Money is evidence.
+- HOW: 1. Van Westendorp or simple price laddering in interviews. 2. Ask for the strongest commitment the stage allows. 3. Note the price at which faces change. 4. Log refusals too.
+- OUTPUT: A WTP readout with commitments listed. CLEARS: At least one costly commitment exists: money, signature, or scheduled deployment.
+- Mode note (existing): For internal cases the probe is a chargeback or budget commitment from the benefiting unit.
+
+### Feasibility spike · core · w2 · F
+- WHAT: A thin technical proof of the hardest part, plus the build, buy or partner call, with a cost envelope.
+- WHY: Cases assume the hard part works. A one-week spike now is cheaper than a two-quarter discovery later.
+- HOW: 1. Name the riskiest technical or operational element. 2. Prove it thin. 3. Decide build, buy or partner per component. 4. Write the cost envelope, rough but honest.
+- OUTPUT: A spike result and a build-buy-partner table. CLEARS: The hardest element ran once, end to end, in any ugly form.
+
+### Pilot design · core · w2 · V/I
+- WHAT: The first stage of your strategy, specified: scope, participants, duration, success criteria and kill criteria.
+- WHY: A pilot without pre-written criteria validates nothing.
+- HOW: 1. Scope the smallest pilot that tests the core promise. 2. Set n, duration, and the metric bar. 3. Write the kill criteria with the same care. 4. Agree who reads the readout and what each result triggers.
+- OUTPUT: A pilot design document. CLEARS: Success and kill criteria are written and shared before the pilot starts. TOOLS: Service Prototype, Success Metrics.
+
+### Loop log · w1 · I
+- WHAT: The record of each pass through this gate: what you believed, what you learned, what changed.
+- WHY: Pivots without records become folklore. The log shows the idea survived contact.
+- HOW: 1. After each loop, write: belief, evidence, decision. 2. Tag it persist, pivot or kill.
+- OUTPUT: A dated loop log. CLEARS: Every gate failure so far has a log entry.
+
+## P5 Materialize and build
+"Turn the validated concept into a machine: model, scope, roadmap, team, operations." Readers fund machines, not ideas.
+
+### Business Model Canvas · core · w2 · V
+- WHAT: All nine blocks, filled from evidence gathered so far, not from hope.
+- WHY: The canvas is where the case's parts prove they fit each other. Empty or vague blocks are unpriced risk.
+- HOW: 1. Customers and value propositions from validated personas and the VP canvas. 2. Channels and relationships from where those users actually are. 3. Revenue from the WTP probe, costs from the spike envelope. 4. Stress against the five patterns: unbundling, long tail, multi-sided platform, freemium, open. 5. Mark each block: evidenced, assumed, or unknown.
+- OUTPUT: A canvas with every block marked by confidence. CLEARS: No block is blank and each one traces to an upstream item. TOOLS: Business Model Canvas, Strategyzer.
+
+### MVP scope · core · w2 · F/D
+- WHAT: The smallest build that delivers the core job end to end, plus the recorded cut list.
+- WHY: MVPs die of too much and of too little. The cut list is proof you chose.
+- HOW: 1. Write the full backlog, then cut to the minimum that completes the job. 2. Inclusion test: would the product be valuable without this? 3. Exclusion test: is it needed for the first instance? 4. Publish the cut list beside the scope.
+- OUTPUT: An MVP scope with a cut list. CLEARS: Someone outside the team challenged the scope and it survived with reasons. TOOLS: User Stories.
+
+### Product roadmap · w2 · F/V
+- WHAT: Now, next, later, keyed to validation milestones rather than dates alone.
+- WHY: A date-only roadmap promises output. A milestone roadmap promises learning.
+- HOW: 1. Lay out now, next and later. 2. Gate each horizon on evidence. 3. Keep later honest: themes, not features.
+- OUTPUT: A milestone-gated roadmap. CLEARS: Each horizon names the evidence that unlocks it. TOOLS: Service Roadmap.
+
+### Operational plan and Gantt · w2 · F
+- WHAT: Workstreams, owners, dependencies and the critical path, drawn as a Gantt for the build and pilot window.
+- WHY: The reader funds a plan, not a vibe.
+- HOW: 1. Streams with named owners. 2. Dependencies and critical path. 3. Time-box to the pilot readout. 4. Add the operational load: support, onboarding, content, compliance.
+- OUTPUT: A Gantt to pilot readout, with owners. CLEARS: The critical path is marked and every stream has one accountable name. TOOLS: Service Specifications.
+
+### Team, competences and gaps · core · w2 · F/I
+- WHAT: The skills this venture needs, who covers each, and the honest gaps with a plan: hire, contract or advise.
+- WHY: Readers fund teams. An honest gap with a plan reads stronger than a padded skills matrix.
+- HOW: 1. List needed competences: build, sell, operate, comply. 2. Map people to them; mark real depth. 3. For each gap: hire, contract, advisor or partner, with a date. 4. Name the missing hire that would change the odds most.
+- OUTPUT: A competence map with a gap plan. CLEARS: Gaps are stated plainly and each has a dated plan.
+
+### Staged development plan · core · w2 · V/I
+- WHAT: The strategic vision cut into stages: pilot, v1, expansion, each with entry criteria, exit criteria and funding.
+- WHY: Stages let a reader fund one step while seeing the whole road.
+- HOW: 1. Write the 3-year vision in three sentences. 2. Cut the road into stages with entry and exit criteria. 3. Attach funding per stage; money unlocks on evidence. 4. Stage one must be the pilot you already designed.
+- OUTPUT: A staged plan with criteria and funding per stage. CLEARS: Every stage has written exit criteria, including stage zero. TOOLS: Future Backcasting, Service Roadmap.
+
+### Data and telemetry plan · w2 · F/I
+- WHAT: What you will measure from day one: activation, retention, funnel events, and where the numbers live.
+- WHY: Gates 3 and 4 run on this data. Instrument now or argue from anecdotes later.
+- HOW: 1. Define the north star and its input events. 2. Instrument the funnel before the pilot. 3. Decide where the data lives and who reads it weekly.
+- OUTPUT: A tracking plan wired before pilot start. CLEARS: A test event has flowed end to end into the dashboard. TOOLS: Success Metrics.
+
+(Mode-only items skipped: NewCo structure and governance, corporate; Platform and partner plan, ecosystem.)
+
+## P6 Monetize and validate · Gate 3
+"Run the pilot, read the numbers. One unit of this business must make money, or show a credible path."
+
+### Revenue and pricing model · core · w3 · V
+- WHAT: The model chosen and the price set, from WTP evidence: subscription, transaction, licence, usage, or value share.
+- WHY: Pricing is the highest-leverage decision in the case. It was probed at Gate 2. Now it gets committed to paper.
+- HOW: 1. Choose the model that matches how value is felt. 2. Scan Doblin's profit model tactics: subscription, metered use, installed base, switchboard, freemium, bundled pricing, risk sharing. 3. Set the price from the WTP probe, not cost plus comfort. 4. Design the ladder. 5. State what is deliberately free, and why.
+- OUTPUT: A pricing model with a ladder. CLEARS: The price traces to WTP evidence and at least one buyer accepted it.
+- Mode note (existing): The model here is business value: revenue lift, cost saved or experience gained, priced against the baseline and signed by finance.
+
+### Unit economics · core · w3 · V
+- WHAT: The per-unit truth: CAC, LTV, payback months, contribution margin. Marketplace models add GMV, take rate, liquidity and repeat rate.
+- WHY: A P&L can hide anything. A unit cannot.
+- HOW: 1. CAC from real channel tests. 2. LTV from observed retention, conservative curve. 3. Payback in months and contribution margin per unit. 4. For an internal case: incremental margin per affected user, for example ₹ per user per year.
+- OUTPUT: A unit economics sheet. CLEARS: CAC and retention inputs come from your own tests or pilot.
+
+### Pilot run and readout · core · w3 · D/V
+- WHAT: The designed pilot, executed, read against the criteria written before it started, closed with a decision memo.
+- WHY: The strongest single artifact a business case can contain.
+- HOW: 1. Run as designed; log any mid-flight change. 2. Read against the pre-written criteria. 3. Decision memo: continue, pivot, or stop. 4. Collect testimony: quotes, usage clips, renewal intent.
+- OUTPUT: A pilot readout and decision memo. CLEARS: Results are compared against the original criteria document, verbatim.
+
+### Retention and pull evidence · w2 · D
+- WHAT: Cohort retention, activation depth, and organic pull: referrals, waitlists, users returning uninvited.
+- WHY: Retention is desirability measured honestly. Pull is the earliest signal of product-market fit.
+- HOW: 1. Cohort curves from the pilot. 2. Find the flattening point. 3. Log unprompted pull.
+- OUTPUT: Cohort curves with a pull log. CLEARS: At least one cohort curve exists from real usage.
+
+## P7 Grow and scale
+"Positioning, PMCs, marketing mix, sales machine, growth loops. Spend follows evidence."
+
+### Positioning strategy · w2 · V/D
+- WHAT: The category you claim, who it is for, what you replace, and the proof. The sentence sales will say.
+- HOW: 1. Choose the frame: new category, better X, or X for Y. 2. Write: for [segment], [name] is the [category] that [proof]. 3. Stress-test against the positioning map. 4. Say it aloud to a buyer.
+- CLEARS: A real buyer heard it and placed you correctly against alternatives.
+
+### PMCs, prioritized · core · w2 · V
+- WHAT: Product-market combinations ranked, the beachhead chosen with reasons, and the expansion sequence.
+- HOW: 1. List every viable PMC. 2. Score: pain intensity, access, willingness to pay, reference value. 3. Choose the beachhead; write why runners-up wait. 4. Sequence expansion with triggers.
+- CLEARS: The beachhead has a written rationale a skeptic can audit. TOOLS: Offering Map, Evaluation Matrix.
+
+### Marketing mix per PMC · w2 · V
+- WHAT: For each prioritized PMC: product variant, price, place and promotion, with budget and expected CAC per channel.
+- CLEARS: Every channel line carries a budget and an expected CAC.
+
+### Growth model and north star · w2 · V/D
+- WHAT: The north star metric, its input tree, and the loops that drive it.
+- HOW: 1. Pick the north star that tracks delivered value, not activity. 2. Draw the input tree. 3. Design one or two loops. 4. Assign an owner and a weekly number to each input.
+- CLEARS: Each input has an owner and a current weekly reading.
+
+### Sales plan · core · w2 · V
+- WHAT: The funnel end to end: inbound and outbound motions, list building, nurturing cadence, stage conversions, projections and KPIs.
+- CLEARS: The projection is computed from stage conversions, not asserted.
+- Mode note (existing): For internal adoption the funnel is rollout: awareness, activation, habit, with owners per stage.
+
+### Channel tests · w2 · V/I
+- WHAT: Two or three channels tested small before budget concentrates, with CAC per channel from real spend.
+- CLEARS: At least two channels have a measured CAC from your own spend.
+
+## P8 Assemble the case · Gate 4
+"Financials, risks, the ask, the impact close. Then the narrative, in order, for a cold reader." Assembly is a craft step, not a stapling step.
+
+### Financial plan · core · w3 · V
+- WHAT: Three-year P&L, cash flow statement, and the ratios a reader checks: gross margin, burn multiple, runway, working capital.
+- HOW: 1. Revenue from the sales projection. 2. Costs from the ops plan and team map. 3. Monthly cash flow; note the trough. 4. Ratios stated plainly.
+- CLEARS: Revenue traces to the funnel model and the cash trough is identified.
+- Mode note (existing): The plan here is incremental: cost of build and run against value of the lift, with payback period.
+
+### Scenarios and sensitivity · w2 · V/I
+- WHAT: Base, bear and bull runs of the model, plus the one assumption that moves the outcome most.
+- CLEARS: The most sensitive assumption is named and linked to the evidence behind it.
+
+### Model-specific metrics · w1 · V
+- WHAT: The metric set your model demands: SaaS wants MRR, NRR, churn; marketplaces GMV, take rate, liquidity.
+- CLEARS: The panel matches your revenue model archetype.
+
+### Investment ask and use of funds · core · w2 · V/I
+- WHAT: The amount, the tranches tied to stage criteria, what the money buys, and what milestone the runway reaches.
+- HOW: 1. Size the ask from the cash trough plus honest buffer. 2. Split into tranches keyed to the staged plan. 3. Use of funds by category. 4. State the next gate: what unlocks more money, what stops it.
+- CLEARS: Each tranche names its unlock criteria from the staged plan.
+- Mode note (existing): The ask is a budget with opportunity cost stated: what does not get built instead.
+
+### Risk register · core · w2 · I/V
+- WHAT: The top five risks scored by likelihood and impact, each with an owner, a trigger and a mitigation.
+- HOW: 1. Risks across market, execution, technology, regulation, people. 2. Score likelihood and impact; keep the top five visible. 3. Owner, trigger, mitigation for each. 4. Include the kill risk: the event that should end the venture.
+- CLEARS: Every risk has an owner and a trigger, and one of them is a kill condition. TOOLS: Issue Cards.
+
+### Legal, regulatory and IP · w1 · I/F
+- WHAT: Licences needed, data protection duties, sector rules, and where your IP position stands.
+- CLEARS: Someone with legal competence has reviewed it, even informally.
+
+### Impact statement · core · w2 · I
+- WHAT: The close: who benefits, what changes in the world, externalities owned honestly, jobs and environment where relevant.
+- WHY: The case ends on integrity because that is the lens money cannot fake. It is also the paragraph people remember.
+- HOW: 1. Who is better off, concretely, if this works at scale. 2. Own the externalities and what you will do about them. 3. Tie impact to a measurable proxy you already track. 4. One page.
+- CLEARS: It names at least one negative externality and a real response to it. TOOLS: Impact Journey.
+
+### The narrative and pitch map · core · w3 · I/D
+- WHAT: The case assembled in reading order, plus a ten-slide pitch mapping and the five-minute spoken walkthrough.
+- HOW: 1. Assemble in the order: world, people, pain, proof, answer, machine, money, ask. 2. Ten slides, one claim per slide, evidence in the appendix. 3. Script the five-minute walkthrough against the decision customer's three questions. 4. Cut everything that does not change the decision.
+- CLEARS: A cold reader followed the document without you in the room and asked informed questions.
+
+## The Case Walkthrough (the linear version): 17 steps in 5 acts
+Act I Discover: 01 ecosystem intro (with why-now) · 02 user and buyer personas · 03 pain statements for both · 04 market sizing and data. Check: pain proven, sized, costed? (else loop for more research, or park a weak problem)
+Act II Position: 05 existing solutions and what stays unsolved · 06 value proposition · 07 solution concept · 08 visual demo/walkthrough. Check: users say it back, demo lands? (else rework 06 to 07)
+Act III The machine: 09 product roadmap · 10 revenue and pricing model, or business value.
+Act IV The plan: 11 strategic vision, development stages, pilot validation · 12 Business Model Canvas · 13 Doblin sweep. Check: pilot clears the pre-written criteria? (persist; else pivot to a new answer for the same problem, or kill)
+Act V Deliver: 14 team, competences, ops plan with Gantt · 15 marketing plan and sales plan · 16 financial plan and the ask · 17 risks, legal, and the impact statement to close.
+Watch-outs the walkthrough flags: cases die at the wallet; a top-down number alone is a press release; ten features is not a concept; a pilot without pre-written criteria just spends; no kill criteria tells a sponsor you plan to spend until stopped.
 
 ## The four gates (from the Gates view)
 "Each evidenced item earns weight times strength. A lens bar shows points earned over points possible in that gate's span, with the tick marking the threshold. A gate clears only when every required lens beats its threshold and every core item in the span is evidenced. When it does not clear, the gate tells you what to test next. That is the loop."

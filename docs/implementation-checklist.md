@@ -4,6 +4,8 @@ Phase-wise, step-wise. Each step names its check. Tick a box only after the chec
 
 Legend: `[ ]` open · `[x]` done · `[~]` done with a note
 
+Standing rule (user, Sep 1 2026): the page never uses the method's internal vocabulary. No gate names, phase codes or lens acronyms in any user-visible string. Chapters are named by content (The problem · The solution · The business model · The ask); the closing card is a verdict card ("Where the problem stands": what we know / what we assume / what would settle it). Anchor ids: `#problem-verdict`, `#solution-verdict`, `#business-verdict`, `#ask-verdict`. Code identifiers (GateCard, GATE_1) may keep the method names.
+
 ## Phase 1: skeleton + Chapter 1 (Gate 1) + minimal Gate 2
 
 ### Docs first
@@ -52,8 +54,8 @@ Legend: `[ ]` open · `[x]` done · `[~]` done with a note
 - Check: `grep -rn "—" src/components src/content` = 0; every `", not "` hit reviewed; no tool names in copy
 
 ### Gate cards + rules
-- [x] GateCard 1 (know / assume / clears / lenses / verdict)
-- [x] GateCard 2 minimal (H1–H4 as assumptions; clears = pilot stages 2 and 3)
+- [x] Verdict card 1 (know / assume / what would settle it / lenses / verdict), no gate vocabulary
+- [x] Verdict card 2 minimal (H1–H4 as assumptions; settled by pilot stages 2 and 3)
 - [x] RULES.md: rules 79+ for chapters, gate cards, number tags, no outcome claimed, scroll-mt convention
 - Check: build, full visual pass at 390 and 1440, Reveal fires on gate cards
 - [x] Commit ("Case restructure phase 1: chapters by gate, Gate 1 content, chapter nav"), deploy via clean-dir rsync, confirm live, update memory
