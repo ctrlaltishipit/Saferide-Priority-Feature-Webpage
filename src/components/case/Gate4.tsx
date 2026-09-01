@@ -80,7 +80,7 @@ export function Roadmap() {
 
 export function TheAsk() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE ASK"
         glyph="hand"
@@ -117,7 +117,7 @@ export function TheAsk() {
 
 export function Impact() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader eyebrow="THE IMPACT" glyph="ripple" title="Who is better off, who could be worse off, and what I do about it." />
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
         <Reveal className="grid items-center gap-4 rounded-2xl border border-line bg-mist p-6 sm:col-span-2 sm:grid-cols-[1.3fr_1fr]">
@@ -147,7 +147,7 @@ export function Impact() {
 export function CaseInSixty() {
   const rows = CHAPTERS.filter((c) => c.n);
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE CASE IN SIXTY SECONDS"
         glyph="timer"
@@ -180,7 +180,7 @@ export function CaseInSixty() {
 
 export function AboutThisCase() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader eyebrow="HOW THIS CASE WAS BUILT" glyph="wrench" size="h3" title="Problem first. Rules before screens. Evidence with its tags on." />
       <Reveal className="rounded-2xl border border-line bg-mist p-5 sm:p-6">
         <ol className="m-0 flex list-none flex-col gap-3 p-0">

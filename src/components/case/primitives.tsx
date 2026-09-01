@@ -92,11 +92,11 @@ export function Chapter({
         </span>
         <span className="text-[13px] font-semibold text-ink-faint">The question: {meta.question}</span>
       </div>
-      <h2 className={`m-0 max-w-[820px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.05] tracking-[-1.5px] [text-wrap:balance] ${meta.summary?.length ? "mb-6" : "mb-8 sm:mb-10"}`}>
+      <h2 className={`m-0 max-w-[820px] text-[clamp(28px,3.4vw,42px)] font-extrabold leading-[1.05] tracking-[-1.3px] [text-wrap:balance] ${meta.summary?.length ? "mb-5" : "mb-6 sm:mb-8"}`}>
         {meta.title}
       </h2>
       {meta.summary?.length ? (
-        <div className="mb-10 rounded-2xl border border-line bg-mist p-4 sm:mb-12 sm:p-5">
+        <div className="mb-7 rounded-2xl border border-line bg-mist p-4 sm:mb-8 sm:p-5">
           <div className="mb-3 flex items-center gap-2 text-[11px] font-bold tracking-[1.8px] text-ink-faint">
             <span className="h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
             THIS CHAPTER IN 20 SECONDS
@@ -113,7 +113,7 @@ export function Chapter({
     </Container>
   );
   return (
-    <section id={id} className={`scroll-mt-[50px] pt-14 sm:pt-24 ${className}`}>
+    <section id={id} className={`scroll-mt-[50px] pt-10 sm:pt-16 ${className}`}>
       {kicker}
       {contained ? <Container>{children}</Container> : children}
     </section>
@@ -209,13 +209,13 @@ export function SectionHeader({
       </div>
       {size === "h2" ? (
         <h2
-          className={`m-0 ${lede ? "mb-3" : "mb-[34px]"} max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] ${titleClassName}`}
+          className={`m-0 ${lede ? "mb-3" : "mb-[34px]"} max-w-[760px] text-[clamp(26px,3vw,38px)] font-extrabold leading-[1.08] tracking-[-1.1px] ${titleClassName}`}
         >
           {title}
         </h2>
       ) : (
         <h3
-          className={`m-0 mb-2 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px] ${titleClassName}`}
+          className={`m-0 mb-2 text-[clamp(20px,2.3vw,28px)] font-extrabold leading-[1.12] tracking-[-0.7px] ${titleClassName}`}
         >
           {title}
         </h3>
@@ -292,7 +292,7 @@ function GateColumn({
    would settle it, the four lenses in plain words, and one verdict line. */
 export function GateCard({ gate }: { gate: Gate }) {
   return (
-    <Reveal className="mt-14 sm:mt-24">
+    <Reveal className="mt-10 sm:mt-16">
       <div id={gate.id} className="beam scroll-mt-[50px]">
         <div className="rounded-2xl bg-black p-7 text-white sm:p-10">
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">

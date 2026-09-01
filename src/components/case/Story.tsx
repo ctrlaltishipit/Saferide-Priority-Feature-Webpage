@@ -136,7 +136,7 @@ export function Methods() {
 /* Chapter 4: the decisions that changed between the first draft and the prototype. */
 export function Iterations() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="WHAT CHANGED WHILE BUILDING"
         glyph="wrench"
@@ -179,7 +179,7 @@ export function Iterations() {
 /* Chapter 6: what the work taught. */
 export function Lessons() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader eyebrow="WHAT I LEARNED" glyph="star" size="h3" title="Four lessons from building it alone." />
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
         {LESSONS.map((l, i) => (
@@ -199,7 +199,7 @@ export function Lessons() {
 /* Chapter 7: the open door. */
 export function TalkToMe() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <GlowCard className="flex flex-col gap-5 rounded-3xl bg-black p-7 text-white sm:flex-row sm:items-center sm:justify-between sm:p-10">
         <div className="max-w-[640px]">
           <div className="text-[11px] font-bold tracking-[1.8px] text-[#8FB0FF]">TELL ME WHERE THIS IS WRONG</div>

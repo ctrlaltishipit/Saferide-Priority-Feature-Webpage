@@ -389,7 +389,7 @@ const FIT: string[] = [
 
 export default function Industry() {
   return (
-    <div id="industry" className="mt-14 sm:mt-24">
+    <div id="industry" className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">INDUSTRY 101</div>
       <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
         The market I am
@@ -414,7 +414,7 @@ export default function Industry() {
       </div>
 
       {/* TAM / SAM / SOM */}
-      <div className="mt-10 sm:mt-14">
+      <div className="mt-8 sm:mt-12">
         <Reveal className="mx-auto max-w-[720px] text-center">
           <h3 className="m-0 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
             The slice I am aiming at.
@@ -431,7 +431,7 @@ export default function Industry() {
       </div>
 
       {/* Competitor safety features */}
-      <div className="mt-10 sm:mt-14">
+      <div className="mt-8 sm:mt-12">
         <h3 className="m-0 mb-2 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
           What each app ships for safety today.
         </h3>

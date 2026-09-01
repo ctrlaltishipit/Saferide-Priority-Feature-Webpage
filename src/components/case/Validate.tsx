@@ -48,7 +48,7 @@ export function Hypotheses() {
 export function ResearchPlan() {
   const total = RESEARCH_PLAN.slice(0, 5).reduce((n, r) => n + Number(r.count), 0);
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="WHO I WOULD SIT WITH FIRST"
         glyph="people"
@@ -77,7 +77,7 @@ export function ResearchPlan() {
 export function PriceLadder() {
   const n = WTP_LADDER.length;
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="WHAT IS A COMMITTED DRIVER WORTH"
         glyph="coins"
@@ -134,7 +134,7 @@ export function PriceLadder() {
 
 export function AssumptionMap() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE ASSUMPTIONS THAT DIE FIRST"
         glyph="cross"

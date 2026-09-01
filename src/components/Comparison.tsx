@@ -88,7 +88,7 @@ export default function Comparison() {
   const [on, setOn] = useState(false);
 
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">SIX JOBS, ONE TOGGLE</div>
       <h2 className="m-0 mb-2 text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px] md:whitespace-nowrap">
         The jobs she does by hand tonight.

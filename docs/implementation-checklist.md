@@ -121,6 +121,12 @@ Phases 2 to 4 shipped together on Sep 1, 2026 at the user's request ("go for it 
 - [x] Hero type and spacing reduced so the landing fits one screen on web and phone; header holds one row at 360/768/1024/1280/1440 with eight chapters
 - Check: build green, nav fit, anchors, screenshots; commit + deploy
 
+## Phase 8: Density pass (shipped Sep 1, 2026)
+- [x] Hero fits a 650px-tall laptop viewport at 100% zoom (ends near 590px); text column matches the visual's height; gap under the header cut to 20px
+- [x] Section gaps reduced page-wide (mt-10/sm:mt-16 instead of mt-14/sm:mt-24); chapter and section headings one step smaller
+- [x] News walls, the review wall, the six insights and the why-now cards scroll as one-row rails on phones and stay grids on web; the review wall shows 8 first with "Show all N reviews"
+- Result: page height 48.4k → 46.0k px at 1440, 86.8k → 76.8k px at 390
+
 ## Standing verification routine (every phase)
 1. `npm run build`
 2. `grep -rn "—" src/components src/content`; review `grep -rn ", not " src/components src/content`

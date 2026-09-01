@@ -134,10 +134,10 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="mx-auto grid max-w-[1240px] items-center gap-8 px-5 pb-8 pt-8 sm:gap-10 sm:pt-12 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]"
+      className="mx-auto grid max-w-[1240px] items-center gap-6 px-5 pb-5 pt-4 sm:gap-10 sm:pb-6 sm:pt-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]"
     >
       <div className="min-w-0" style={{ animation: "riseL .9s ease both" }}>
-        <div className="mb-3 inline-flex items-center gap-2 text-[12.5px] font-semibold">
+        <div className="mb-2 inline-flex items-center gap-2 text-[12px] font-semibold">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 21s-6.5-5.4-6.5-10.2A6.5 6.5 0 0112 4.5a6.5 6.5 0 016.5 6.3C18.5 15.6 12 21 12 21z" fill="#000" />
             <circle cx="12" cy="10.8" r="2.2" fill="#fff" />
@@ -145,42 +145,42 @@ export default function Hero() {
           Hyderabad, IN{" "}
           <span className="font-medium text-ink-faint underline">pilot concept</span>
         </div>
-        <h1 className="mb-3.5 text-[clamp(34px,4.6vw,60px)] font-extrabold leading-[1.04] tracking-[-1.6px] [text-wrap:balance]">
+        <h1 className="mb-3 text-[clamp(30px,3.4vw,46px)] font-extrabold leading-[1.05] tracking-[-1.3px] [text-wrap:balance]">
           The late-night ride, planned safer.
         </h1>
-        <p className="mb-3.5 max-w-[500px] text-[14.5px] leading-[1.55] text-ink-soft [text-wrap:pretty] sm:text-[15px]">
+        <p className="mb-3 max-w-[470px] text-[13.5px] leading-[1.55] text-ink-soft [text-wrap:pretty] sm:text-[14px]">
           At midnight in Hyderabad, a woman booking a cab runs her own safety
           check by hand. SafeRide Priority is one toggle inside the Uber app
           that does it for her before the door closes: a plain brief, a safer
           drop point, a driver who has already committed, and a circle that
           knows without asking.
         </p>
-        <ul className="mb-4 flex max-w-[500px] flex-wrap gap-1.5 text-[11.5px] font-semibold">
+        <ul className="mb-3 flex max-w-[470px] flex-wrap gap-1.5 text-[11px] font-semibold">
           {["8 PM to 5 AM, any hour for emergencies", "Every ride type except Parcel", "Immediate priority for female riders"].map((t) => (
-            <li key={t} className="rounded-full border border-line bg-white px-2.5 py-1">
+            <li key={t} className="rounded-full border border-line bg-white px-2.5 py-[3px]">
               {t}
             </li>
           ))}
         </ul>
         {/* trip card */}
-        <div className="relative max-w-[420px] rounded-[14px] bg-mist px-3.5 py-1">
-          <div className="absolute bottom-[30px] left-[21px] top-[30px] w-0.5 bg-[#C9CED4]" />
-          <div className="flex items-center gap-[11px] py-[9px]">
+        <div className="relative max-w-[400px] rounded-[14px] bg-mist px-3.5 py-0.5">
+          <div className="absolute bottom-[26px] left-[21px] top-[26px] w-0.5 bg-[#C9CED4]" />
+          <div className="flex items-center gap-[11px] py-[7px]">
             <span className="h-2 w-2 flex-none rounded-full bg-black" />
-            <span className="min-w-0 text-[13.5px] font-semibold">Cyber Towers, HITEC City</span>
+            <span className="min-w-0 text-[13px] font-semibold">Cyber Towers, HITEC City</span>
             <span className="ml-auto whitespace-nowrap text-[11px] font-bold text-ink-faint">12:15 AM</span>
           </div>
           <div className="ml-[19px] h-px bg-line" />
-          <div className="flex items-center gap-[11px] py-[9px]">
+          <div className="flex items-center gap-[11px] py-[7px]">
             <span className="h-2 w-2 flex-none bg-black" />
-            <span className="min-w-0 text-[13.5px] font-semibold">Kondapur, Residential Lane 4</span>
+            <span className="min-w-0 text-[13px] font-semibold">Kondapur, Residential Lane 4</span>
             <span className="ml-auto whitespace-nowrap text-[11px] font-bold text-safe-dark">anchor found</span>
           </div>
         </div>
-        <div className="mt-4 flex flex-wrap items-center gap-3.5">
+        <div className="mt-3 flex flex-wrap items-center gap-3.5">
           <a
             href="#prototype"
-            className="inline-flex items-center gap-[9px] rounded-xl bg-black px-5 py-3 text-[14px] font-bold text-white transition-all duration-200 hover:bg-brand hover:shadow-[0_10px_30px_rgba(39,110,241,.4)]"
+            className="inline-flex items-center gap-[9px] rounded-xl bg-black px-4.5 py-2.5 text-[13.5px] font-bold text-white transition-all duration-200 hover:bg-brand hover:shadow-[0_10px_30px_rgba(39,110,241,.4)]"
           >
             Review my ride plan
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -189,12 +189,12 @@ export default function Hero() {
           </a>
           <a
             href="#case-study"
-            className="border-b border-black pb-0.5 text-[14px] font-semibold transition-colors hover:border-brand hover:text-brand"
+            className="border-b border-black pb-0.5 text-[13.5px] font-semibold transition-colors hover:border-brand hover:text-brand"
           >
             Read the case study
           </a>
         </div>
-        <p className="mt-4 max-w-[440px] text-[11px] leading-[1.5] text-[#A6A6A6]">
+        <p className="mt-3 max-w-[440px] text-[10.5px] leading-[1.5] text-[#A6A6A6]">
           Independent portfolio concept. Not affiliated with, endorsed by, or
           sponsored by Uber. All data and interactions are simulated.
         </p>

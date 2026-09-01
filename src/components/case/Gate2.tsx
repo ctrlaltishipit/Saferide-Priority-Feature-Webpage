@@ -2,6 +2,7 @@
 
 import { Reveal, jumpToStep } from "../ui";
 import { Glyph, SectionHeader, SourceSnippet } from "./primitives";
+import { Carousel } from "./Motion";
 import { DOBLIN, INSIGHTS, NOT_LIST, OPTION_CRITERIA, OPTIONS } from "@/content/case";
 
 /* ────────────────── Chapter 2 additions: the solution ──────────────────
@@ -17,7 +18,7 @@ const SCORE = {
 
 export function OptionsWeighed() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE OPTIONS I WEIGHED"
         glyph="scale"
@@ -73,7 +74,7 @@ export function Doblin() {
   const yes = DOBLIN.filter((d) => d.state === "yes").length;
   const WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="HOW I INNOVATED"
         glyph="grid"
@@ -136,7 +137,7 @@ export function Doblin() {
 
 export function NotList() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE NOT-LIST"
         glyph="cross"
@@ -193,7 +194,7 @@ function Chain() {
 
 export function HowWeGotHere() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="HOW I GOT HERE"
         glyph="compass"
@@ -203,7 +204,7 @@ export function HowWeGotHere() {
       <Reveal className="mb-6 rounded-2xl border border-line bg-mist p-4 sm:p-6">
         <Chain />
       </Reveal>
-      <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
+      <Carousel minWidth={300} ariaLabel="Six insights">
         {INSIGHTS.map((it, i) => (
           <Reveal key={it.screen.label + i} delay={Math.min(i * 0.05, 0.25)} className="flex h-full flex-col rounded-2xl border border-line bg-white p-5">
             <div className="flex items-center gap-2 text-brand">
@@ -241,7 +242,7 @@ export function HowWeGotHere() {
             </button>
           </Reveal>
         ))}
-      </div>
+      </Carousel>
     </div>
   );
 }

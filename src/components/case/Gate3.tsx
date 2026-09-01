@@ -36,7 +36,7 @@ export function NoPilotNote() {
 
 export function MetricTree() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE NORTH STAR AND WHAT FEEDS IT"
         glyph="star"
@@ -88,7 +88,7 @@ export function MetricTree() {
 
 export function RevenueModel() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE MONEY MODEL, SHOWN WITH ITS WORKING"
         glyph="coins"
@@ -153,7 +153,7 @@ export function RevenueModel() {
 
 export function ValueLogic() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE VALUE, AGAINST THE BASELINE"
         glyph="levers"
@@ -190,7 +190,7 @@ const BMC_AREAS = `"kp kp ka ka vp vp cr cr cs cs" "kp kp kr kr vp vp ch ch cs c
 
 export function BusinessModelCanvas() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE BUSINESS MODEL ON ONE CANVAS"
         glyph="canvas"
@@ -236,7 +236,7 @@ export function BusinessModelCanvas() {
 
 export function PilotPlan() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE PILOT, AND THE STAGES AFTER IT"
         glyph="path"
@@ -271,7 +271,7 @@ export function PilotPlan() {
 
 export function Squad() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE SEATS A PILOT NEEDS"
         glyph="team"

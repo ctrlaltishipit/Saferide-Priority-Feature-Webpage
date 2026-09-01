@@ -5,7 +5,7 @@ import { SectionHeader } from "./primitives";
    reader leaves with. This is what the hero's "Read the case" lands on. */
 export default function CaseMap() {
   return (
-    <section id="case-study" className="mx-auto max-w-[1240px] scroll-mt-[50px] px-5 pt-12 sm:pt-16">
+    <section id="case-study" className="mx-auto max-w-[1240px] scroll-mt-[50px] px-5 pt-8 sm:pt-10">
       <SectionHeader
         eyebrow="THE CASE AT A GLANCE"
         title="Eight chapters, five minutes."

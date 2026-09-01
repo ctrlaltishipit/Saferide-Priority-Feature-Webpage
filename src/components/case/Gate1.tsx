@@ -1,5 +1,6 @@
 import { Reveal } from "../ui";
 import { SectionHeader, SourceSnippet, Tag } from "./primitives";
+import { Carousel } from "./Motion";
 import {
   CONSTRAINTS,
   DECISION,
@@ -64,7 +65,7 @@ export function WhoDecides() {
 
 export function Personas() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="WHO IS IN THE CAR"
         glyph="people"
@@ -116,7 +117,7 @@ export function Personas() {
 
 export function Jobs() {
   return (
-    <div className="mt-10 sm:mt-14">
+    <div className="mt-8 sm:mt-12">
       <SectionHeader
         eyebrow="THE JOBS SHE DOES BY HAND"
         glyph="list"
@@ -152,14 +153,14 @@ export function Jobs() {
 
 export function WhyNow() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="WHY NOW, AND WHY UBER FIRST"
         glyph="window"
         title="The window opened this year."
         lede="Four things changed recently. Each leaves the same minutes empty: the ones before the booking."
       />
-      <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
+      <Carousel minWidth={260} ariaLabel="Why now">
         {WHY_NOW.map((w, i) => (
           <div key={w.title} className="sticky sm:static" style={{ top: 64 + i * 8, zIndex: i + 1 }}>
             <Reveal delay={i * 0.07} className="h-full">
@@ -174,7 +175,7 @@ export function WhyNow() {
             </Reveal>
           </div>
         ))}
-      </div>
+      </Carousel>
       <Reveal className="mt-4 rounded-2xl bg-black p-5 text-[14px] font-semibold leading-[1.55] text-white sm:p-6">{WHY_UBER_FIRST}</Reveal>
     </div>
   );
@@ -182,7 +183,7 @@ export function WhyNow() {
 
 export function GapToMetric() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="FROM PAIN TO NUMBER"
         glyph="bridge"
@@ -223,7 +224,7 @@ export function GapToMetric() {
 
 export function Constraints() {
   return (
-    <div className="mt-10 sm:mt-14">
+    <div className="mt-8 sm:mt-12">
       <SectionHeader
         eyebrow="THE LINES I DO NOT CROSS"
         glyph="lines"

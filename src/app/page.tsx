@@ -35,11 +35,11 @@ export default function Home() {
         {/* 1. Introduction: the problem, the thesis, what the case covers */}
         <Chapter id="intro">
           <Problem />
-          <div className="mt-14 sm:mt-24">
+          <div className="mt-10 sm:mt-16">
             <Stats />
           </div>
           <ConceptOnePage />
-          <div className="mt-14 sm:mt-24">
+          <div className="mt-10 sm:mt-16">
             <WhoDecides />
           </div>
         </Chapter>
@@ -71,9 +71,9 @@ export default function Home() {
             <DecisionEngine />
           </Container>
           <FlowCards />
-          <Container className="pt-14 sm:pt-24">
+          <Container className="pt-10 sm:pt-16">
             <Architecture />
-            <div className="mt-14 sm:mt-24">
+            <div className="mt-10 sm:mt-16">
               <SectionHeader
                 eyebrow="THE RISKS I DESIGNED AGAINST"
                 glyph="shield"
@@ -92,7 +92,7 @@ export default function Home() {
         {/* 5. Prototype showcase: the working demo, the features, with and without */}
         <Chapter id="prototype" contained={false}>
           <Prototype />
-          <Container id="features" className="pt-14 sm:pt-24">
+          <Container id="features" className="pt-10 sm:pt-16">
             <SectionHeader
               eyebrow="THE FEATURE SET"
               title="Five features, one flow built on consent."
@@ -125,7 +125,7 @@ export default function Home() {
         </Chapter>
 
         {/* 8. Conclusion and recommendations */}
-        <Chapter id="conclusion" className="pb-14 sm:pb-24">
+        <Chapter id="conclusion" className="pb-10 sm:pb-16">
           <CaseInSixty />
           <TheAsk />
           <Roadmap />

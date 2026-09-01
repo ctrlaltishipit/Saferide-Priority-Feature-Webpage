@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Reveal } from "./ui";
+import { Carousel } from "./case/Motion";
 
 /* ─────────────────────────── The evidence wall ───────────────────────────
    Real news reports captured from the public web, real app store reviews,
@@ -251,7 +252,9 @@ function AppReviews() {
     };
   }, [open]);
 
+  const [all, setAll] = useState(false);
   const shots = SHOTS.filter((s) => s.app === app);
+  const visible = all ? shots : shots.slice(0, 8);
   return (
     <div>
       <div className="mb-5 flex flex-wrap gap-2">
@@ -262,7 +265,10 @@ function AppReviews() {
             <button
               key={t.key}
               type="button"
-              onClick={() => setApp(t.key)}
+              onClick={() => {
+                setApp(t.key);
+                setAll(false);
+              }}
               aria-pressed={active}
               className={`rounded-full border px-4 py-2 text-[13px] font-bold transition-colors ${
                 active
@@ -275,11 +281,22 @@ function AppReviews() {
           );
         })}
       </div>
-      <div key={app} className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
-        {shots.map((s, i) => (
+      <Carousel key={`${app}-${all}`} minWidth={280} ariaLabel="Rider reviews">
+        {visible.map((s, i) => (
           <ShotCard key={s.img} s={s} delay={Math.min(i * 0.05, 0.25)} onOpen={setOpen} />
         ))}
-      </div>
+      </Carousel>
+      {shots.length > 8 && (
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            onClick={() => setAll((v) => !v)}
+            className="rounded-full border border-line bg-white px-4 py-2 text-[13px] font-bold text-ink transition-colors hover:border-black"
+          >
+            {all ? "Show fewer" : `Show all ${shots.length} reviews`}
+          </button>
+        </div>
+      )}
       {open && (
         <div
           className="fixed inset-0 z-[95] overflow-y-auto bg-black/75 p-4 backdrop-blur-sm sm:p-10"
@@ -420,7 +437,7 @@ export function ConceptOnePage() {
 
 export default function Evidence() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">THE PROOF</div>
       <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
         The same headline,
@@ -435,16 +452,14 @@ export default function Evidence() {
       </p>
 
       {/* Half one: fear. Cards deck up on mobile, three across on larger screens */}
-      <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))]">
+      <Carousel minWidth={290} ariaLabel="News reports">
         {ARTICLES.map((a, i) => (
-          <div key={a.pub} className="sticky sm:static" style={{ top: 64 + i * 8, zIndex: i + 1 }}>
-            <ArticleCard a={a} delay={i * 0.08} />
-          </div>
+          <ArticleCard key={a.pub} a={a} delay={i * 0.08} />
         ))}
-      </div>
+      </Carousel>
 
       {/* Half two: the ride that never comes */}
-      <div className="mt-10 sm:mt-14">
+      <div className="mt-8 sm:mt-12">
         <h3 className="m-0 mb-2 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
           The other half of the problem:
           <br />
@@ -456,17 +471,15 @@ export default function Evidence() {
           the middle of the road. SafeRide Priority is built for both halves: it plans the safety
           and it commits the driver.
         </p>
-        <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))]">
-          {RELIABILITY.map((a, i) => (
-            <div key={a.pub} className="sticky sm:static" style={{ top: 64 + i * 8, zIndex: i + 1 }}>
-              <ArticleCard a={a} delay={i * 0.08} />
-            </div>
-          ))}
-        </div>
+        <Carousel minWidth={290} ariaLabel="News reports">
+        {RELIABILITY.map((a, i) => (
+          <ArticleCard key={a.pub} a={a} delay={i * 0.08} />
+        ))}
+      </Carousel>
       </div>
 
       {/* Straight from the app stores */}
-      <div className="mt-10 sm:mt-14">
+      <div className="mt-8 sm:mt-12">
         <h3 className="m-0 mb-2 text-[clamp(22px,2.6vw,32px)] font-extrabold leading-[1.12] tracking-[-0.8px]">
           Riders are already saying it, in public.
         </h3>
@@ -481,7 +494,7 @@ export default function Evidence() {
       </div>
 
       {/* The problem statement, stated plainly */}
-      <Reveal className="mt-10 sm:mt-14">
+      <Reveal className="mt-8 sm:mt-12">
         <div className="beam">
           <div className="rounded-2xl bg-black p-7 text-white sm:p-10">
             <div className="text-[11px] font-bold tracking-[1.8px] text-[#8f8f8f]">

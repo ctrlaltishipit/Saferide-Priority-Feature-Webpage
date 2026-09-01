@@ -336,7 +336,7 @@ export function Problem() {
 /* ──────────────────────── Decision engine diagram ──────────────────────── */
 export function DecisionEngine() {
   return (
-    <div className="mt-14 sm:mt-24">
+    <div className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">HOW IT DECIDES</div>
       <h2 className="m-0 mb-2 max-w-[680px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
         Observable signals in.
