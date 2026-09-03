@@ -10,7 +10,7 @@ import { ABOUT, ASK, CHAPTERS, IMPACT, PORTABLE, ROADMAP, STOP_RULES } from "@/c
 
 export function Roadmap() {
   return (
-    <div>
+    <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE ROAD, IN THREE HORIZONS"
         glyph="road"
@@ -18,7 +18,20 @@ export function Roadmap() {
         lede="Dates promise output. This roadmap promises learning: each horizon names what must be true before it starts."
       />
       <Reveal className="mb-4 overflow-hidden rounded-2xl bg-mist p-2 sm:p-4">
-        <RoadFigure labels={ROADMAP.map((h) => h.label)} />
+        <div className="hidden sm:block">
+          <RoadFigure labels={ROADMAP.map((h) => h.label)} />
+        </div>
+        {/* phones read the road top to bottom */}
+        <div className="relative overflow-hidden rounded-xl bg-[#111] px-4 py-5 sm:hidden">
+          <span className="absolute inset-y-5 left-1/2 w-0 -translate-x-1/2 border-l-2 border-dashed border-[#F6BC2F]" aria-hidden="true" style={{ animation: "dashflow 1.2s linear infinite" }} />
+          <div className="relative flex flex-col items-center gap-4">
+            {ROADMAP.map((h, i) => (
+              <span key={h.label} className={`rounded-full px-6 py-2 text-[14px] font-extrabold ${i === 0 ? "bg-brand text-white" : "bg-white text-black"}`}>
+                {h.label}
+              </span>
+            ))}
+          </div>
+        </div>
       </Reveal>
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
         {ROADMAP.map((h, i) => (

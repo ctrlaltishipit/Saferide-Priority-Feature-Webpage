@@ -134,9 +134,9 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="mx-auto grid w-full max-w-[1240px] items-center gap-3 px-5 pb-3 pt-2 sm:gap-10 sm:pb-3 sm:pt-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]"
+      className="mx-auto grid w-full max-w-[1240px] items-center gap-3 px-5 pb-3 pt-2 max-sm:h-full max-sm:[grid-template-rows:auto_minmax(0,1fr)] sm:gap-10 sm:pb-3 sm:pt-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]"
     >
-      <div className="min-w-0" style={{ animation: "riseL .9s ease both" }}>
+      <div className="hero-copy min-w-0" style={{ animation: "riseL .9s ease both" }}>
         <div className="mb-2 inline-flex items-center gap-2 text-[12px] font-semibold">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 21s-6.5-5.4-6.5-10.2A6.5 6.5 0 0112 4.5a6.5 6.5 0 016.5 6.3C18.5 15.6 12 21 12 21z" fill="#000" />
@@ -145,17 +145,17 @@ export default function Hero() {
           Hyderabad, IN{" "}
           <span className="font-medium text-ink-faint underline">pilot concept</span>
         </div>
-        <h1 className="mb-2.5 text-[26px] font-extrabold leading-[1.05] tracking-[-1.1px] [text-wrap:balance] sm:mb-3 sm:text-[clamp(32px,min(3.7vw,7vh),52px)] sm:tracking-[-1.5px]">
+        <h1 className="mb-2.5 text-[29px] font-extrabold leading-[1.05] tracking-[-1.1px] [text-wrap:balance] sm:mb-3 sm:text-[clamp(32px,min(3.7vw,7vh),52px)] sm:tracking-[-1.5px]">
           The late-night ride, planned safer.
         </h1>
-        <p className="mb-2.5 max-w-[470px] text-[12.5px] leading-[1.5] text-ink-soft [text-wrap:pretty] sm:mb-3 sm:text-[clamp(14px,1.9vh,15.5px)] sm:leading-[1.6]">
+        <p className="hero-lede mb-2.5 max-w-[470px] text-[13.5px] leading-[1.55] text-ink-soft [text-wrap:pretty] sm:mb-3 sm:text-[clamp(14px,1.9vh,15.5px)] sm:leading-[1.6]">
           At midnight in Hyderabad, a woman booking a cab runs her own safety
           check by hand. SafeRide Priority is one toggle inside the Uber app
           that does it for her before the door closes: a plain brief, a safer
           drop point, a driver who has already committed, and a circle that
           knows without asking.
         </p>
-        <ul className="mb-2.5 flex max-w-[470px] flex-wrap gap-1 text-[10.5px] font-semibold sm:mb-3 sm:gap-1.5 sm:text-[11.5px]">
+        <ul className="mb-2.5 flex max-w-[470px] flex-wrap gap-1 text-[11px] font-semibold sm:mb-3 sm:gap-1.5 sm:text-[11.5px]">
           {["8 PM to 5 AM, any hour for emergencies", "Every ride type except Parcel", "Immediate priority for female riders"].map((t) => (
             <li key={t} className="rounded-full border border-line bg-white px-2.5 py-[3px]">
               {t}
@@ -180,7 +180,7 @@ export default function Hero() {
         <div className="mt-2.5 flex flex-wrap items-center gap-3 sm:mt-3 sm:gap-3.5">
           <a
             href="#prototype"
-            className="inline-flex items-center gap-[9px] rounded-xl bg-black px-4 py-2 text-[13px] font-bold sm:px-5 sm:py-2.5 sm:text-[14px] text-white transition-all duration-200 hover:bg-brand hover:shadow-[0_10px_30px_rgba(39,110,241,.4)]"
+            className="inline-flex items-center gap-[9px] rounded-xl bg-black px-4 py-2.5 text-[13.5px] font-bold sm:px-5 sm:py-2.5 sm:text-[14px] text-white transition-all duration-200 hover:bg-brand hover:shadow-[0_10px_30px_rgba(39,110,241,.4)]"
           >
             Review my ride plan
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -194,14 +194,14 @@ export default function Hero() {
             Read the case study
           </a>
         </div>
-        <p className="mt-2.5 max-w-[440px] text-[10px] leading-[1.45] text-[#A6A6A6] sm:mt-3 sm:text-[11px]">
+        <p className="hero-disc mt-2.5 max-w-[440px] text-[10.5px] leading-[1.45] text-[#A6A6A6] sm:mt-3 sm:text-[11px]">
           Independent portfolio concept. Not affiliated with, endorsed by, or
           sponsored by Uber. All data and interactions are simulated.
         </p>
       </div>
 
-      <div className="mx-auto w-full max-w-[240px] min-w-0 [perspective:1400px] min-[480px]:max-w-[340px] sm:max-w-none max-sm:[@media(max-height:800px)]:hidden" style={{ animation: "riseR .9s ease both" }}>
-        <div className="group relative transition-transform duration-500 [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-7deg)]">
+      <div className="hero-art min-w-0 [perspective:1400px] max-sm:flex max-sm:h-full max-sm:min-h-0 max-sm:items-center max-sm:justify-center" style={{ animation: "riseR .9s ease both" }}>
+        <div className="art-frame group relative transition-transform duration-500 [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-7deg)] max-sm:mx-auto max-sm:w-fit">
           <NightCity />
           {/* rotating callouts */}
           <div
@@ -220,7 +220,7 @@ export default function Hero() {
           </div>
           <div
             key={`b${tick}`}
-            className="absolute bottom-[42%] left-1.5 rounded-[14px] border border-[#EFEFEF] bg-white/95 px-[15px] py-[11px] shadow-[0_18px_44px_rgba(0,0,0,.32)] backdrop-blur-md"
+            className="absolute bottom-[42%] left-1.5 hidden rounded-[14px] sm:block border border-[#EFEFEF] bg-white/95 px-[15px] py-[11px] shadow-[0_18px_44px_rgba(0,0,0,.32)] backdrop-blur-md"
             style={{ animation: "slideup .55s ease both" }}
           >
             <div className="whitespace-nowrap text-[10.5px] font-extrabold tracking-[.8px] text-brand-dark">{b.k}</div>
@@ -228,7 +228,7 @@ export default function Hero() {
           </div>
           <div
             key={`c${tick}`}
-            className="absolute -bottom-3 right-3.5 flex items-center gap-[9px] rounded-[14px] px-[15px] py-[11px] shadow-[0_16px_36px_rgba(0,0,0,.2)]"
+            className="absolute -bottom-3 right-3.5 hidden items-center sm:flex gap-[9px] rounded-[14px] px-[15px] py-[11px] shadow-[0_16px_36px_rgba(0,0,0,.2)]"
             style={{ background: c.bg, border: `1px solid ${c.border}`, animation: "slideup .55s ease both" }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -39,7 +39,7 @@ export default function Nav() {
         <a href="#top" className="flex items-center gap-1.5 text-white">
           <Logo size={22} />
           {/* eight icons plus the pill need the width on small phones, and eight names need it on small laptops */}
-          <span className="hidden text-[12.5px] font-extrabold tracking-[-0.3px] min-[480px]:inline md:hidden xl:inline xl:text-lg xl:tracking-[-0.4px]">
+          <span className="text-[13.5px] font-extrabold tracking-[-0.3px] md:hidden xl:inline xl:text-lg xl:tracking-[-0.4px]">
             SafeRide Priority
           </span>
         </a>
@@ -69,8 +69,8 @@ export default function Nav() {
           })}
         </div>
 
-        {/* below md: one icon per chapter, label pops up on tap */}
-        <div className="flex items-center justify-end gap-0.5 md:hidden">
+        {/* tablets only: one icon per chapter in the bar; phones get the bottom dock instead */}
+        <div className="hidden items-center justify-end gap-0.5 sm:flex md:hidden">
           {LIVE_CHAPTERS.map((c) => {
             const on = active === c.id;
             return (
@@ -97,12 +97,44 @@ export default function Nav() {
           href="https://saferide-priority-app.vercel.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="col-start-3 hidden whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[11px] font-bold text-black min-[380px]:inline-block transition-all duration-200 hover:bg-brand hover:text-white hover:shadow-[0_6px_20px_rgba(39,110,241,.45)] md:px-4 md:text-[13px]"
+          className="col-start-3 whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-[11.5px] font-bold text-black transition-all duration-200 hover:bg-brand hover:text-white hover:shadow-[0_6px_20px_rgba(39,110,241,.45)] md:px-4 md:text-[13px]"
         >
           <span className="md:hidden">Try the app</span>
           <span className="hidden md:inline">Try the pilot app</span>
         </a>
       </nav>
     </header>
+  );
+}
+
+/* The phone dock: the eight chapters as a floating tab bar at the bottom,
+   the active one opened into a pill with its name. Phones only. */
+export function ChapterDock() {
+  const [active] = useActiveChapter(CHAPTER_IDS);
+  const current = active ?? LIVE_CHAPTERS[0].id;
+  return (
+    <nav
+      aria-label="Chapters"
+      className="fixed inset-x-3 bottom-3 z-[85] flex items-center justify-between gap-0.5 rounded-full border border-white/10 bg-black/90 px-2 py-1.5 shadow-[0_12px_32px_rgba(0,0,0,.45)] backdrop-blur-md sm:hidden"
+      style={{ marginBottom: "env(safe-area-inset-bottom, 0px)" }}
+    >
+      {LIVE_CHAPTERS.map((c) => {
+        const on = current === c.id;
+        return (
+          <a
+            key={c.id}
+            href={`#${c.id}`}
+            aria-label={c.label}
+            aria-current={on ? "true" : undefined}
+            className={`flex min-w-0 items-center justify-center rounded-full transition-all duration-300 ${
+              on ? "gap-1.5 bg-brand px-2.5 py-1.5 text-white" : "h-8 w-8 flex-none text-white/70 active:text-white"
+            }`}
+          >
+            {CHAPTER_ICONS[c.id]}
+            {on && <span className="truncate text-[10px] font-bold">{c.short}</span>}
+          </a>
+        );
+      })}
+    </nav>
   );
 }

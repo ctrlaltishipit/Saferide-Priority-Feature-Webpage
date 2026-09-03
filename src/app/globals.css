@@ -228,3 +228,18 @@
   }
   .car > * { flex: none; opacity: 1; transform: none; }
 }
+
+/* the hero animation on phones: the leftover height above the fold decides its size */
+@media (max-width: 639px) {
+  .hero-art .art-frame { height: 100%; }
+  .hero-art .art-frame > svg { height: 100%; width: auto; max-width: 100%; }
+}
+
+/* short phone screens: smaller hero type, no art, so the fold still ends at the banner */
+@media (max-width: 639px) and (max-height: 800px) {
+  .hero-art { display: none; }
+  .hero-copy h1 { font-size: 25px; margin-bottom: 8px; }
+  .hero-copy .hero-lede { font-size: 12px; line-height: 1.45; margin-bottom: 8px; }
+  .hero-copy ul { font-size: 10px; margin-bottom: 8px; }
+  .hero-copy .hero-disc { font-size: 9.5px; margin-top: 8px; }
+}

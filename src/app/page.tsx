@@ -1,4 +1,4 @@
-import Nav from "@/components/Nav";
+import Nav, { ChapterDock } from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ScrollCompanion from "@/components/ScrollCompanion";
 import { Ticker, Stats, Problem, DecisionEngine, ResponsibleAI, Architecture } from "@/components/Sections";
@@ -27,13 +27,16 @@ export default function Home() {
     <div className="overflow-x-clip">
       <ScrollCompanion />
       <Nav />
+      <ChapterDock />
       <main>
         {/* the first screen ends at the ticker: hero stretches, the banner sits at the fold */}
         <div className="flex min-h-[calc(100svh-50px)] flex-col">
           <div className="flex w-full flex-1 items-center">
             <Hero />
           </div>
-          <Ticker />
+          <div className="max-sm:bg-black max-sm:pb-[64px]">
+            <Ticker />
+          </div>
         </div>
         <CaseMap />
 
