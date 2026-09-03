@@ -180,6 +180,7 @@ const INITIAL = {
   female: false,
   whyOpen: false,
   anchor: null as string | null,
+  anchor2: null as string | null,
   match: null as "standard" | "priority" | null,
   wait: false,
   contacts: SEED_CONTACTS,
@@ -445,7 +446,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
     return (
       <UberHome
         onWhereTo={() => set({ step: 2, tripType: "city", drop: "Kondapur, Residential Lane 4" })}
-        onOutstation={() => set({ step: 2, tripType: "outstation", drop: OUTSTATION_DROPS[0], anchor: null })}
+        onOutstation={() => set({ step: 2, tripType: "outstation", drop: OUTSTATION_DROPS[0], anchor: null, anchor2: null })}
       />
     );
   }
@@ -476,15 +477,32 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
               { left: 296, top: 106, n: "1" },
               { left: 354, top: 166, n: "2" },
               { left: 288, top: 196, n: "3" },
-            ].map((m) => (
-              <div
-                key={m.n}
-                className="absolute flex h-[22px] w-[22px] items-center justify-center rounded-full bg-safe-dark text-[11px] font-bold text-white shadow-[0_2px_6px_rgba(0,0,0,.25)]"
-                style={{ left: m.left, top: m.top, animation: "slideup .3s ease both" }}
-              >
-                {m.n}
-              </div>
-            ))}
+            ].map((m, i) => {
+              const name = ANCHORS[i].name;
+              const rank = s.anchor === name ? 1 : s.anchor2 === name ? 2 : 0;
+              return (
+                <div
+                  key={m.n}
+                  className="absolute flex items-center justify-center rounded-full bg-safe-dark text-[11px] font-bold text-white"
+                  style={{
+                    left: rank ? m.left - 2 : m.left,
+                    top: rank ? m.top - 2 : m.top,
+                    width: rank ? 26 : 22,
+                    height: rank ? 26 : 22,
+                    border: rank ? "2px solid #fff" : "none",
+                    boxShadow: rank ? `0 0 0 2px ${rank === 1 ? "#0E8345" : "rgba(14,131,69,.55)"}, 0 2px 8px rgba(0,0,0,.3)` : "0 2px 6px rgba(0,0,0,.25)",
+                    animation: "slideup .3s ease both",
+                  }}
+                >
+                  {m.n}
+                  {rank ? (
+                    <span className="absolute -top-[17px] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-1.5 py-px text-[8.5px] font-bold text-safe-dark shadow-[0_1px_4px_rgba(0,0,0,.2)]">
+                      {rank === 1 ? "1st" : "2nd"}
+                    </span>
+                  ) : null}
+                </div>
+              );
+            })}
             <div className="absolute left-[240px] top-[116px] rounded-[5px] bg-white px-[7px] py-[3px] text-[10px] font-semibold shadow-[0_1px_4px_rgba(0,0,0,.2)]">
               Original drop
             </div>
@@ -571,6 +589,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                       set({
                         tripType: tt,
                         anchor: null,
+                        anchor2: null,
                         drop: tt === "city" ? "Kondapur, Residential Lane 4" : OUTSTATION_DROPS[0],
                       })
                     }
@@ -911,20 +930,26 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
               <h2 className="mb-1.5 mt-1 text-xl font-extrabold tracking-[-.3px]">Safer drop points nearby</h2>
               <div className="mb-3 text-[12.5px] leading-[1.5] text-ink-faint">
                 Your drop point has fewer verified public or staffed anchors nearby. These alternatives
-                are more visible or staffed. They are numbered on the map above.
+                are more visible or staffed. They are numbered on the map above. Pick up to two: a
+                first choice and a backup.
               </div>
               <div className="flex flex-col gap-[9px]">
                 {ANCHORS.map((a) => {
-                  const on = s.anchor === a.name;
+                  const rank = s.anchor === a.name ? 1 : s.anchor2 === a.name ? 2 : 0;
                   return (
                     <button
                       key={a.n}
                       type="button"
-                      onClick={() => set({ anchor: on ? null : a.name })}
+                      onClick={() => {
+                        if (rank === 1) set({ anchor: s.anchor2, anchor2: null });
+                        else if (rank === 2) set({ anchor2: null });
+                        else if (!s.anchor) set({ anchor: a.name });
+                        else set({ anchor2: a.name });
+                      }}
                       className="rounded-[13px] p-[13px] text-left transition-colors duration-150"
                       style={{
-                        border: `1.5px solid ${on ? "#0E8345" : "#E2E2E2"}`,
-                        background: on ? "#F3FBF6" : "#FFFFFF",
+                        border: `1.5px solid ${rank ? "#0E8345" : "#E2E2E2"}`,
+                        background: rank === 1 ? "#F3FBF6" : "#FFFFFF",
                       }}
                     >
                       <div className="flex items-center gap-2.5">
@@ -939,9 +964,9 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                         </div>
                         <span
                           className="whitespace-nowrap text-[11.5px] font-bold"
-                          style={{ color: on ? "#0E8345" : "#111111" }}
+                          style={{ color: rank ? "#0E8345" : "#111111" }}
                         >
-                          {on ? "Selected ✓" : "Select"}
+                          {rank === 1 ? "1st choice ✓" : rank === 2 ? "2nd choice ✓" : "Select"}
                         </span>
                       </div>
                       <div className="ml-[34px] mt-2 text-xs font-semibold text-safe-dark">{a.why}</div>
@@ -950,13 +975,14 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                 })}
               </div>
               <div className="mb-3.5 mt-3 text-[11.5px] leading-[1.5] text-ink-faint">
-                Walking distances are estimates. Your original drop stays available. Nothing about it is
+                Walking distances are estimates. The driver heads for your first choice; the backup is
+                there if that spot is blocked. Your original drop stays available. Nothing about it is
                 labelled unsafe.
               </div>
               <div className="flex gap-2.5">
                 <button
                   type="button"
-                  onClick={() => set({ anchor: null, step: 5 })}
+                  onClick={() => set({ anchor: null, anchor2: null, step: 5 })}
                   className="flex-1 rounded-[10px] border-[1.5px] border-[#D8DCE0] p-3.5 text-center text-[13.5px] font-bold"
                 >
                   Keep Original Drop
@@ -966,7 +992,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                   onClick={() => set({ step: 5 })}
                   className="flex-1 rounded-[10px] bg-[#111] p-3.5 text-center text-[13.5px] font-bold text-white"
                 >
-                  {s.anchor ? "Continue with anchor" : "Continue"}
+                  {s.anchor2 ? "Continue with anchors" : s.anchor ? "Continue with anchor" : "Continue"}
                 </button>
               </div>
             </div>
@@ -1501,6 +1527,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                     {s.match === "standard" ? "₹249 · Standard" : "₹269 · Safety Priority"}
                     <br />
                     {s.anchor ? `Drop moved to ${s.anchor} (safer anchor). ` : "Original drop kept. "}
+                    {s.anchor2 ? `Backup anchor: ${s.anchor2}. ` : ""}
                     {sharingOn ? `Trip was shared under: ${s.policy}.` : "Trip was not shared."}
                   </div>
                   {sharingOn && (
