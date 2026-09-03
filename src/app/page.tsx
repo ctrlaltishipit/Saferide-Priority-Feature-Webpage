@@ -28,8 +28,13 @@ export default function Home() {
       <ScrollCompanion />
       <Nav />
       <main>
-        <Hero />
-        <Ticker />
+        {/* the first screen ends at the ticker: hero stretches, the banner sits at the fold */}
+        <div className="flex min-h-[calc(100svh-50px)] flex-col">
+          <div className="flex w-full flex-1 items-center">
+            <Hero />
+          </div>
+          <Ticker />
+        </div>
         <CaseMap />
 
         {/* 1. Introduction: the problem, the thesis, what the case covers */}
