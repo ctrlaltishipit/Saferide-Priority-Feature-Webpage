@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Reveal } from "./ui";
+import { Glyph } from "./case/primitives";
 import { Carousel } from "./case/Motion";
 
 /* ─────────────────────────── The evidence wall ───────────────────────────
@@ -145,6 +146,7 @@ function ArticleCard({ a, delay }: { a: Article; delay: number }) {
    and opens in full on tap. */
 
 type AppKey = "uber" | "ola" | "rapido" | "indrive" | "manayatri";
+type TabKey = "all" | AppKey;
 
 type Shot = {
   img: string;
@@ -154,7 +156,8 @@ type Shot = {
   tall?: boolean;
 };
 
-const APP_TABS: { key: AppKey; label: string }[] = [
+const APP_TABS: { key: TabKey; label: string }[] = [
+  { key: "all", label: "All" },
   { key: "uber", label: "Uber" },
   { key: "ola", label: "Ola" },
   { key: "rapido", label: "Rapido" },
@@ -183,12 +186,16 @@ const SHOTS: Shot[] = [
   { img: "/reviews/uber-as-2.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Driver was very rude and drove harshly: the driver refused to come to the rider and drove rashly" },
   { img: "/reviews/uber-play-1.jpg", app: "uber", store: "Google Play", alt: "Uber Google Play review calling the booking experience a nightmare" },
   { img: "/reviews/uber-as-6.jpg", app: "uber", store: "App Store", tall: true, alt: "Uber App Store review titled Uber Experience: the driver shouted, abused and held the rider until an extra fare was paid" },
+  { img: "/reviews/uber-as-10.jpg", app: "uber", store: "App Store", alt: "Uber App Store review titled Worst experience: drivers call, ask the destination and cancel the cab, so many times" },
   /* Ola */
+  { img: "/reviews/ola-as-1.jpg", app: "ola", store: "App Store", alt: "Ola App Store review titled Safety concern and poor customer care management" },
+  { img: "/reviews/ola-as-2.jpg", app: "ola", store: "App Store", alt: "Ola App Store review titled Increasing cancelling rides issue by drivers: when we book a ride, the driver calls and asks the destination first" },
   { img: "/reviews/ola-tp-1.jpg", app: "ola", store: "Trustpilot", tall: true, alt: "Ola Trustpilot review: a woman alone at night watched the pickup time grow while no cab ever arrived" },
+  { img: "/reviews/ola-as-3.jpg", app: "ola", store: "App Store", alt: "Ola App Store review titled Worst for anyone: an airport pickup went wrong before the OTP was even given" },
   { img: "/reviews/ola-play-1.jpg", app: "ola", store: "Google Play", alt: "Ola Google Play review: four cab bookings cancelled one after another" },
   { img: "/reviews/ola-tp-2.jpg", app: "ola", store: "Trustpilot", alt: "Ola Trustpilot review: pathetic services and no security for women passengers" },
   { img: "/reviews/ola-tp-3.jpg", app: "ola", store: "Trustpilot", alt: "Ola Trustpilot review by Kavya Vemuri: rides kept cancelling and she waited four long hours" },
-  { img: "/reviews/ola-as-1.jpg", app: "ola", store: "App Store", alt: "Ola App Store review titled Safety concern and poor customer care management" },
+  { img: "/reviews/ola-as-4.jpg", app: "ola", store: "App Store", tall: true, alt: "Ola App Store review titled Worst service ever: an outstation trip from Jaipur that the rider calls a scam" },
   /* Rapido */
   { img: "/reviews/rapido-as-1.jpg", app: "rapido", store: "App Store", alt: "Rapido App Store review asking for a priority request feature for critical times" },
   { img: "/reviews/rapido-play-1.jpg", app: "rapido", store: "Google Play", alt: "Rapido Google Play review: locations change midway, prices jump and drivers feel unsafe" },
@@ -205,6 +212,19 @@ const SHOTS: Shot[] = [
   { img: "/reviews/manayatri-play-3.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: a drunk driver misbehaved, and the company wrote back an apology" },
   { img: "/reviews/manayatri-play-4.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: the auto booked twice and cancelled when the driver was near the pickup" },
   { img: "/reviews/manayatri-play-2.jpg", app: "manayatri", store: "Google Play", alt: "Mana Yatri Google Play review: no driver accepts the ride, never usable in an urgency" },
+];
+
+/* The eight reviews the All tab shows: two Uber, two Ola, two Rapido, one
+   inDrive, one Mana Yatri. Four to a row on web, a rail on phones. */
+const FEATURED: string[] = [
+  "/reviews/uber-as-3.jpg",
+  "/reviews/uber-as-10.jpg",
+  "/reviews/ola-as-1.jpg",
+  "/reviews/ola-as-2.jpg",
+  "/reviews/rapido-as-2.jpg",
+  "/reviews/rapido-play-1.jpg",
+  "/reviews/indrive-tp-1.jpg",
+  "/reviews/manayatri-play-1.jpg",
 ];
 
 function ShotCard({ s, delay, onOpen }: { s: Shot; delay: number; onOpen: (s: Shot) => void }) {
@@ -236,7 +256,7 @@ function ShotCard({ s, delay, onOpen }: { s: Shot; delay: number; onOpen: (s: Sh
 }
 
 function AppReviews() {
-  const [app, setApp] = useState<AppKey>("uber");
+  const [app, setApp] = useState<TabKey>("all");
   const [open, setOpen] = useState<Shot | null>(null);
 
   useEffect(() => {
@@ -253,13 +273,16 @@ function AppReviews() {
   }, [open]);
 
   const [all, setAll] = useState(false);
-  const shots = SHOTS.filter((s) => s.app === app);
+  const shots =
+    app === "all"
+      ? FEATURED.map((img) => SHOTS.find((s) => s.img === img)!).filter(Boolean)
+      : SHOTS.filter((s) => s.app === app);
   const visible = all ? shots : shots.slice(0, 8);
   return (
     <div>
       <div className="mb-5 flex flex-wrap gap-2">
         {APP_TABS.map((t) => {
-          const n = SHOTS.filter((s) => s.app === t.key).length;
+          const n = t.key === "all" ? SHOTS.length : SHOTS.filter((s) => s.app === t.key).length;
           const active = app === t.key;
           return (
             <button
@@ -371,11 +394,11 @@ const OBJECTIVES: { label: string; title: string; text: string; icon: React.Reac
   },
 ];
 
-const DIFFERENT: string[] = [
-  "Every safety tool the app ships today stays exactly where it is. SafeRide Priority arms them before pickup, so the rider never has to remember them mid ride.",
-  "Today's tools respond once something already feels wrong. SafeRide Priority works earlier and lowers the chance that moment arrives at all.",
-  "A SafeRide Priority match is a committed pickup. The driver accepts your trip before you see the match, cannot drop it for a ride on another app, and if anything changes you are rematched first in line.",
-  "It is an add-on for the moments that matter most: a late shift, an emergency, a hospital run, a night you simply need the ride to come. One tap says why you ride, and emergency, medical and urgent trips can switch it on at any hour, day or night. The rider stays in charge, and every share, match and anchor is her explicit choice.",
+const DIFFERENT: { k: string; glyph: "shield" | "clock" | "car" | "hand"; text: string }[] = [
+  { k: "Nothing replaced", glyph: "shield", text: "Every safety tool the app ships today stays exactly where it is. SafeRide Priority arms them before pickup, so the rider never has to remember them mid ride." },
+  { k: "Earlier by design", glyph: "clock", text: "Today's tools respond once something already feels wrong. SafeRide Priority works earlier and lowers the chance that moment arrives at all." },
+  { k: "A committed pickup", glyph: "car", text: "The driver accepts your trip before you see the match, cannot drop it for a ride on another app, and if anything changes you are rematched first in line." },
+  { k: "Her call, always", glyph: "hand", text: "One tap says why you ride: a late shift, a hospital run, a night the ride simply has to come. Emergency, medical and urgent trips switch it on at any hour, and every share, match and anchor is her explicit choice." },
 ];
 
 /* The concept on one page: why, what, how, and how it differs from what
@@ -419,19 +442,82 @@ export function ConceptOnePage() {
           <div className="text-[11px] font-bold tracking-[1.8px] text-ink-faint">
             HOW THIS IS DIFFERENT FROM TODAY&apos;S SAFETY FEATURES
           </div>
-          <ul className="m-0 mt-4 grid list-none gap-4 p-0 sm:grid-cols-2">
-            {DIFFERENT.map((d, i) => (
-              <li key={i} className="flex gap-3 text-[13.5px] leading-[1.6] text-ink-soft">
-                <span className="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-brand text-[11px] font-extrabold text-white">
-                  {i + 1}
-                </span>
-                {d}
-              </li>
+          <h3 className="m-0 mt-2 text-[clamp(19px,2.2vw,26px)] font-extrabold leading-[1.15] tracking-[-0.6px]">
+            The safety work moves to before the pickup.
+          </h3>
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 sm:gap-10">
+            {[DIFFERENT.slice(0, 2), DIFFERENT.slice(2, 4)].map((col, ci) => (
+              <ol key={ci} className="m-0 flex list-none flex-col gap-6 p-0">
+                {col.map((d, i) => {
+                  const n = ci * 2 + i + 1;
+                  const last = i === col.length - 1;
+                  return (
+                    <li key={d.k} className="relative flex gap-4">
+                      {!last && <span className="absolute bottom-[-18px] left-[17px] top-10 border-l-2 border-dashed border-[#C7D9FB]" aria-hidden="true" />}
+                      <span className="relative z-[1] mt-0.5 flex h-9 w-9 flex-none items-center justify-center rounded-full bg-brand text-white shadow-[0_0_0_5px_rgba(39,110,241,.12)]">
+                        <Glyph name={d.glyph} />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-[14px] font-extrabold tracking-[-0.2px]">{d.k}</span>
+                          <span className="text-[10px] font-bold text-ink-faint">{n} OF 4</span>
+                        </div>
+                        <p className="m-0 mt-1 text-[13px] leading-[1.6] text-ink-soft">{d.text}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
             ))}
-          </ul>
+          </div>
         </div>
       </Reveal>
     </div>
+  );
+}
+
+/* A highlighted phrase in the problem statement: the skim path through it. */
+function Hi({ children }: { children: React.ReactNode }) {
+  return <em className="font-extrabold italic text-[#8FB0FF]">{children}</em>;
+}
+
+/* A small night vignette beside the problem statement: a rider with her
+   phone, and the three worries orbiting her: the clock, the question, the
+   ride that may never come. Matches the other night illustrations. */
+function WorryFigure() {
+  return (
+    <svg viewBox="0 0 220 230" className="mx-auto block h-auto w-full max-w-[150px] sm:max-w-[190px]" role="img" aria-label="A rider at night with her phone, worrying about the time, the driver and whether the cab will come">
+      <style>{`@keyframes worryFloat { from { transform: translateY(0); } to { transform: translateY(-6px); } }`}</style>
+      {[[26, 30], [196, 44], [40, 190], [188, 186], [110, 14]].map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r="1.6" fill="#8FB0FF" opacity=".7" />
+      ))}
+      <circle cx="110" cy="128" r="84" fill="none" stroke="#2A3F6B" strokeWidth="1.5" strokeDasharray="5 8" />
+      {/* the rider */}
+      <circle cx="110" cy="118" r="13" fill="#FFFFFF" />
+      <path d="M84 172c4-24 13-33 26-33s22 9 26 33z" fill="#276EF1" />
+      <rect x="130" y="140" width="9" height="15" rx="2.5" fill="#FFFFFF" transform="rotate(18 134 147)" />
+      <ellipse cx="140" cy="146" rx="14" ry="9" fill="#8FB0FF" opacity=".18" />
+      {/* the worries */}
+      <g style={{ animation: "worryFloat 2.6s ease-in-out infinite alternate" }}>
+        <rect x="28" y="64" width="44" height="30" rx="10" fill="#FFFFFF" />
+        <circle cx="50" cy="79" r="8.5" fill="none" stroke="#111" strokeWidth="2" />
+        <path d="M50 74v5l3.5 2.5" stroke="#111" strokeWidth="2" fill="none" strokeLinecap="round" />
+      </g>
+      <g style={{ animation: "worryFloat 2.6s .5s ease-in-out infinite alternate" }}>
+        <rect x="140" y="52" width="40" height="30" rx="10" fill="#FFFFFF" />
+        <text x="160" y="74" textAnchor="middle" fontSize="18" fontWeight="800" fill="#276EF1" fontFamily="Helvetica,Arial">?</text>
+      </g>
+      <g style={{ animation: "worryFloat 2.6s 1s ease-in-out infinite alternate" }}>
+        <rect x="148" y="104" width="52" height="30" rx="10" fill="#FFFFFF" />
+        <path d="M158 122v-5.5a3 3 0 013-3h10l4 5h4a2.5 2.5 0 012.5 2.5v1z" fill="#111" />
+        <circle cx="163" cy="123" r="2.4" fill="#111" />
+        <circle cx="177" cy="123" r="2.4" fill="#111" />
+        <path d="M186 108l8 8m0-8l-8 8" stroke="#E5484D" strokeWidth="2.4" strokeLinecap="round" />
+      </g>
+      <text x="110" y="222" textAnchor="middle" fontSize="10.5" fontWeight="700" letterSpacing="1.2" fill="#8f8f8f" fontFamily="Helvetica,Arial">
+        TONIGHT, BEFORE THE BOOKING
+      </text>
+    </svg>
   );
 }
 
@@ -500,15 +586,17 @@ export default function Evidence() {
             <div className="text-[11px] font-bold tracking-[1.8px] text-[#8f8f8f]">
               THE PROBLEM STATEMENT
             </div>
-            <p className="m-0 mt-3 max-w-[900px] text-[clamp(18px,2.3vw,26px)] font-bold leading-[1.42] tracking-[-0.4px]">
-              Between 8 PM and 5 AM, booking a cab in India is two problems in one. The first is
-              fear: a woman runs her own safety protocol, checks the plate, shares her location
-              and stays on the phone until her door closes. The second is the ride itself:
-              drivers cancel when they hear the destination, nobody accepts the night booking,
-              and some trips end in the middle of the road. The tools the apps offer are real,
-              but they wake up after the car starts moving, and none of them promise the car
-              will come at all.
-            </p>
+            <div className="mt-3 grid items-center gap-6 sm:grid-cols-[1.5fr_auto]">
+              <p className="m-0 max-w-[900px] text-[clamp(17px,2.1vw,24px)] font-bold leading-[1.45] tracking-[-0.3px]">
+                Between 8 PM and 5 AM, booking a cab in India is <Hi>two problems in one</Hi>. The first is <Hi>fear</Hi>: a
+                woman <Hi>runs her own safety protocol</Hi>, checks the plate, shares her location and stays on the phone
+                until her door closes. The second is the ride itself: <Hi>drivers cancel when they hear the destination</Hi>,
+                nobody accepts the night booking, and some trips end in the middle of the road. The tools the apps offer are
+                real, but they <Hi>wake up after the car starts moving</Hi>, and none of them <Hi>promise the car will come
+                at all</Hi>.
+              </p>
+              <WorryFigure />
+            </div>
           </div>
         </div>
       </Reveal>
