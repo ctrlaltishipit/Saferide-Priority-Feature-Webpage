@@ -186,48 +186,68 @@ export function ValueLogic() {
   );
 }
 
-const BMC_AREAS = `"kp kp ka ka vp vp cr cr cs cs" "kp kp kr kr vp vp ch ch cs cs" "cost cost cost cost cost rev rev rev rev rev"`;
+
+/* The classic nine-box canvas: shared hairlines, the value proposition as
+   the dark centre, costs and revenue as the base row. Cells grow with their
+   text, so nothing is ever cut. Phones read it as one column in canvas order. */
+const BMC_SPAN: Record<string, string> = {
+  kp: "lg:col-span-2 lg:row-span-2",
+  ka: "lg:col-span-2",
+  kr: "lg:col-span-2",
+  vp: "lg:col-span-2 lg:row-span-2",
+  cr: "lg:col-span-2",
+  ch: "lg:col-span-2",
+  cs: "lg:col-span-2 lg:row-span-2",
+  cost: "lg:col-span-5",
+  rev: "lg:col-span-5",
+};
+const BMC_ORDER = ["kp", "ka", "vp", "cr", "cs", "kr", "ch", "cost", "rev"];
 
 export function BusinessModelCanvas() {
+  const blocks = BMC_ORDER.map((k) => BMC.find((b) => b.area === k)!);
   return (
     <div className="mt-10 sm:mt-16">
       <SectionHeader
         eyebrow="THE BUSINESS MODEL ON ONE CANVAS"
         glyph="canvas"
         title="Nine blocks, each marked by how sure I am."
-        lede="Where the parts of the case prove they fit. Every block carries a tag: evidenced, a design answer, assumed, or unknown until the pilot."
+        lede="The classic canvas, filled in for SafeRide. Every block carries a tag: evidenced, a design answer, assumed, or unknown until the pilot."
       />
       <Reveal>
-        {/* one column on phones; the classic nine-block layout from sm up, placed by named areas */}
-        <style>{`@media (min-width: 640px){ .bmc-grid { grid-template-columns: repeat(10, 1fr); grid-template-areas: ${BMC_AREAS}; } ${BMC.map((b) => `.bmc-grid > [data-area="${b.area}"] { grid-area: ${b.area}; }`).join(" ")} }`}</style>
-        <div className="bmc-grid grid gap-2.5">
-          {BMC.map((b) => {
-            const c = CONFIDENCE[b.conf];
-            const vp = b.area === "vp";
-            return (
-              <GlowCard
-                key={b.area}
-                className={`flex flex-col rounded-2xl border p-4 ${vp ? "border-brand bg-[rgba(39,110,241,.05)]" : "border-line bg-white"}`}
-                style={undefined}
-              >
-                <div data-area={b.area} className="contents" />
-                <div className="flex items-start justify-between gap-2">
-                  <div className="text-[11px] font-bold tracking-[1.4px] text-ink-faint">{b.title.toUpperCase()}</div>
-                  <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-line px-2 py-0.5 text-[9.5px] font-extrabold tracking-[0.6px] text-ink-soft">
-                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: c.color }} aria-hidden="true" />
-                    {c.label.toUpperCase()}
-                  </span>
+        <div className="overflow-hidden rounded-2xl border border-line bg-line">
+          <div className="grid grid-cols-1 gap-px lg:grid-cols-10 lg:[grid-auto-rows:minmax(0,auto)]">
+            {blocks.map((b) => {
+              const c = CONFIDENCE[b.conf];
+              const vp = b.area === "vp";
+              const base = b.area === "cost" || b.area === "rev";
+              return (
+                <div
+                  key={b.area}
+                  className={`flex flex-col p-4 ${BMC_SPAN[b.area]} ${vp ? "bg-black text-white" : base ? "bg-mist" : "bg-white"}`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className={`text-[10.5px] font-bold tracking-[1.3px] ${vp ? "text-[#8FB0FF]" : "text-ink-faint"}`}>{b.title.toUpperCase()}</div>
+                    <span
+                      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[9px] font-extrabold tracking-[0.6px] ${
+                        vp ? "bg-white/10 text-white" : "border border-line bg-white text-ink-soft"
+                      }`}
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: c.color }} aria-hidden="true" />
+                      {c.label.toUpperCase()}
+                    </span>
+                  </div>
+                  <ul className={`m-0 mt-2.5 flex list-none flex-col gap-1.5 p-0 text-[12.5px] leading-[1.5] ${vp ? "text-white" : "text-ink-soft"}`}>
+                    {b.items.map((it) => (
+                      <li key={it} className="flex items-start gap-2">
+                        <span className={`mt-[7px] h-1 w-1 flex-none rounded-full ${vp ? "bg-brand" : "bg-[#C9CED4]"}`} aria-hidden="true" />
+                        <span className={vp ? "text-[13.5px] font-semibold leading-[1.55]" : ""}>{it}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="m-0 mt-2 flex list-none flex-col gap-1.5 p-0 text-[13px] leading-[1.5] text-ink-soft">
-                  {b.items.map((it) => (
-                    <li key={it} className={vp ? "font-semibold text-ink" : ""}>
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </GlowCard>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </Reveal>
     </div>

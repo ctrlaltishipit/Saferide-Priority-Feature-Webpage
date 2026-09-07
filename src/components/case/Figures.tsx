@@ -13,23 +13,17 @@ export function NorthStarTree({ labels }: { labels: string[] }) {
   const xs = labels.map((_, i) => 50 + (i * 620) / Math.max(1, n - 1));
   return (
     <svg viewBox="0 0 720 236" className="block h-auto w-full" role="img" aria-label="Eight pilot targets feed one north star">
-      <defs>
-        <radialGradient id="nsGlow" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stopColor="#8FB0FF" stopOpacity=".55" />
-          <stop offset="1" stopColor="#8FB0FF" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <circle cx="360" cy="44" r="44" fill="url(#nsGlow)" />
+      {/* a quiet, geometric north star: fine rings and a slim four-point mark */}
+      <circle cx="360" cy="40" r="22" fill="none" stroke="#2A3F6B" strokeWidth="1.4" />
+      <circle cx="360" cy="40" r="31" fill="none" stroke="#2A3F6B" strokeWidth="1" opacity=".45" />
       {xs.map((x, i) => (
-        <path key={i} d={`M${x} 172 C ${x} 120, 360 110, 360 62`} fill="none" stroke="#2A3F6B" strokeWidth="1.6" />
+        <path key={i} d={`M${x} 172 C ${x} 120, 360 116, 360 70`} fill="none" stroke="#2A3F6B" strokeWidth="1.6" />
       ))}
       {xs.map((x, i) => (
-        <path key={`f${i}`} d={`M${x} 172 C ${x} 120, 360 110, 360 62`} fill="none" stroke="#8FB0FF" strokeWidth="1.6" strokeDasharray="5 9" style={flow} />
+        <path key={`f${i}`} d={`M${x} 172 C ${x} 120, 360 116, 360 70`} fill="none" stroke="#8FB0FF" strokeWidth="1.6" strokeDasharray="5 9" style={flow} />
       ))}
-      <path d="M360 22l6.4 13.2 14.6 2-10.6 10.2 2.6 14.6L360 55l-13 7 2.6-14.6-10.6-10.2 14.6-2z" fill="#FFF3C4" />
-      <text x="360" y="86" textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1.5" fill="#8FB0FF" fontFamily={F}>
-        NORTH STAR
-      </text>
+      <path d="M360 14 L363.8 36.2 L382 40 L363.8 43.8 L360 66 L356.2 43.8 L338 40 L356.2 36.2 Z" fill="#FFFFFF" />
+      <circle cx="360" cy="40" r="2.2" fill="#276EF1" />
       {xs.map((x, i) => (
         <g key={`n${i}`}>
           <circle cx={x} cy="172" r="7" fill="#276EF1" />
