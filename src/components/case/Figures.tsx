@@ -103,7 +103,7 @@ export function StageTimeline({ names }: { names: string[] }) {
 }
 
 /* A road with three horizon markers. */
-export function RoadFigure({ labels }: { labels: string[] }) {
+export function RoadFigure({ labels, active = 0, onSelect }: { labels: string[]; active?: number; onSelect?: (i: number) => void }) {
   return (
     <svg viewBox="0 0 720 150" className="block h-auto w-full" role="img" aria-label="The road in three horizons: now, next, later">
       <path d="M40 130 L200 20 L520 20 L680 130 Z" fill="#111" />
@@ -111,10 +111,19 @@ export function RoadFigure({ labels }: { labels: string[] }) {
       {labels.map((l, i) => {
         const x = [140, 360, 580][i];
         const y = [96, 60, 96][i];
+        const on = i === active;
         return (
-          <g key={l}>
-            <rect x={x - 58} y={y - 18} width="116" height="34" rx="17" fill={i === 0 ? "#276EF1" : "#fff"} stroke={i === 0 ? "none" : "#E2E2E2"} />
-            <text x={x} y={y + 5} textAnchor="middle" fontSize="14" fontWeight="800" fill={i === 0 ? "#fff" : "#111"} fontFamily={F}>
+          <g
+            key={l}
+            role={onSelect ? "button" : undefined}
+            tabIndex={onSelect ? 0 : undefined}
+            aria-pressed={onSelect ? on : undefined}
+            aria-label={onSelect ? `Show the ${l} horizon` : undefined}
+            onClick={onSelect ? () => onSelect(i) : undefined}
+            style={onSelect ? { cursor: "pointer", outline: "none", transition: "transform .3s cubic-bezier(.16,1,.3,1)", transformOrigin: `${x}px ${y}px`, transformBox: "view-box", transform: on ? "scale(1.08)" : "scale(1)" } : undefined}
+          >
+            <rect x={x - 58} y={y - 18} width="116" height="34" rx="17" fill={on ? "#276EF1" : "#fff"} stroke={on ? "none" : "#E2E2E2"} />
+            <text x={x} y={y + 5} textAnchor="middle" fontSize="14" fontWeight="800" fill={on ? "#fff" : "#111"} fontFamily={F}>
               {l}
             </text>
           </g>
