@@ -4,7 +4,7 @@
    which design decisions changed while building, and what the work taught.
    Server components; the only motion comes from the shared Motion helpers. */
 
-import { FOUNDER, JOURNEY, METHODS, ITERATIONS, LESSONS, LINKEDIN_URL } from "@/content/case";
+import { FOUNDER, JOURNEY, METHODS, ITERATIONS, LESSONS, LINKEDIN_URL, PILOT_APP_URL } from "@/content/case";
 import { SectionHeader, Glyph } from "./primitives";
 import { GlowCard, Carousel } from "./Motion";
 
@@ -164,7 +164,7 @@ export function Iterations() {
               <div className="text-[10.5px] font-bold tracking-[1.4px] text-ink-faint">WHY</div>
               <p className="m-0 mt-1 text-[13px] leading-[1.55] text-ink-soft">{it.why}</p>
               {it.screen !== undefined && (
-                <a href="#prototype" className="mt-2 inline-block text-[12px] font-bold text-brand">
+                <a href="#prototype-demo" className="mt-2 inline-block text-[12px] font-bold text-brand">
                   See it on screen {it.screen} →
                 </a>
               )}
@@ -214,6 +214,79 @@ export function TalkToMe() {
           <LinkedInLink dark label="Connect with me on LinkedIn →" />
         </div>
       </GlowCard>
+    </div>
+  );
+}
+
+
+/* Chapter 5 opener: the guided prototype and the hands-on pilot app are two
+   doors into the same product. This card says which door is which, and that
+   neither of them is the eight-week pilot. */
+export function TwoWays() {
+  return (
+    <div>
+      <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
+        {/* door one: guided */}
+        <GlowCard className="flex h-full flex-col rounded-3xl border border-line bg-white p-6 sm:p-7">
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-mist px-2.5 py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-brand">THE PROTOTYPE</span>
+            <span className="text-[11px] font-bold tracking-[0.8px] text-ink-faint">GUIDED · ON THIS PAGE</span>
+          </div>
+          <h3 className="m-0 mt-3 text-[clamp(20px,2.3vw,28px)] font-extrabold leading-[1.12] tracking-[-0.7px]">Watch it think.</h3>
+          <ul className="m-0 mt-3 flex list-none flex-col gap-2 p-0 text-[13.5px] leading-[1.55] text-ink-soft">
+            {[
+              "The tour plays all eight screens in thirty seconds, choosing an anchor, a match and a circle for you.",
+              "A step list sits beside the phone: tap any step to jump straight to its screen.",
+              "Every screen carries a note on what it adds and why it exists. This is the version that explains itself.",
+            ].map((l) => (
+              <li key={l} className="flex items-start gap-2">
+                <span className="mt-[8px] h-1.5 w-1.5 flex-none rounded-full bg-brand" aria-hidden="true" />
+                {l}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-auto pt-4">
+            <a href="#prototype-demo" className="inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-[13px] font-bold text-white transition-colors hover:bg-brand">
+              Start the walkthrough ↓
+            </a>
+          </div>
+        </GlowCard>
+
+        {/* door two: hands-on */}
+        <GlowCard className="flex h-full flex-col rounded-3xl bg-black p-6 text-white sm:p-7">
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-brand px-2.5 py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-white">THE PILOT APP</span>
+            <span className="text-[11px] font-bold tracking-[0.8px] text-[#8f8f8f]">HANDS-ON · OPENS SEPARATELY</span>
+          </div>
+          <h3 className="m-0 mt-3 text-[clamp(20px,2.3vw,28px)] font-extrabold leading-[1.12] tracking-[-0.7px]">Drive it yourself.</h3>
+          <ul className="m-0 mt-3 flex list-none flex-col gap-2 p-0 text-[13.5px] leading-[1.55] text-[#C9C9C9]">
+            {[
+              "The same eight screens with the notes taken off. No tour, no script: you flip the toggle, say why you ride, pick the anchor, save the circle, book.",
+              "Opens full screen in its own tab. On a phone it opens like a real app, which is the best way to feel it.",
+              "Everything is still simulated. Nothing real is booked, tracked or messaged.",
+            ].map((l) => (
+              <li key={l} className="flex items-start gap-2">
+                <span className="mt-[8px] h-1.5 w-1.5 flex-none rounded-full bg-brand" aria-hidden="true" />
+                {l}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-auto pt-4">
+            <a
+              href={PILOT_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13px] font-bold text-black transition-all hover:bg-brand hover:text-white"
+            >
+              Open the pilot app →
+            </a>
+          </div>
+        </GlowCard>
+      </div>
+      <p className="mx-auto mt-4 max-w-[760px] text-center text-[13px] leading-[1.6] text-ink-faint">
+        One product, two doors. And neither door is the pilot itself: the pilot is the eight-week Hyderabad test designed in
+        chapter 6, and it has not run. The pilot app is what a rider in that pilot would open.
+      </p>
     </div>
   );
 }

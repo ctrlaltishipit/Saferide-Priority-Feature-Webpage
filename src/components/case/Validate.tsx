@@ -4,6 +4,7 @@
    Server components; motion comes from the shared helpers. */
 
 import { HYPOTHESES, RESEARCH_PLAN, WTP_LADDER, ASSUMPTION_MAP } from "@/content/case";
+import { Fragment } from "react";
 import { SectionHeader } from "./primitives";
 import { GlowCard, Carousel } from "./Motion";
 
@@ -14,32 +15,48 @@ export function Hypotheses() {
         eyebrow="FOUR HYPOTHESES"
         glyph="scale"
         title="Each bet names the number that would kill it."
-        lede="Written before the pilot, with the analysis pre-registered. A hypothesis without a stop rule is a wish."
+        titleClassName="md:whitespace-nowrap"
+        lede={
+          <>
+            Written before the pilot, with the analysis pre-registered.
+            <br />
+            A hypothesis without a stop rule is a wish.
+          </>
+        }
       />
-      <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
-        {HYPOTHESES.map((h, i) => (
-          <GlowCard key={h.id} className={`flex h-full flex-col rounded-2xl p-5 ${i === 3 ? "bg-black text-white" : "border border-line bg-white"}`}>
-            <div className="flex items-center justify-between gap-2">
-              <span className={`rounded-full px-2.5 py-1 text-[10.5px] font-extrabold tracking-[1.2px] ${i === 3 ? "bg-white text-black" : "bg-black text-white"}`}>{h.id}</span>
-              <a href="#prototype" className={`text-[11.5px] font-bold ${i === 3 ? "text-[#8FB0FF]" : "text-brand"}`}>
-                Screen {h.screen} →
-              </a>
-            </div>
-            <p className="m-0 mt-3 text-[15px] font-extrabold leading-[1.35] tracking-[-0.2px]">{h.claim}</p>
-            <dl className={`m-0 mt-4 grid gap-2.5 text-[12.5px] leading-[1.5] ${i === 3 ? "text-[#C9C9C9]" : "text-ink-soft"}`}>
-              {[["Metric", h.metric], ["Sample", h.sample], ["When", h.when]].map(([k, v]) => (
-                <div key={k}>
-                  <dt className={`text-[10px] font-bold tracking-[1.4px] ${i === 3 ? "text-[#8f8f8f]" : "text-ink-faint"}`}>{k.toUpperCase()}</dt>
-                  <dd className="m-0">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className={`mt-auto rounded-xl p-3 pt-3 text-[12.5px] leading-[1.5] ${i === 3 ? "mt-4 bg-white/10" : "mt-4 bg-[#FFF1F3] text-[#8A1C2B]"}`}>
-              <span className="font-extrabold">Stop rule: </span>
-              {h.stop}
-            </div>
-          </GlowCard>
-        ))}
+      <div className="grid gap-3 md:grid-cols-2">
+        {HYPOTHESES.map((h, i) => {
+          const dark = i === HYPOTHESES.length - 1;
+          return (
+            <GlowCard key={h.id} className={`flex h-full flex-col rounded-2xl p-5 ${dark ? "bg-black text-white" : "border border-line bg-white"}`}>
+              <div className="flex items-center justify-between gap-2">
+                <span className={`rounded-full px-2.5 py-0.5 text-[10.5px] font-extrabold tracking-[1.2px] ${dark ? "bg-white text-black" : "bg-black text-white"}`}>{h.id}</span>
+                <a href="#prototype-demo" className={`text-[11px] font-bold ${dark ? "text-[#8FB0FF]" : "text-brand"}`}>
+                  Screen {h.screen} →
+                </a>
+              </div>
+              <p className="m-0 mt-2.5 text-[14.5px] font-extrabold leading-[1.35] tracking-[-0.2px]">{h.claim}</p>
+              <dl className={`m-0 mt-3 grid grid-cols-[58px_1fr] items-baseline gap-x-3 gap-y-1.5 text-[12px] leading-[1.45] ${dark ? "text-[#C9C9C9]" : "text-ink-soft"}`}>
+                {[
+                  ["Metric", h.metric],
+                  ["Sample", h.sample],
+                  ["When", h.when],
+                ].map(([k, v]) => (
+                  <Fragment key={k}>
+                    <dt className={`text-[9.5px] font-extrabold tracking-[1.2px] ${dark ? "text-[#8f8f8f]" : "text-ink-faint"}`}>{k.toUpperCase()}</dt>
+                    <dd className="m-0">{v}</dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <div className="mt-auto pt-3.5">
+                <p className={`m-0 rounded-lg border-l-[3px] px-3 py-2 text-[12px] leading-[1.5] ${dark ? "border-[#FF8FA3] bg-white/10 text-[#FFD9DF]" : "border-[#E5484D] bg-[#FFF5F5] text-[#7A1F2B]"}`}>
+                  <span className="font-extrabold">STOP RULE · </span>
+                  {h.stop}
+                </p>
+              </div>
+            </GlowCard>
+          );
+        })}
       </div>
     </div>
   );
@@ -73,11 +90,14 @@ export function ResearchPlan() {
   );
 }
 
-/* The price ladder as a set of rising steps, with the prototype's price lit. */
+/* The price ladder as five slim rows: price, a rising bar, one line on what
+   that price would tell me. The prototype's price is the dark row. */
+const LADDER_W = ["14%", "30%", "48%", "68%", "88%"];
+const LADDER_ROLE = ["FLOOR TEST", "STEP 1", "IN THE PROTOTYPE", "STEP 3", "CEILING TEST"];
+
 export function PriceLadder() {
-  const n = WTP_LADDER.length;
   return (
-    <div className="mt-10 sm:mt-16">
+    <div className="mt-14 sm:mt-24">
       <SectionHeader
         eyebrow="WHAT IS A COMMITTED DRIVER WORTH"
         glyph="coins"
@@ -85,48 +105,31 @@ export function PriceLadder() {
         title="A price ladder, then a split between minutes and rupees."
         lede="Five prices asked in order, so the answer is a curve and not a yes. Stage 3 then shows half the riders a wait premium and half a fee."
       />
-      <div className="rounded-2xl border border-line bg-white p-4 sm:p-6">
-        <svg viewBox="0 0 720 200" className="block h-auto w-full" role="img" aria-label="Five price steps from zero to sixty rupees, with twenty rupees lit as the prototype price">
-          <style>{`@keyframes stepUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }`}</style>
-          {WTP_LADDER.map((w, i) => {
-            const x = 20 + i * 140;
-            const h = 40 + i * 30;
-            const lit = w.price === "₹20";
-            return (
-              <g key={w.price}>
-                <rect
-                  x={x}
-                  y={170 - h}
-                  width="120"
-                  height={h}
-                  rx="10"
-                  fill={lit ? "#276EF1" : "#EEF3FE"}
-                  stroke={lit ? "none" : "#C7D9FB"}
-                  style={{ transformOrigin: "0 170px", transformBox: "view-box", animation: `stepUp .7s ${i * 0.1}s cubic-bezier(.16,1,.3,1) both` }}
+      <div className="flex flex-col gap-1 rounded-2xl border border-line bg-white p-2 sm:p-3">
+        <style>{`@keyframes ladderW { from { transform: scaleX(0); } to { transform: scaleX(1); } }`}</style>
+        {WTP_LADDER.map((w, i) => {
+          const lit = w.price === "₹20";
+          return (
+            <div
+              key={w.price}
+              className={`grid grid-cols-[44px_minmax(56px,110px)_1fr] items-center gap-x-3 gap-y-1 rounded-xl px-3 py-2.5 sm:grid-cols-[52px_150px_1fr_auto] sm:gap-x-4 ${
+                lit ? "bg-black text-white" : ""
+              }`}
+            >
+              <span className="text-[14.5px] font-extrabold tracking-[-0.3px]">{w.price}</span>
+              <span className={`h-2 overflow-hidden rounded-full ${lit ? "bg-white/15" : "bg-mist"}`} aria-hidden="true">
+                <span
+                  className={`block h-full rounded-full ${lit ? "bg-brand" : "bg-[#C7D9FB]"}`}
+                  style={{ width: LADDER_W[i], transformOrigin: "left", animation: `ladderW .8s ${i * 0.08}s cubic-bezier(.16,1,.3,1) both` }}
                 />
-                <text x={x + 60} y={170 - h + 26} textAnchor="middle" fontSize="18" fontWeight="800" fill={lit ? "#fff" : "#111"} fontFamily="Helvetica,Arial">
-                  {w.price}
-                </text>
-                {lit && (
-                  <text x={x + 60} y={170 - h + 44} textAnchor="middle" fontSize="10" fontWeight="800" letterSpacing="1.2" fill="#D6E4FE" fontFamily="Helvetica,Arial">
-                    IN THE PROTOTYPE
-                  </text>
-                )}
-                <text x={x + 60} y="192" textAnchor="middle" fontSize="11" fontWeight="700" fill="#9AA0A6" fontFamily="Helvetica,Arial">
-                  {i === 0 ? "floor test" : i === n - 1 ? "ceiling test" : `step ${i}`}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-        <ul className="m-0 mt-4 grid list-none gap-2 p-0 sm:grid-cols-5">
-          {WTP_LADDER.map((w) => (
-            <li key={w.price} className={`rounded-xl p-3 text-[12.5px] leading-[1.5] ${w.price === "₹20" ? "bg-black text-white" : "bg-mist text-ink-soft"}`}>
-              <span className="font-extrabold">{w.price} · </span>
-              {w.read}
-            </li>
-          ))}
-        </ul>
+              </span>
+              <span className={`col-span-3 text-[12.5px] leading-[1.5] sm:col-span-1 ${lit ? "text-[#C9C9C9]" : "text-ink-soft"}`}>{w.read}</span>
+              <span className={`hidden whitespace-nowrap text-[9.5px] font-extrabold tracking-[1px] sm:inline ${lit ? "text-[#8FB0FF]" : "text-ink-faint"}`}>
+                {LADDER_ROLE[i]}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

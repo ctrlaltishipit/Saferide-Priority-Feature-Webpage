@@ -91,7 +91,15 @@ export function StageTimeline({ names }: { names: string[] }) {
           <text x={x} y="41" textAnchor="middle" fontSize="13" fontWeight="800" fill={i === 4 ? "#276EF1" : "#fff"} fontFamily={F}>
             {i}
           </text>
-          <text x={x} y="80" textAnchor="middle" fontSize="12.5" fontWeight="700" fill="#545454" fontFamily={F}>
+          <text
+            x={i === 0 ? 6 : i === names.length - 1 ? 714 : x}
+            y="80"
+            textAnchor={i === 0 ? "start" : i === names.length - 1 ? "end" : "middle"}
+            fontSize="12.5"
+            fontWeight="700"
+            fill="#545454"
+            fontFamily={F}
+          >
             {names[i]}
           </text>
         </g>

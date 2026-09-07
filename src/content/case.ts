@@ -62,7 +62,7 @@ export const CHAPTERS: ChapterMeta[] = [
     question: "Who is building this, who it is for, and the market it sits in.",
     verdict: "A solo founder, four people in one night ride, and a night market of about 2 lakh rides where every app works after the car moves.",
     summary: [
-      "I am Deekshitha Sreerala. Every part of this case, from the research to the prototype, is my own work.",
+      "I am Deekshitha Sreerala. Every part of this case, from the research to the pilot app you can open, is my own work.",
       "Four people share one night ride: the rider, the contact who waits, the driver, and the platform that decides.",
       "India's ride-hailing market is heading for $3.8 billion by FY2032, near 19% growth a year. Uber, Ola, Rapido, inDrive and Mana Yatri all start their safety work after pickup.",
     ],
@@ -108,13 +108,13 @@ export const CHAPTERS: ChapterMeta[] = [
     kicker: "CHAPTER 5",
     label: "Prototype",
     short: "Prototype",
-    title: "Walk all 8 screens yourself.",
-    question: "The working prototype, its key features, and the view a contact gets.",
-    verdict: "Fully interactive. Eight screens, the contact's tracking view, and nothing real booked or shared.",
+    title: "Two ways in: watch it think, or drive it yourself.",
+    question: "The guided prototype on this page, and the pilot app you open hands-on.",
+    verdict: "The prototype explains each screen as you go. The pilot app hands you the keys. Nothing real is booked or shared in either.",
     summary: [
-      "Start on the Uber splash, book a ride, and walk the seven safety steps. Every value comes from the written rules.",
-      "Five features in one flow: the brief, safer anchors, the committed match, the Safety Circle, the check-in.",
-      "Flip the toggle to see the six jobs with and without SafeRide, side by side.",
+      "The prototype, below on this page, is the guided way in: the tour plays the eight screens with a note on what each adds and why.",
+      "The pilot app is the hands-on way in: the same screens as a standalone app. Flip the toggle, say why you ride, pick an anchor, book. On a phone it opens like a real app.",
+      "Neither is the pilot. The pilot is the eight-week Hyderabad test in chapter 6, and it has not run.",
     ],
     status: "live",
   },
@@ -172,13 +172,15 @@ export const CHAPTERS: ChapterMeta[] = [
 
 
 /* ── the person behind this ── */
+export const PILOT_APP_URL = "https://saferide-priority-app.vercel.app";
+
 export const LINKEDIN_URL = "https://www.linkedin.com/in/deekshitha-sreerala/";
 
 export const FOUNDER = {
   name: "Deekshitha Sreerala",
   role: "Solo founder. The whole team.",
   lines: [
-    "There is no company behind this page and no team beside me. The research, the rules, the screens, the prototype and this case are one person's work.",
+    "There is no company behind this page and no team beside me. The research, the rules, the guided prototype, the pilot app and this case are one person's work.",
     "I built it the way I would run a product: problem first, rules before screens, every number tagged, nothing claimed that a pilot has not shown.",
     "If you see a hole in the argument, a number that looks wrong, or a better way to do any of this, I want to hear it.",
   ],
@@ -189,7 +191,7 @@ export const JOURNEY: { step: string; text: string }[] = [
   { step: "Noticed the ritual", text: "Women I know book a cab after dark and run the same five checks by hand. Then I found that 4 in 10 say they fear the ride." },
   { step: "Read what riders wrote", text: "29 public reviews across five apps and six news reports, 2014 to 2026. The same headline, twelve years apart." },
   { step: "Wrote the rules first", text: "84 plain rules for what the product does and never does, before a single screen. They still decide every value on every screen." },
-  { step: "Built the prototype", text: "Eight screens and the contact's tracking view, fully interactive. Six decisions changed along the way." },
+  { step: "Built it, twice over", text: "A guided prototype that explains each screen, and a pilot app you can open hands-on. Same rules, same eight screens. Six decisions changed along the way." },
   { step: "Wrote this case", text: "For the room that decides: every number sourced, assumed or a hypothesis, and a verdict at the end of each part." },
 ];
 

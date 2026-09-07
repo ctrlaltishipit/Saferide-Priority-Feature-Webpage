@@ -15,7 +15,7 @@ import { WhoDecides, Personas, Jobs, WhyNow, GapToMetric, Constraints } from "@/
 import { OptionsWeighed, Doblin, NotList, HowWeGotHere } from "@/components/case/Gate2";
 import { NoPilotNote, MetricTree, RevenueModel, ValueLogic, BusinessModelCanvas, PilotPlan, Squad } from "@/components/case/Gate3";
 import { Roadmap, TheAsk, Impact, CaseInSixty, AboutThisCase } from "@/components/case/Gate4";
-import { TheBrain, Methods, Iterations, Lessons, TalkToMe } from "@/components/case/Story";
+import { TheBrain, Methods, Iterations, Lessons, TalkToMe, TwoWays } from "@/components/case/Story";
 import { Hypotheses, ResearchPlan, PriceLadder, AssumptionMap } from "@/components/case/Validate";
 import { GATE_1, GATE_2, GATE_3, GATE_4 } from "@/content/case";
 
@@ -99,6 +99,9 @@ export default function Home() {
 
         {/* 5. Prototype showcase: the working demo, the features, with and without */}
         <Chapter id="prototype" contained={false}>
+          <Container className="mb-8 sm:mb-10">
+            <TwoWays />
+          </Container>
           <Prototype />
           <Container id="features" className="pt-10 sm:pt-16">
             <SectionHeader

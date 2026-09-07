@@ -97,7 +97,7 @@ export default function Prototype() {
     <section id="prototype-demo" className="bg-black text-white">
       <div className="mx-auto max-w-[1240px] px-5 py-5">
         <div className="mb-2 text-xs font-bold tracking-[1.6px] text-[#A6A6A6]">
-          TAP THROUGH IT · EIGHT SCREENS AND THE CONTACT VIEW
+          THE GUIDED PROTOTYPE · EIGHT SCREENS AND THE CONTACT VIEW
         </div>
         <h3 className="m-0 mb-1 text-[clamp(22px,2.2vw,30px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
           Start on the Uber splash. End at the arrival check-in.
@@ -105,7 +105,7 @@ export default function Prototype() {
         <p className="m-0 mb-2.5 text-[13.5px] leading-[1.5] text-[#A6A6A6]">
           The app opens on the Uber splash, lands on home, and the safety flow runs in 7 steps: in the city or outstation, on
           every ride type except Parcel. Sample Hyderabad locations, fictional drivers and contacts. Nothing real is booked,
-          tracked or contacted.
+          tracked or contacted. Prefer no commentary? The pilot app above opens the same screens hands-on.
         </p>
 
         {/* demo controls */}

@@ -45,11 +45,11 @@ export default function ScrollCompanion() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed bottom-1 z-[80] w-[clamp(118px,16vw,172px)] transition-[left] duration-100 ease-linear"
+      className="pointer-events-none fixed -bottom-1 z-[60] w-[clamp(92px,11vw,126px)] transition-[left] duration-100 ease-linear"
       style={{
         left: `calc(${(pct * 100).toFixed(2)}vw - ${(
           pct *
-          (Math.min(Math.max(typeof window !== "undefined" ? window.innerWidth * 0.16 : 140, 118), 172) +
+          (Math.min(Math.max(typeof window !== "undefined" ? window.innerWidth * 0.11 : 110, 92), 126) +
             4)
         ).toFixed(1)}px)`,
       }}

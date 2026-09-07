@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./ui";
 import { SourceSnippet } from "./case/primitives";
+import { sourceByUrl } from "@/content/case";
 import { TiltCard } from "./case/Motion";
 import { COVERAGE, PHASES, PORTABLE } from "@/content/case";
 
@@ -149,99 +150,106 @@ function MarketRings() {
     return () => io.disconnect();
   }, []);
 
-  const r = RINGS[active];
   return (
-    <div ref={ref} className="grid items-center gap-6 lg:grid-cols-2">
-      {/* the rings */}
-      <div className="mx-auto w-full max-w-[460px]">
-        <svg viewBox="0 0 440 440" className="block h-auto w-full" role="group" aria-label="Three rings: the whole market, the late-night slice, the Hyderabad pilot">
-          <style>{`@keyframes ringIn { from { transform: scale(.55); opacity: 0; } to { transform: scale(1); opacity: 1; } }`}</style>
-          {RINGS.map((ring, i) => {
-            const on = active === i;
-            return (
-              <g
+    <div ref={ref} className="mx-auto max-w-[880px] rounded-3xl border border-line bg-white p-4 sm:p-6">
+      <div className="grid items-center gap-5 sm:grid-cols-[240px_1fr] sm:gap-8">
+        {/* the rings, small and quiet */}
+        <div className="mx-auto w-full max-w-[210px] sm:max-w-none">
+          <svg viewBox="0 0 440 440" className="block h-auto w-full" role="group" aria-label="Three rings: the whole market, the late-night slice, the Hyderabad pilot">
+            <style>{`@keyframes ringIn { from { transform: scale(.55); opacity: 0; } to { transform: scale(1); opacity: 1; } }`}</style>
+            {RINGS.map((ring, i) => {
+              const on = active === i;
+              return (
+                <g
+                  key={ring.tag}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${ring.tag}: ${ring.title}, ${ring.big}`}
+                  aria-pressed={on}
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
+                  style={{
+                    transformOrigin: "220px 220px",
+                    transformBox: "view-box",
+                    transform: on ? "scale(1.05)" : "scale(1)",
+                    transition: "transform .35s cubic-bezier(.16,1,.3,1)",
+                    animation: shown ? `ringIn .7s ${i * 0.12}s cubic-bezier(.16,1,.3,1) both` : "none",
+                    opacity: shown ? undefined : 0,
+                    cursor: "pointer",
+                    outline: "none",
+                  }}
+                >
+                  <circle cx="220" cy="220" r={RING_R[i]} fill={RING_FILL[i]} stroke={on ? "#000" : RING_STROKE[i]} strokeWidth={on ? 3 : 1.5} />
+                  {i < 2 && (
+                    <text x="220" y={220 - RING_R[i] + 34} textAnchor="middle" fontSize="14" fontWeight="800" letterSpacing="1.5" fill={i === 0 ? "#1D4FB8" : "#153E93"} fontFamily="Helvetica,Arial">
+                      {ring.tag}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+            <text x="220" y="227" textAnchor="middle" fontSize="15" fontWeight="800" letterSpacing="1.5" fill="#fff" fontFamily="Helvetica,Arial" pointerEvents="none">
+              SOM
+            </text>
+          </svg>
+        </div>
+
+        {/* the switch and the detail; every state renders in the same cell, so nothing moves */}
+        <div className="min-w-0">
+          <div className="flex rounded-full border border-line bg-mist p-1" role="tablist" aria-label="Market layers">
+            {RINGS.map((ring, i) => (
+              <button
                 key={ring.tag}
-                role="button"
-                tabIndex={0}
-                aria-label={`${ring.tag}: ${ring.title}, ${ring.big}`}
-                aria-pressed={on}
-                onMouseEnter={() => setActive(i)}
+                type="button"
+                role="tab"
+                aria-selected={active === i}
                 onClick={() => setActive(i)}
-                onFocus={() => setActive(i)}
-                style={{
-                  transformOrigin: "220px 220px",
-                  transformBox: "view-box",
-                  transform: on ? "scale(1.06)" : "scale(1)",
-                  transition: "transform .35s cubic-bezier(.16,1,.3,1)",
-                  animation: shown ? `ringIn .7s ${i * 0.12}s cubic-bezier(.16,1,.3,1) both` : "none",
-                  opacity: shown ? undefined : 0,
-                  cursor: "pointer",
-                  outline: "none",
-                }}
+                className={`flex-1 rounded-full px-2 py-1.5 text-[12px] font-bold transition-colors ${
+                  active === i ? "bg-black text-white" : "text-ink-soft hover:text-ink"
+                }`}
               >
-                <circle cx="220" cy="220" r={RING_R[i]} fill={RING_FILL[i]} stroke={on ? "#000" : RING_STROKE[i]} strokeWidth={on ? 3 : 1.5} />
-                {i < 2 && (
-                  <text x="220" y={220 - RING_R[i] + 32} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={i === 0 ? "#1D4FB8" : "#153E93"} fontFamily="Helvetica,Arial">
-                    {ring.tag} · {ring.big}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-          <text x="220" y="212" textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1.5" fill="#fff" fontFamily="Helvetica,Arial" pointerEvents="none">
-            SOM
-          </text>
-          <text x="220" y="240" textAnchor="middle" fontSize="24" fontWeight="800" fill="#fff" fontFamily="Helvetica,Arial" pointerEvents="none">
-            {RINGS[2].big}
-          </text>
-        </svg>
-      </div>
-
-      {/* the detail for the active ring */}
-      <div className="glow rounded-2xl border border-line bg-white p-5 sm:p-6" aria-live="polite">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-black px-2.5 py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-white">{r.tag}</span>
-          <span className={`rounded-full px-2 py-0.5 text-[9.5px] font-extrabold tracking-[1px] ${r.kind === "SOURCED" ? "bg-[#E3EDFE] text-brand" : "bg-[#FFF1D6] text-[#8A5A00]"}`}>{r.kind}</span>
-          <span className="ml-auto text-[12px] font-bold text-ink-faint">{active + 1} of 3</span>
+                {ring.tag}
+              </button>
+            ))}
+          </div>
+          <div className="mt-4 grid" aria-live="polite">
+            {RINGS.map((ring, i) => {
+              const src = ring.srcUrl ? sourceByUrl(ring.srcUrl) : null;
+              return (
+                <div key={ring.tag} aria-hidden={active !== i} className={`min-w-0 [grid-area:1/1] ${active === i ? "" : "invisible"}`}>
+                  <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                    <span className="text-[26px] font-extrabold tracking-[-1px]">{ring.big}</span>
+                    <span className="text-[12.5px] font-semibold text-ink-faint">{ring.sub}</span>
+                  </div>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-2">
+                    <span className="text-[14.5px] font-extrabold tracking-[-0.2px]">{ring.title}</span>
+                    <span className={`rounded-full px-2 py-0.5 text-[9px] font-extrabold tracking-[1px] ${ring.kind === "SOURCED" ? "bg-[#E3EDFE] text-brand" : "bg-[#FFF1D6] text-[#8A5A00]"}`}>{ring.kind}</span>
+                  </div>
+                  <p className="m-0 mt-1.5 text-[13px] leading-[1.55] text-ink-soft">{ring.text}</p>
+                  <div className="mt-3">
+                    {ring.srcUrl && src ? (
+                      <a
+                        href={ring.srcUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2.5 rounded-xl border border-line bg-mist p-1.5 pr-3 transition-colors hover:border-brand"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={src.img} alt="" className="h-10 w-16 flex-none rounded-lg border border-line object-cover object-top" />
+                        <span className="min-w-0 flex-1 truncate text-[12px] font-bold">{src.name}</span>
+                        <span className="flex-none text-[13px] font-bold text-brand">→</span>
+                      </a>
+                    ) : (
+                      <p className="m-0 rounded-xl border border-dashed border-[#E2C79A] bg-[#FFF7EC] px-3 py-2 text-[12px] leading-[1.5] text-[#7A4B00]">
+                        No public source publishes the night share. Stage 1 of the pilot replaces this assumption with Uber&apos;s own number.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="mt-3 text-[clamp(30px,3.4vw,40px)] font-extrabold tracking-[-1.5px]">{r.big}</div>
-        <div className="text-[13px] font-semibold text-ink-faint">{r.sub}</div>
-        <div className="mt-3 text-[16px] font-extrabold tracking-[-0.3px]">{r.title}</div>
-        <p className="m-0 mt-1.5 text-[13.5px] leading-[1.6] text-ink-soft">{r.text}</p>
-        <div className="mt-4">
-          {r.srcUrl ? (
-            <SourceSnippet url={r.srcUrl} compact />
-          ) : (
-            <div className="rounded-xl border border-dashed border-[#E2C79A] bg-[#FFF7EC] p-3 text-[12.5px] leading-[1.5] text-[#7A4B00]">
-              No public source publishes the night share. This is my assumption. The pilot&apos;s first stage replaces it with Uber&apos;s own number.
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* the three rings as cards, so the numbers read without hovering */}
-      <div className="grid gap-2.5 sm:grid-cols-3 lg:col-span-2">
-        {RINGS.map((ring, i) => {
-          const on = active === i;
-          return (
-            <button
-              key={ring.tag}
-              type="button"
-              onClick={() => setActive(i)}
-              onMouseEnter={() => setActive(i)}
-              aria-pressed={on}
-              className={`glow flex items-center gap-3 rounded-2xl border p-4 text-left transition-colors ${on ? "border-black bg-black text-white" : "border-line bg-white hover:border-brand"}`}
-            >
-              <span className="h-3.5 w-3.5 flex-none rounded-full" style={{ background: RING_FILL[i], boxShadow: `0 0 0 2px ${RING_STROKE[i]}` }} aria-hidden="true" />
-              <span className="min-w-0">
-                <span className={`block text-[10.5px] font-bold tracking-[1.4px] ${on ? "text-[#8FB0FF]" : "text-ink-faint"}`}>{ring.tag}</span>
-                <span className="block truncate text-[14px] font-extrabold tracking-[-0.2px]">
-                  {ring.big} · {ring.title}
-                </span>
-              </span>
-            </button>
-          );
-        })}
       </div>
     </div>
   );
@@ -420,9 +428,8 @@ export default function Industry() {
             The slice I am aiming at.
           </h3>
           <p className="mt-3 text-[15px] leading-[1.65] text-ink-soft [text-wrap:pretty]">
-            The whole market is the outer ring. The late-night window in the big metros is the middle one, where the fear
-            actually lives. The first bite is the centre: Hyderabad, 8 PM to 5 AM. Hover or tap a ring to see its number,
-            its tag and its source.
+            The outer ring is the whole market. The middle is late nights in the big metros, where the fear lives. The
+            centre is the first bite: Hyderabad, 8 PM to 5 AM. Tap a ring or a tab.
           </p>
         </Reveal>
         <div className="mt-8">
