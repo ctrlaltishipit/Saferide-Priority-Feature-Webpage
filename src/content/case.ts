@@ -179,6 +179,7 @@ export const LINKEDIN_URL = "https://www.linkedin.com/in/deekshitha-sreerala/";
 export const FOUNDER = {
   name: "Deekshitha Sreerala",
   role: "Solo founder. The whole team.",
+  intro: "An AI product management generalist. I take a fuzzy problem from research to working software, and this page shows how I work.",
   lines: [
     "There is no company behind this page and no team beside me. The research, the rules, the guided prototype, the pilot app and this case are one person's work.",
     "I built it the way I would run a product: problem first, rules before screens, every number tagged, nothing claimed that a pilot has not shown.",

@@ -41,29 +41,30 @@ export function TheBrain() {
         title="One person. Every seat."
         lede="No company, no team, no budget. This is what one person can take from a noticed habit to a working prototype, and where that stops."
       />
-      <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
+      <div className="grid items-start gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
         {/* the founder */}
-        <GlowCard className="flex h-full flex-col rounded-3xl bg-black p-6 text-white sm:p-8">
-          <div className="flex items-center gap-4">
-            <span className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-brand text-[18px] font-extrabold tracking-[-0.5px]" aria-hidden="true">
+        <GlowCard className="flex flex-col rounded-3xl bg-black p-5 text-white sm:p-6">
+          <div className="flex items-center gap-3.5">
+            <span className="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-brand text-[16px] font-extrabold tracking-[-0.5px]" aria-hidden="true">
               DS
             </span>
             <div>
-              <div className="text-[20px] font-extrabold tracking-[-0.5px]">{FOUNDER.name}</div>
-              <div className="text-[12.5px] font-semibold text-[#8FB0FF]">{FOUNDER.role}</div>
+              <div className="text-[18px] font-extrabold tracking-[-0.4px]">{FOUNDER.name}</div>
+              <div className="text-[12px] font-semibold text-[#8FB0FF]">{FOUNDER.role}</div>
             </div>
           </div>
-          <ul className="m-0 mt-5 flex list-none flex-col gap-3 p-0">
+          <p className="m-0 mt-3.5 text-[13.5px] leading-[1.55] text-white">{FOUNDER.intro}</p>
+          <ul className="m-0 mt-3.5 flex list-none flex-col gap-2.5 border-t border-white/10 p-0 pt-3.5">
             {FOUNDER.lines.map((l) => (
-              <li key={l} className="flex gap-3 text-[14px] leading-[1.6] text-[#D6DCE4]">
-                <span className="mt-[9px] h-1.5 w-1.5 flex-none rounded-full bg-brand" aria-hidden="true" />
+              <li key={l} className="flex gap-3 text-[13px] leading-[1.55] text-[#C9CFD8]">
+                <span className="mt-[8px] h-1.5 w-1.5 flex-none rounded-full bg-brand" aria-hidden="true" />
                 {l}
               </li>
             ))}
           </ul>
-          <div className="mt-auto pt-6">
-            <p className="m-0 mb-3 text-[13px] leading-[1.55] text-[#A6A6A6]">{FOUNDER.invite}</p>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             <LinkedInLink dark />
+            <p className="m-0 text-[12px] leading-[1.5] text-[#A6A6A6]">Criticism, inputs and advice are all welcome.</p>
           </div>
         </GlowCard>
 

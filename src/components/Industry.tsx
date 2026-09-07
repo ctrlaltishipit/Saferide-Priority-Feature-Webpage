@@ -390,9 +390,10 @@ function CoverageStrip() {
    argument (fines, T-Safe, the US-only driver preference) lives in the
    Why now block of chapter 1. */
 const FIT: string[] = [
-  "Almost every tool above starts working after the car does. The minutes before booking stay empty, and that is exactly where SafeRide Priority lives.",
-  "The gap persists for a structural reason: each app added safety tools one switch at a time, and no team owns the moment before the booking. Sequencing those switches into one flow is a product job, and none of the three has done it.",
-  "Hyderabad police built T-Safe and have said they want cab apps to plug into it. SafeRide's tracking link and circle SMS are shaped to be that bridge.",
+  "Almost every tool above starts working after the car does. The minutes before booking stay empty, and that is exactly where the SafeRide Priority feature lives.",
+  "The gap is structural: each app added safety tools one switch at a time, and no team owns the moment before the booking. Sequencing those switches into one flow is a product job.",
+  "Hyderabad police built T-Safe and want cab apps to plug into it. The tracking link and circle SMS are shaped to be that bridge.",
+  "Nothing here is Uber-only. The same toggle, brief, committed pickup and circle can sit inside Ola, Rapido, inDrive or Mana Yatri. Uber goes first because its toolkit reads out fastest.",
 ];
 
 export default function Industry() {
@@ -462,21 +463,31 @@ export default function Industry() {
         <div className="beam">
           <div className="rounded-2xl bg-black p-7 text-white sm:p-9">
             <div className="text-[11px] font-bold tracking-[1.8px] text-[#8f8f8f]">
-              WHERE SAFERIDE PRIORITY FITS
+              THE SAFERIDE PRIORITY FEATURE, ACROSS RIDING APPS
             </div>
             <div className="mt-2 text-[clamp(20px,2.4vw,28px)] font-extrabold leading-[1.15] tracking-[-0.6px]">
-              An add-on layer every app here could adopt.
+              An add-on layer any riding app could adopt.
             </div>
-            <ul className="m-0 mt-5 grid list-none gap-4 p-0 sm:grid-cols-2">
-              {FIT.map((f, i) => (
-                <li key={i} className="flex gap-3 text-[13.5px] leading-[1.6] text-[#C9C9C9]">
-                  <span className="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-white/15 text-[11px] font-extrabold text-white">
-                    {i + 1}
-                  </span>
-                  {f}
-                </li>
+            {/* two rails, read top to bottom: 1 over 2 on the left, 3 over 4 on the right */}
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-10">
+              {[FIT.slice(0, 2), FIT.slice(2, 4)].map((col, ci) => (
+                <ol key={ci} className="m-0 flex list-none flex-col gap-6 p-0">
+                  {col.map((f, i) => {
+                    const n = ci * 2 + i + 1;
+                    const last = i === col.length - 1;
+                    return (
+                      <li key={n} className="relative flex gap-4">
+                        {!last && <span className="absolute bottom-[-18px] left-[15px] top-9 border-l-2 border-dashed border-white/20" aria-hidden="true" />}
+                        <span className="relative z-[1] mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-[13px] font-extrabold text-white shadow-[0_0_0_5px_rgba(39,110,241,.16)]">
+                          {n}
+                        </span>
+                        <p className="m-0 text-[13.5px] leading-[1.6] text-[#C9C9C9]">{f}</p>
+                      </li>
+                    );
+                  })}
+                </ol>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </Reveal>
