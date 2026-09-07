@@ -93,7 +93,7 @@ export function RevenueModel() {
         eyebrow="THE MONEY MODEL, SHOWN WITH ITS WORKING"
         glyph="coins"
         title="What one night in Hyderabad could be worth."
-        lede="Two lines of value: the optional fee, and fares that complete because the driver committed. Every input wears its tag. The range is something to argue with, no more."
+        lede="Two lines of value: the optional fee, and fares that complete. Every input wears its tag."
       />
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
         <Reveal className="rounded-2xl border border-line bg-white p-5 sm:p-6">
@@ -158,7 +158,7 @@ export function ValueLogic() {
         eyebrow="THE VALUE, AGAINST THE BASELINE"
         glyph="levers"
         title="Three levers, two things that could go wrong."
-        lede="Inside a live product, the money story is a delta against today's numbers. It also names how the feature could hurt the product it sits in."
+        lede="Money is a delta against today's numbers, and the harm it could do is named."
       />
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
         {VALUE_LEVERS.map((v, i) => (
@@ -211,7 +211,7 @@ export function BusinessModelCanvas() {
         eyebrow="THE BUSINESS MODEL ON ONE CANVAS"
         glyph="canvas"
         title="Nine blocks, each marked by how sure I am."
-        lede="The classic canvas, filled in for SafeRide. Every block carries a tag: evidenced, a design answer, assumed, or unknown until the pilot."
+        lede="The classic canvas. Every block carries a tag: evidenced, design, assumed, or unknown."
       />
       <Reveal>
         <div className="overflow-hidden rounded-2xl border border-line bg-line">
@@ -296,7 +296,7 @@ export function Squad() {
         eyebrow="THE SEATS A PILOT NEEDS"
         glyph="team"
         title="Eight seats. Today one person holds all of them."
-        lede="A pilot inside a live product borrows more than it hires. What the eight weeks would need at Uber, who would cover it, and the reviews on the calendar. Until then, every seat is me."
+        lede="A pilot borrows more than it hires. The seats, who covers each, and the reviews on the calendar. Today, every seat is me."
       />
       <Carousel minWidth={270} ariaLabel="The squad">
         {SQUAD.map((r, i) => (

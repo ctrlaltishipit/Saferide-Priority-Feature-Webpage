@@ -79,7 +79,7 @@ export function Doblin() {
         eyebrow="HOW I INNOVATED"
         glyph="grid"
         title={`${WORDS[yes]} of the ten types, and none of them is a new feature.`}
-        lede="Ten types of innovation is a public checklist: four about how the business is set up, two about what it offers, four about how it feels. A type is ticked only where SafeRide truly changes something. The rest stay unticked, with the reason."
+        lede="Ten public types of innovation. A tick only where SafeRide truly changes something; the rest say why not."
       />
       <style>{`@keyframes tickdraw { to { stroke-dashoffset: 0; } }`}</style>
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">

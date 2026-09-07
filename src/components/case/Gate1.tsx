@@ -70,7 +70,7 @@ export function Personas() {
         eyebrow="WHO IS IN THE CAR"
         glyph="people"
         title="Four people, one night ride."
-        lede="The rider is the user. Her contact carries the worry. The driver decides whether the ride comes. Inside Uber, the buyer is the council named in chapter 1."
+        lede="The rider is the user. Her contact carries the worry. The driver decides whether the ride comes."
       />
       <div className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))]">
         {PERSONAS.map((p, i) => (
@@ -188,7 +188,7 @@ export function GapToMetric() {
         eyebrow="FROM PAIN TO NUMBER"
         glyph="bridge"
         title="Every pain sits on a metric Uber already tracks."
-        lede="No rupee figure yet, and no outcome claimed. Each pain suppresses a number Uber measures today. The pilot's first stage pulls the baseline; the last column is what we would test against it."
+        lede="No rupee figure yet. Each pain suppresses a number Uber already measures; stage 1 pulls the baseline."
       />
       <div className="hidden gap-4 px-5 pb-2 text-[11px] font-bold tracking-[1.8px] text-ink-faint sm:grid sm:grid-cols-[1.1fr_1fr_1.1fr]">
         <div>THE PAIN</div>

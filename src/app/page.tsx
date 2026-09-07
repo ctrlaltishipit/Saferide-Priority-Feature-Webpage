@@ -73,7 +73,7 @@ export default function Home() {
 
         {/* 4. Design process: options, iterations, decisions */}
         <Chapter id="design" contained={false}>
-          <Container>
+          <Container className="[&>*:first-child]:mt-0">
             <OptionsWeighed />
             <Iterations />
             <DecisionEngine />

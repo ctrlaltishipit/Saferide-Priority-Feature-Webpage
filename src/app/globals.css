@@ -243,3 +243,8 @@
   .hero-copy ul { font-size: 10px; margin-bottom: 8px; }
   .hero-copy .hero-disc { font-size: 9.5px; margin-top: 8px; }
 }
+
+/* smaller rail tiles, for dense card sets like the case map */
+@media (max-width: 639px) {
+  .car-sm > * { flex: 0 0 min(46vw, 185px); }
+}

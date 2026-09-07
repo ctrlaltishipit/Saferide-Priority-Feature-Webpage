@@ -103,7 +103,7 @@ export function PriceLadder() {
         glyph="coins"
         size="h3"
         title="A price ladder, then a split between minutes and rupees."
-        lede="Five prices asked in order, so the answer is a curve and not a yes. Stage 3 then shows half the riders a wait premium and half a fee."
+        lede="Five prices in order, so the answer is a curve. Stage 3 splits the premium: minutes or rupees."
       />
       <div className="flex flex-col gap-1 rounded-2xl border border-line bg-white p-2 sm:p-3">
         <style>{`@keyframes ladderW { from { transform: scaleX(0); } to { transform: scaleX(1); } }`}</style>

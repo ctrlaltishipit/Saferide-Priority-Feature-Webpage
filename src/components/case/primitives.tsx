@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { CHAPTER_ICONS } from "./chapterIcons";
 import { Reveal } from "../ui";
 import { chapterById, LENSES, LENS_STATE, sourceByUrl, type Gate, type LensRead } from "@/content/case";
 
@@ -86,7 +87,10 @@ export function Chapter({
   const meta = chapterById(id);
   const kicker = meta && (
     <Container>
-      <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-white" aria-hidden="true">
+          {CHAPTER_ICONS[meta.id]}
+        </span>
         <span className="text-xs font-bold tracking-[1.6px] text-brand">
           {meta.kicker} · {meta.label.toUpperCase()}
         </span>
@@ -96,7 +100,7 @@ export function Chapter({
         {meta.title}
       </h2>
       {meta.summary?.length ? (
-        <div className="mb-7 rounded-2xl border border-line bg-mist p-4 sm:mb-8 sm:p-5">
+        <div className="mb-5 rounded-2xl border border-line bg-mist p-4 sm:mb-6 sm:p-5">
           <div className="mb-3 flex items-center gap-2 text-[11px] font-bold tracking-[1.8px] text-ink-faint">
             <span className="h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
             THIS CHAPTER IN 20 SECONDS
@@ -115,7 +119,7 @@ export function Chapter({
   return (
     <section id={id} className={`scroll-mt-[50px] pt-10 sm:pt-16 ${className}`}>
       {kicker}
-      {contained ? <Container>{children}</Container> : children}
+      {contained ? <Container className="[&>*:first-child]:mt-0">{children}</Container> : children}
     </section>
   );
 }
