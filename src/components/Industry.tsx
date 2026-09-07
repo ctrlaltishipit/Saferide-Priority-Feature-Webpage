@@ -9,7 +9,7 @@ import { COVERAGE, PHASES, PORTABLE } from "@/content/case";
 
 /* ─────────────────────────── Industry 101 ───────────────────────────
    Sourced market numbers for Indian ride-hailing, a TAM / SAM / SOM
-   funnel, what each app ships for safety today, and where SafeRide
+   funnel, what each app ships for safety today, and where SafeRide Priority
    Priority fits as an add-on layer. India only, per the product rules. */
 
 const MARKET: {
@@ -167,7 +167,6 @@ function MarketRings() {
                   aria-label={`${ring.tag}: ${ring.title}, ${ring.big}`}
                   aria-pressed={on}
                   onClick={() => setActive(i)}
-                  onMouseEnter={() => setActive(i)}
                   style={{
                     transformOrigin: "220px 220px",
                     transformBox: "view-box",
@@ -335,7 +334,7 @@ function PlayerCard({ p, delay }: { p: (typeof PLAYERS)[number]; delay: number }
   );
 }
 
-/* The aha: where each app's safety work starts today, and where SafeRide
+/* The aha: where each app's safety work starts today, and where SafeRide Priority
    starts. The empty first column is the whole case in one picture. */
 const DOT = { 0: "bg-[#E2E2E2]", 1: "bg-caution", 2: "bg-safe" } as const;
 function CoverageStrip() {
@@ -458,7 +457,7 @@ export default function Industry() {
 
       <CoverageStrip />
 
-      {/* Where SafeRide fits */}
+      {/* Where SafeRide Priority fits */}
       <Reveal className="mt-6">
         <div className="beam">
           <div className="rounded-2xl bg-black p-7 text-white sm:p-9">

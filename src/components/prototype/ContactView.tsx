@@ -345,7 +345,7 @@ export default function ContactView({
                   <div className="flex flex-wrap items-center gap-1.5 text-[14.5px] font-extrabold">
                     {driver.name}
                     {info?.driverKind !== "standard" && (
-                      <span className="rounded-full bg-[#EFF4FE] px-2 py-0.5 text-[9.5px] font-bold text-brand-dark">SafeRide eligible</span>
+                      <span className="rounded-full bg-[#EFF4FE] px-2 py-0.5 text-[9.5px] font-bold text-brand-dark">SafeRide Priority eligible</span>
                     )}
                   </div>
                   <div className="text-[12px] text-ink-faint">

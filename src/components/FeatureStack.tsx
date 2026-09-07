@@ -27,7 +27,7 @@ function GaugeVisual() {
 
 function MatchVisual() {
   return (
-    <svg viewBox="0 0 360 190" className="mx-auto block w-full max-w-[430px]" aria-label="Driver card with SafeRide eligibility badge and trade-off chips">
+    <svg viewBox="0 0 360 190" className="mx-auto block w-full max-w-[430px]" aria-label="Driver card with SafeRide Priority eligibility badge and trade-off chips">
       <rect x="4" y="6" width="352" height="148" rx="18" fill="#141414" stroke="#2A2A2A" />
       <circle cx="46" cy="52" r="24" fill="#276EF1" />
       <text x="46" y="58" textAnchor="middle" fontSize="16" fontWeight="800" fill="#fff" fontFamily="Helvetica">AS</text>
@@ -156,7 +156,7 @@ const CARDS: Card[] = [
     badge: "P0 · SAFETY PRIORITY MATCH",
     badgeCls: "text-[#8FB0FF] bg-[#16264A]",
     title: (<>See the full trade-off<br />before you choose.</>),
-    body: "Verification complete · safety training · 1000+ trips · clear review status. Driver eligibility rests on several audited signals, and star ratings are only one small part. The +4 min and +₹20 trade off sits right on the card before you pick. And every SafeRide match is a committed pickup: the driver accepts your trip before you see the match, and a cancel means an instant first-in-line rematch.",
+    body: "Verification complete · safety training · 1000+ trips · clear review status. Driver eligibility rests on several audited signals, and star ratings are only one small part. The +4 min and +₹20 trade off sits right on the card before you pick. And every SafeRide Priority match is a committed pickup: the driver accepts your trip before you see the match, and a cancel means an instant first-in-line rematch.",
     visual: <MatchVisual />,
     cardCls: "bg-black text-white",
     bodyColor: "text-[#A6A6A6]",

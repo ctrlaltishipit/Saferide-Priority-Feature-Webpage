@@ -8,7 +8,7 @@ const CALLOUT_A = [
   { dot: "#A6A6A6", ring: "rgba(166,166,166,.22)", t: "Limited Data", sub: "not enough data, and it says so" },
 ];
 const CALLOUT_B = [
-  { k: "SAFETY PRIORITY MATCH", t: "Anil S. · SafeRide eligible · +4 min" },
+  { k: "SAFETY PRIORITY MATCH", t: "Anil S. · SafeRide Priority eligible · +4 min" },
   { k: "SAFER ANCHOR FOUND", t: "Metro entrance · 180 m · staffed" },
   { k: "TRIP VERIFICATION", t: "PIN 4827 · confirm before boarding" },
 ];
@@ -23,7 +23,7 @@ function NightCity() {
     <svg
       viewBox="0 0 560 470"
       className="block h-auto w-full rounded-3xl"
-      aria-label="Night city illustration: a car routes toward a staffed metro anchor under a SafeRide shield"
+      aria-label="Night city illustration: a car routes toward a staffed metro anchor under a SafeRide Priority shield"
     >
       <defs>
         <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">

@@ -206,12 +206,12 @@ export interface Method {
 }
 
 export const METHODS: Method[] = [
-  { name: "Desk research", count: "12 sources", what: "Government reports, market studies and newsroom posts, each shown as a screenshot that opens the original.", limit: "Public numbers only. Uber's own baselines are not public.", glyph: "list" },
-  { name: "Review mining", count: "29 reviews", what: "App store and review site screenshots across Uber, Ola, Rapido, inDrive and Mana Yatri, coded into six jobs.", limit: "Reviews skew to the angry and the grateful. They show the pattern, never the rate.", glyph: "people" },
-  { name: "Competitor audit", count: "5 apps · 4 phases", what: "What every app does before booking, at pickup, during the ride and after arrival.", limit: "Based on public feature pages and the apps themselves, as of this year.", glyph: "grid" },
-  { name: "News timeline", count: "6 reports", what: "Safety and reliability stories from 2014 to 2026, captured clean and linked.", limit: "Headlines prove the problem persists, never how often it happens.", glyph: "clock" },
-  { name: "Rules as requirements", count: "84 rules", what: "Every requirement written as a plain sentence a rider could read, then enforced in the prototype.", limit: "Written by one person. A pilot team would challenge several.", glyph: "wrench" },
-  { name: "Live interviews", count: "0 so far", what: "Composite personas come from reviews, posts and the PRD. Rider conversations in the pilot corridors are stage 1 of the pilot.", limit: "The biggest gap in this research, said plainly.", glyph: "room" },
+  { name: "Desk research", count: "12 sources", what: "Public reports and studies, each shown as a screenshot that opens the original.", limit: "Public numbers only. Uber's own baselines are not public.", glyph: "list" },
+  { name: "Review mining", count: "29 reviews", what: "Real screenshots across five apps, coded into six jobs.", limit: "Reviews show the pattern, never the rate.", glyph: "people" },
+  { name: "Competitor audit", count: "5 apps · 4 phases", what: "What every app does before, at, during and after the ride.", limit: "Reads public feature pages, as of this year.", glyph: "grid" },
+  { name: "News timeline", count: "6 reports", what: "Safety and reliability stories, 2014 to 2026, captured clean.", limit: "Headlines prove persistence, not frequency.", glyph: "clock" },
+  { name: "Rules as requirements", count: "84 rules", what: "Every requirement as a plain sentence, enforced in the prototype.", limit: "Written alone. A pilot team would challenge several.", glyph: "wrench" },
+  { name: "Live interviews", count: "0 so far", what: "Personas come from reviews and posts. Conversations are pilot stage 1.", limit: "The biggest gap in this research, said plainly.", glyph: "room" },
 ];
 
 /* ── design decisions that changed while building ── */
@@ -475,7 +475,7 @@ export const PERSONAS: Persona[] = [
   },
   {
     name: "Anil S.",
-    who: "Night driver. Verified, safety trained, more than 1,000 trips. A SafeRide Partner.",
+    who: "Night driver. Verified, safety trained, more than 1,000 trips. A SafeRide Priority Partner.",
     tag: "PARTNER DRIVER",
     tonight: "Three long night requests. One pays a little more if he commits before the rider sees him.",
     workaround: "Runs two apps and drops the weaker request when a better fare lands.",
@@ -524,7 +524,7 @@ export const WHY_NOW: WhyNowItem[] = [
   },
   {
     title: "Hyderabad police built the night watch and asked apps to plug in.",
-    text: "T-Safe monitors rides on request. SafeRide's tracking link and circle SMS are shaped to be that bridge.",
+    text: "T-Safe monitors rides on request. SafeRide Priority's tracking link and circle SMS are shaped to be that bridge.",
     sourceName: "Telangana Today",
     sourceUrl: "https://telanganatoday.com/explainer-what-is-t-safe-and-how-to-use-it",
   },
@@ -537,7 +537,7 @@ export const WHY_NOW: WhyNowItem[] = [
 ];
 
 export const WHY_UBER_FIRST =
-  "Why Uber first: it ships the deepest toolkit of the three apps. SafeRide is a sequencing job on tools Uber already paid for.";
+  "Why Uber first: it ships the deepest toolkit of the three apps. SafeRide Priority is a sequencing job on tools Uber already paid for.";
 
 /* ── gap to metric ── */
 export interface GapRow {
@@ -640,12 +640,12 @@ export const OPTIONS: Option[] = [
 export interface DoblinType {
   group: "Configuration" | "Offering" | "Experience";
   name: string;
-  /** yes = SafeRide truly changes something here; no = left as it is, with the reason */
+  /** yes = SafeRide Priority truly changes something here; no = left as it is, with the reason */
   state: "yes" | "no";
   how: string;
 }
 
-/* Ten types of innovation, ticked only where SafeRide changes something real. */
+/* Ten types of innovation, ticked only where SafeRide Priority changes something real. */
 export const DOBLIN: DoblinType[] = [
   { group: "Configuration", name: "Profit model", state: "yes", how: "An optional priority fee, and fares that complete because the driver committed." },
   { group: "Configuration", name: "Network", state: "yes", how: "Hyderabad police's T-Safe as the tracking partner. Metro gates, hospitals and fuel stations as anchors." },
@@ -655,7 +655,7 @@ export const DOBLIN: DoblinType[] = [
   { group: "Offering", name: "Product system", state: "yes", how: "A layer over Uber's toolkit, with a contact view and a city bridge that work together." },
   { group: "Experience", name: "Service", state: "yes", how: "The circle SMS, the calm check-in, the first-in-line rematch when a driver drops out." },
   { group: "Experience", name: "Channel", state: "no", how: "Same booking flow, same SMS. Nothing new to install or find." },
-  { group: "Experience", name: "Brand", state: "no", how: "Uber's brand, untouched. SafeRide is a toggle, and the disclaimer says so." },
+  { group: "Experience", name: "Brand", state: "no", how: "Uber's brand, untouched. SafeRide Priority is a toggle, and the disclaimer says so." },
   { group: "Experience", name: "Customer engagement", state: "yes", how: "Consent before every share. A brief you can question. One tap says why you ride tonight." },
 ];
 
@@ -732,7 +732,7 @@ export const INSIGHTS: Insight[] = [
 /* ═══════════════════════ Chapter 3: the business model ═══════════════════════ */
 
 export const NORTH_STAR = {
-  metric: "SafeRide-supported late-night trips completed with a positive rider-reported sense of control and no safety-support escalation.",
+  metric: "SafeRide Priority-supported late-night trips completed with a positive rider-reported sense of control and no safety-support escalation.",
   note: "A health proxy, read weekly. No model measures safety outcomes at pilot scale, so I measure what the pilot can see.",
 };
 
@@ -909,12 +909,12 @@ export const ROADMAP: Horizon[] = [
 /* Built for Uber first, made for every riding app. */
 export const PORTABLE = {
   title: "Built for Uber first. Made for every riding app.",
-  text: "Nothing in SafeRide is Uber-only. The brief, the safer drop, the committed pickup, the circle and the check-in sit on top of any booking flow. Uber goes first because its toolkit is deepest, so the pilot reads out fastest.",
+  text: "Nothing in SafeRide Priority is Uber-only. The brief, the safer drop, the committed pickup, the circle and the check-in sit on top of any booking flow. Uber goes first because its toolkit is deepest, so the pilot reads out fastest.",
   path: ["Prototype", "Pilot", "MVP", "Any riding app"],
   apps: ["Uber", "Ola", "Rapido", "inDrive", "Mana Yatri"],
 };
 
-/* Where each app's safety work starts today, and where SafeRide starts. */
+/* Where each app's safety work starts today, and where SafeRide Priority starts. */
 export type Phase = "before" | "pickup" | "during" | "after";
 export const PHASES: { key: Phase; label: string }[] = [
   { key: "before", label: "Before booking" },

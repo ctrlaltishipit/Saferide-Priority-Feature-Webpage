@@ -58,7 +58,7 @@ export function Reveal({
   );
 }
 
-/* SafeRide shield logomark. */
+/* SafeRide Priority shield logomark. */
 export function Logo({ size = 26 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 190 190" aria-hidden="true">

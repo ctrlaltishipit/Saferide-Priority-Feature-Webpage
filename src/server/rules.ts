@@ -16,7 +16,7 @@ export const TRIP_ETA_MINUTES = 24;
 export const TRIP_PIN = "4827"; // one source for the ride PIN, shown to rider and contacts
 export const UBER_HELPLINE = "1800 555 0199"; // fictional demo helpline
 
-/* Rules 7 and 8. SafeRide runs only between 8 PM and 5 AM. */
+/* Rules 7 and 8. SafeRide Priority runs only between 8 PM and 5 AM. */
 export function isWithinLateNightWindow(hour: number): boolean {
   return hour >= LATE_NIGHT_START_HOUR || hour < LATE_NIGHT_END_HOUR;
 }
@@ -37,7 +37,7 @@ export function pickupSlots(): string[] {
 }
 
 /* Rules 30 to 34. The Female rider toggle.
-   Any user can use SafeRide. A rider who turns this on gets priority
+   Any user can use SafeRide Priority. A rider who turns this on gets priority
    matching, the driver is alerted before the trip that a female
    passenger is travelling, and live GPS tracking becomes mandatory. */
 export const FEMALE_RIDER_DRIVER_ALERT =
@@ -45,16 +45,16 @@ export const FEMALE_RIDER_DRIVER_ALERT =
 export const FEMALE_RIDER_GPS_NOTE =
   "Live GPS tracking is mandatory for this trip.";
 
-/* Committed pickup. A SafeRide match is a promise the ride will come.
+/* Committed pickup. A SafeRide Priority match is a promise the ride will come.
    The driver accepts the trip before the rider sees the match, cannot
    drop it for a ride on another app, and a cancel means an instant
    first-in-line rematch. Urgent and hospital trips head the queue. */
 export const MATCH_COMMIT_NOTE =
   "This driver accepted your trip before you saw this match and cannot drop it for a ride on another app. If anything changes, you are rematched first in line.";
 
-/* Why this ride. One tap tells SafeRide why the rider is travelling.
+/* Why this ride. One tap tells SafeRide Priority why the rider is travelling.
    The reason sets the place in the priority queue, and the top reasons
-   unlock SafeRide at any hour of the day. The reason stays private:
+   unlock SafeRide Priority at any hour of the day. The reason stays private:
    the driver only ever sees a priority flag. */
 export type ReasonTier = "top" | "high" | "standard";
 export type TripReason = {
@@ -83,7 +83,7 @@ export const TRIP_REASONS: TripReason[] = [
 export const REASON_TIER_LINES: Record<ReasonTier, string> = {
   top: "Top of the queue. A committed driver is assigned to you first.",
   high: "High priority. You are matched ahead of standard requests.",
-  standard: "Standard priority queue, with every SafeRide protection on.",
+  standard: "Standard priority queue, with every SafeRide Priority protection on.",
 };
 export const REASON_QUEUE_LABELS: Record<ReasonTier, string> = {
   top: "Top of the queue",
@@ -155,7 +155,7 @@ export function buildCircleSms(input: {
   };
 }
 
-/* Rules 11 to 14. SafeRide covers in-city trips and outstation trips,
+/* Rules 11 to 14. SafeRide Priority covers in-city trips and outstation trips,
    on every ride type except Parcel. The demo outstation trip. */
 export const OUTSTATION_ETA_LABEL = "about 4 hours";
 export const OUTSTATION_DROPS = [

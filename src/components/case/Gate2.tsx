@@ -79,7 +79,7 @@ export function Doblin() {
         eyebrow="HOW I INNOVATED"
         glyph="grid"
         title={`${WORDS[yes]} of the ten types, and none of them is a new feature.`}
-        lede="Ten public types of innovation. A tick only where SafeRide truly changes something; the rest say why not."
+        lede="Ten public types of innovation. A tick only where SafeRide Priority truly changes something; the rest say why not."
       />
       <style>{`@keyframes tickdraw { to { stroke-dashoffset: 0; } }`}</style>
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
@@ -129,7 +129,7 @@ export function Doblin() {
         ))}
       </div>
       <p className="mx-auto mt-6 max-w-[760px] text-center text-[13.5px] leading-[1.6] text-ink-soft">
-        The rule of thumb behind the checklist: three types beyond product features is the floor, and five or more working together is what rivals find hard to copy. SafeRide ticks {yes}. The feature list is left alone on purpose.
+        The rule of thumb behind the checklist: three types beyond product features is the floor, and five or more working together is what rivals find hard to copy. SafeRide Priority ticks {yes}. The feature list is left alone on purpose.
       </p>
     </div>
   );
@@ -141,7 +141,7 @@ export function NotList() {
       <SectionHeader
         eyebrow="THE NOT-LIST"
         glyph="cross"
-        title="What SafeRide will never build."
+        title="What SafeRide Priority will never build."
         lede="A concept is only as clear as its edges. Six things people ask for first, and why each stays out."
       />
       <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">

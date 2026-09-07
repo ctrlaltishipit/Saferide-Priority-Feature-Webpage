@@ -784,10 +784,10 @@ export default function UberHome({
           </ServiceTile>
         </div>
 
-        {/* outstation getaways · tapping one starts an outstation SafeRide booking */}
+        {/* outstation getaways · tapping one starts an outstation SafeRide Priority booking */}
         <div className="mt-6 flex items-baseline justify-between">
           <div className="text-[19px] font-extrabold">Outstation getaways</div>
-          <span className="text-[10.5px] font-semibold text-brand-dark">SafeRide works here too</span>
+          <span className="text-[10.5px] font-semibold text-brand-dark">SafeRide Priority works here too</span>
         </div>
         <div className="hscroll -mr-4 mt-3 flex gap-3 overflow-x-auto pr-4" role="group" aria-label="Outstation getaways">
           <button type="button" onClick={onOutstation ?? onWhereTo} className="text-left">

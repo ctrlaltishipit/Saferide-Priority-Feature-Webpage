@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* The little SafeRide car that drives along the bottom edge as you scroll.
+/* The little SafeRide Priority car that drives along the bottom edge as you scroll.
    Driver + passenger visible through the windows; wheels spin while moving. */
 export default function ScrollCompanion() {
   const [pct, setPct] = useState(0);

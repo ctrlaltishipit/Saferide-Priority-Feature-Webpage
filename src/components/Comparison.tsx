@@ -184,7 +184,7 @@ export default function Comparison() {
         ))}
       </div>
       <div className="mt-3 text-xs text-[#A6A6A6]">
-        Either way, the ride books. SafeRide never blocks a trip. It just removes the juggling.
+        Either way, the ride books. SafeRide Priority never blocks a trip. It just removes the juggling.
       </div>
     </div>
   );

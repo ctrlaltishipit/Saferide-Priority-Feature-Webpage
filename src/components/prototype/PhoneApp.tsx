@@ -37,10 +37,10 @@ export type Scenario = "elevated" | "lower" | "limited-data";
    Screen 1 is the Uber Home. Steps 2 to 8 are the 7-step safety flow,
    shown to the user as Step 1 of 7 through Step 7 of 7. */
 export const APP_SCREENS = [
-  { n: "1", title: "Uber Home", desc: "Familiar home, with the SafeRide entry point" },
+  { n: "1", title: "Uber Home", desc: "Familiar home, with the SafeRide Priority entry point" },
 ];
 export const FLOW_SCREENS = [
-  { n: "1", title: "Demo Booking", desc: "Trip, why this ride, SafeRide toggle" },
+  { n: "1", title: "Demo Booking", desc: "Trip, why this ride, SafeRide Priority toggle" },
   { n: "2", title: "Contextual Safety Brief", desc: "Category, reasons, confidence" },
   { n: "3", title: "Safer Anchors", desc: "Visible, staffed drop alternatives" },
   { n: "4", title: "Safety Priority Match", desc: "Standard vs eligible driver trade-off" },
@@ -274,7 +274,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
   const drv = s.match === "standard" ? DRIVERS.standard : DRIVERS.priority;
   const drvVeh = vehicleLine(drv);
   const selNames = s.contacts.map((c) => c.name).filter((n) => s.sel[n]);
-  /* Rules 7 and 8: SafeRide runs only between 8 PM and 5 AM. */
+  /* Rules 7 and 8: SafeRide Priority runs only between 8 PM and 5 AM. */
   const hour = parseTimeLabel(s.time);
   const inWindow = hour === null ? true : isWithinLateNightWindow(hour);
   const safeOn = s.safeRide && inWindow;
@@ -441,7 +441,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
     );
   }
 
-  /* Screen 1: the Uber home, with the SafeRide entry point. */
+  /* Screen 1: the Uber home, with the SafeRide Priority entry point. */
   if (s.step === 1) {
     return (
       <UberHome
@@ -1060,7 +1060,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                     <div className="flex flex-wrap items-center gap-[7px]">
                       <span className="text-[15px] font-bold">Safety Priority</span>
                       <span className="whitespace-nowrap rounded-full bg-[#EFF4FE] px-2 py-0.5 text-[10px] font-bold text-brand-dark">
-                        SafeRide eligible
+                        SafeRide Priority eligible
                       </span>
                     </div>
                     <div className="mt-px text-xs text-ink-faint">
@@ -1079,9 +1079,9 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                 </div>
               </button>
               <div className="mt-2.5 rounded-xl bg-[#F3F3F3] px-[13px] py-3">
-                <div className="mb-1 text-xs font-bold">What &quot;SafeRide eligible&quot; means</div>
+                <div className="mb-1 text-xs font-bold">What &quot;SafeRide Priority eligible&quot; means</div>
                 <div className="text-xs leading-[1.55] text-[#444]">
-                  Meets SafeRide eligibility criteria: verification complete, safety training, 1000+
+                  Meets SafeRide Priority eligibility criteria: verification complete, safety training, 1000+
                   trips, clear review status. Eligibility uses several audited signals, never star
                   ratings alone. Drivers get a training path and an appeal process.
                 </div>
@@ -1353,7 +1353,7 @@ export default function PhoneApp({ scenario, riderName, showNoResponse, onStepCh
                     <span className="text-[15px] font-extrabold">{drv.name}</span>
                     {s.match !== "standard" && (
                       <span className="whitespace-nowrap rounded-full bg-[#EFF4FE] px-2 py-0.5 text-[10px] font-bold text-brand-dark">
-                        SafeRide eligible
+                        SafeRide Priority eligible
                       </span>
                     )}
                   </div>

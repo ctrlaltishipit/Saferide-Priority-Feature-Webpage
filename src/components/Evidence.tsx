@@ -372,9 +372,9 @@ const OBJECTIVES: { label: string; title: string; text: string; icon: React.Reac
 ];
 
 const DIFFERENT: string[] = [
-  "Every safety tool the app ships today stays exactly where it is. SafeRide arms them before pickup, so the rider never has to remember them mid ride.",
-  "Today's tools respond once something already feels wrong. SafeRide works earlier and lowers the chance that moment arrives at all.",
-  "A SafeRide match is a committed pickup. The driver accepts your trip before you see the match, cannot drop it for a ride on another app, and if anything changes you are rematched first in line.",
+  "Every safety tool the app ships today stays exactly where it is. SafeRide Priority arms them before pickup, so the rider never has to remember them mid ride.",
+  "Today's tools respond once something already feels wrong. SafeRide Priority works earlier and lowers the chance that moment arrives at all.",
+  "A SafeRide Priority match is a committed pickup. The driver accepts your trip before you see the match, cannot drop it for a ride on another app, and if anything changes you are rematched first in line.",
   "It is an add-on for the moments that matter most: a late shift, an emergency, a hospital run, a night you simply need the ride to come. One tap says why you ride, and emergency, medical and urgent trips can switch it on at any hour, day or night. The rider stays in charge, and every share, match and anchor is her explicit choice.",
 ];
 
@@ -390,7 +390,7 @@ export function ConceptOnePage() {
         before the booking.
       </h2>
       <p className="mb-8 max-w-[640px] text-base leading-[1.65] text-ink-soft [text-wrap:pretty]">
-        The SOS button and every tool Uber ships today stay exactly where they are. SafeRide
+        The SOS button and every tool Uber ships today stay exactly where they are. SafeRide Priority
         Priority sits in front of them: one toggle at booking that plans the trip, commits the
         driver, tells the right people, and closes the loop when you arrive.
       </p>

@@ -15,8 +15,8 @@ const SCENARIO_MEANING: Record<Scenario, string> = {
 
 /* One caption per internal step: 0 splash, 1 home, 2 to 8 the 7-step flow. */
 const TOUR: { title: string; text: string }[] = [
-  { title: "Every ride starts here", text: "The app the rider already opens every night. SafeRide asks her to download nothing new. It lives inside the flow she trusts. The splash moves on by itself, like the real launch." },
-  { title: "The entry point meets riders where they are", text: "A faithful Uber home. Scroll it, tap 'Later' to open Plan your ride (try the Pickup and For me pills, and Send a ride), tap an Outstation getaway to book a long haul, or tap the SafeRide card to start in the city." },
+  { title: "Every ride starts here", text: "The app the rider already opens every night. SafeRide Priority asks her to download nothing new. It lives inside the flow she trusts. The splash moves on by itself, like the real launch." },
+  { title: "The entry point meets riders where they are", text: "A faithful Uber home. Scroll it, tap 'Later' to open Plan your ride (try the Pickup and For me pills, and Send a ride), tap an Outstation getaway to book a long haul, or tap the SafeRide Priority card to start in the city." },
   { title: "Step 1: one familiar booking sheet", text: "Pickup, drop, 15-minute slots, and a 'Why this ride?' tap: emergency, medical and urgent trips jump the queue and work at any hour. Plus the Female rider switch: immediate priority, driver alert, mandatory GPS." },
   { title: "Step 2: guidance you can question", text: "The Contextual Safety Brief gives a category with plain-language reasons and a confidence meter. Open 'Why am I seeing this?': explainability is the feature." },
   { title: "Step 3: a safer spot to step out", text: "Safer Anchors suggests staffed, well-lit drop points within a short walk. The original drop stays one tap away the whole time." },
@@ -292,7 +292,7 @@ export default function Prototype() {
             ) : (
               <div className="mt-1 rounded-lg border border-dashed border-[#333333] px-3 py-1.5 text-[10.5px] leading-[1.5] text-[#A6A6A6]">
                 Scenario and rider name are tweakable in the controls above. On step 1, pick In city
-                or Outstation, and try turning the SafeRide toggle off to book a standard ride. The
+                or Outstation, and try turning the SafeRide Priority toggle off to book a standard ride. The
                 Elevated, Lower and Limited Data buttons change what the Safety Brief on step 2 says.
               </div>
             )}

@@ -98,7 +98,9 @@ export function TheBrain() {
   );
 }
 
-/* Chapter 3: the research methods, each with the limit it carries. */
+/* Chapter 3: the research as one flow. Six methods run left to right on web
+   and top to bottom on phones; the limits sit apart in their own segment, so
+   what the research found never mixes with where it stops. */
 export function Methods() {
   return (
     <div>
@@ -106,30 +108,59 @@ export function Methods() {
         eyebrow="HOW I RESEARCHED IT"
         glyph="list"
         size="h3"
-        title="Six methods, and the limit of each."
-        lede="Every finding in this chapter comes from one of these. The last card is the gap, said out loud."
+        title="Six methods, one flow."
+        lede="What the research did, in order. The limits sit below it, said plainly."
       />
-      <Carousel minWidth={250} ariaLabel="Research methods">
-        {METHODS.map((m, i) => {
-          const gap = i === METHODS.length - 1;
-          return (
-            <GlowCard key={m.name} className={`flex h-full flex-col rounded-2xl border p-5 ${gap ? "border-[#F0DCC8] bg-[#FFF7EC]" : "border-line bg-white"}`}>
-              <div className="flex items-center gap-2.5">
-                <span className={`flex h-8 w-8 flex-none items-center justify-center rounded-full ${gap ? "bg-[#FFE3B8] text-[#7A4B00]" : "bg-mist text-brand"}`}>
-                  <Glyph name={m.glyph} />
+      <div className="relative">
+        {/* the route behind the flow, web only */}
+        <svg className="absolute inset-x-10 top-[34px] hidden h-[3px] w-[calc(100%-80px)] xl:block" preserveAspectRatio="none" viewBox="0 0 100 3" aria-hidden="true">
+          <line x1="0" y1="1.5" x2="100" y2="1.5" stroke="#E2E2E2" strokeWidth="3" />
+          <line x1="0" y1="1.5" x2="100" y2="1.5" stroke="#276EF1" strokeWidth="3" strokeDasharray="2.2 2.8" style={{ animation: "dashflow 1.6s linear infinite" }} />
+        </svg>
+        <ol className="relative m-0 grid list-none gap-3 p-0 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+          {METHODS.map((m, i) => {
+            const gap = i === METHODS.length - 1;
+            return (
+              <li key={m.name} className="relative flex gap-3.5 sm:block">
+                {/* the rail on phones */}
+                {i < METHODS.length - 1 && (
+                  <span className="absolute bottom-[-14px] left-[15px] top-10 border-l-2 border-dashed border-[#C7D9FB] sm:hidden" aria-hidden="true" />
+                )}
+                <span className="relative z-[1] mt-1 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-white sm:hidden">
+                  {i + 1}
                 </span>
-                <span className="text-[14.5px] font-extrabold tracking-[-0.2px]">{m.name}</span>
-                <span className={`ml-auto whitespace-nowrap rounded-full px-2 py-0.5 text-[10.5px] font-bold ${gap ? "bg-[#7A4B00] text-white" : "bg-black text-white"}`}>{m.count}</span>
-              </div>
-              <p className="m-0 mt-3 text-[13px] leading-[1.55] text-ink-soft">{m.what}</p>
-              <p className="m-0 mt-auto pt-3 text-[12.5px] leading-[1.5] text-ink-faint">
-                <span className="font-bold text-ink">Limit: </span>
-                {m.limit}
-              </p>
-            </GlowCard>
-          );
-        })}
-      </Carousel>
+                <GlowCard className="flex min-w-0 flex-1 flex-col rounded-2xl border border-line bg-white p-3.5 sm:h-full sm:items-center sm:text-center">
+                  <span className={`hidden h-9 w-9 items-center justify-center rounded-full sm:flex ${gap ? "bg-[#FFE3B8] text-[#7A4B00]" : "bg-mist text-brand"}`}>
+                    <Glyph name={m.glyph} />
+                  </span>
+                  <div className="text-[13.5px] font-extrabold leading-[1.25] tracking-[-0.2px] sm:mt-2">{m.name}</div>
+                  <span className={`mt-1 inline-block w-fit whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-extrabold sm:mx-auto ${gap ? "bg-[#7A4B00] text-white" : "bg-black text-white"}`}>
+                    {m.count}
+                  </span>
+                  <p className="m-0 mt-1.5 text-[12px] leading-[1.5] text-ink-soft">{m.what}</p>
+                </GlowCard>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+
+      {/* the limits, kept apart so they never read as findings */}
+      <div className="mt-4 rounded-2xl border border-[#F0DCC8] bg-[#FFF7EC] p-4 sm:p-5">
+        <div className="text-[10.5px] font-bold tracking-[1.6px] text-[#7A4B00]">THE LIMITS, SAID PLAINLY</div>
+        <ul className="m-0 mt-3 grid list-none gap-x-6 gap-y-2 p-0 sm:grid-cols-2 xl:grid-cols-3">
+          {METHODS.map((m, i) => (
+            <li key={m.name} className="flex gap-2 text-[12.5px] leading-[1.5] text-[#5A3A00]">
+              <span className="font-extrabold">{i + 1}.</span>
+              {m.limit}
+            </li>
+          ))}
+        </ul>
+        <p className="m-0 mt-3 border-t border-[#F0DCC8] pt-3 text-[12.5px] leading-[1.55] text-[#7A4B00]">
+          These limits set the next step: stage 1 of the pilot goes deeper into the problem with real riders and Uber&apos;s own
+          baselines, before the solution hardens.
+        </p>
+      </div>
     </div>
   );
 }

@@ -84,7 +84,7 @@ const VISUALS: ReactNode[] = [
 ];
 
 export const STEP_NAMES = [
-  { n: "1", title: "Demo Booking", desc: "Trip, why this ride, SafeRide toggle" },
+  { n: "1", title: "Demo Booking", desc: "Trip, why this ride, SafeRide Priority toggle" },
   { n: "2", title: "Contextual Safety Brief", desc: "Category, reasons, confidence" },
   { n: "3", title: "Safer Anchors", desc: "Visible, staffed drop alternatives" },
   { n: "4", title: "Safety Priority Match", desc: "Standard vs eligible driver trade-off" },
@@ -94,7 +94,7 @@ export const STEP_NAMES = [
 ];
 
 const FLOW_META = [
-  { tag: "BOOKING", tagColor: "#A6A6A6", desc: "Sample Hyderabad pickup, drop and time, plus the opt-in SafeRide toggle." },
+  { tag: "BOOKING", tagColor: "#A6A6A6", desc: "Sample Hyderabad pickup, drop and time, plus the opt-in SafeRide Priority toggle." },
   { tag: "GUIDANCE", tagColor: "#F6BC2F", desc: "A clear category chip, 2 to 4 plain reasons, a confidence meter and a Why am I seeing this panel." },
   { tag: "ANCHORS", tagColor: "#06C167", desc: "1 to 3 staffed drop points within 300 m, each with a clear reason." },
   { tag: "MATCH", tagColor: "#276EF1", desc: "Standard vs vetted driver, with the +4 min and +₹20 trade off shown up front." },

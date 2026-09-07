@@ -91,7 +91,7 @@ const STATS: {
   },
   {
     big: "8 PM–5 AM",
-    text: "the hours this case is about, and the window where SafeRide reviews the ride plan. Emergency, medical and urgent trips can use it at any hour.",
+    text: "the hours this case is about, and the window where SafeRide Priority reviews the ride plan. Emergency, medical and urgent trips can use it at any hour.",
     cls: "bg-black text-white",
     textCls: "text-[#A6A6A6]",
     smaller: true,
@@ -423,7 +423,7 @@ const PRINCIPLES = [
   {
     title: "Honest about its limits",
     risk: "Risk: a false sense of security. A rider reads the brief as a promise.",
-    text: "SafeRide gives contextual guidance and says so clearly. It makes no safety promises.",
+    text: "SafeRide Priority gives contextual guidance and says so clearly. It makes no safety promises.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
         <circle cx="15" cy="15" r="13" stroke="#000" strokeWidth="2" />
@@ -502,7 +502,7 @@ const PRINCIPLES = [
   {
     title: "Built for every rider",
     risk: "Risk: a feature that guesses who a rider is, or excludes riders who want it.",
-    text: "Anyone can turn SafeRide on. The Female rider switch is optional and self declared, never guessed.",
+    text: "Anyone can turn SafeRide Priority on. The Female rider switch is optional and self declared, never guessed.",
     icon: (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
         <circle cx="10" cy="10" r="4" stroke="#000" strokeWidth="2" />
