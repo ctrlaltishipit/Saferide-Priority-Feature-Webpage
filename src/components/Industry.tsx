@@ -391,7 +391,7 @@ export default function Industry() {
   return (
     <div id="industry" className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">INDUSTRY 101</div>
-      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(26px,3vw,38px)] font-extrabold leading-[1.08] tracking-[-1.1px]">
         The market I am
         <br />
         building into.

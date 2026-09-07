@@ -382,9 +382,9 @@ const DIFFERENT: string[] = [
    ships today. Rendered in chapter 2, where the solution starts. */
 export function ConceptOnePage() {
   return (
-    <div>
+    <div className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">THE CONCEPT ON ONE PAGE</div>
-      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(26px,3vw,38px)] font-extrabold leading-[1.08] tracking-[-1.1px]">
         A decision layer that runs
         <br />
         before the booking.
@@ -439,7 +439,7 @@ export default function Evidence() {
   return (
     <div className="mt-10 sm:mt-16">
       <div className="mb-2.5 text-xs font-bold tracking-[1.6px] text-ink-faint">THE PROOF</div>
-      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1.08] tracking-[-1.3px]">
+      <h2 className="m-0 mb-3 max-w-[760px] text-[clamp(26px,3vw,38px)] font-extrabold leading-[1.08] tracking-[-1.1px]">
         The same headline,
         <br />
         twelve years apart.
